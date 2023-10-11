@@ -1,0 +1,167 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "email": "administrador@email.com",
+      "password": "senhamestre",
+      "cpf": "390.053.750-00",
+      "status": true,
+      "fullName": "Manda-chuva",
+      "genre": "NONBINARY",
+      "phone": "(49) 9 8622-8534",
+      "type": "ADMINISTRATOR"
+    }
+  ],
+  "pacientes": [
+    {
+      "id": 1,
+      "fullName": "Sandro Café",
+      "genre": "Cisgênero",
+      "cpf": "569.062.550-70",
+      "phone": "(48) 9 9547-4151",
+      "email": "sancafe@email.com",
+      "birthday": "05/08/1995",
+      "rg": "363.12.882-9 ISS_SC",
+      "civilStatus": "Solteiro(a)",
+      "placeOfBirth": "Brasileiro",
+      "emergencyContact": "(48) 9 9564-4556",
+      "allergyList": "Nenhuma",
+      "specificCareList": "Nenhum",
+      "healthInsurance": "Unimed",
+      "healthInsuranceNumber": "6554811",
+      "healthInsuranceValidity": "31/10/2025",
+      "address": {
+        "id": 1,
+        "cep": "88011-100",
+        "city": "Florianópolis",
+        "state": "SC",
+        "publicPlace": "Beira-mar",
+        "number": "12",
+        "complement": "Apto 12",
+        "neighborhood": "Centro",
+        "referencePoint": "Ao lado da praça"
+      },
+      "status": true
+    }
+  ],
+  "consultas": [
+    {
+      "id": 1,
+      "reasonForConsultation": "Deu ruim na lombar",
+      "consultationDate": "",
+      "consultationTime": "",
+      "problemDescription": "Foi levantar um caixote de jabuticaba e deu um mal jeito na lombar.",
+      "prescriptionMedication": "Dipirona",
+      "dosageAndRecautions": "Tomar comprimido de 500mg a cada 8hs, evitar fazer esforço.",
+      "status": true
+    }
+  ],
+  "exames": [
+    {
+      "id": 1,
+      "examName": "Hemograma",
+      "examDate": "2023-12-30",
+      "examHour": "22:00:00",
+      "examType": "Exame de sangue",
+      "laboratory": "Laboratório de Dexter",
+      "documentUrl": null,
+      "results": "Tudo show de bola mermão, segue o baile."
+    }
+  ],
+  "medicamentos": [
+    {
+      "id": 1,
+      "name": "Dipirona",
+      "date": "2023-10-15",
+      "time": "13:08:00",
+      "type": "Comprimido",
+      "quantity": 500.0,
+      "unit": "mg",
+      "observations": "Pode dar ruim se tomar demais.",
+      "status": true
+    }
+  ],
+  "dietas": [
+    {
+      "id": 1,
+      "dietName": "Low carb vegana",
+      "dietDate": "2023-10-15",
+      "dietTime": "13:08:00",
+      "type": "Low Carb",
+      "description": "Comer várias coisas doidas pra fazer efeito.",
+      "status": true
+    }
+  ],
+  "exercicios": [
+    {
+      "id": 1,
+      "name": "Corrida",
+      "date": "2023-10-15",
+      "time": "13:08:00",
+      "type": "Resistência Aeróbica",
+      "weeklyAmount": 5,
+      "description": "Correr nas esteiras do hospital diariamente durante 20 minutos.",
+      "status": true
+    }
+  ],
+  "prontuarios": [
+    {
+      "id": 1,
+      "patient": {
+        "id": 1,
+        "fullName": "Sandro Café",
+        "genre": "Cisgênero",
+        "cpf": "569.062.550-70",
+        "phone": "(48) 9 9547-4151",
+        "email": "sancafe@email.com",
+        "birthday": "05/08/1995",
+        "rg": "363.12.882-9 ISS_SC",
+        "civilStatus": "Solteiro(a)",
+        "placeOfBirth": "Brasileiro",
+        "emergencyContact": "(48) 9 9564-4556",
+        "allergyList": "Nenhuma",
+        "specificCareList": "Nenhum",
+        "healthInsurance": "Unimed",
+        "healthInsuranceNumber": "6554811",
+        "healthInsuranceValidity": "31/10/2025",
+        "address": {
+          "id": 1,
+          "cep": "88011-100",
+          "city": "Florianópolis",
+          "state": "SC",
+          "publicPlace": "Beira-mar",
+          "number": "12",
+          "complement": "Apto 12",
+          "neighborhood": "Centro",
+          "referencePoint": "Ao lado da praça"
+        },
+        "status": true
+      },
+      "exams": [],
+      "exercises": []
+    }
+  ],
+  "logs": [
+    {
+      "message": "O usuário (1) Manda-chuva criou o paciente (1) Sandro Café.",
+      "timestamp": "2023-10-15T13:08:00.000"
+    },
+    {
+      "message": "O usuário (1) Manda-chuva criou o paciente (2) Pedro Lucas.",
+      "timestamp": "2023-10-15T14:08:00.000"
+    },
+    {
+      "message": "O usuário (1) Manda-chuva criou o paciente (3) Carlos José.",
+      "timestamp": "2023-10-15T18:08:00.000"
+    }
+  ],
+  "estatisticas": {
+    "users": 3,
+    "patients": 12,
+    "exams": 8,
+    "exercises": 6,
+    "diets": 13,
+    "medicaments": 20,
+    "queries": 9
+  }
+}
