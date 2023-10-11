@@ -9,6 +9,7 @@ export class NavButtonComponent {
   @Input() text = '';
   @Input() icon = '';
   @Input() selected = false;
+  @Input() collapsed = false;
   @Output() click = new EventEmitter();
 
   onClick() {

@@ -22,6 +22,7 @@ export class SidebarComponent {
     { text: 'Exercícios', icon: 'ionBarbell', selected: false },
     { text: 'Prontuários', icon: 'ionIdCard', selected: false },
   ];
+  collapsed = false;
 
   select(selectedIdx: number) {
     this.options = this.options.map((opt, idx) => ({

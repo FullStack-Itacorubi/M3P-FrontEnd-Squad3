@@ -1,6 +1,6 @@
 <button
   (click)="(onClick)"
-  class="relative flex items-center justify-center w-full gap-3 py-2 transition-colors"
+  class="relative flex items-center justify-center w-full h-10 gap-3 py-2 transition-colors"
   [ngClass]="
     selected
       ? 'bg-slate-50 text-slate-800 shadow-inner-right'
@@ -9,7 +9,7 @@
   [disabled]="selected"
 >
   <ng-icon [name]="icon" class="text-xl" />
-  <span class="w-3/6 text-left">{{ text }}</span>
+  <span *ngIf="!collapsed" class="w-3/6 text-left truncate">{{ text }}</span>
 
   <div
     *ngIf="selected"

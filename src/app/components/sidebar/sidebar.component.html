@@ -1,12 +1,16 @@
-<aside class="flex flex-col justify-between h-full py-8">
+<aside
+  class="relative flex flex-col justify-between h-full py-8 transition-all duration-700"
+  [ngClass]="collapsed ? 'w-20' : 'w-56'"
+>
   <section class="mx-auto">Logo</section>
-  <section>
+  <section class="overflow-hidden">
     <ul>
       <li *ngFor="let option of options; index as idx">
         <app-nav-button
           [icon]="option.icon"
           [text]="option.text"
           [selected]="option.selected"
+          [collapsed]="collapsed"
           (click)="select(idx)"
         />
       </li>
@@ -20,4 +24,13 @@
       Sair
     </button>
   </section>
+
+  <button
+    class="absolute right-0 flex items-center justify-center w-8 transition-colors translate-x-1/2 rounded-full bg-slate-800 aspect-square hover:bg-slate-700"
+    (click)="collapsed = !collapsed"
+  >
+    <ng-icon
+      [name]="collapsed ? 'ionArrowForwardOutline' : 'ionArrowBackOutline'"
+    />
+  </button>
 </aside>
