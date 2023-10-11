@@ -1,0 +1,18 @@
+<button
+  (click)="(onClick)"
+  class="relative flex items-center justify-center w-full gap-3 py-2 transition-colors"
+  [ngClass]="
+    selected
+      ? 'bg-slate-50 text-slate-800 shadow-inner-right'
+      : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-slate-50 focus:bg-slate-700 focus:text-slate-50 focus:outline-none'
+  "
+  [disabled]="selected"
+>
+  <ng-icon [name]="icon" class="text-xl" />
+  <span class="w-3/6 text-left">{{ text }}</span>
+
+  <div
+    *ngIf="selected"
+    class="absolute left-0 w-1 rounded-r bg-slate-800 h-3/5"
+  ></div>
+</button>
