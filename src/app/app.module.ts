@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { NgIconsModule } from '@ng-icons/core';
 import * as IonIcons from '@ng-icons/ionicons';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NavButtonComponent } from './components/sidebar/nav-button/nav-button.component';
 
 @NgModule({
-  declarations: [AppComponent, LayoutComponent],
+  declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
