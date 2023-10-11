@@ -1,0 +1,23 @@
+<aside class="flex flex-col justify-between h-full py-8">
+  <section class="mx-auto">Logo</section>
+  <section>
+    <ul>
+      <li *ngFor="let option of options; index as idx">
+        <app-nav-button
+          [icon]="option.icon"
+          [text]="option.text"
+          [selected]="option.selected"
+          (click)="select(idx)"
+        />
+      </li>
+    </ul>
+  </section>
+  <section>
+    <button
+      class="flex items-center justify-center w-full gap-2 py-2 mx-auto transition-colors text-slate-400 focus:bg-slate-700 focus:text-slate-50 hover:bg-slate-700 hover:text-slate-50 focus:outline-none"
+    >
+      <ng-icon name="ionArrowBackCircleOutline" class="text-xl" />
+      Sair
+    </button>
+  </section>
+</aside>
