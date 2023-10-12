@@ -4,13 +4,13 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { HeaderComponent } from './shared/header/header.component';
 
 const routes: Routes = [
+  //{ path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: '',
     component: LayoutComponent,
-  },
-  {  
-    path: 'header',
-    component: HeaderComponent,
+    children:[
+      {}
+    ]
   },
 ];
 
