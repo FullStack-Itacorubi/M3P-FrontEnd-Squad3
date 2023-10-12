@@ -1,5 +1,5 @@
 <div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
-  <form>
+  <form formGroup="formUserRegister">
     <h3 class="text-xl font-bold my-2">Cadastro de usuário</h3>
 
     <div class="md:flex gap-2">
@@ -8,14 +8,18 @@
         <input
           type="text"
           class="input-field"
+          name="fullname"
+          id="fullname"
+          formControlName="fullname"
         />
       </div>
       <div class="input-wrapper mr-5 w-4/12">
         <label for="genre">Gênero</label>
         <select
+          class="input-field"
           name="genre"
           id="genre"
-          class="input-field"
+          formControlName="genre"
         >
           <option disabled selected></option>
           <option value="cisgender">Cisgenero</option>
@@ -24,12 +28,18 @@
         </select>
       </div>
     </div>
+
     <div class="md:flex gap-2">
       <div class="input-wrapper w-4/12">
         <label for="cpf">CPF</label>
         <input
           type="text"
           class="input-field"
+          name="cpf"
+          id="cpf"
+          formControlName="cpf"
+          placeholder="000.000.000-00"
+          mask="000.000.000-00"
         />
       </div>
       <div class="input-wrapper w-4/12">
@@ -37,15 +47,20 @@
         <input
           type="text"
           class="input-field"
+          name="phone"
+          id="phone"
+          formControlName="phone"
+          placeholder="(99) 9 9999-9999"
+          mask="(99) 9 9999-9999"
         />
       </div>
-
       <div class="input-wrapper mr-5 w-4/12">
-        <label for="genre">Tipo</label>
+        <label for="type">Tipo</label>
         <select
+          class="input-field"
           name="type"
           id="type"
-          class="input-field"
+          formControlName="type"
         >
           <option disabled selected></option>
           <option value="administrator">Administrador</option>
@@ -54,12 +69,17 @@
         </select>
       </div>
     </div>
+
     <div class="md:flex gap-2">
       <div class="input-wrapper w-8/12">
         <label for="email">E-mail</label>
         <input
           type="text"
           class="input-field"
+          name="email"
+          id="email"
+          formControlName="email"
+          placeholder="example@gmail.com"
         />
       </div>
       <div class="input-wrapper mr-5 w-4/12">
@@ -67,6 +87,9 @@
         <input
           type="text"
           class="input-field"
+          name="password"
+          id="password"
+          formControlName="password"
         />
       </div>
     </div>
