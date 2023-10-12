@@ -10,9 +10,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavButtonComponent } from './components/sidebar/nav-button/nav-button.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { StatsCardComponent } from './components/stats-card/stats-card.component';
+import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
 
 @NgModule({
-  declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent, StatsComponent, StatsCardComponent],
+  declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent, StatsComponent, StatsCardComponent, TabMenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

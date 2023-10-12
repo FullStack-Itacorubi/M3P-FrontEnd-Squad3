@@ -1,5 +1,31 @@
 <div class="flex h-[calc(100%-64px)] bg-slate-50 text-slate-800">
-  <div class="flex-grow"></div>
+  <div class="flex flex-col flex-grow p-4">
+    <div class="flex justify-between pb-2 border-b">
+      <div class="flex gap-6 pl-4">
+        <app-tab-menu
+          *ngFor="let option of menuOptions; index as idx"
+          class="translate-y-[9px] pb-2"
+          [label]="option.label"
+          [selected]="option.selected"
+          (select)="select(idx)"
+        />
+      </div>
+      <div class="relative">
+        <input
+          class="py-2 pl-10 pr-4 transition-colors bg-transparent border rounded-full border-slate-200 focus:outline-none focus:border-slate-400 text-slate-800"
+          type="search"
+          name="search"
+          id="search"
+          placeholder="Pesquisar"
+        />
+        <ng-icon
+          name="ionSearch"
+          class="absolute text-xl -translate-y-1/2 left-3 top-1/2 text-slate-300"
+        />
+      </div>
+    </div>
+    <div class="flex-grow"></div>
+  </div>
   <div class="flex flex-col w-2/12 gap-4 p-4 pl-0 overflow-y-auto">
     <app-stats-card />
     <app-stats-card />
