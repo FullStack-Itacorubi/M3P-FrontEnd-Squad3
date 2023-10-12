@@ -7,9 +7,10 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { NgIconsModule } from '@ng-icons/core';
 import * as IonIcons from '@ng-icons/ionicons';
 import { HeaderComponent } from './shared/header/header.component';
+import { DropdownComponent } from './shared/header/dropdown/dropdown.component';
 
 @NgModule({
-  declarations: [AppComponent, LayoutComponent, HeaderComponent],
+  declarations: [AppComponent, LayoutComponent, HeaderComponent, DropdownComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
