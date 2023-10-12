@@ -13,7 +13,15 @@ import { StatsCardComponent } from './components/stats-card/stats-card.component
 import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
 
 @NgModule({
-  declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent, StatsComponent, StatsCardComponent, TabMenuComponent],
+  declarations: [
+    AppComponent,
+    LayoutComponent,
+    SidebarComponent,
+    NavButtonComponent,
+    StatsComponent,
+    StatsCardComponent,
+    TabMenuComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

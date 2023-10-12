@@ -27,10 +27,10 @@
     <div class="flex-grow"></div>
   </div>
   <div class="flex flex-col w-2/12 gap-4 p-4 pl-0 overflow-y-auto">
-    <app-stats-card />
-    <app-stats-card />
-    <app-stats-card />
-    <app-stats-card />
-    <app-stats-card />
+    <app-stats-card
+      *ngFor="let stat of stats"
+      [label]="stat.label"
+      [value]="stat.value"
+    />
   </div>
 </div>
