@@ -15,9 +15,8 @@ interface Userinfos {
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.css'],
 })
-
 export class UserComponent {
   formUserRegister: FormGroup<Userinfos> = new FormGroup({
     fullname: new FormControl(''),
@@ -52,5 +51,25 @@ export class UserComponent {
         Validators.minLength(6),
       ]),
     });
+  }
+
+  registerUser() {
+    if (!this.formUserRegister.valid) {
+      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+    } else {
+      alert('Dados cadastrado com sucesso!');
+    }
+
+    const user = {
+      fullname: this.formUserRegister.value.fullname!,
+      genre: this.formUserRegister.value.fullname!,
+      cpf: this.formUserRegister.value.fullname!,
+      phone: this.formUserRegister.value.fullname!,
+      type: this.formUserRegister.value.fullname!,
+      email: this.formUserRegister.value.fullname!,
+      password: this.formUserRegister.value.fullname!,
+    }
+
+    this.initUserForm();
   }
 }
