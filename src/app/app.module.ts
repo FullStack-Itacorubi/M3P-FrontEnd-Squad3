@@ -13,6 +13,7 @@ import { StatsCardComponent } from './components/stats/stats-card/stats-card.com
 import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
 import { PatientsCardComponent } from './components/stats/patients-card/patients-card.component';
 import { StatsListComponent } from './components/stats/stats-list/stats-list.component';
+import { StatsTableRowComponent } from './components/stats/stats-table-row/stats-table-row.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { StatsListComponent } from './components/stats/stats-list/stats-list.com
     TabMenuComponent,
     PatientsCardComponent,
     StatsListComponent,
+    StatsTableRowComponent,
   ],
   imports: [
     BrowserModule,
