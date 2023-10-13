@@ -155,13 +155,34 @@
       "timestamp": "2023-10-15T18:08:00.000"
     }
   ],
-  "estatisticas": {
-    "users": 3,
-    "patients": 12,
-    "exams": 8,
-    "exercises": 6,
-    "diets": 13,
-    "medicaments": 20,
-    "queries": 9
-  }
+  "estatisticas": [
+    {
+      "label": "Usuários",
+      "value": 3
+    },
+    {
+      "label": "Pacientes",
+      "value": 12
+    },
+    {
+      "label": "Exames",
+      "value": 8
+    },
+    {
+      "label": "Exercícios",
+      "value": 6
+    },
+    {
+      "label": "Dietas",
+      "value": 13
+    },
+    {
+      "label": "Medicamentos",
+      "value": 20
+    },
+    {
+      "label": "Consultas",
+      "value": 9
+    }
+  ]
 }

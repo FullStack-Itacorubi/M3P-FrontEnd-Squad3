@@ -11,6 +11,8 @@ import { NavButtonComponent } from './components/sidebar/nav-button/nav-button.c
 import { StatsComponent } from './pages/stats/stats.component';
 import { StatsCardComponent } from './components/stats-card/stats-card.component';
 import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
+import { PatientsCardComponent } from './components/stats/patients-card/patients-card.component';
+import { StatsListComponent } from './components/stats/stats-list/stats-list.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
     StatsComponent,
     StatsCardComponent,
     TabMenuComponent,
+    PatientsCardComponent,
+    StatsListComponent,
   ],
   imports: [
     BrowserModule,

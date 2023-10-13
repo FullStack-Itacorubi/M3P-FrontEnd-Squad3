@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StatsListStyle } from 'src/app/components/stats/stats-list/stats-list.component';
 import { StatsService } from 'src/app/services/stats.service';
 
 type Stats = {
@@ -22,13 +23,17 @@ export class StatsComponent implements OnInit {
       selected: false,
     },
   ];
+  listStyle: StatsListStyle = 'TABLE';
+
   stats: Stats[] = [];
+  patients = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  users = [1, 1, 1, 1, 1];
 
   constructor(private statsService: StatsService) {}
 
   async ngOnInit() {
     const { data } = await this.statsService.getStats();
-    Object.keys(data).map((k) => this.stats.push({ label: k, value: data[k] }));
+    this.stats = data as Stats[];
   }
 
   select(updatedIdx: number) {
