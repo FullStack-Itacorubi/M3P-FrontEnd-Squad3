@@ -9,7 +9,7 @@ import * as IonIcons from '@ng-icons/ionicons';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavButtonComponent } from './components/sidebar/nav-button/nav-button.component';
 import { StatsComponent } from './pages/stats/stats.component';
-import { StatsCardComponent } from './components/stats-card/stats-card.component';
+import { StatsCardComponent } from './components/stats/stats-card/stats-card.component';
 import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
 import { PatientsCardComponent } from './components/stats/patients-card/patients-card.component';
 import { StatsListComponent } from './components/stats/stats-list/stats-list.component';
