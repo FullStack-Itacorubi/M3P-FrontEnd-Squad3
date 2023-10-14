@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsListStyle } from 'src/app/components/stats/stats-list/stats-list.component';
+import { PatientsService } from 'src/app/services/patients.service';
 import { StatsService } from 'src/app/services/stats.service';
+import { UsersService } from 'src/app/services/users.service';
+import { Patient, User } from 'src/app/utils/types';
 
 type Stats = {
   label: string;
@@ -23,17 +26,25 @@ export class StatsComponent implements OnInit {
       selected: false,
     },
   ];
-  listStyle: StatsListStyle = 'TABLE';
+  listStyle: StatsListStyle = 'GRID';
 
   stats: Stats[] = [];
-  patients = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-  users = [1, 1, 1, 1, 1];
+  patients: Patient[] = [];
+  users: User[] = [];
 
-  constructor(private statsService: StatsService) {}
+  constructor(
+    private statsService: StatsService,
+    private patientsService: PatientsService,
+    private usersService: UsersService
+  ) {}
 
   async ngOnInit() {
-    const { data } = await this.statsService.getStats();
-    this.stats = data as Stats[];
+    const statsData = await this.statsService.getStats();
+    this.stats = statsData.data;
+    const patientsData = await this.patientsService.getPatients();
+    this.patients = patientsData.data;
+    const usersData = await this.usersService.getUsers();
+    this.users = usersData.data;
   }
 
   select(updatedIdx: number) {

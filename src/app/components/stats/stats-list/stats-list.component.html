@@ -1,7 +1,15 @@
 <div *ngIf="listStyle === 'GRID'; then grid; else table"></div>
 <ng-template #grid>
   <div class="grid grid-cols-5 gap-3">
-    <app-patients-card *ngFor="let details of data" />
+    <app-patients-card
+      *ngFor="let details of data"
+      [healthInsurance]="details.healthInsurance"
+      [name]="details.fullName"
+      [phone]="details.phone"
+      [age]="
+        details.birthday ? calculateAge(details.birthday) + ' anos' : undefined
+      "
+    />
   </div>
 </ng-template>
 <ng-template #table>
@@ -17,6 +25,12 @@
     <app-stats-table-row
       *ngFor="let details of data; index as i"
       [id]="i + 1"
+      [healthInsurance]="details.healthInsurance"
+      [name]="details.fullName"
+      [phone]="details.phone"
+      [age]="
+        details.birthday ? calculateAge(details.birthday) + ' anos' : undefined
+      "
     />
   </div>
 </ng-template>
