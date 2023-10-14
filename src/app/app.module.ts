@@ -14,6 +14,8 @@ import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
 import { PatientsCardComponent } from './components/stats/patients-card/patients-card.component';
 import { StatsListComponent } from './components/stats/stats-list/stats-list.component';
 import { StatsTableRowComponent } from './components/stats/stats-table-row/stats-table-row.component';
+import { DelaySearchInputComponent } from './components/delay-search-input/delay-search-input.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,12 @@ import { StatsTableRowComponent } from './components/stats/stats-table-row/stats
     PatientsCardComponent,
     StatsListComponent,
     StatsTableRowComponent,
+    DelaySearchInputComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     NgIconsModule.withIcons({ ...IonIcons }),
   ],
   providers: [],

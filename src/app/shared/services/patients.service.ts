@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from '../../utils/environment';
+import { Patient } from 'src/app/utils/types';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,11 @@ export class PatientsService {
 
   constructor() {}
 
-  getPatients() {
-    return axios.get(`${this.baseUrl}/pacientes`);
+  async getPatients(filter?: string) {
+    const patients = await axios.get<Patient[]>(`${this.baseUrl}/pacientes`);
+    if (!filter) return patients.data;
+    return patients.data.filter((patient) =>
+      patient.fullName.toLowerCase().includes(filter)
+    );
   }
 }

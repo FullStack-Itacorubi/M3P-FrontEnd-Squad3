@@ -10,19 +10,7 @@
           (select)="select(idx)"
         />
       </div>
-      <div class="relative">
-        <input
-          class="py-2 pl-10 pr-4 transition-colors bg-transparent border rounded-full border-slate-200 focus:outline-none focus:border-slate-400 text-slate-800"
-          type="search"
-          name="search"
-          id="search"
-          placeholder="Pesquisar"
-        />
-        <ng-icon
-          name="ionSearch"
-          class="absolute text-xl -translate-y-1/2 left-3 top-1/2 text-slate-300"
-        />
-      </div>
+      <app-delay-search-input (inputEmitter)="onSearchInput($event)" />
     </div>
     <div class="flex-grow overflow-y-auto">
       <div class="p-4 flex flex-col gap-2">

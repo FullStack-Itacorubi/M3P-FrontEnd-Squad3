@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
-import { Patient, User } from 'src/app/utils/types';
+import { Component, Input } from '@angular/core';
 
 export type StatsListStyle = 'TABLE' | 'GRID';
 
@@ -14,13 +7,9 @@ export type StatsListStyle = 'TABLE' | 'GRID';
   templateUrl: './stats-list.component.html',
   styleUrls: ['./stats-list.component.css'],
 })
-export class StatsListComponent implements OnChanges {
+export class StatsListComponent {
   @Input() listStyle: StatsListStyle = 'GRID';
   @Input() data: any[] = [];
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.data);
-  }
 
   calculateAge(dateStr: string) {
     if (!dateStr) return;

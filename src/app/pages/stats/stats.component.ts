@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsListStyle } from 'src/app/components/stats/stats-list/stats-list.component';
-import { PatientsService } from 'src/app/services/patients.service';
-import { StatsService } from 'src/app/services/stats.service';
-import { UsersService } from 'src/app/services/users.service';
+import { PatientsService } from 'src/app/shared/services/patients.service';
+import { StatsService } from 'src/app/shared/services/stats.service';
+import { UsersService } from 'src/app/shared/services/users.service';
 import { Patient, User } from 'src/app/utils/types';
 
 type Stats = {
@@ -39,12 +39,9 @@ export class StatsComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const statsData = await this.statsService.getStats();
-    this.stats = statsData.data;
-    const patientsData = await this.patientsService.getPatients();
-    this.patients = patientsData.data;
-    const usersData = await this.usersService.getUsers();
-    this.users = usersData.data;
+    this.stats = (await this.statsService.getStats()).data;
+    this.getPatients();
+    this.getUsers();
   }
 
   select(updatedIdx: number) {
@@ -52,5 +49,18 @@ export class StatsComponent implements OnInit {
       ...opt,
       selected: idx === updatedIdx,
     }));
+  }
+
+  onSearchInput(filter: string) {
+    if (this.menuOptions[0].selected) this.getPatients(filter);
+    else this.getUsers(filter);
+  }
+
+  private async getPatients(filter?: string) {
+    this.patients = await this.patientsService.getPatients(filter);
+  }
+
+  private async getUsers(filter?: string) {
+    this.users = await this.usersService.getUsers(filter);
   }
 }

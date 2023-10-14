@@ -1,0 +1,15 @@
+<div class="relative">
+  <input
+    class="w-0 focus:w-60 py-2 pl-10 pr-4 transition-all duration-700 bg-transparent border rounded-full border-slate-200 focus:outline-none focus:border-slate-400 text-slate-800"
+    type="search"
+    name="search"
+    id="search"
+    placeholder="Pesquisar"
+    [(ngModel)]="input"
+    (input)="onInput()"
+  />
+  <ng-icon
+    name="ionSearch"
+    class="absolute text-xl -translate-y-1/2 left-3 top-1/2 text-slate-300"
+  />
+</div>
