@@ -5,12 +5,12 @@ import { environment } from '../utils/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class StatsService {
+export class UsersService {
   private baseUrl = environment.API_BASE_URL;
 
   constructor() {}
 
-  getStats() {
-    return axios.get(`${this.baseUrl}/estatisticas`);
+  getUsers() {
+    return axios.get(`${this.baseUrl}/usuarios`);
   }
 }
