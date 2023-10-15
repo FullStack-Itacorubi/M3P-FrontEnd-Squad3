@@ -12,6 +12,22 @@
           id="examName"
           formControlName="examName"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examName')?.errors?.['required'] && formsExamRegister.get('examName')?.touched"
+        >
+          <p *ngIf="formsExamRegister.get('examName')?.errors">
+            Por favor insira o nome do exame!
+          </p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examName')?.errors?.['minlength'] && formsExamRegister.get('examName')?.touched"
+        >
+          <p *ngIf="formsExamRegister.get('examName')?.errors">
+            O nome do exame deve possuir no mínimo 8 caracteres!
+          </p>
+        </div>
       </div>
 
       <div class="input-wrapper mr-5 w-6/12">
@@ -23,6 +39,22 @@
           id="examType"
           formControlName="examType"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examType')?.errors?.['required'] && formsExamRegister.get('examType')?.touched"
+        >
+          <p *ngIf="formsExamRegister.get('examType')?.errors">
+            Por favor insira o tipo do exame!
+          </p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examType')?.errors?.['minlength'] && formsExamRegister.get('examType')?.touched"
+        >
+          <p *ngIf="formsExamRegister.get('examType')?.errors">
+            O tipo do exame deve possuir no mínimo 4 caracteres!
+          </p>
+        </div>
       </div>
     </div>
 
@@ -36,6 +68,14 @@
           id="examDate"
           formControlName="examDate"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examDate')?.errors?.['required'] && formsExamRegister.get('examDate')?.touched"
+        >
+          <p *ngIf="formsExamRegister.get('examDate')?.errors">
+            Por favor insira a data do exame!
+          </p>
+        </div>
       </div>
 
       <div class="input-wrapper w-3/12">
@@ -47,6 +87,14 @@
           id="examHour"
           formControlName="examHour"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examHour')?.errors?.['required'] && formsExamRegister.get('examHour')?.touched"
+        >
+          <p *ngIf="formsExamRegister.get('examHour')?.errors">
+            Por favor insira a hora do exame!
+          </p>
+        </div>
       </div>
 
       <div class="input-wrapper mr-5 w-6/12">
@@ -58,6 +106,22 @@
           id="laboratory"
           formControlName="laboratory"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('laboratory')?.errors?.['required'] && formsExamRegister.get('laboratory')?.touched"
+        >
+          <p *ngIf="formsExamRegister.get('laboratory')?.errors">
+            Por favor insira o laboratório!
+          </p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('laboratory')?.errors?.['minlength'] && formsExamRegister.get('laboratory')?.touched"
+        >
+          <p *ngIf="formsExamRegister.get('laboratory')?.errors">
+            O laboratório deve possuir no mínimo 4 caracteres!
+          </p>
+        </div>
       </div>
     </div>
 
@@ -84,6 +148,22 @@
           rows="5"
           formControlName="results"
         ></textarea>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('results')?.errors?.['required'] && formsExamRegister.get('results')?.touched"
+        >
+          <p *ngIf="formsExamRegister.get('results')?.errors">
+            Por favor insira o resultado!
+          </p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('results')?.errors?.['minlength'] && formsExamRegister.get('results')?.touched"
+        >
+          <p *ngIf="formsExamRegister.get('results')?.errors">
+            O resultado deve possuir no mínimo 16 caracteres!
+          </p>
+        </div>
       </div>
     </div>
   </form>
