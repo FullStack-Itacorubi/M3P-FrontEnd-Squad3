@@ -1,1 +1,255 @@
-<p>patient works!</p>
+<div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
+  <form>
+    <h3 class="text-xl font-bold my-2">Cadastro de paciente</h3>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-6/12">
+        <label for="fullname">Nome completo</label>
+        <input
+          type="text"
+          class="input-field"
+          name="fullname"
+          id="fullname"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper w-2/12">
+        <label for="genre">Gênero</label>
+        <select class="input-field" name="genre" id="genre" formControlName="">
+          <option disabled selected></option>
+          <option value="cisgender">Cisgenero</option>
+          <option value="transgender">Transgênero</option>
+          <option value="nonbinary">Não-binário</option>
+        </select>
+      </div>
+      <div class="input-wrapper w-2/12">
+        <label for="birthdate">Data de nascimento</label>
+        <input
+          type="text"
+          class="input-field"
+          name="birthdate"
+          id="birthdate"
+          formControlName=""
+          placeholder="dd/MM/aaaa"
+        />
+      </div>
+      <div class="input-wrapper mr-5 w-2/12">
+        <label for="cpf">CPF</label>
+        <input
+          type="text"
+          class="input-field"
+          name="cpf"
+          id="cpf"
+          formControlName=""
+          placeholder="000.000.000-00"
+        />
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-3/12">
+        <label for="rg">RG</label>
+        <input
+          type="text"
+          class="input-field"
+          name="rg"
+          id="rg"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper w-3/12">
+        <label for="civilStatus">Estado civil</label>
+        <select
+          class="input-field"
+          name="civilStatus"
+          id="civilStatus"
+          class="input-field"
+          formControlName=""
+        >
+          <option disabled selected></option>
+          <option value="single">Solteiro(a)</option>
+          <option value="married">Casado(a)</option>
+          <option value="separated">Separado(a)</option>
+          <option value="divorced">Divorciado(a)</option>
+          <option value="widower">Viúvo(a)</option>
+        </select>
+      </div>
+      <div class="input-wrapper w-3/12">
+        <label for="placeOfBirth">Naturalidade</label>
+        <input
+          type="text"
+          class="input-field"
+          name="placeOfBirth"
+          id="placeOfBirth"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper mr-5 w-3/12">
+        <label for="email">E-mail</label>
+        <input
+          type="text"
+          class="input-field"
+          name="email"
+          id="email"
+          formControlName=""
+          placeholder="example@gmail.com"
+        />
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-3/12">
+        <label for="phone">Telefone</label>
+        <input
+          type="text"
+          class="input-field"
+          name="phone"
+          id="phone"
+          formControlName=""
+          placeholder="(99) 9 9999-9999"
+        />
+      </div>
+      <div class="input-wrapper w-3/12">
+        <label for="emergencyContact">Contato de Emergência</label>
+        <input
+          type="text"
+          class="input-field"
+          name="emergencyContact"
+          id="emergencyContact"
+          formControlName=""
+          placeholder="(99) 9 9999-9999"
+        />
+      </div>
+      <div class="input-wrapper w-3/12">
+        <label for="allergyList">Lista de Alergias</label>
+        <input
+          type="text"
+          class="input-field"
+          name="allergyList"
+          id="allergyList"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper mr-5 w-3/12">
+        <label for="specificCareList">Lista de Cuidados</label>
+        <input
+          type="text"
+          class="input-field"
+          name="specificCareList"
+          id="specificCareList"
+          formControlName=""
+        />
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-4/12">
+        <label for="healthInsurance">Convênio</label>
+        <input
+          type="text"
+          class="input-field"
+          name="healthInsurance"
+          id="healthInsurance"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper w-4/12">
+        <label for="healthInsuranceNumber">Numero do convênio</label>
+        <input
+          type="text"
+          class="input-field"
+          name="healthInsuranceNumber"
+          id="healthInsuranceNumber"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper mr-5 w-4/12">
+        <label for="healthInsuranceValidity">Validade do convênio</label>
+        <input
+          type="text"
+          class="input-field"
+          name="healthInsuranceValidity"
+          id="healthInsuranceValidity"
+          formControlName=""
+          placeholder="dd/MM/aaaa"
+        />
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-6/12">
+        <label for="publicPlace">Logradouro</label>
+        <input
+          type="text"
+          class="input-field"
+          name="publicPlace"
+          id="publicPlace"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper w-2/12">
+        <label for="number">Numero</label>
+        <input
+          type="text"
+          class="input-field"
+          name="number"
+          id="number"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper w-2/12">
+        <label for="neighborhood">Bairro</label>
+        <input
+          type="text"
+          class="input-field"
+          name="neighborhood"
+          id="neighborhood"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper mr-5 w-2/12">
+        <label for="city">Cidade</label>
+        <input
+          type="text"
+          class="input-field"
+          name="city"
+          id="city"
+          formControlName=""
+        />
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-4/12">
+        <label for="cep">CEP</label>
+        <input
+          type="text"
+          class="input-field"
+          name="cep"
+          id="cep"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper w-4/12">
+        <label for="complement">Complemento</label>
+        <input
+          type="text"
+          class="input-field"
+          name="complement"
+          id="complement"
+          formControlName=""
+        />
+      </div>
+      <div class="input-wrapper mr-5 w-4/12">
+        <label for="referencePoint">Ponto de Referência</label>
+        <input
+          type="text"
+          class="input-field"
+          name="referencePoint"
+          id="referencePoint"
+          formControlName=""
+        />
+      </div>
+    </div>
+  </form>
+</div>
