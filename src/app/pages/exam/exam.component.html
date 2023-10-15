@@ -1,5 +1,5 @@
 <div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
-  <form>
+  <form [formGroup]="formsExamRegister">
     <h3 class="text-xl font-bold my-2">Cadastro de exames</h3>
 
     <div class="md:flex gap-2">
@@ -10,7 +10,7 @@
           class="input-field"
           name="examName"
           id="examName"
-          formControlName=""
+          formControlName="examName"
         />
       </div>
 
@@ -21,7 +21,7 @@
           class="input-field"
           name="examType"
           id="examType"
-          formControlName=""
+          formControlName="examType"
         />
       </div>
     </div>
@@ -34,7 +34,7 @@
           class="input-field"
           name="examDate"
           id="examDate"
-          formControlName=""
+          formControlName="examDate"
         />
       </div>
 
@@ -45,7 +45,7 @@
           class="input-field"
           name="examHour"
           id="examHour"
-          formControlName=""
+          formControlName="examHour"
         />
       </div>
 
@@ -56,7 +56,7 @@
           class="input-field"
           name="laboratory"
           id="laboratory"
-          formControlName=""
+          formControlName="laboratory"
         />
       </div>
     </div>
@@ -69,7 +69,7 @@
           class="input-field"
           name="documentUrl"
           id="documentUrl"
-          formControlName=""
+          formControlName="documentUrl"
         />
       </div>
     </div>
@@ -82,7 +82,7 @@
           name="results"
           id="results"
           rows="5"
-          formControlName=""
+          formControlName="results"
         ></textarea>
       </div>
     </div>
