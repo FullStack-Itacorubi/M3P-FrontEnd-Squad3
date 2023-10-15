@@ -62,12 +62,12 @@ export class UserComponent {
 
     const user = {
       fullname: this.formUserRegister.value.fullname!,
-      genre: this.formUserRegister.value.fullname!,
-      cpf: this.formUserRegister.value.fullname!,
-      phone: this.formUserRegister.value.fullname!,
-      type: this.formUserRegister.value.fullname!,
-      email: this.formUserRegister.value.fullname!,
-      password: this.formUserRegister.value.fullname!,
+      genre: this.formUserRegister.value.genre!,
+      cpf: this.formUserRegister.value.cpf!,
+      phone: this.formUserRegister.value.phone!,
+      type: this.formUserRegister.value.type!,
+      email: this.formUserRegister.value.email!,
+      password: this.formUserRegister.value.password!,
     };
 
     this.initUserForm();
