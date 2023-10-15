@@ -1,5 +1,5 @@
 <div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
-  <form formGroup="formUserRegister">
+  <form [formGroup]="formUserRegister">
     <h3 class="text-xl font-bold my-2">Cadastro de usuário</h3>
 
     <div class="md:flex gap-2">
@@ -12,7 +12,24 @@
           id="fullname"
           formControlName="fullname"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('fullname')?.errors?.['required'] && formUserRegister.get('fullname')?.touched"
+        >
+          <p *ngIf="formUserRegister.get('fullname')?.errors">
+            Por favor insira seu nome completo!
+          </p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('fullname')?.errors?.['minlength'] && formUserRegister.get('fullname')?.touched"
+        >
+          <p *ngIf="formUserRegister.get('fullname')?.errors">
+            Seu nome deve possuir no mínimo 8 caracteres!
+          </p>
+        </div>
       </div>
+
       <div class="input-wrapper mr-5 w-4/12">
         <label for="genre">Gênero</label>
         <select
@@ -26,6 +43,14 @@
           <option value="transgender">Transgênero</option>
           <option value="nonbinary">Não-binário</option>
         </select>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('genre')?.errors?.['required'] && formUserRegister.get('genre')?.touched"
+        >
+          <p *ngIf="formUserRegister.get('genre')?.errors">
+            Por favor insira seu genero!
+          </p>
+        </div>
       </div>
     </div>
 
@@ -41,7 +66,16 @@
           placeholder="000.000.000-00"
           mask="000.000.000-00"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('cpf')?.errors?.['required'] && formUserRegister.get('cpf')?.touched"
+        >
+          <p *ngIf="formUserRegister.get('cpf')?.errors">
+            Por favor insira seu CPF!
+          </p>
+        </div>
       </div>
+
       <div class="input-wrapper w-4/12">
         <label for="phone">Telefone</label>
         <input
@@ -53,7 +87,16 @@
           placeholder="(99) 9 9999-9999"
           mask="(99) 9 9999-9999"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('phone')?.errors?.['required'] && formUserRegister.get('phone')?.touched"
+        >
+          <p *ngIf="formUserRegister.get('phone')?.errors">
+            Por favor insira seu telefone!
+          </p>
+        </div>
       </div>
+
       <div class="input-wrapper mr-5 w-4/12">
         <label for="type">Tipo</label>
         <select
@@ -67,6 +110,14 @@
           <option value="doctor">Médico</option>
           <option value="nurse">Enfermeiro</option>
         </select>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('type')?.errors?.['required'] && formUserRegister.get('type')?.touched"
+        >
+          <p *ngIf="formUserRegister.get('type')?.errors">
+            Por favor insira seu tipo de usuário
+          </p>
+        </div>
       </div>
     </div>
 
@@ -81,7 +132,24 @@
           formControlName="email"
           placeholder="example@gmail.com"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('email')?.errors?.['required'] && formUserRegister.get('email')?.touched"
+        >
+          <p *ngIf="formUserRegister.get('email')?.errors">
+            Por favor insira seu e-mail!
+          </p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('email')?.errors?.['email'] && formUserRegister.get('email')?.touched"
+        >
+          <p *ngIf="formUserRegister.get('email')?.errors">
+            Por favor insira um e-mail válido!
+          </p>
+        </div>
       </div>
+
       <div class="input-wrapper mr-5 w-4/12">
         <label for="password">Senha</label>
         <input
@@ -91,6 +159,22 @@
           id="password"
           formControlName="password"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('password')?.errors?.['required'] && formUserRegister.get('password')?.touched"
+        >
+          <p *ngIf="formUserRegister.get('password')?.errors">
+            Por favor insira sua senha!
+          </p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('password')?.errors?.['minlength'] && formUserRegister.get('password')?.touched"
+        >
+          <p *ngIf="formUserRegister.get('password')?.errors">
+            Sua senha deve possuir no mínimo 8 caracteres!
+          </p>
+        </div>
       </div>
     </div>
   </form>

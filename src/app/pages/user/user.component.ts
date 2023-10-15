@@ -45,7 +45,7 @@ export class UserComponent {
       cpf: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       type: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
@@ -68,7 +68,7 @@ export class UserComponent {
       type: this.formUserRegister.value.fullname!,
       email: this.formUserRegister.value.fullname!,
       password: this.formUserRegister.value.fullname!,
-    }
+    };
 
     this.initUserForm();
   }
