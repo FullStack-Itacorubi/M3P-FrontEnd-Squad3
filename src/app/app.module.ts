@@ -8,9 +8,10 @@ import { NgIconsModule } from '@ng-icons/core';
 import * as IonIcons from '@ng-icons/ionicons';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavButtonComponent } from './components/sidebar/nav-button/nav-button.component';
+import { ExamComponent } from './pages/exam/exam.component';
 
 @NgModule({
-  declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent],
+  declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent, ExamComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
