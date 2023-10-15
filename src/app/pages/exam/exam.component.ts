@@ -8,7 +8,7 @@ interface Examinfos {
   examHour: FormControl<string | null>;
   examType: FormControl<string | null>;
   laboratory: FormControl<string | null>;
-  documetnUrl: FormControl<string | null>;
+  documentUrl: FormControl<string | null>;
   results: FormControl<string | null>;
 }
 
@@ -24,7 +24,7 @@ export class ExamComponent {
     examHour: new FormControl(''),
     examType: new FormControl(''),
     laboratory: new FormControl(''),
-    documetnUrl: new FormControl(''),
+    documentUrl: new FormControl(''),
     results: new FormControl(''),
   });
 
@@ -53,13 +53,33 @@ export class ExamComponent {
         Validators.minLength(4),
         Validators.maxLength(32),
       ]),
-      documetnUrl: new FormControl(''),
+      documentUrl: new FormControl(''),
       results: new FormControl('', [
         Validators.required,
         Validators.minLength(16),
         Validators.maxLength(1024),
       ]),
     })
-
   }
+
+  registerExam() {
+    if (!this.formsExamRegister.valid) {
+      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+    } else {
+      alert('Dados cadastrado com sucesso!');
+    }
+
+    const user = {
+      examName: this.formsExamRegister.value.examName!,
+      examDate: this.formsExamRegister.value.examDate!,
+      examHour: this.formsExamRegister.value.examHour!,
+      examType: this.formsExamRegister.value.examType!,
+      laboratory: this.formsExamRegister.value.laboratory!,
+      documentUrl: this.formsExamRegister.value.documentUrl!,
+      results: this.formsExamRegister.value.results!,
+    }
+
+    this.initExamForm();
+  }
+
 }
