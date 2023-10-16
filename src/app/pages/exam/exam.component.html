@@ -54,11 +54,13 @@
       <div class="input-wrapper w-3/12">
         <label for="examDate">Data do Exame</label>
         <input
-          type="date"
+          type="text"
           class="input-field"
           name="examDate"
           id="examDate"
           formControlName="examDate"
+          placeholder="dd/mm/aaaa"
+          mask = "d0/M0/0000"
         />
         <div
           class="text-red-500 font-semibold"
@@ -71,11 +73,13 @@
       <div class="input-wrapper w-3/12">
         <label for="examHour">Hora do Exame</label>
         <input
-          type="time"
+          type="text"
           class="input-field"
           name="examHour"
           id="examHour"
           formControlName="examHour"
+          placeholder="hh:mm:ss"
+          mask = "Hh:m0:s0"
         />
         <div
           class="text-red-500 font-semibold"
