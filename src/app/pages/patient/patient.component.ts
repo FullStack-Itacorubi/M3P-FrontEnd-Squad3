@@ -101,4 +101,40 @@ export class PatientComponent {
       referencePoint: new FormControl(''),
     });
   }
+
+  registerPatient() {
+    if (!this.formPatientRegister.valid) {
+      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+    } else {
+      alert('Dados cadastrado com sucesso!');
+    }
+
+    const patient = {
+      fullname: this.formPatientRegister.value.fullname!,
+      genre: this.formPatientRegister.value.genre!,
+      birthdate: this.formPatientRegister.value.birthdate!,
+      cpf: this.formPatientRegister.value.cpf!,
+      rg: this.formPatientRegister.value.rg!,
+      civilStatus: this.formPatientRegister.value.civilStatus!,
+      placeOfBirth: this.formPatientRegister.value.placeOfBirth!,
+      email: this.formPatientRegister.value.email!,
+      phone: this.formPatientRegister.value.phone!,
+      emergencyContact: this.formPatientRegister.value.emergencyContact!,
+      allergyList:this.formPatientRegister.value.allergyList!,
+      specificCareList: this.formPatientRegister.value.specificCareList!,
+      healthInsurance: this.formPatientRegister.value.healthInsurance!,
+      healthInsuranceNumber: this.formPatientRegister.value.healthInsuranceNumber!,
+      healthInsuranceValidity: this.formPatientRegister.value.healthInsuranceValidity!,
+      publicPlace: this.formPatientRegister.value.publicPlace!,
+      number: this.formPatientRegister.value.number!,
+      neighborhood: this.formPatientRegister.value.neighborhood!,
+      city: this.formPatientRegister.value.city!,
+      state: this.formPatientRegister.value.state!,
+      cep: this.formPatientRegister.value.cep!,
+      complement: this.formPatientRegister.value.complement!,
+      referencePoint: this.formPatientRegister.value.referencePoint!,
+    }
+
+    this.initPatientForm();
+  }
 }
