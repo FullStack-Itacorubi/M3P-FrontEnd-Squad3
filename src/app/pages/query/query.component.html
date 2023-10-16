@@ -1,0 +1,126 @@
+<div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
+    <form formGroup = "formQuery">
+      <h3 class="text-xl font-bold my-2">Cadastro de consulta</h3>
+
+      <div>
+        <button type="submit" class="btn btn-success" disabled>Salvar</button>
+        <button type="submit" class="btn btn-success" disabled>Editar</button>
+        <button type="submit" class="btn btn-success" disabled>Excluir</button>
+      </div>
+
+  
+      <div class="md:flex gap-2">
+        <div class="input-wrapper w-8/12">
+          <label for="MotivoConsulta">Motivo da Consulta</label>
+          <input
+            type="text"
+            class="input-field"
+            name="MotivoConsulta"
+            id="MotivoConsulta"
+            formControlName="motive"
+          />
+          <div class="alert alert-danger" role="alert" 
+            *ngIf="formQuery.get('motive')?.errors?.['required'] 
+            && formQuery.get('motive')?.touched">
+            <small>Campo obrigatório</small>
+          </div>    
+        </div>
+      </div>
+  
+      <div class="md:flex gap-2">
+        <div class="input-wrapper mr-5 w-4/12">
+          <label for="dataConsulta">Data da Consulta</label>
+          <input
+            type="date"
+            class="input-field"
+            name="dataConsulta"
+            id="dataConsulta"
+            formControlName="date"
+          />
+          <div class="alert alert-danger" role="alert" 
+            *ngIf="formQuery.get('date')?.errors?.['required'] 
+            && formQuery.get('date')?.touched">
+            <small>Campo obrigatório</small>
+        </div>    
+        </div>
+        <div class="input-wrapper w-4/12">
+          <label for="horario">Horário da Consulta</label>
+          <input
+            type="text"
+            class="input-field"
+            name="horario"
+            id="horario"
+            formControlName="time"
+          />
+          <div class="alert alert-danger" role="alert" 
+            *ngIf="formQuery.get('time')?.errors?.['required'] 
+            && formQuery.get('time')?.touched">
+            <small>Campo obrigatório</small>
+          </div>    
+        </div>
+        <div class="input-wrapper w-4/12">
+          <label for="descricao">Descrição do Problema</label>
+          <input
+            type="textarea"
+            class="input-field"
+            name="descricao"
+            id="descricao"
+            formControlName="description"
+          />
+          <div class="alert alert-danger" role="alert" 
+           *ngIf="formQuery.get('description')?.errors?.['required'] 
+            && formQuery.get('description')?.touched">
+            <small>Campo obrigatório</small>
+          </div>    
+        </div>
+      </div>
+  
+      <div class="md:flex gap-2">
+        <div class="input-wrapper mr-5 w-4/12">
+          <label for="medicacao">Medicação Receitada</label>
+          <input
+            type="text"
+            class="input-field"
+            name="medicacao"
+            id="medicacao"
+            formControlName="medication"
+          />
+          <div class="alert alert-danger" role="alert" 
+            *ngIf="formQuery.get('description')?.errors?.['required'] 
+            && formQuery.get('description')?.touched">
+            <small>Campo obrigatório</small>
+        </div>    
+        </div>
+        <div class="input-wrapper w-4/12">
+          <label for="dosagem">Dosagem e Precauções</label>
+          <input
+            type="text"
+            class="input-field"
+            name="dosagem"
+            id="dosagem"
+            formControlName="dosage"
+          />
+          <div class="alert alert-danger" role="alert" 
+           *ngIf="formQuery.get('dosage')?.errors?.['required'] 
+           && formQuery.get('dosage')?.touched">
+           <small>Campo obrigatório</small>
+          </div>    
+        </div>
+        <div class="input-wrapper mr-5 w-4/12">
+            <label for="status">Status do Sistema</label>
+            <input
+              type="text"
+              class="input-field"
+              name="status"
+              id="status"
+              formControlName="status"
+            />
+            <div class="alert alert-danger" role="alert" 
+              *ngIf="formQuery.get('status')?.errors?.['required'] 
+              && formQuery.get('status')?.touched">
+              <small>Campo obrigatório</small>
+          </div>    
+          </div>
+      </div>
+    </form>
+  </div>
