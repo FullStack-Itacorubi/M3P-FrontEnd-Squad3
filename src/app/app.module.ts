@@ -10,6 +10,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavButtonComponent } from './components/sidebar/nav-button/nav-button.component';
 import { PatientComponent } from './pages/patient/patient.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent, PatientComponent],
@@ -17,6 +18,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     BrowserModule,
     AppRoutingModule,
     NgIconsModule.withIcons({ ...IonIcons }),
+    ReactiveFormsModule,
     NgxMaskDirective,
   ],
   providers: [ provideNgxMask() ],

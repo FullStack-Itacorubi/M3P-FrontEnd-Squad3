@@ -1,5 +1,5 @@
 <div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
-  <form>
+  <form [formGroup]="formPatientRegister">
     <h3 class="text-xl font-bold my-2">Cadastro de paciente</h3>
 
     <div class="md:flex gap-2">
@@ -10,12 +10,17 @@
           class="input-field"
           name="fullname"
           id="fullname"
-          formControlName=""
+          formControlName="fullname"
         />
       </div>
       <div class="input-wrapper w-2/12">
         <label for="genre">Gênero</label>
-        <select class="input-field" name="genre" id="genre" formControlName="">
+        <select
+          class="input-field"
+          name="genre"
+          id="genre"
+          formControlName="genre"
+        >
           <option disabled selected></option>
           <option value="cisgender">Cisgenero</option>
           <option value="transgender">Transgênero</option>
@@ -29,7 +34,7 @@
           class="input-field"
           name="birthdate"
           id="birthdate"
-          formControlName=""
+          formControlName="birthdate"
           placeholder="dd/mm/aaaa"
           mask="d0/M0/0000"
         />
@@ -41,7 +46,7 @@
           class="input-field"
           name="cpf"
           id="cpf"
-          formControlName=""
+          formControlName="cpf"
           placeholder="000.000.000-00"
           mask="000.000.000-00"
         />
@@ -56,7 +61,7 @@
           class="input-field"
           name="rg"
           id="rg"
-          formControlName=""
+          formControlName="rg"
         />
       </div>
       <div class="input-wrapper w-3/12">
@@ -66,7 +71,7 @@
           name="civilStatus"
           id="civilStatus"
           class="input-field"
-          formControlName=""
+          formControlName="civilStatus"
         >
           <option disabled selected></option>
           <option value="single">Solteiro(a)</option>
@@ -83,7 +88,7 @@
           class="input-field"
           name="placeOfBirth"
           id="placeOfBirth"
-          formControlName=""
+          formControlName="placeOfBirth"
         />
       </div>
       <div class="input-wrapper mr-5 w-3/12">
@@ -93,7 +98,7 @@
           class="input-field"
           name="email"
           id="email"
-          formControlName=""
+          formControlName="email"
           placeholder="example@gmail.com"
         />
       </div>
@@ -107,7 +112,7 @@
           class="input-field"
           name="phone"
           id="phone"
-          formControlName=""
+          formControlName="phone"
           placeholder="(99) 9 9999-9999"
           mask="(00) 0 0000-0000"
         />
@@ -119,7 +124,7 @@
           class="input-field"
           name="emergencyContact"
           id="emergencyContact"
-          formControlName=""
+          formControlName="emergencyContact"
           placeholder="(99) 9 9999-9999"
           mask="(00) 0 0000-0000"
         />
@@ -131,7 +136,7 @@
           class="input-field"
           name="allergyList"
           id="allergyList"
-          formControlName=""
+          formControlName="allergyList"
         />
       </div>
       <div class="input-wrapper mr-5 w-3/12">
@@ -141,7 +146,7 @@
           class="input-field"
           name="specificCareList"
           id="specificCareList"
-          formControlName=""
+          formControlName="specificCareList"
         />
       </div>
     </div>
@@ -154,7 +159,7 @@
           class="input-field"
           name="healthInsurance"
           id="healthInsurance"
-          formControlName=""
+          formControlName="healthInsurance"
         />
       </div>
       <div class="input-wrapper w-4/12">
@@ -164,7 +169,7 @@
           class="input-field"
           name="healthInsuranceNumber"
           id="healthInsuranceNumber"
-          formControlName=""
+          formControlName="healthInsuranceNumber"
         />
       </div>
       <div class="input-wrapper mr-5 w-4/12">
@@ -174,7 +179,7 @@
           class="input-field"
           name="healthInsuranceValidity"
           id="healthInsuranceValidity"
-          formControlName=""
+          formControlName="healthInsuranceValidity"
           placeholder="dd/mm/aaaa"
           mask="d0/M0/0000"
         />
@@ -189,7 +194,7 @@
           class="input-field"
           name="publicPlace"
           id="publicPlace"
-          formControlName=""
+          formControlName="publicPlace"
         />
       </div>
       <div class="input-wrapper w-2/12">
@@ -199,7 +204,7 @@
           class="input-field"
           name="number"
           id="number"
-          formControlName=""
+          formControlName="number"
         />
       </div>
       <div class="input-wrapper w-2/12">
@@ -209,7 +214,7 @@
           class="input-field"
           name="neighborhood"
           id="neighborhood"
-          formControlName=""
+          formControlName="neighborhood"
         />
       </div>
       <div class="input-wrapper mr-5 w-2/12">
@@ -219,7 +224,7 @@
           class="input-field"
           name="city"
           id="city"
-          formControlName=""
+          formControlName="city"
         />
       </div>
     </div>
@@ -232,7 +237,7 @@
           class="input-field"
           name="state"
           id="state"
-          formControlName=""
+          formControlName="state"
         />
       </div>
       <div class="input-wrapper w-3/12">
@@ -242,7 +247,7 @@
           class="input-field"
           name="cep"
           id="cep"
-          formControlName=""
+          formControlName="cep"
         />
       </div>
       <div class="input-wrapper w-3/12">
@@ -252,7 +257,7 @@
           class="input-field"
           name="complement"
           id="complement"
-          formControlName=""
+          formControlName="complement"
         />
       </div>
       <div class="input-wrapper mr-5 w-3/12">
@@ -262,7 +267,7 @@
           class="input-field"
           name="referencePoint"
           id="referencePoint"
-          formControlName=""
+          formControlName="referencePoint"
         />
       </div>
     </div>
