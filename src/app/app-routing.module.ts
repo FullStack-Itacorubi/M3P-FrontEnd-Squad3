@@ -9,9 +9,6 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    children:[
-      {}
-    ]
   },
   {
     path: 'sidebar',
