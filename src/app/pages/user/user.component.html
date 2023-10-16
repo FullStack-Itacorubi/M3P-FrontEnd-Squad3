@@ -16,7 +16,7 @@
           class="text-red-500 font-semibold"
           *ngIf="formUserRegister.get('fullname')?.errors?.['required'] && formUserRegister.get('fullname')?.touched"
         >
-          <p *ngIf="formUserRegister.get('fullname')?.errors">
+          <p>
             Por favor insira seu nome completo!
           </p>
         </div>
@@ -24,7 +24,7 @@
           class="text-red-500 font-semibold"
           *ngIf="formUserRegister.get('fullname')?.errors?.['minlength'] && formUserRegister.get('fullname')?.touched"
         >
-          <p *ngIf="formUserRegister.get('fullname')?.errors">
+          <p>
             Seu nome deve possuir no mínimo 8 caracteres!
           </p>
         </div>
@@ -47,7 +47,7 @@
           class="text-red-500 font-semibold"
           *ngIf="formUserRegister.get('genre')?.errors?.['required'] && formUserRegister.get('genre')?.touched"
         >
-          <p *ngIf="formUserRegister.get('genre')?.errors">
+          <p>
             Por favor insira seu genero!
           </p>
         </div>
@@ -70,7 +70,7 @@
           class="text-red-500 font-semibold"
           *ngIf="formUserRegister.get('cpf')?.errors?.['required'] && formUserRegister.get('cpf')?.touched"
         >
-          <p *ngIf="formUserRegister.get('cpf')?.errors">
+          <p>
             Por favor insira seu CPF!
           </p>
         </div>
@@ -91,7 +91,7 @@
           class="text-red-500 font-semibold"
           *ngIf="formUserRegister.get('phone')?.errors?.['required'] && formUserRegister.get('phone')?.touched"
         >
-          <p *ngIf="formUserRegister.get('phone')?.errors">
+          <p>
             Por favor insira seu telefone!
           </p>
         </div>
@@ -114,7 +114,7 @@
           class="text-red-500 font-semibold"
           *ngIf="formUserRegister.get('type')?.errors?.['required'] && formUserRegister.get('type')?.touched"
         >
-          <p *ngIf="formUserRegister.get('type')?.errors">
+          <p>
             Por favor insira seu tipo de usuário
           </p>
         </div>
@@ -136,7 +136,7 @@
           class="text-red-500 font-semibold"
           *ngIf="formUserRegister.get('email')?.errors?.['required'] && formUserRegister.get('email')?.touched"
         >
-          <p *ngIf="formUserRegister.get('email')?.errors">
+          <p>
             Por favor insira seu e-mail!
           </p>
         </div>
@@ -144,7 +144,7 @@
           class="text-red-500 font-semibold"
           *ngIf="formUserRegister.get('email')?.errors?.['email'] && formUserRegister.get('email')?.touched"
         >
-          <p *ngIf="formUserRegister.get('email')?.errors">
+          <p>
             Por favor insira um e-mail válido!
           </p>
         </div>
@@ -163,7 +163,7 @@
           class="text-red-500 font-semibold"
           *ngIf="formUserRegister.get('password')?.errors?.['required'] && formUserRegister.get('password')?.touched"
         >
-          <p *ngIf="formUserRegister.get('password')?.errors">
+          <p>
             Por favor insira sua senha!
           </p>
         </div>
@@ -171,7 +171,7 @@
           class="text-red-500 font-semibold"
           *ngIf="formUserRegister.get('password')?.errors?.['minlength'] && formUserRegister.get('password')?.touched"
         >
-          <p *ngIf="formUserRegister.get('password')?.errors">
+          <p>
             Sua senha deve possuir no mínimo 8 caracteres!
           </p>
         </div>
