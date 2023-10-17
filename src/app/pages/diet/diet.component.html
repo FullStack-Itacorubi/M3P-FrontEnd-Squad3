@@ -1,1 +1,71 @@
-<p>diet works!</p>
+<div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
+  <form>
+    <h3 class="text-xl font-bold my-2">Cadastro de dietas</h3>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-6/12">
+        <label for="dietName">Nome da dieta</label>
+        <input
+          type="text"
+          class="input-field"
+          name="dietName"
+          id="dietName"
+          formControlName=""
+        />
+      </div>
+
+      <div class="input-wrapper mr-5 w-6/12">
+        <label for="type">Tipo da dieta</label>
+        <select class="input-field" name="type" id="type" formControlName="">
+          <option disabled selected></option>
+          <option value="low_carb">Low Carb</option>
+          <option value="dash">Dash</option>
+          <option value="paleolithic">Paleolítica</option>
+          <option value="ketogenic">Cetogenica</option>
+          <option value="dukan">Dukan</option>
+          <option value="mediterranean">Mediterrânea</option>
+          <option value="othe">Outra</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-6/12">
+        <label for="dietDate">Data</label>
+        <input
+          type="text"
+          class="input-field"
+          name="dietDate"
+          id="dietDate"
+          formControlName=""
+          placeholder="dd/mm/aaaa"
+        />
+      </div>
+
+      <div class="input-wrapper mr-5 w-6/12">
+        <label for="dietTime">Hora</label>
+        <input
+          type="text"
+          class="input-field"
+          name="dietTime"
+          id="dietTime"
+          formControlName=""
+          placeholder="hh:mm:ss"
+        />
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper mr-5 w-full">
+        <label for="description">Descrição</label>
+        <textarea
+          class="input-field"
+          name="description"
+          id="description"
+          rows="5"
+          formControlName=""
+        ></textarea>
+      </div>
+    </div>
+  </form>
+</div>
