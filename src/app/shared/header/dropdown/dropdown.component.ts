@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToolbarService } from 'src/app/services/toolbar.service';
 
 @Component({
   selector: 'app-dropdown',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class DropdownComponent {
 
+  constructor(private toolbarService : ToolbarService) {}
+  
+  returnLogin() {
+    this.toolbarService.logout();
+  
+  }
 }
