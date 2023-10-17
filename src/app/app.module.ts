@@ -10,6 +10,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavButtonComponent } from './components/sidebar/nav-button/nav-button.component';
 import { DietComponent } from './pages/diet/diet.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent, DietComponent],
@@ -18,6 +19,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     AppRoutingModule,
     NgIconsModule.withIcons({ ...IonIcons }),
     NgxMaskDirective,
+    ReactiveFormsModule,
   ],
   providers: [ provideNgxMask() ],
   bootstrap: [AppComponent],
