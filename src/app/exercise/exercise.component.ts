@@ -57,4 +57,23 @@ export class ExerciseComponent {
 
   }
 
+  registerExercise() {
+    if (!this.formsExerciseRegister.valid) {
+      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+    } else {
+      alert('Dados cadastrado com sucesso!');
+    }
+
+    const user = {
+      name: this.formsExerciseRegister.value.name!,
+      date: this.formsExerciseRegister.value.date!,
+      time: this.formsExerciseRegister.value.time!,
+      type: this.formsExerciseRegister.value.type!,
+      weeklyAmount: this.formsExerciseRegister.value.weeklyAmount!,
+      description: this.formsExerciseRegister.value.description!,
+    }
+
+    this.initExerciseForm();
+  }
+
 }
