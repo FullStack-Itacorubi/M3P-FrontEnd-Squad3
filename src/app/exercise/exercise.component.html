@@ -1,5 +1,5 @@
 <div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
-    <form>
+    <form [formGroup]="formsExerciseRegister">
       <h3 class="text-xl font-bold my-2">Cadastro de exercício</h3>
   
       <div class="md:flex gap-2">
@@ -10,7 +10,7 @@
             class="input-field"
             name="name"
             id="name"
-            formControlName=""
+            formControlName="name"
           />
         </div>
       </div>
@@ -23,7 +23,7 @@
               class="input-field"
               name="date"
               id="date"
-              formControlName=""
+              formControlName="date"
             />
           </div>
           <div class="input-wrapper w-6/12">
@@ -33,7 +33,7 @@
               class="input-field"
               name="time"
               id="time"
-              formControlName=""
+              formControlName="time"
             />
           </div>
       </div>
@@ -41,7 +41,7 @@
       <div class="md:flex gap-2">
         <div class="input-wrapper w-6/12">
           <label for="type">Tipo</label>
-          <select class="input-field" name="type" id="type" formControlName="">
+          <select class="input-field" name="type" id="type" formControlName="type">
             <option disabled selected></option>
             <option value="aerobics">Resistência Aeróbica</option>
             <option value="muscular">Resistência Muscular</option>
@@ -58,7 +58,7 @@
             class="input-field"
             name="weeklyAmount"
             id="weeklyAmount"
-            formControlName=""
+            formControlName="weeklyAmount"
           />
         </div>
       </div>
@@ -71,7 +71,7 @@
             name="description"
             id="description"
             rows="5"
-            formControlName=""
+            formControlName="description"
           ></textarea>
         </div>
       </div>

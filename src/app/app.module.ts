@@ -9,6 +9,7 @@ import * as IonIcons from '@ng-icons/ionicons';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavButtonComponent } from './components/sidebar/nav-button/nav-button.component';
 import { ExerciseComponent } from './exercise/exercise.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent, ExerciseComponent],
@@ -16,6 +17,7 @@ import { ExerciseComponent } from './exercise/exercise.component';
     BrowserModule,
     AppRoutingModule,
     NgIconsModule.withIcons({ ...IonIcons }),
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
