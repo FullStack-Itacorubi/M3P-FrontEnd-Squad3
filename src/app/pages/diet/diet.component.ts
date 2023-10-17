@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DietService } from 'src/app/services/diet.service';
 
 interface Dietinfos {
   dietName: FormControl<string | null>;
@@ -23,7 +24,7 @@ export class DietComponent {
     description: new FormControl(''),
   });
 
-  constructor() {}
+  constructor(private dietService: DietService) {}
 
   ngOnInit(): void {
     this.initDietForm();
