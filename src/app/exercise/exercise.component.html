@@ -12,6 +12,18 @@
             id="name"
             formControlName="name"
           />
+          <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExerciseRegister.get('name')?.errors?.['required'] && formsExerciseRegister.get('name')?.touched"
+        >
+          <p>Por favor insira o nome do Série de Exercícios!</p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExerciseRegister.get('name')?.errors?.['minlength'] && formsExerciseRegister.get('name')?.touched"
+        >
+          <p>O nome do Série de Exercícios deve possuir no mínimo 5 caracteres!</p>
+        </div>
         </div>
       </div>
   
@@ -25,6 +37,12 @@
               id="date"
               formControlName="date"
             />
+            <div
+            class="text-red-500 font-semibold"
+            *ngIf="formsExerciseRegister.get('date')?.errors?.['required'] && formsExerciseRegister.get('date')?.touched"
+          >
+            <p>Por favor insira a data do exercício!</p>
+          </div>
           </div>
           <div class="input-wrapper w-6/12">
             <label for="time">Horário</label>
@@ -35,6 +53,12 @@
               id="time"
               formControlName="time"
             />
+            <div
+            class="text-red-500 font-semibold"
+            *ngIf="formsExerciseRegister.get('time')?.errors?.['required'] && formsExerciseRegister.get('time')?.touched"
+          >
+            <p>Por favor insira o horário do exercício!</p>
+          </div>
           </div>
       </div>
   
@@ -50,16 +74,28 @@
             <option value="agility">Agilidade</option>
             <option value="other">Outro</option>
           </select>
+          <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExerciseRegister.get('type')?.errors?.['required'] && formsExerciseRegister.get('type')?.touched"
+        >
+          <p>Por favor insira o tipo de exercício!</p>
+        </div>
         </div>
         <div class="input-wrapper w-6/12">
           <label for="weeklyAmount">Quantidade por Semana</label>
           <input
-            type="number"
+            type="text"
             class="input-field"
             name="weeklyAmount"
             id="weeklyAmount"
             formControlName="weeklyAmount"
           />
+          <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExerciseRegister.get('weeklyAmount')?.errors?.['required'] && formsExerciseRegister.get('weeklyAmount')?.touched"
+        >
+          <p>Por favor insira a quantidade de exercício por semana!</p>
+        </div>
         </div>
       </div>
   
@@ -73,6 +109,18 @@
             rows="5"
             formControlName="description"
           ></textarea>
+          <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExerciseRegister.get('description')?.errors?.['required'] && formsExerciseRegister.get('description')?.touched"
+        >
+          <p>Por favor insira a descrição!</p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExerciseRegister.get('description')?.errors?.['minlength'] && formsExerciseRegister.get('description')?.touched"
+        >
+          <p>A descrição deve possuir no mínimo 10 caracteres!</p>
+        </div>
         </div>
       </div>
 
