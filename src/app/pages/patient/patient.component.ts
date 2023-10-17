@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CepService } from 'src/app/services/cep.service';
 import { PatientService } from 'src/app/services/patient.service';
 
 interface Patientinfos {
@@ -60,9 +61,30 @@ export class PatientComponent {
     referencePoint: new FormControl(''),
   });
 
-  constructor(private patientService: PatientService) {}
+  constructor(
+    private patientService: PatientService,
+    private cepService: CepService
+  ) {}
 
-  ngOnIniti(): void {
+  checkCep() {
+    const cep = this.formPatientRegister.get('cep')?.value;
+    console.log(cep) 
+    if (cep) {
+      this.cepService.search(cep).subscribe((data) => this.populaForm(data));
+    }
+  }
+
+  populaForm(data: any) {
+    console.log(data)
+    this.formPatientRegister.patchValue({
+      publicPlace: data.logradouro,
+      neighborhood: data.bairro,
+      city: data.localidade,
+      state: data.uf,
+    });
+  }
+
+  ngOnInit(): void {
     this.initPatientForm();
   }
 
@@ -120,11 +142,13 @@ export class PatientComponent {
       email: this.formPatientRegister.value.email!,
       phone: this.formPatientRegister.value.phone!,
       emergencyContact: this.formPatientRegister.value.emergencyContact!,
-      allergyList:this.formPatientRegister.value.allergyList!,
+      allergyList: this.formPatientRegister.value.allergyList!,
       specificCareList: this.formPatientRegister.value.specificCareList!,
       healthInsurance: this.formPatientRegister.value.healthInsurance!,
-      healthInsuranceNumber: this.formPatientRegister.value.healthInsuranceNumber!,
-      healthInsuranceValidity: this.formPatientRegister.value.healthInsuranceValidity!,
+      healthInsuranceNumber:
+        this.formPatientRegister.value.healthInsuranceNumber!,
+      healthInsuranceValidity:
+        this.formPatientRegister.value.healthInsuranceValidity!,
       publicPlace: this.formPatientRegister.value.publicPlace!,
       number: this.formPatientRegister.value.number!,
       neighborhood: this.formPatientRegister.value.neighborhood!,
@@ -133,7 +157,7 @@ export class PatientComponent {
       cep: this.formPatientRegister.value.cep!,
       complement: this.formPatientRegister.value.complement!,
       referencePoint: this.formPatientRegister.value.referencePoint!,
-    }
+    };
 
     this.initPatientForm();
   }

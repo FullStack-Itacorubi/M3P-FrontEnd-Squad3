@@ -11,6 +11,7 @@ import { NavButtonComponent } from './components/sidebar/nav-button/nav-button.c
 import { PatientComponent } from './pages/patient/patient.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent, PatientComponent],
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgIconsModule.withIcons({ ...IonIcons }),
     ReactiveFormsModule,
     NgxMaskDirective,
+    HttpClientModule,
   ],
   providers: [ provideNgxMask() ],
   bootstrap: [AppComponent],
