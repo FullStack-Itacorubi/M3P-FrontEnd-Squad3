@@ -31,11 +31,13 @@
           <div class="input-wrapper w-6/12">
             <label for="date">Data</label>
             <input
-              type="date"
+              type="text"
               class="input-field"
               name="date"
               id="date"
               formControlName="date"
+              placeholder="dd/mm/aaaa"
+              mask = "d0/M0/0000"
             />
             <div
             class="text-red-500 font-semibold"
@@ -47,11 +49,13 @@
           <div class="input-wrapper w-6/12">
             <label for="time">Horário</label>
             <input
-              type="time"
+              type="text"
               class="input-field"
               name="time"
               id="time"
               formControlName="time"
+              placeholder="hh:mm:ss"
+              mask = "Hh:m0:s0"
             />
             <div
             class="text-red-500 font-semibold"
