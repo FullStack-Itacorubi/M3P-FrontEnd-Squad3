@@ -9,6 +9,7 @@ import * as IonIcons from '@ng-icons/ionicons';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavButtonComponent } from './components/sidebar/nav-button/nav-button.component';
 import { DietComponent } from './pages/diet/diet.component';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent, SidebarComponent, NavButtonComponent, DietComponent],
@@ -16,8 +17,9 @@ import { DietComponent } from './pages/diet/diet.component';
     BrowserModule,
     AppRoutingModule,
     NgIconsModule.withIcons({ ...IonIcons }),
+    NgxMaskDirective,
   ],
-  providers: [],
+  providers: [ provideNgxMask() ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
