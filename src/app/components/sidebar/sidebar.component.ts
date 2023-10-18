@@ -4,6 +4,7 @@ type Options = {
   text: string;
   icon: string;
   selected: boolean;
+  link: string;
 };
 
 @Component({
@@ -13,14 +14,39 @@ type Options = {
 })
 export class SidebarComponent {
   options: Options[] = [
-    { text: 'Dashboard', icon: 'ionAnalytics', selected: true },
-    { text: 'Pacientes', icon: 'ionPeople', selected: false },
-    { text: 'Consultas', icon: 'ionCalendarClear', selected: false },
-    { text: 'Exames', icon: 'ionDocuments', selected: false },
-    { text: 'Dietas', icon: 'ionFastFood', selected: false },
-    { text: 'Medicamentos', icon: 'ionBandage', selected: false },
-    { text: 'Exercícios', icon: 'ionBarbell', selected: false },
-    { text: 'Prontuários', icon: 'ionIdCard', selected: false },
+    { text: 'Dashboard', icon: 'ionAnalytics', selected: true, link: '/' },
+    {
+      text: 'Pacientes',
+      icon: 'ionPeople',
+      selected: false,
+      link: '/pacientes',
+    },
+    {
+      text: 'Consultas',
+      icon: 'ionCalendarClear',
+      selected: false,
+      link: '/consultas',
+    },
+    { text: 'Exames', icon: 'ionDocuments', selected: false, link: '/exames' },
+    { text: 'Dietas', icon: 'ionFastFood', selected: false, link: '/dietas' },
+    {
+      text: 'Medicamentos',
+      icon: 'ionBandage',
+      selected: false,
+      link: '/medicamentos',
+    },
+    {
+      text: 'Exercícios',
+      icon: 'ionBarbell',
+      selected: false,
+      link: '/exercicios',
+    },
+    {
+      text: 'Prontuários',
+      icon: 'ionIdCard',
+      selected: false,
+      link: '/prontuarios',
+    },
   ];
   collapsed = false;
 
