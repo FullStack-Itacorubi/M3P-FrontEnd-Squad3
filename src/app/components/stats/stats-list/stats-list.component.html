@@ -1,0 +1,36 @@
+<div *ngIf="listStyle === 'GRID'; then grid; else table"></div>
+<ng-template #grid>
+  <div class="grid grid-cols-5 gap-3">
+    <app-patients-card
+      *ngFor="let details of data"
+      [healthInsurance]="details.healthInsurance"
+      [name]="details.fullName"
+      [phone]="details.phone"
+      [age]="
+        details.birthday ? calculateAge(details.birthday) + ' anos' : undefined
+      "
+    />
+  </div>
+</ng-template>
+<ng-template #table>
+  <div class="border border-slate-300 flex flex-col rounded-md overflow-hidden">
+    <div class="flex items-center text-slate-800 font-medium">
+      <div class="py-2 w-10 aspect-square bg-slate-300"></div>
+      <div class="flex-grow pl-3">Nome</div>
+      <div class="pl-3 w-1/12">Idade</div>
+      <div class="pl-3 w-2/12">Contato</div>
+      <div class="pl-3 w-3/12">Plano de Saúde</div>
+      <div class="px-3 w-1/12"></div>
+    </div>
+    <app-stats-table-row
+      *ngFor="let details of data; index as i"
+      [id]="i + 1"
+      [healthInsurance]="details.healthInsurance"
+      [name]="details.fullName"
+      [phone]="details.phone"
+      [age]="
+        details.birthday ? calculateAge(details.birthday) + ' anos' : undefined
+      "
+    />
+  </div>
+</ng-template>
