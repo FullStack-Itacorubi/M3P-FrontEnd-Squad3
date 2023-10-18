@@ -17,6 +17,9 @@ import { StatsListComponent } from './components/stats/stats-list/stats-list.com
 import { StatsTableRowComponent } from './components/stats/stats-table-row/stats-table-row.component';
 import { DelaySearchInputComponent } from './components/delay-search-input/delay-search-input.component';
 import { FormsModule } from '@angular/forms';
+import { ExerciseComponent } from './exercise/exercise.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { FormsModule } from '@angular/forms';
     DelaySearchInputComponent,
     HeaderComponent,
     DropdownComponent,
+    ExerciseComponent,
   ],
 
   imports: [
@@ -40,8 +44,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     NgIconsModule.withIcons({ ...IonIcons }),
+    ReactiveFormsModule,
+    NgxMaskDirective,
   ],
-  providers: [],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
