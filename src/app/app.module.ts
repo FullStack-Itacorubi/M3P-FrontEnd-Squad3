@@ -18,10 +18,8 @@ import { StatsTableRowComponent } from './components/stats/stats-table-row/stats
 import { DelaySearchInputComponent } from './components/delay-search-input/delay-search-input.component';
 import { FormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
-
     AppComponent,
     LayoutComponent,
     SidebarComponent,
@@ -33,8 +31,8 @@ import { FormsModule } from '@angular/forms';
     StatsListComponent,
     StatsTableRowComponent,
     DelaySearchInputComponent,
-    HeaderComponent, 
-    DropdownComponent]
+    HeaderComponent,
+    DropdownComponent,
   ],
 
   imports: [
