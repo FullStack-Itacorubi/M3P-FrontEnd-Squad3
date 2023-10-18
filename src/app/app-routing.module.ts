@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { UserComponent } from './pages/user/user.component';
 import { ExamComponent } from './pages/exam/exam.component';
 import { PatientComponent } from './pages/patient/patient.component';
 import { DietComponent } from './pages/diet/diet.component';
@@ -32,6 +32,10 @@ const routes: Routes = [
       {
         path: 'exames',
         component: ExamComponent,
+      },
+      {
+        path: 'usuarios',
+        component: UserComponent,
       },
     ],
   },
