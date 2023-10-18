@@ -18,6 +18,7 @@ import { StatsTableRowComponent } from './components/stats/stats-table-row/stats
 import { DelaySearchInputComponent } from './components/delay-search-input/delay-search-input.component';
 import { FormsModule } from '@angular/forms';
 import { ExerciseComponent } from './exercise/exercise.component';
+import { DietComponent } from './pages/diet/diet.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
@@ -37,6 +38,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     HeaderComponent,
     DropdownComponent,
     ExerciseComponent,
+    DietComponent,
   ],
 
   imports: [
@@ -44,8 +46,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     AppRoutingModule,
     FormsModule,
     NgIconsModule.withIcons({ ...IonIcons }),
-    ReactiveFormsModule,
     NgxMaskDirective,
+    ReactiveFormsModule,
   ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent],
