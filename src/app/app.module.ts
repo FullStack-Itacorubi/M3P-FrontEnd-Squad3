@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { DietComponent } from './pages/diet/diet.component';
 import { PatientComponent } from './pages/patient/patient.component';
+import { ExamComponent } from './pages/exam/exam.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -42,6 +43,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ExerciseComponent,
     DietComponent,
     PatientComponent,
+    ExamComponent,
   ],
 
   imports: [
