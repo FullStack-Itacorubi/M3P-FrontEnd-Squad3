@@ -19,44 +19,87 @@
           [formGroup]="loginForm"
           (ngSubmit)="onSubmit()"
         > <!-- w-96 -->
-          <div class="relative flex items-center text-slate-800">
-            <ng-icon
-              name="ionMail"
-              class="absolute ml-4 w-5 h-5 pointer-event-none"
-            /> <!--  text-slate-800 -->
+          <div class="flex flex-col"><!-- items-center -->
+            <div class="relative flex items-center text-slate-800">
+              <ng-icon
+                name="ionMail"
+                class="absolute ml-4 w-5 h-5 pointer-event-none"
+              /> <!--  text-slate-800 -->
 
-            <input
-              type="text"
-              id="email"
-              name="email"
-              class="w-full pr-2 pl-11 py-4 placeholder-slate-500 border border-solid border-slate-300 rounded-lg"
-              placeholder="E-mail"
-              aria-label="E-mail inserir"
-              formControlName="email"
-            />
+              <input
+                type="text"
+                id="email"
+                name="email"
+                class="w-full pr-2 pl-11 py-4 placeholder-slate-500 border border-solid border-slate-300 rounded-lg"
+                placeholder="E-mail"
+                aria-label="E-mail inserir"
+                formControlName="email"
+              />
+            </div>
+
+            <div
+              class="text-red-500 font-semibold"
+              *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors"
+            >
+              <small
+                *ngIf="loginForm.get('email')?.errors?.['required']"
+              >
+                Por favor, insira seu e-mail!
+              </small>
+
+              <small
+                *ngIf="loginForm.get('email')?.errors?.['email']"
+              >
+                Por favor, insira um e-mail válido!
+              </small>
+            </div>
           </div>
 
-          <div class="relative flex items-center text-slate-800">
-            <ng-icon
-              name="ionLockClosed"
-              class="absolute ml-4 w-5 h-5 pointer-event-none"
-            />
+          <div class="flex flex-col">
+            <div class="relative flex items-center text-slate-800">
+              <ng-icon
+                name="ionLockClosed"
+                class="absolute ml-4 w-5 h-5 pointer-event-none"
+              />
 
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="w-full pr-2 pl-11 py-4 placeholder-slate-500 border border-solid border-slate-300 rounded-lg"
-              placeholder="Senha"
-              aria-label="Senha inserir"
-              formControlName="password"
-            />
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="w-full pr-2 pl-11 py-4 placeholder-slate-500 border border-solid border-slate-300 rounded-lg"
+                placeholder="Senha"
+                aria-label="Senha inserir"
+                formControlName="password"
+              />
+            </div>
+
+            <div
+              class="text-red-500 font-semibold"
+              *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors"
+            >
+              <small
+                *ngIf="loginForm.get('password')?.errors?.['required']"
+              >
+                Por favor, insira sua senha!
+              </small>
+
+              <small
+                *ngIf="loginForm.get('password')?.errors?.['minlength']"
+              >
+                Por favor, a senha deve possuir no mínimo 6 caracteres!
+              </small>
+            </div>
           </div>
 
           <button
             type="submit"
             class="p-3 font-bold text-xs leading-4 text-slate-100 bg-slate-800 rounded-lg"
             [disabled]="loginForm.invalid"
+            [ngClass]="{
+              'opaqueButton': loginForm.invalid,
+              'cursor-pointer': !loginForm.invalid,
+              'cursor-not-allowed': loginForm.invalid
+            }"
           >
             Login
           </button>
@@ -66,8 +109,8 @@
           Não possui conta?
 
           <strong
-            class="text-slate-800 underline"
-            [routerLink]="['/usuarios/esqueceu-senha']"
+            class="text-slate-800 underline cursor-pointer"
+            (click)="goToContactAdmin()"
           >
             Clique aqui
           </strong>
@@ -78,7 +121,7 @@
         Esqueceu sua senha?
 
         <strong
-          class="text-slate-800 underline"
+          class="text-slate-800 underline cursor-pointer"
           (click)="goToResetPassword()"
         >
           Clique aqui
