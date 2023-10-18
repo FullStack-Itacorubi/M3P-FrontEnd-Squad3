@@ -1,8 +1,9 @@
 <div class="flex w-screen h-screen text-slate-50 bg-slate-800">
   <app-sidebar class=""></app-sidebar>
   <div class="flex-1 py-4 pr-4">
-    <div class="w-full h-full rounded-xl bg-slate-50">
-      <app-exam></app-exam>
+    <div class="w-full h-full overflow-hidden rounded-xl bg-slate-50">
+      <app-header></app-header>
+      <router-outlet />
     </div>
   </div>
 </div>
