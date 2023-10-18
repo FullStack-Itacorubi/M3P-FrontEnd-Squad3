@@ -19,8 +19,10 @@ import { DelaySearchInputComponent } from './components/delay-search-input/delay
 import { FormsModule } from '@angular/forms';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { DietComponent } from './pages/diet/diet.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { PatientComponent } from './pages/patient/patient.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     DropdownComponent,
     ExerciseComponent,
     DietComponent,
+    PatientComponent,
   ],
 
   imports: [
@@ -46,8 +49,9 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     AppRoutingModule,
     FormsModule,
     NgIconsModule.withIcons({ ...IonIcons }),
-    NgxMaskDirective,
     ReactiveFormsModule,
+    NgxMaskDirective,
+    HttpClientModule,
   ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent],
