@@ -47,4 +47,22 @@ export class DietComponent {
       ]),
     });
   }
+
+  registerDiet() {
+    if (!this.formsDietRegister.valid) {
+      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+    } else {
+      alert('Dados cadastrado com sucesso!');
+    }
+
+    const diet = {
+      dietName: this.formsDietRegister.value.dietName!,
+      type: this.formsDietRegister.value.type!,
+      dietDate: this.formsDietRegister.value.dietDate!,
+      dietTime: this.formsDietRegister.value.dietTime!,
+      description: this.formsDietRegister.value.description!,
+    };
+
+    this.initDietForm();
+  }
 }
