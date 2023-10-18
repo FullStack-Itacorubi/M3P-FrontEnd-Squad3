@@ -12,6 +12,18 @@
           id="dietName"
           formControlName="dietName"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsDietRegister.get('dietName')?.errors?.['required'] && formsDietRegister.get('dietName')?.touched"
+        >
+          <p>Por favor insira o nome da dieta!</p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsDietRegister.get('dietName')?.errors?.['minlength'] && formsDietRegister.get('dietName')?.touched"
+        >
+          <p>O nome da dieta deve possuir no mínimo 5 caracteres!</p>
+        </div>
       </div>
 
       <div class="input-wrapper mr-5 w-6/12">
@@ -31,6 +43,12 @@
           <option value="mediterranean">Mediterrânea</option>
           <option value="othe">Outra</option>
         </select>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsDietRegister.get('type')?.errors?.['required'] && formsDietRegister.get('type')?.touched"
+        >
+          <p>Por favor insira o tipo da dieta!</p>
+        </div>
       </div>
     </div>
 
@@ -46,6 +64,12 @@
           placeholder="dd/mm/aaaa"
           mask="d0/M0/0000"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsDietRegister.get('dietDate')?.errors?.['required'] && formsDietRegister.get('dietDate')?.touched"
+        >
+          <p>Por favor insira a data!</p>
+        </div>
       </div>
 
       <div class="input-wrapper mr-5 w-6/12">
@@ -59,6 +83,12 @@
           placeholder="hh:mm:ss"
           mask="Hh:m0:s0"
         />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsDietRegister.get('dietTime')?.errors?.['required'] && formsDietRegister.get('dietTime')?.touched"
+        >
+          <p>Por favor insira a hora!</p>
+        </div>
       </div>
     </div>
 
@@ -72,6 +102,18 @@
           rows="5"
           formControlName="description"
         ></textarea>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsDietRegister.get('description')?.errors?.['required'] && formsDietRegister.get('description')?.touched"
+        >
+          <p>Por favor insira a descrição da dieta!</p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsDietRegister.get('description')?.errors?.['minlength'] && formsDietRegister.get('description')?.touched"
+        >
+          <p>A descrição deve possuir no mínimo 10 caracteres!</p>
+        </div>
       </div>
     </div>
   </form>
