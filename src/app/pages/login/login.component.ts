@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ContactAdminComponent } from 'src/app/components/contact-admin/contact-admin.component';
-import { ResetPasswordComponent } from 'src/app/components/reset-password/reset-password.component';
-import { IOptionsModal } from 'src/app/shared/interfaces/options-modal.interface';
+import {
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
+import { IOptionsModal } from 'src/app/shared/interfaces/options-modal.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { ContactAdminComponent } from 'src/app/components/contact-admin/contact-admin.component';
+import { ResetPasswordComponent } from 'src/app/components/reset-password/reset-password.component';
 
 @Component( {
   selector: 'app-login',
@@ -19,12 +22,10 @@ export class LoginComponent implements OnInit {
     animations: {
       modal: {
         enter: 'enter-scaling 0.3s ease-out',
-        // leave: 'fade-out 0.1s forwards',
         leave: 'fade-out 0.7s forwards',
       },
       overlay: {
         enter: 'fade-in 1s',
-        // leave: 'fade-out 0.3s forwards',
         leave: 'fade-out 1.3s forwards',
       },
     },
@@ -35,7 +36,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
     private modalService: ModalService
   ) { }
 
@@ -58,19 +58,13 @@ export class LoginComponent implements OnInit {
         ),
       },
       {
-        // updateOn: "blur",
         updateOn: "change",
       }
     );
   }
 
-  /* get loginFormControl() {
-    return this.loginForm.controls;
-  } */
-
   onSubmit() {
     this.authService.makeLogin( this.loginForm.value );
-    this.loginForm.reset();
   }
 
   goToContactAdmin() {
@@ -78,24 +72,6 @@ export class LoginComponent implements OnInit {
   }
 
   goToResetPassword() {
-    // this.router.navigate( [ "/usuarios/esqueceu-senha" ] );
-    /* this.modalService.open( ResetPasswordComponent, {
-      animations: {
-        modal: {
-          enter: 'enter-scaling 0.3s ease-out',
-          // leave: 'fade-out 0.1s forwards',
-          leave: 'fade-out 0.7s forwards',
-        },
-        overlay: {
-          enter: 'fade-in 1s',
-          // leave: 'fade-out 0.3s forwards',
-          leave: 'fade-out 1.3s forwards',
-        },
-      },
-      size: {
-        // width: '40rem',
-      },
-    } ); */
     this.modalService.open( ResetPasswordComponent, this.options );
   }
 }
