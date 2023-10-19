@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LayoutComponent } from './components/layout/layout.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgIconsModule } from '@ng-icons/core';
 import * as IonIcons from '@ng-icons/ionicons';
 import { HeaderComponent } from './shared/header/header.component';
@@ -23,8 +22,15 @@ import { PatientComponent } from './pages/patient/patient.component';
 import { UserComponent } from './pages/user/user.component';
 import { ExamComponent } from './pages/exam/exam.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { GlobalHttpErrorHandlerInterceptor } from './middlewares/global-http-error-handler.interceptor';
+import { LoginComponent } from './pages/login/login.component';
+import { GenericModalComponent } from './shared/components/generic-modal/generic-modal.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ContactAdminComponent } from './components/contact-admin/contact-admin.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +52,10 @@ import { HttpClientModule } from '@angular/common/http';
     PatientComponent,
     ExamComponent,
     UserComponent,
+    LoginComponent,
+    GenericModalComponent,
+    ResetPasswordComponent,
+    ContactAdminComponent,
   ],
 
   imports: [
@@ -57,7 +67,14 @@ import { HttpClientModule } from '@angular/common/http';
     NgxMaskDirective,
     HttpClientModule,
   ],
-  providers: [provideNgxMask()],
+  providers: [
+    provideNgxMask(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GlobalHttpErrorHandlerInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

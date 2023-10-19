@@ -1,0 +1,132 @@
+<div class="h-screen flex justify-center items-center bg-[url('/../../../assets/bg-login.jpg')] bg-cover bg-no-repeat">
+  <div class="w-full h-full flex flex-col justify-center items-center backdrop-blur-[20px]">
+    <main class="p-3 gap-6 flex flex-col items-center">
+      <img class="w-[97px] h-[50px]" src="/../../../assets/Logo.svg" alt="Logo" />
+
+      <div class="p-4 flex flex-col items-center gap-4 bg-white rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+        <div class="p-2 text-center">
+          <h1 class="font-bold text-2xl leading-8 text-slate-800">
+            Bem vindo
+          </h1>
+
+          <p class="mt-2 text-xs leading-4 text-slate-500">
+            Entre suas credenciais para acessar o sistema.
+          </p>
+        </div>
+
+        <form
+          class="w-88 p-3 flex flex-col gap-4"
+          [formGroup]="loginForm"
+          (ngSubmit)="onSubmit()"
+        > <!-- w-96 -->
+          <div class="flex flex-col"><!-- items-center -->
+            <div class="relative flex items-center text-slate-800">
+              <ng-icon
+                name="ionMail"
+                class="absolute ml-4 w-5 h-5 pointer-event-none"
+              /> <!--  text-slate-800 -->
+
+              <input
+                type="text"
+                id="email"
+                name="email"
+                class="w-full pr-2 pl-11 py-4 placeholder-slate-500 border border-solid border-slate-300 rounded-lg"
+                placeholder="E-mail"
+                aria-label="E-mail inserir"
+                formControlName="email"
+              />
+            </div>
+
+            <div
+              class="text-red-500 font-semibold"
+              *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors"
+            >
+              <small
+                *ngIf="loginForm.get('email')?.errors?.['required']"
+              >
+                Por favor, insira seu e-mail!
+              </small>
+
+              <small
+                *ngIf="loginForm.get('email')?.errors?.['email']"
+              >
+                Por favor, insira um e-mail válido!
+              </small>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+            <div class="relative flex items-center text-slate-800">
+              <ng-icon
+                name="ionLockClosed"
+                class="absolute ml-4 w-5 h-5 pointer-event-none"
+              />
+
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="w-full pr-2 pl-11 py-4 placeholder-slate-500 border border-solid border-slate-300 rounded-lg"
+                placeholder="Senha"
+                aria-label="Senha inserir"
+                formControlName="password"
+              />
+            </div>
+
+            <div
+              class="text-red-500 font-semibold"
+              *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors"
+            >
+              <small
+                *ngIf="loginForm.get('password')?.errors?.['required']"
+              >
+                Por favor, insira sua senha!
+              </small>
+
+              <small
+                *ngIf="loginForm.get('password')?.errors?.['minlength']"
+              >
+                Por favor, a senha deve possuir no mínimo 6 caracteres!
+              </small>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="p-3 font-bold text-xs leading-4 text-slate-100 bg-slate-800 rounded-lg"
+            [disabled]="loginForm.invalid"
+            [ngClass]="{
+              'opaqueButton': loginForm.invalid,
+              'cursor-pointer': !loginForm.invalid,
+              'cursor-not-allowed': loginForm.invalid
+            }"
+          >
+            Login
+          </button>
+        </form>
+
+        <span class="text-xs leading-4 text-slate-500">
+          Não possui conta?
+
+          <strong
+            class="text-slate-800 underline cursor-pointer"
+            (click)="goToContactAdmin()"
+          >
+            Clique aqui
+          </strong>
+        </span>
+      </div>
+
+      <span class="text-xs leading-4 text-slate-500">
+        Esqueceu sua senha?
+
+        <strong
+          class="text-slate-800 underline cursor-pointer"
+          (click)="goToResetPassword()"
+        >
+          Clique aqui
+        </strong>
+      </span>
+    </main>
+  </div>
+</div>

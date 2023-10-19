@@ -1,0 +1,77 @@
+<div class="p-4 flex flex-col items-center gap-4 bg-white rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+  <div class="p-2 text-center">
+    <h1 class="font-bold text-2xl leading-8 text-slate-800">
+      Bem vindo
+    </h1>
+
+    <p class="mt-2 text-xs leading-4 text-slate-500">
+      Entre com seu e-mail para o administrator entrar em contato.
+    </p>
+  </div>
+
+  <form
+    class="w-88 p-3 flex flex-col gap-4"
+    [formGroup]="contactAdminForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="flex flex-col"><!-- items-center -->
+      <div class="relative flex items-center text-slate-800">
+        <ng-icon
+          name="ionMail"
+          class="absolute ml-4 w-5 h-5 pointer-event-none"
+        />
+
+        <input
+          type="text"
+          id="email"
+          name="email"
+          class="w-full pr-2 pl-11 py-4 placeholder-slate-500 border border-solid border-slate-300 rounded-lg"
+          placeholder="E-mail"
+          aria-label="E-mail inserir"
+          formControlName="email"
+        />
+      </div>
+
+      <div
+        class="text-red-500 font-semibold"
+        *ngIf="contactAdminForm.get('email')?.touched && contactAdminForm.get('email')?.errors"
+      >
+        <small
+          *ngIf="contactAdminForm.get('email')?.errors?.['required']"
+        >
+          Por favor, insira seu e-mail!
+        </small>
+
+        <small
+          *ngIf="contactAdminForm.get('email')?.errors?.['email']"
+        >
+          Por favor, insira um e-mail válido!
+        </small>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="p-3 font-bold text-xs leading-4 text-slate-100 bg-slate-800 rounded-lg"
+      [disabled]="contactAdminForm.invalid"
+      [ngClass]="{
+        'opaqueButton': contactAdminForm.invalid,
+        'cursor-pointer': contactAdminForm.valid,
+        'cursor-not-allowed': contactAdminForm.invalid
+      }"
+    >
+      Entrar em contato
+    </button>
+  </form>
+
+  <span class="text-xs leading-4 text-slate-500">
+    Não precisa mais?
+
+    <strong
+      class="text-slate-800 underline cursor-pointer"
+      (click)="close()"
+    >
+      Voltar
+    </strong>
+  </span>
+</div>
