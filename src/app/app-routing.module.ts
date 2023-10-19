@@ -7,7 +7,7 @@ import { UserComponent } from './pages/user/user.component';
 import { ExamComponent } from './pages/exam/exam.component';
 import { PatientComponent } from './pages/patient/patient.component';
 import { DietComponent } from './pages/diet/diet.component';
-import { ExerciseComponent } from './exercise/exercise.component';
+import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { StatsComponent } from './pages/stats/stats.component';
 
 const routes: Routes = [

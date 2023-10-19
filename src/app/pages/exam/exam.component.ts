@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ExamService } from 'src/app/services/exam.service';
+import { ExamService } from 'src/app/shared/services/exam.service';
 
 interface Examinfos {
   examName: FormControl<string | null>;
@@ -34,7 +34,7 @@ export class ExamComponent {
     this.initExamForm();
   }
 
-  initExamForm(){
+  initExamForm() {
     this.formsExamRegister = new FormGroup({
       examName: new FormControl('', [
         Validators.required,
@@ -59,7 +59,7 @@ export class ExamComponent {
         Validators.minLength(16),
         Validators.maxLength(1024),
       ]),
-    })
+    });
   }
 
   registerExam() {
@@ -77,9 +77,8 @@ export class ExamComponent {
       laboratory: this.formsExamRegister.value.laboratory!,
       documentUrl: this.formsExamRegister.value.documentUrl!,
       results: this.formsExamRegister.value.results!,
-    }
+    };
 
     this.initExamForm();
   }
-
 }

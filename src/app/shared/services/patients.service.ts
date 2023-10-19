@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { environment } from '../../utils/environment';
-import { Patient } from 'src/app/utils/types';
+import { environment } from '../utils/environment';
+import { Patient } from 'src/app/shared/utils/types';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CepService } from 'src/app/services/cep.service';
-import { PatientService } from 'src/app/services/patient.service';
+import { CepService } from 'src/app/shared/services/cep.service';
+import { PatientService } from 'src/app/shared/services/patient.service';
 
 interface Patientinfos {
   fullname: FormControl<string | null>;
@@ -68,14 +68,14 @@ export class PatientComponent {
 
   checkCep() {
     const cep = this.formPatientRegister.get('cep')?.value;
-    console.log(cep) 
+    console.log(cep);
     if (cep) {
       this.cepService.search(cep).subscribe((data) => this.populaForm(data));
     }
   }
 
   populaForm(data: any) {
-    console.log(data)
+    console.log(data);
     this.formPatientRegister.patchValue({
       publicPlace: data.logradouro,
       neighborhood: data.bairro,

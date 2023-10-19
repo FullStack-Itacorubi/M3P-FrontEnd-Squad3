@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ExerciseService } from '../exercise.service';
-
+import { ExerciseService } from '../../exercise.service';
 
 interface Exerciseinfos {
   name: FormControl<string | null>;
@@ -33,7 +32,7 @@ export class ExerciseComponent {
     this.initExerciseForm();
   }
 
-  initExerciseForm(){
+  initExerciseForm() {
     this.formsExerciseRegister = new FormGroup({
       name: new FormControl('', [
         Validators.required,
@@ -53,8 +52,7 @@ export class ExerciseComponent {
         Validators.minLength(10),
         Validators.maxLength(1000),
       ]),
-    })
-
+    });
   }
 
   registerExercise() {
@@ -71,9 +69,8 @@ export class ExerciseComponent {
       type: this.formsExerciseRegister.value.type!,
       weeklyAmount: this.formsExerciseRegister.value.weeklyAmount!,
       description: this.formsExerciseRegister.value.description!,
-    }
+    };
 
     this.initExerciseForm();
   }
-
 }

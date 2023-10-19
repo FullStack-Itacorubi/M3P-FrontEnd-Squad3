@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DietService } from 'src/app/services/diet.service';
+import { DietService } from 'src/app/shared/services/diet.service';
 
 interface Dietinfos {
   dietName: FormControl<string | null>;

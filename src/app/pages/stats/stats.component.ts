@@ -3,10 +3,10 @@ import { StatsListStyle } from 'src/app/components/stats/stats-list/stats-list.c
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { StatsService } from 'src/app/shared/services/stats.service';
 import { UsersService } from 'src/app/shared/services/users.service';
-import { Patient, User } from 'src/app/utils/types';
+import { Patient, User } from 'src/app/shared/utils/types';
 
 type Stats = {
-  label: string;
+  title: string;
   value: number;
 };
 
