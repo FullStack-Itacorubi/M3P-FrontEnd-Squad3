@@ -1,7 +1,12 @@
-<div class="fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-40 z-40" #overlay>
+<div
+  class="fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-70 z-40"
+  #overlay
+  (click)="close()"
+>
   <section
-    class="fixed top-2/4 left-2/4 border border-solid border-gray-200 rounded-md overflow-auto -translate-x-2/4 -translate-y-2/4 origin-left z-50"
+    class="fixed top-2/4 left-2/4 rounded-md overflow-auto -translate-x-2/4 -translate-y-2/4 origin-left z-50"
     #modal
+    (click)="stopPropagation($event)"
   >
     <ng-content></ng-content>
   </section>
