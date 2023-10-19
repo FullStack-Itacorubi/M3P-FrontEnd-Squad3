@@ -40,6 +40,10 @@ export class GenericModalComponent implements AfterViewInit {
     this.modalService.close();
   }
 
+  stopPropagation( event: MouseEvent ) {
+    event.stopPropagation();
+  }
+
   ngAfterViewInit() {
     this.options = this.modalService.options;
     this.addOptions();
