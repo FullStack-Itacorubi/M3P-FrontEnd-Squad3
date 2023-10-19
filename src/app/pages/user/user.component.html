@@ -1,0 +1,181 @@
+<div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
+  <form [formGroup]="formUserRegister">
+    <h3 class="text-xl font-bold my-2">Cadastro de usuário</h3>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-8/12">
+        <label for="fullname">Nome completo</label>
+        <input
+          type="text"
+          class="input-field"
+          name="fullname"
+          id="fullname"
+          formControlName="fullname"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('fullname')?.errors?.['required'] && formUserRegister.get('fullname')?.touched"
+        >
+          <p>
+            Por favor insira seu nome completo!
+          </p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('fullname')?.errors?.['minlength'] && formUserRegister.get('fullname')?.touched"
+        >
+          <p>
+            Seu nome deve possuir no mínimo 8 caracteres!
+          </p>
+        </div>
+      </div>
+
+      <div class="input-wrapper mr-5 w-4/12">
+        <label for="genre">Gênero</label>
+        <select
+          class="input-field"
+          name="genre"
+          id="genre"
+          formControlName="genre"
+        >
+          <option disabled selected></option>
+          <option value="cisgender">Cisgenero</option>
+          <option value="transgender">Transgênero</option>
+          <option value="nonbinary">Não-binário</option>
+        </select>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('genre')?.errors?.['required'] && formUserRegister.get('genre')?.touched"
+        >
+          <p>
+            Por favor insira seu genero!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-4/12">
+        <label for="cpf">CPF</label>
+        <input
+          type="text"
+          class="input-field"
+          name="cpf"
+          id="cpf"
+          formControlName="cpf"
+          placeholder="000.000.000-00"
+          mask="000.000.000-00"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('cpf')?.errors?.['required'] && formUserRegister.get('cpf')?.touched"
+        >
+          <p>
+            Por favor insira seu CPF!
+          </p>
+        </div>
+      </div>
+
+      <div class="input-wrapper w-4/12">
+        <label for="phone">Telefone</label>
+        <input
+          type="text"
+          class="input-field"
+          name="phone"
+          id="phone"
+          formControlName="phone"
+          placeholder="(99) 9 9999-9999"
+          mask="(00) 0 0000-0000"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('phone')?.errors?.['required'] && formUserRegister.get('phone')?.touched"
+        >
+          <p>
+            Por favor insira seu telefone!
+          </p>
+        </div>
+      </div>
+
+      <div class="input-wrapper mr-5 w-4/12">
+        <label for="type">Tipo</label>
+        <select
+          class="input-field"
+          name="type"
+          id="type"
+          formControlName="type"
+        >
+          <option disabled selected></option>
+          <option value="administrator">Administrador</option>
+          <option value="doctor">Médico</option>
+          <option value="nurse">Enfermeiro</option>
+        </select>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('type')?.errors?.['required'] && formUserRegister.get('type')?.touched"
+        >
+          <p>
+            Por favor insira seu tipo de usuário
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-8/12">
+        <label for="email">E-mail</label>
+        <input
+          type="text"
+          class="input-field"
+          name="email"
+          id="email"
+          formControlName="email"
+          placeholder="example@gmail.com"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('email')?.errors?.['required'] && formUserRegister.get('email')?.touched"
+        >
+          <p>
+            Por favor insira seu e-mail!
+          </p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('email')?.errors?.['email'] && formUserRegister.get('email')?.touched"
+        >
+          <p>
+            Por favor insira um e-mail válido!
+          </p>
+        </div>
+      </div>
+
+      <div class="input-wrapper mr-5 w-4/12">
+        <label for="password">Senha</label>
+        <input
+          type="text"
+          class="input-field"
+          name="password"
+          id="password"
+          formControlName="password"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('password')?.errors?.['required'] && formUserRegister.get('password')?.touched"
+        >
+          <p>
+            Por favor insira sua senha!
+          </p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formUserRegister.get('password')?.errors?.['minlength'] && formUserRegister.get('password')?.touched"
+        >
+          <p>
+            Sua senha deve possuir no mínimo 8 caracteres!
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

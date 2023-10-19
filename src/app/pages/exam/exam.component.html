@@ -1,0 +1,154 @@
+<div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
+  <form [formGroup]="formsExamRegister">
+    <h3 class="text-xl font-bold my-2">Cadastro de exames</h3>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-6/12">
+        <label for="examName">Nome do Exame</label>
+        <input
+          type="text"
+          class="input-field"
+          name="examName"
+          id="examName"
+          formControlName="examName"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examName')?.errors?.['required'] && formsExamRegister.get('examName')?.touched"
+        >
+          <p>Por favor insira o nome do exame!</p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examName')?.errors?.['minlength'] && formsExamRegister.get('examName')?.touched"
+        >
+          <p>O nome do exame deve possuir no mínimo 8 caracteres!</p>
+        </div>
+      </div>
+
+      <div class="input-wrapper mr-5 w-6/12">
+        <label for="examType">Tipo do Exame</label>
+        <input
+          type="text"
+          class="input-field"
+          name="examType"
+          id="examType"
+          formControlName="examType"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examType')?.errors?.['required'] && formsExamRegister.get('examType')?.touched"
+        >
+          <p>Por favor insira o tipo do exame!</p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examType')?.errors?.['minlength'] && formsExamRegister.get('examType')?.touched"
+        >
+          <p>O tipo do exame deve possuir no mínimo 4 caracteres!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-3/12">
+        <label for="examDate">Data do Exame</label>
+        <input
+          type="text"
+          class="input-field"
+          name="examDate"
+          id="examDate"
+          formControlName="examDate"
+          placeholder="dd/mm/aaaa"
+          mask = "d0/M0/0000"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examDate')?.errors?.['required'] && formsExamRegister.get('examDate')?.touched"
+        >
+          <p>Por favor insira a data do exame!</p>
+        </div>
+      </div>
+
+      <div class="input-wrapper w-3/12">
+        <label for="examHour">Hora do Exame</label>
+        <input
+          type="text"
+          class="input-field"
+          name="examHour"
+          id="examHour"
+          formControlName="examHour"
+          placeholder="hh:mm:ss"
+          mask = "Hh:m0:s0"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('examHour')?.errors?.['required'] && formsExamRegister.get('examHour')?.touched"
+        >
+          <p>Por favor insira a hora do exame!</p>
+        </div>
+      </div>
+
+      <div class="input-wrapper mr-5 w-6/12">
+        <label for="laboratory">Laboratório</label>
+        <input
+          type="text"
+          class="input-field"
+          name="laboratory"
+          id="laboratory"
+          formControlName="laboratory"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('laboratory')?.errors?.['required'] && formsExamRegister.get('laboratory')?.touched"
+        >
+          <p>Por favor insira o laboratório!</p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('laboratory')?.errors?.['minlength'] && formsExamRegister.get('laboratory')?.touched"
+        >
+          <p>O laboratório deve possuir no mínimo 4 caracteres!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper mr-5 w-full">
+        <label for="documentUrl">URL do documento</label>
+        <input
+          type="url"
+          class="input-field"
+          name="documentUrl"
+          id="documentUrl"
+          formControlName="documentUrl"
+        />
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper mr-5 w-full">
+        <label for="results">Resultados</label>
+        <textarea
+          class="input-field"
+          name="results"
+          id="results"
+          rows="5"
+          formControlName="results"
+        ></textarea>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('results')?.errors?.['required'] && formsExamRegister.get('results')?.touched"
+        >
+          <p>Por favor insira o resultado!</p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formsExamRegister.get('results')?.errors?.['minlength'] && formsExamRegister.get('results')?.touched"
+        >
+          <p>O resultado deve possuir no mínimo 16 caracteres!</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
