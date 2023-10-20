@@ -1,0 +1,15 @@
+<div class="p-4 border rounded-md shadow-md border-x-slate-300 text-slate-600">
+  <header class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <ng-icon *ngIf="headerIcon" [name]="headerIcon" class="text-3xl" />
+      <span>{{ headerTitle }}</span>
+    </div>
+    <button (click)="open = !open">
+      <ng-icon [name]="open ? 'ionChevronUp' : 'ionChevronDown'" />
+    </button>
+  </header>
+  <div *ngIf="open" class="flex flex-col gap-3 pt-2 text-sm">
+    <hr />
+    <ng-content />
+  </div>
+</div>
