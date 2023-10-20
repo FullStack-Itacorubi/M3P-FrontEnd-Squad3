@@ -1,7 +1,7 @@
 <app-accordion *ngIf="patient" [headerTitle]="patient.fullName">
   <div class="flex justify-between">
-    <p>(99) 9 9999-9999</p>
-    <p>Convênio</p>
+    <p>{{ patient.phone }}</p>
+    <p>{{ patient.healthInsurance || "Nenhum" }}</p>
   </div>
   <div class="flex justify-between">
     <div class="flex flex-col items-center text-base">

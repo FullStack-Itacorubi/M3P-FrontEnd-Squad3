@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { Patient } from 'src/app/shared/utils/types';
+import { Component, OnInit } from '@angular/core';
+import { MedicalRecordsService } from 'src/app/shared/services/medical-records.service';
+import { MedicalRecord, Patient } from 'src/app/shared/utils/types';
 
 @Component({
   selector: 'app-medical-records',
   templateUrl: './medical-records.component.html',
   styleUrls: ['./medical-records.component.css'],
 })
-export class MedicalRecordsComponent {
+export class MedicalRecordsComponent implements OnInit {
   patientTest: Patient = {
     fullName: 'João Silva',
     id: 1,
@@ -30,5 +31,11 @@ export class MedicalRecordsComponent {
       state: '',
     },
   };
-  test = [, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,];
+  medicalRecords: MedicalRecord[] = [];
+
+  constructor(private medicalRecordsService: MedicalRecordsService) {}
+
+  async ngOnInit() {
+    this.medicalRecords = await this.medicalRecordsService.getMedicalRecords();
+  }
 }

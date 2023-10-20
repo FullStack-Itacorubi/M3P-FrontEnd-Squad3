@@ -3,8 +3,8 @@
     <app-delay-search-input (inputEmitter)="({})" />
     <div class="flex flex-wrap gap-3 pt-3">
       <app-medical-records-card
-        *ngFor="let item of test; index as i"
-        [patient]="patientTest"
+        *ngFor="let medicalRecord of medicalRecords"
+        [patient]="medicalRecord.patient"
         class="w-[calc(25%-9px)]"
       />
     </div>

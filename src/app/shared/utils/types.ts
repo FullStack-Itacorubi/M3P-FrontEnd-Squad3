@@ -31,6 +31,11 @@ export type User = {
   type: string;
 };
 
+export type MedicalRecord = {
+  id: number;
+  patient: Patient;
+};
+
 type Address = {
   id: number;
   cep: string;
