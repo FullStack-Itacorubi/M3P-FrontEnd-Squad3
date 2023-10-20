@@ -18,4 +18,12 @@ export class MedicalRecordsService {
 
     return medicalRecords.data;
   }
+
+  async getPatientMedicalRecord(id: number) {
+    const medicalRecords = await axios.get<MedicalRecord[]>(
+      `${this.baseUrl}/prontuarios?id=${id}`
+    );
+
+    return medicalRecords.data[0];
+  }
 }
