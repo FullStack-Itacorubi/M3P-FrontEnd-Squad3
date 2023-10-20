@@ -2,38 +2,11 @@
   <div class="flex-grow p-4 overflow-y-auto">
     <app-delay-search-input (inputEmitter)="({})" />
     <div class="flex flex-wrap gap-3 pt-3">
-      <app-accordion
+      <app-medical-records-card
         *ngFor="let item of test; index as i"
-        [headerTitle]="'' + i"
-        [headerIcon]="'ionClipboard'"
+        [patient]="patientTest"
         class="w-[calc(25%-9px)]"
-      >
-        <div class="flex justify-between">
-          <p>(99) 9 9999-9999</p>
-          <p>Convênio</p>
-        </div>
-        <div class="flex justify-between">
-          <div class="flex flex-col items-center text-base">
-            <ng-icon name="ionCalendarClear" class="text-2xl" />
-            <p>2</p>
-          </div>
-          <div class="flex flex-col items-center text-base">
-            <ng-icon name="ionDocuments" class="text-2xl" />
-            <p>3</p>
-          </div>
-          <div class="flex flex-col items-center text-base">
-            <ng-icon name="ionBarbell" class="text-2xl" />
-            <p>5</p>
-          </div>
-          <div class="flex flex-col items-center text-base">
-            <ng-icon name="ionFastFood" class="text-2xl" />
-            <p>1</p>
-          </div>
-        </div>
-        <button class="p-2 rounded-md bg-slate-600 text-slate-50">
-          Ver detalhes
-        </button>
-      </app-accordion>
+      />
     </div>
   </div>
 </div>
