@@ -32,6 +32,7 @@ import { GenericModalComponent } from './shared/components/generic-modal/generic
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ContactAdminComponent } from './components/contact-admin/contact-admin.component';
 import { MedicalRecordsComponent } from './pages/medical-records/medical-records.component';
+import { AccordionComponent } from './shared/components/accordion/accordion.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { MedicalRecordsComponent } from './pages/medical-records/medical-records
     ResetPasswordComponent,
     ContactAdminComponent,
     MedicalRecordsComponent,
+    AccordionComponent,
   ],
 
   imports: [

@@ -6,10 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./medical-records.component.css'],
 })
 export class MedicalRecordsComponent {
-  test = [, , , , , , , , , , , , , , , , , , , , ,];
-  open = false;
-
-  onHover() {
-    console.log('teste');
-  }
+  test = [, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,];
 }
