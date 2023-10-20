@@ -31,9 +31,21 @@ export type User = {
   type: string;
 };
 
+export type Exam = {};
+
+export type Diet = {};
+
+export type Exercise = {};
+
+export type Query = {};
+
 export type MedicalRecord = {
   id: number;
   patient: Patient;
+  queries: Query[];
+  exercises: Exercise[];
+  diets: Diet[];
+  exams: Exam[];
 };
 
 type Address = {
