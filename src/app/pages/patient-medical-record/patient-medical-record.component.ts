@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MedicalRecordsService } from 'src/app/shared/services/medical-records.service';
-import { MedicalRecord } from 'src/app/shared/utils/types';
+import { MedicalRecord, Medicament } from 'src/app/shared/utils/types';
 
 @Component({
   selector: 'app-patient-medical-record',
@@ -22,5 +22,9 @@ export class PatientMedicalRecordComponent implements OnInit {
 
     this.medicalRecord =
       await this.medicalRecordsService.getPatientMedicalRecord(patientId);
+  }
+
+  listMedicaments(medicaments: Medicament[]): string {
+    return medicaments.map((med) => med.name).join(', ') + '.';
   }
 }

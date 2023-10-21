@@ -38,6 +38,12 @@
             >
           </p>
           <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
+            <p *ngIf="query.medicaments">
+              Medicamentos:
+              <span class="font-medium">{{
+                listMedicaments(query.medicaments)
+              }}</span>
+            </p>
             <p>
               Dosagem e precauções:
               <span class="font-medium">{{ query.dosageAndRecautions }}</span>
@@ -49,6 +55,7 @@
           </div>
         </app-accordion>
       </app-accordion>
+
       <app-accordion
         [headerTitle]="medicalRecord?.exams?.length + ' Exames'"
         headerIcon="ionDocuments"
@@ -76,6 +83,7 @@
           </div>
         </app-accordion>
       </app-accordion>
+
       <app-accordion
         [headerTitle]="medicalRecord?.exercises?.length + ' Exercícios'"
         headerIcon="ionDocuments"
@@ -103,6 +111,7 @@
           </div>
         </app-accordion>
       </app-accordion>
+
       <app-accordion
         [headerTitle]="medicalRecord?.diets?.length + ' Dietas'"
         headerIcon="ionDocuments"
