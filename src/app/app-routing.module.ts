@@ -10,6 +10,7 @@ import { DietComponent } from './pages/diet/diet.component';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { MedicalRecordsComponent } from './pages/medical-records/medical-records.component';
+import { QueryComponent } from './pages/query/query.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
         path: 'prontuarios',
         component: MedicalRecordsComponent,
       },
+      {
+        path: 'consultas',
+        component: QueryComponent,
+      }
     ],
   },
   {

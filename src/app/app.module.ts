@@ -34,6 +34,7 @@ import { ContactAdminComponent } from './components/contact-admin/contact-admin.
 import { MedicalRecordsComponent } from './pages/medical-records/medical-records.component';
 import { AccordionComponent } from './shared/components/accordion/accordion.component';
 import { MedicalRecordsCardComponent } from './components/medical-records/medical-records-card/medical-records-card.component';
+import { QueryComponent } from './pages/query/query.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { MedicalRecordsCardComponent } from './components/medical-records/medica
     MedicalRecordsComponent,
     AccordionComponent,
     MedicalRecordsCardComponent,
+    QueryComponent,
   ],
 
   imports: [
