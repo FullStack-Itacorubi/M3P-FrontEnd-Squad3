@@ -1,4 +1,8 @@
-<app-accordion *ngIf="patient" [headerTitle]="patient.fullName">
+<app-accordion
+  *ngIf="patient"
+  [headerTitle]="patient.fullName"
+  [bordered]="true"
+>
   <div class="flex justify-between">
     <p>{{ patient.phone }}</p>
     <p>{{ patient.healthInsurance || "Nenhum" }}</p>
