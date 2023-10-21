@@ -9,6 +9,7 @@ import { PatientComponent } from './pages/patient/patient.component';
 import { DietComponent } from './pages/diet/diet.component';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { StatsComponent } from './pages/stats/stats.component';
+import { MedicamentsComponent } from './pages/medicaments/medicaments.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
         path: 'usuarios',
         component: UserComponent,
       },
+      {
+        path: 'medicamentos',
+        component: MedicamentsComponent,
+      }
     ],
   },
   {

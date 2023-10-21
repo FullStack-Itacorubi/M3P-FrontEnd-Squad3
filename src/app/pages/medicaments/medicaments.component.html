@@ -1,0 +1,175 @@
+<div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
+  <form [formGroup]="formMedicaments">
+    <h3 class="text-xl font-bold my-2">Cadastro de medicamentos</h3>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-10/12">
+        <label for="medicamentsName">Nome do medicamento</label>
+        <input
+          type="text"
+          class="input-field"
+          name="medicamentsName"
+          id="medicamentsName"
+          formControlname="medicamentsName"
+        />
+        <div
+        class="text-red-500 font-semibold"
+        *ngIf="formMedicaments.get('medicamentsName')?.errors?.['required'] && formMedicaments.get('medicamentsName')?.touched"
+      >
+        <p>Por favor insira o nome do medicamento!</p>
+      </div>
+      <div
+        class="text-red-500 font-semibold"
+        *ngIf="formMedicaments.get('medicamentsName')?.errors?.['minlength'] && formMedicaments.get('medicamentsName')?.touched"
+      >
+        <p>O nome do medicamento deve possuir no mínimo 5 caracteres!</p>
+      </div>
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+        <div class="input-wrapper w-6/12">
+          <label for="date">Data</label>
+          <input
+            type="text"
+            class="input-field"
+            name="date"
+            id="date"
+            formControlName="date"
+            placeholder="dd/mm/aaaa"
+            mask = "d0/M0/0000"
+          />
+          <div
+          class="text-red-500 font-semibold"
+          *ngIf="formMedicaments.get('date')?.errors?.['required'] && formMedicaments.get('date')?.touched"
+        >
+          <p>Por favor insira a data!</p>
+        </div>
+        </div>
+        <div class="input-wrapper w-6/12">
+          <label for="time">Horário</label>
+          <input
+            type="text"
+            class="input-field"
+            name="time"
+            id="time"
+            formControlName="time"
+            placeholder="hh:mm:ss"
+            mask = "Hh:m0:s0"
+          />
+          <div
+          class="text-red-500 font-semibold"
+          *ngIf="formMedicaments.get('time')?.errors?.['required'] && formMedicaments.get('time')?.touched"
+        >
+          <p>Por favor insira o horário!</p>
+        </div>
+        </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper w-4/12">
+        <label for="type">Tipo</label>
+        <select class="input-field" name="type" id="type" formControlName="type">
+          <option disabled selected></option>
+          <option value="capsule">Cápsula</option>
+          <option value="pill">Comprimido</option>
+          <option value="liquid">Líquido</option>
+          <option value="creme">Creme</option>
+          <option value="gel">Gel</option>
+          <option value="inalation">Inalação</option>
+          <option value="injection">Injeção</option>
+          <option value="spray">Spray</option>
+        </select>
+        <div
+        class="text-red-500 font-semibold"
+        *ngIf="formMedicaments.get('type')?.errors?.['required'] && formMedicaments.get('type')?.touched"
+      >
+        <p>Por favor insira o tipo de medicamento!</p>
+      </div>
+      </div>
+      <div class="input-wrapper w-4/12">
+        <label for="amount">Quantidade</label>
+        <input
+          type="text"
+          class="input-field"
+          name="amount"
+          id="amount"
+          formControlName="amount"
+        />
+        <div
+        class="text-red-500 font-semibold"
+        *ngIf="formMedicaments.get('amount')?.errors?.['required'] && formMedicaments.get('amount')?.touched"
+      >
+        <p>Por favor insira a quantidade do medicamento!</p>
+      </div>
+      </div>
+      <div class="input-wrapper w-4/12">
+        <label for="unit">Unidade</label>
+        <select
+          class="input-field"
+          name="unit"
+          id="unit"
+          class="input-field"
+          formControlName="unit"
+        >
+          <option disabled selected></option>
+          <option value="mg">Miligrama</option>
+          <option value="mcg">Micrograma</option>
+          <option value="g">Grama</option>
+          <option value="ml">Mililitro</option>
+          <option value="percent">Porcento</option>
+        </select>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formMedicaments.get('unit')?.errors?.['required'] && formMedicaments.get('unit')?.touched"
+        >
+          <p>Por favor insira a unidade!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:flex gap-2">
+      <div class="input-wrapper mr-5 w-full">
+        <label for="observations">Observações</label>
+        <textarea
+          class="input-field"
+          name="observations"
+          id="observations"
+          rows="3"
+          formControlName="observations"
+        ></textarea>
+        <div
+        class="text-red-500 font-semibold"
+        *ngIf="formMedicaments.get('observations')?.errors?.['required'] && formMedicaments.get('observations')?.touched"
+      >
+        <p>Por favor insira as observações!</p>
+      </div>
+      <div
+        class="text-red-500 font-semibold"
+        *ngIf="formMedicaments.get('observations')?.errors?.['minlength'] && formMedicaments.get('observations')?.touched"
+      >
+        <p>As observações devem possuir no mínimo 10 caracteres!</p>
+      </div>
+      </div>
+    </div>
+    <div class="md:flex gap-2">
+      <div class="input-wrapper mr-5 w-4/12">
+        <label for="status">Status do sistema</label>
+        <input
+          type="text"
+          class="input-field"
+          name="status"
+          id="status"
+          formControlName="status"
+        />
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formMedicaments.get('status')?.errors?.['required'] && formMedicaments.get('status')?.touched"
+        >
+          <p>Por favor insira o status!</p>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
