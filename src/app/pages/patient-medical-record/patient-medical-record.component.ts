@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MedicalRecordsService } from 'src/app/shared/services/medical-records.service';
@@ -26,5 +27,19 @@ export class PatientMedicalRecordComponent implements OnInit {
 
   listMedicaments(medicaments: Medicament[]): string {
     return medicaments.map((med) => med.name).join(', ') + '.';
+  }
+
+  getUniqueMedicaments() {
+    const medicaments = new Map<number, Medicament>();
+    this.medicalRecord?.queries.map((query) =>
+      query.medicaments.map((medicament) =>
+        medicaments.set(medicament.id, medicament)
+      )
+    );
+    return [...medicaments.values()];
+  }
+
+  getMedicamentsTotal() {
+    return this.getUniqueMedicaments().length;
   }
 }
