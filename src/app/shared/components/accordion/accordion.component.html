@@ -1,9 +1,17 @@
-<div class="p-4 border rounded-md shadow-md border-x-slate-300 text-slate-600">
+<div
+  class="text-slate-600"
+  [ngClass]="{ 'p-4 border rounded-md shadow-md border-x-slate-300': bordered }"
+>
   <header class="flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <ng-icon *ngIf="headerIcon" [name]="headerIcon" class="text-3xl" />
+    <div *ngIf="headerTitle" class="flex items-center gap-2">
+      <ng-icon
+        *ngIf="headerIcon"
+        [name]="headerIcon"
+        [class]="'text-' + iconSize"
+      />
       <span>{{ headerTitle }}</span>
     </div>
+    <ng-content select="[customHeader]" />
     <button (click)="open = !open">
       <ng-icon [name]="open ? 'ionChevronUp' : 'ionChevronDown'" />
     </button>
