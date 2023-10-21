@@ -10,20 +10,20 @@
           class="input-field"
           name="medicamentsName"
           id="medicamentsName"
-          formControlname="medicamentsName"
+          formControlName="medicamentsName"
         />
         <div
-        class="text-red-500 font-semibold"
-        *ngIf="formMedicaments.get('medicamentsName')?.errors?.['required'] && formMedicaments.get('medicamentsName')?.touched"
-      >
-        <p>Por favor insira o nome do medicamento!</p>
-      </div>
-      <div
-        class="text-red-500 font-semibold"
-        *ngIf="formMedicaments.get('medicamentsName')?.errors?.['minlength'] && formMedicaments.get('medicamentsName')?.touched"
-      >
-        <p>O nome do medicamento deve possuir no mínimo 5 caracteres!</p>
-      </div>
+          class="text-red-500 font-semibold"
+          *ngIf="formMedicaments.get('medicamentsName')?.errors?.['required'] && formMedicaments.get('medicamentsName')?.touched"
+        >
+          <p>Por favor insira o nome do medicamento!</p>
+        </div>
+        <div
+          class="text-red-500 font-semibold"
+          *ngIf="formMedicaments.get('medicamentsName')?.errors?.['minlength'] && formMedicaments.get('medicamentsName')?.touched"
+        >
+          <p>Seu nome deve possuir no mínimo 5 caracteres!</p>
+        </div>
       </div>
     </div>
 
@@ -152,6 +152,7 @@
       </div>
       </div>
     </div>
+    
     <div class="md:flex gap-2">
       <div class="input-wrapper mr-5 w-4/12">
         <label for="status">Status do sistema</label>
