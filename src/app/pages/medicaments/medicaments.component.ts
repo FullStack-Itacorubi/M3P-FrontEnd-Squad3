@@ -55,14 +55,14 @@ export class MedicamentsComponent {
     });
   }
 
-  registerPatient() {
+  registerMedicament() {
     if (!this.formMedicaments.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
     } else {
       alert('Dados cadastrados com sucesso!');
     }
 
-    const patient = {
+    const medicament = {
       medicamentsName: this.formMedicaments.value.medicamentsName!,
       date: this.formMedicaments.value.date!,
       time: this.formMedicaments.value.time!,
