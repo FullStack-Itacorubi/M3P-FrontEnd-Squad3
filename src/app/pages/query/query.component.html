@@ -1,1 +1,149 @@
-<p>query works!</p>
+<div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
+    <form [formGroup]="formQuery">
+
+        <h3 class="text-xl font-bold my-2">Cadastro de consultas</h3>
+
+        <div class="md:flex gap-2">
+            <div class="input-wrapper w-full">
+              <label for="motive">Motivo da consulta</label>
+              <input
+                type="text"
+                class="input-field"
+                name="motive"
+                id="motive"
+                formControlName="motive"
+              />
+              <div
+                class="text-red-500 font-semibold"
+                *ngIf="formQuery.get('motive')?.errors?.['required'] && formQuery.get('motive')?.touched"
+              >
+                <p>Por favor insira o motivo da consulta!</p>
+              </div>
+              <div
+                class="text-red-500 font-semibold"
+                *ngIf="formQuery.get('motive')?.errors?.['minlength'] && formQuery.get('motive')?.touched"
+              >
+                <p>Seu nome deve possuir no mínimo 8 caracteres!</p>
+              </div>
+            </div>
+        </div>
+  
+        <div class="md:flex gap-2">
+            <div class="input-wrapper w-6/12">
+                <label for="date">Data da consulta</label>
+                <input
+                type="text"
+                class="input-field"
+                name="date"
+                id="date"
+                formControlName="date"
+                placeholder="dd/mm/aaaa"
+                mask = "d0/M0/0000"
+                />
+                <div
+                class="text-red-500 font-semibold"
+                *ngIf="formQuery.get('date')?.errors?.['required'] && formQuery.get('date')?.touched"
+            >
+                <p>Por favor insira a data da consulta!</p>
+            </div>
+            </div>
+            <div class="input-wrapper w-6/12">
+                <label for="time">Horário da consulta</label>
+                <input
+                type="text"
+                class="input-field"
+                name="time"
+                id="time"
+                formControlName="time"
+                placeholder="hh:mm:ss"
+                mask = "Hh:m0:s0"
+                />
+                <div
+                class="text-red-500 font-semibold"
+                *ngIf="formQuery.get('time')?.errors?.['required'] && formQuery.get('time')?.touched"
+            >
+                <p>Por favor insira o horário da consulta!</p>
+            </div>
+            </div>
+        </div>
+    
+        <div class="md:flex gap-2">
+            <div class="input-wrapper mr-5 w-full">
+            <label for="description">Descrição do problema</label>
+            <textarea
+                class="input-field"
+                name="description"
+                id="description"
+                rows="2"
+                formControlName="description"
+            ></textarea>
+            <div
+            class="text-red-500 font-semibold"
+            *ngIf="formQuery.get('description')?.errors?.['required'] && formQuery.get('description')?.touched"
+            >
+            <p>Por favor descreva o problema!</p>
+            </div>
+            <div
+            class="text-red-500 font-semibold"
+            *ngIf="formQuery.get('description')?.errors?.['minlength'] && formQuery.get('description')?.touched"
+            >
+            <p>A descrição do problema deve possuir no mínimo 16 caracteres!</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="md:flex gap-2">
+            <div class="input-wrapper mr-5 w-full">
+                <label for="dosage">Dosagem e Precauções</label>
+                <input
+                    class="input-field"
+                    name="dosage"
+                    id="dosage"
+                    formControlName="dosage"
+                />
+                <div
+                class="text-red-500 font-semibold"
+                *ngIf="formQuery.get('dosage')?.errors?.['required'] && formQuery.get('dosage')?.touched"
+                >
+                <p>Por favor insira a dosagem e precauções!</p>
+                </div>
+                <div
+                class="text-red-500 font-semibold"
+                *ngIf="formQuery.get('dosage')?.errors?.['minlength'] && formQuery.get('dosage')?.touched"
+            >
+                <p>Dosagem e precauções devem possuir no mínimo 16 caracteres!</p>
+                </div>
+            </div>    
+        </div>
+
+        <div class="md:flex gap-2">
+            <div class="input-wrapper mr-5 w-6/12">
+                <label for="medication">Medicação Receitada</label>
+                <input
+                type="text"
+                class="input-field"
+                name="medication"
+                id="medication"
+                formControlName="medication"
+                />
+            </div>
+            <div class="input-wrapper mr-5 w-6/12">
+                <label for="status">Status do sistema</label>
+                <input
+                  type="text"
+                  class="input-field"
+                  name="status"
+                  id="status"
+                  formControlName="status"
+                />
+                <div
+                  class="text-red-500 font-semibold"
+                  *ngIf="formQuery.get('status')?.errors?.['required'] && formQuery.get('status')?.touched"
+                >
+                  <p>Por favor insira o status!</p>
+                </div>
+              </div>
+        </div>
+
+    </form>
+</div>
