@@ -31,13 +31,61 @@ export type User = {
   type: string;
 };
 
-export type Exam = {};
+export type Exam = {
+  id: number;
+  examName: string;
+  examDate: string;
+  examHour: string;
+  examType: string;
+  laboratory: string;
+  documentUrl?: string;
+  results: string;
+  status: boolean;
+};
 
-export type Diet = {};
+export type Diet = {
+  id: number;
+  dietName: string;
+  dietDate: string;
+  dietTime: string;
+  type: string;
+  description: string;
+  status: boolean;
+};
 
-export type Exercise = {};
+export type Exercise = {
+  id: number;
+  name: string;
+  date: string;
+  time: string;
+  type: string;
+  weeklyAmount: number;
+  description: string;
+  status: boolean;
+};
 
-export type Query = {};
+export type Medicament = {
+  id: number;
+  name: string;
+  date: string;
+  time: string;
+  type: string;
+  quantity: number;
+  unit: string;
+  observations: string;
+  status: boolean;
+};
+
+export type Query = {
+  id: number;
+  reasonForConsultation: string;
+  consultationDate: string;
+  consultationTime: string;
+  problemDescription: string;
+  medicaments: Medicament[];
+  dosageAndRecautions: string;
+  status: boolean;
+};
 
 export type MedicalRecord = {
   id: number;

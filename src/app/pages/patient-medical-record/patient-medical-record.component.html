@@ -1,0 +1,203 @@
+<div class="flex h-[calc(100%-64px)] text-slate-800">
+  <div class="flex-grow p-4 overflow-y-auto">
+    <section class="p-3">
+      <h2 class="text-xl font-bold">
+        {{ medicalRecord?.patient?.fullName }}
+      </h2>
+      <div class="columns-2">
+        <p>
+          <span class="font-semibold">Convênio:</span>
+          {{ medicalRecord?.patient?.healthInsurance ?? "Nenhum" }}
+        </p>
+        <p>
+          <span class="font-semibold">Alergias:</span>
+          {{ medicalRecord?.patient?.allergyList ?? "Nenhum" }}
+        </p>
+        <p>
+          <span class="font-semibold">Telefone de contato:</span>
+          {{ medicalRecord?.patient?.phone }}
+        </p>
+        <p>
+          <span class="font-semibold">Cuidados especiais:</span>
+          {{ medicalRecord?.patient?.specificCareList ?? "Nenhum" }}
+        </p>
+      </div>
+    </section>
+    <section class="flex flex-col gap-3 p-3">
+      <app-accordion
+        [headerTitle]="medicalRecord?.queries?.length + ' Consultas'"
+        headerIcon="ionDocuments"
+        iconSize="lg"
+        [bordered]="true"
+      >
+        <app-accordion *ngFor="let query of medicalRecord?.queries">
+          <div customHeader class="flex gap-2">
+            <button [routerLink]="['/consultas', query.id]">
+              <ng-icon name="ionCreateOutline" class="text-lg" />
+            </button>
+            <p customHeader class="font-semibold">
+              {{ query.consultationDate }} {{ query.consultationTime }}
+              <span class="font-medium">
+                - {{ query.reasonForConsultation }}</span
+              >
+            </p>
+          </div>
+          <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
+            <p *ngIf="query.medicaments">
+              Medicamentos:
+              <span class="font-medium">{{
+                listMedicaments(query.medicaments)
+              }}</span>
+            </p>
+            <p>
+              Dosagem e precauções:
+              <span class="font-medium">{{ query.dosageAndRecautions }}</span>
+            </p>
+            <p>
+              Descrição:
+              <span class="font-medium">{{ query.problemDescription }}</span>
+            </p>
+          </div>
+        </app-accordion>
+      </app-accordion>
+
+      <app-accordion
+        [headerTitle]="medicalRecord?.exams?.length + ' Exames'"
+        headerIcon="ionDocuments"
+        iconSize="lg"
+        [bordered]="true"
+      >
+        <app-accordion *ngFor="let exam of medicalRecord?.exams">
+          <div customHeader class="flex gap-2">
+            <button [routerLink]="['/exames', exam.id]">
+              <ng-icon name="ionCreateOutline" class="text-lg" />
+            </button>
+            <p customHeader class="font-semibold">
+              {{ exam.examDate }} {{ exam.examHour }}
+              <span class="font-medium"> - {{ exam.examName }}</span>
+            </p>
+          </div>
+          <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
+            <p>
+              Tipo de exame:
+              <span class="font-medium">{{ exam.examType }}</span>
+            </p>
+            <p>
+              Laboratório:
+              <span class="font-medium">{{ exam.laboratory }}</span>
+            </p>
+            <p>
+              Anexo:
+              <a [href]="exam.documentUrl" class="font-medium text-blue-500">{{
+                exam.documentUrl
+              }}</a>
+            </p>
+            <p>
+              Resultados:
+              <span class="font-medium">{{ exam.results }}</span>
+            </p>
+          </div>
+        </app-accordion>
+      </app-accordion>
+
+      <app-accordion
+        [headerTitle]="getMedicamentsTotal() + ' Medicamentos'"
+        headerIcon="ionBandage"
+        iconSize="lg"
+        [bordered]="true"
+      >
+        <app-accordion *ngFor="let medicament of getUniqueMedicaments()">
+          <div customHeader class="flex gap-2">
+            <button [routerLink]="['/medicamentos', medicament.id]">
+              <ng-icon name="ionCreateOutline" class="text-lg" />
+            </button>
+            <p customHeader class="font-semibold">
+              {{ medicament.date }} {{ medicament.time }}
+              <span class="font-medium"> - {{ medicament.name }}</span>
+            </p>
+          </div>
+          <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
+            <p>
+              Tipo:
+              <span class="font-medium">{{ medicament.type }}</span>
+            </p>
+            <p>
+              Quantidade:
+              <span class="font-medium">{{ medicament.quantity }}</span>
+            </p>
+            <p>
+              Unidade:
+              <span class="font-medium">{{ medicament.unit }}</span>
+            </p>
+            <p>
+              Observações:
+              <span class="font-medium">{{ medicament.observations }}</span>
+            </p>
+          </div>
+        </app-accordion>
+      </app-accordion>
+
+      <app-accordion
+        [headerTitle]="medicalRecord?.exercises?.length + ' Exercícios'"
+        headerIcon="ionDocuments"
+        iconSize="lg"
+        [bordered]="true"
+      >
+        <app-accordion *ngFor="let exercise of medicalRecord?.exercises">
+          <div customHeader class="flex gap-2">
+            <button [routerLink]="['/exercicios', exercise.id]">
+              <ng-icon name="ionCreateOutline" class="text-lg" />
+            </button>
+            <p customHeader class="font-semibold">
+              {{ exercise.date }} {{ exercise.time }}
+              <span class="font-medium"> - {{ exercise.name }}</span>
+            </p>
+          </div>
+          <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
+            <p>
+              Tipo de exercício:
+              <span class="font-medium">{{ exercise.type }}</span>
+            </p>
+            <p>
+              Quantidade semanal:
+              <span class="font-medium">{{ exercise.weeklyAmount }}</span>
+            </p>
+            <p>
+              Descrição:
+              <span class="font-medium">{{ exercise.description }}</span>
+            </p>
+          </div>
+        </app-accordion>
+      </app-accordion>
+
+      <app-accordion
+        [headerTitle]="medicalRecord?.diets?.length + ' Dietas'"
+        headerIcon="ionDocuments"
+        iconSize="lg"
+        [bordered]="true"
+      >
+        <app-accordion *ngFor="let diet of medicalRecord?.diets">
+          <div customHeader class="flex gap-2">
+            <button [routerLink]="['/dietas', diet.id]">
+              <ng-icon name="ionCreateOutline" class="text-lg" />
+            </button>
+            <p customHeader class="font-semibold">
+              {{ diet.dietDate }} {{ diet.dietTime }}
+              <span class="font-medium"> - {{ diet.dietName }}</span>
+            </p>
+          </div>
+          <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
+            <p>
+              Tipo de dieta:
+              <span class="font-medium">{{ diet.type }}</span>
+            </p>
+            <p>
+              Descrição
+              <span class="font-medium">{{ diet.description }}</span>
+            </p>
+          </div>
+        </app-accordion>
+      </app-accordion>
+    </section>
+  </div>
+</div>
