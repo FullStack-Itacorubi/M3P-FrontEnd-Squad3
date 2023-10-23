@@ -1,11 +1,28 @@
-<div class="lg:absolute bg-white right-0 rounded-md mt-2 w-48 origin-top-right py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden group-hover:block text-black text-sm z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-    <!-- Opções do dropdown, como sair, perfil, etc. -->
+<div>
+  <button class="flex items-center" (click)="this.visible = !this.visible">
+    <ng-icon
+      [name]="visible ? 'ionChevronUp' : 'ionChevronDown'"
+      class="text-lg hover:text-slate-500"
+    />
+  </button>
+  <div
+    *ngIf="visible"
+    class="absolute w-2/12 bg-slate-50 bottom-0 right-0 mr-1 translate-y-[calc(100%+4px)] border rounded-md py-1 shadow-lg text-sm z-10"
+  >
     <ul>
-        <li>
-            <a class="flex px-4 py-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black">Perfil</a>
-        </li>
-        <li>
-            <a (click)="returnLogin()" class="flex px-4 py-2 font-medium text-gray-600 rounded-md hover:bg-gray-100 hover:text-black">Sair</a>
-        </li>
+      <li>
+        <a
+          class="flex px-4 py-2 font-medium rounded-md cursor-pointer text-slate-800 hover:bg-slate-100"
+          >Perfil</a
+        >
+      </li>
+      <li>
+        <a
+          (click)="returnLogin()"
+          class="flex px-4 py-2 font-medium rounded-md cursor-pointer text-slate-800 hover:bg-gray-100"
+          >Sair</a
+        >
+      </li>
     </ul>
+  </div>
 </div>
