@@ -1,9 +1,10 @@
-<div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
+<div class="container py-4 pr-2 m-auto text-slate-800 pl-14">
   <form [formGroup]="formPatientRegister">
-    <h3 class="text-xl font-bold my-2">Cadastro de paciente</h3>
+    <app-form-buttons />
+    <h3 class="my-2 text-xl font-bold">Cadastro de paciente</h3>
 
-    <div class="md:flex gap-2">
-      <div class="input-wrapper w-6/12">
+    <div class="gap-2 md:flex">
+      <div class="w-6/12 input-wrapper">
         <label for="fullname">Nome completo</label>
         <input
           type="text"
@@ -13,19 +14,19 @@
           formControlName="fullname"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('fullname')?.errors?.['required'] && formPatientRegister.get('fullname')?.touched"
         >
           <p>Por favor insira seu nome completo!</p>
         </div>
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('fullname')?.errors?.['minlength'] && formPatientRegister.get('fullname')?.touched"
         >
           <p>Seu nome deve possuir no mínimo 8 caracteres!</p>
         </div>
       </div>
-      <div class="input-wrapper w-2/12">
+      <div class="w-2/12 input-wrapper">
         <label for="genre">Gênero</label>
         <select
           class="input-field"
@@ -39,13 +40,13 @@
           <option value="nonbinary">Não-binário</option>
         </select>
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('genre')?.errors?.['required'] && formPatientRegister.get('genre')?.touched"
         >
           <p>Por favor insira seu genero!</p>
         </div>
       </div>
-      <div class="input-wrapper w-2/12">
+      <div class="w-2/12 input-wrapper">
         <label for="birthdate">Data de nascimento</label>
         <input
           type="text"
@@ -57,13 +58,13 @@
           mask="d0/M0/0000"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('birthdate')?.errors?.['required'] && formPatientRegister.get('birthdate')?.touched"
         >
           <p>Por favor insira sua data de nascimento!</p>
         </div>
       </div>
-      <div class="input-wrapper mr-5 w-2/12">
+      <div class="w-2/12 mr-5 input-wrapper">
         <label for="cpf">CPF</label>
         <input
           type="text"
@@ -75,7 +76,7 @@
           mask="000.000.000-00"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('cpf')?.errors?.['required'] && formPatientRegister.get('cpf')?.touched"
         >
           <p>Por favor insira seu CPF!</p>
@@ -83,8 +84,8 @@
       </div>
     </div>
 
-    <div class="md:flex gap-2">
-      <div class="input-wrapper w-3/12">
+    <div class="gap-2 md:flex">
+      <div class="w-3/12 input-wrapper">
         <label for="rg">RG</label>
         <input
           type="text"
@@ -94,13 +95,13 @@
           formControlName="rg"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('rg')?.errors?.['required'] && formPatientRegister.get('rg')?.touched"
         >
           <p>Por favor insira seu RG!</p>
         </div>
       </div>
-      <div class="input-wrapper w-3/12">
+      <div class="w-3/12 input-wrapper">
         <label for="civilStatus">Estado civil</label>
         <select
           class="input-field"
@@ -117,13 +118,13 @@
           <option value="widower">Viúvo(a)</option>
         </select>
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('civilStatus')?.errors?.['required'] && formPatientRegister.get('civilStatus')?.touched"
         >
           <p>Por favor insira seu estado civil!</p>
         </div>
       </div>
-      <div class="input-wrapper w-3/12">
+      <div class="w-3/12 input-wrapper">
         <label for="placeOfBirth">Naturalidade</label>
         <input
           type="text"
@@ -133,19 +134,19 @@
           formControlName="placeOfBirth"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('placeOfBirth')?.errors?.['required'] && formPatientRegister.get('placeOfBirth')?.touched"
         >
           <p>Por favor insira sua naturalidade!</p>
         </div>
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('placeOfBirth')?.errors?.['minlength'] && formPatientRegister.get('placeOfBirth')?.touched"
         >
           <p>Sua naturalidade deve possuir no mínimo 8 caracteres!</p>
         </div>
       </div>
-      <div class="input-wrapper mr-5 w-3/12">
+      <div class="w-3/12 mr-5 input-wrapper">
         <label for="email">E-mail</label>
         <input
           type="text"
@@ -156,13 +157,13 @@
           placeholder="example@gmail.com"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('email')?.errors?.['required'] && formPatientRegister.get('email')?.touched"
         >
           <p>Por favor insira seu e-mail!</p>
         </div>
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('email')?.errors?.['email'] && formPatientRegister.get('email')?.touched"
         >
           <p>Por favor insira um e-mail válido!</p>
@@ -170,8 +171,8 @@
       </div>
     </div>
 
-    <div class="md:flex gap-2">
-      <div class="input-wrapper w-3/12">
+    <div class="gap-2 md:flex">
+      <div class="w-3/12 input-wrapper">
         <label for="phone">Telefone</label>
         <input
           type="text"
@@ -183,13 +184,13 @@
           mask="(00) 0 0000-0000"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('phone')?.errors?.['required'] && formPatientRegister.get('phone')?.touched"
         >
           <p>Por favor insira seu telefone!</p>
         </div>
       </div>
-      <div class="input-wrapper w-3/12">
+      <div class="w-3/12 input-wrapper">
         <label for="emergencyContact">Contato de Emergência</label>
         <input
           type="text"
@@ -201,13 +202,13 @@
           mask="(00) 0 0000-0000"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('emergencyContact')?.errors?.['required'] && formPatientRegister.get('emergencyContact')?.touched"
         >
           <p>Por favor insira seu contato de emergência!</p>
         </div>
       </div>
-      <div class="input-wrapper w-3/12">
+      <div class="w-3/12 input-wrapper">
         <label for="allergyList">Lista de Alergias</label>
         <input
           type="text"
@@ -217,7 +218,7 @@
           formControlName="allergyList"
         />
       </div>
-      <div class="input-wrapper mr-5 w-3/12">
+      <div class="w-3/12 mr-5 input-wrapper">
         <label for="specificCareList">Lista de Cuidados</label>
         <input
           type="text"
@@ -229,8 +230,8 @@
       </div>
     </div>
 
-    <div class="md:flex gap-2">
-      <div class="input-wrapper w-4/12">
+    <div class="gap-2 md:flex">
+      <div class="w-4/12 input-wrapper">
         <label for="healthInsurance">Convênio</label>
         <input
           type="text"
@@ -240,7 +241,7 @@
           formControlName="healthInsurance"
         />
       </div>
-      <div class="input-wrapper w-4/12">
+      <div class="w-4/12 input-wrapper">
         <label for="healthInsuranceNumber">Numero do convênio</label>
         <input
           type="text"
@@ -250,7 +251,7 @@
           formControlName="healthInsuranceNumber"
         />
       </div>
-      <div class="input-wrapper mr-5 w-4/12">
+      <div class="w-4/12 mr-5 input-wrapper">
         <label for="healthInsuranceValidity">Validade do convênio</label>
         <input
           type="text"
@@ -264,8 +265,8 @@
       </div>
     </div>
 
-    <div class="md:flex gap-2">
-      <div class="input-wrapper w-6/12">
+    <div class="gap-2 md:flex">
+      <div class="w-6/12 input-wrapper">
         <label for="publicPlace">Logradouro</label>
         <input
           type="text"
@@ -275,13 +276,13 @@
           formControlName="publicPlace"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('publicPlace')?.errors?.['required'] && formPatientRegister.get('publicPlace')?.touched"
         >
           <p>Por favor insira seu logradouro!</p>
         </div>
       </div>
-      <div class="input-wrapper w-2/12">
+      <div class="w-2/12 input-wrapper">
         <label for="number">Numero</label>
         <input
           type="text"
@@ -291,13 +292,13 @@
           formControlName="number"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('number')?.errors?.['required'] && formPatientRegister.get('number')?.touched"
         >
           <p>Por favor insira o número da sua residência!</p>
         </div>
       </div>
-      <div class="input-wrapper w-2/12">
+      <div class="w-2/12 input-wrapper">
         <label for="neighborhood">Bairro</label>
         <input
           type="text"
@@ -307,13 +308,13 @@
           formControlName="neighborhood"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('neighborhood')?.errors?.['required'] && formPatientRegister.get('neighborhood')?.touched"
         >
           <p>Por favor insira seu bairro!</p>
         </div>
       </div>
-      <div class="input-wrapper mr-5 w-2/12">
+      <div class="w-2/12 mr-5 input-wrapper">
         <label for="city">Cidade</label>
         <input
           type="text"
@@ -323,7 +324,7 @@
           formControlName="city"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('city')?.errors?.['required'] && formPatientRegister.get('city')?.touched"
         >
           <p>Por favor insira sua cidade!</p>
@@ -331,8 +332,8 @@
       </div>
     </div>
 
-    <div class="md:flex gap-2">
-      <div class="input-wrapper w-3/12">
+    <div class="gap-2 md:flex">
+      <div class="w-3/12 input-wrapper">
         <label for="state">Estado</label>
         <input
           type="text"
@@ -342,13 +343,13 @@
           formControlName="state"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('state')?.errors?.['required'] && formPatientRegister.get('state')?.touched"
         >
           <p>Por favor insira seu estado!</p>
         </div>
       </div>
-      <div class="input-wrapper w-3/12">
+      <div class="w-3/12 input-wrapper">
         <label for="cep">CEP</label>
         <input
           type="text"
@@ -359,13 +360,13 @@
           (blur)="checkCep()"
         />
         <div
-          class="text-red-500 font-semibold"
+          class="font-semibold text-red-500"
           *ngIf="formPatientRegister.get('cep')?.errors?.['required'] && formPatientRegister.get('cep')?.touched"
         >
           <p>Por favor insira seu cep!</p>
         </div>
       </div>
-      <div class="input-wrapper w-3/12">
+      <div class="w-3/12 input-wrapper">
         <label for="complement">Complemento</label>
         <input
           type="text"
@@ -375,7 +376,7 @@
           formControlName="complement"
         />
       </div>
-      <div class="input-wrapper mr-5 w-3/12">
+      <div class="w-3/12 mr-5 input-wrapper">
         <label for="referencePoint">Ponto de Referência</label>
         <input
           type="text"
