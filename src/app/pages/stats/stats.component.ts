@@ -11,20 +11,27 @@ type Stats = {
   value: number;
 };
 
+type StatsTabOption = {
+  label: string;
+  selected: boolean;
+  restricted?: 'ADMIN';
+};
+
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
   styleUrls: ['./stats.component.css'],
 })
 export class StatsComponent implements OnInit {
-  menuOptions = [
+  menuOptions: StatsTabOption[] = [
     {
       label: 'Pacientes',
       selected: true,
     },
     {
-      label: 'Usuário',
+      label: 'Usuários',
       selected: false,
+      restricted: 'ADMIN',
     },
   ];
   listStyle: StatsListStyle = 'GRID';
