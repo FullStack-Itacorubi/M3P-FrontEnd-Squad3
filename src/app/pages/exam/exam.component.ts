@@ -9,6 +9,7 @@ interface Examinfos {
   examType: FormControl<string | null>;
   laboratory: FormControl<string | null>;
   documentUrl: FormControl<string | null>;
+  status: FormControl<string | null>;
   results: FormControl<string | null>;
 }
 
@@ -25,6 +26,7 @@ export class ExamComponent {
     examType: new FormControl(''),
     laboratory: new FormControl(''),
     documentUrl: new FormControl(''),
+    status: new FormControl(''),
     results: new FormControl(''),
   });
 
@@ -54,6 +56,7 @@ export class ExamComponent {
         Validators.maxLength(32),
       ]),
       documentUrl: new FormControl(''),
+      status: new FormControl(''),
       results: new FormControl('', [
         Validators.required,
         Validators.minLength(16),
@@ -76,6 +79,7 @@ export class ExamComponent {
       examType: this.formsExamRegister.value.examType!,
       laboratory: this.formsExamRegister.value.laboratory!,
       documentUrl: this.formsExamRegister.value.documentUrl!,
+      status: this.formsExamRegister.value.status!,
       results: this.formsExamRegister.value.results!,
     };
 
