@@ -9,35 +9,25 @@ interface Examinfos {
   examType: FormControl<string | null>;
   laboratory: FormControl<string | null>;
   documentUrl: FormControl<string | null>;
-  status: FormControl<string | null>;
+  status: FormControl<boolean | null>;
   results: FormControl<string | null>;
 }
 
 @Component({
   selector: 'app-exam',
   templateUrl: './exam.component.html',
-  styleUrls: ['./exam.component.css'],
+  styleUrls: ['./exam.component.css', '../../app.component.css'],
 })
+
 export class ExamComponent {
-  formsExamRegister: FormGroup<Examinfos> = new FormGroup({
-    examName: new FormControl(''),
-    examDate: new FormControl(''),
-    examHour: new FormControl(''),
-    examType: new FormControl(''),
-    laboratory: new FormControl(''),
-    documentUrl: new FormControl(''),
-    status: new FormControl(''),
-    results: new FormControl(''),
-  });
+  formsExamRegister: FormGroup<Examinfos>; 
 
-  constructor(private examService: ExamService) {}
-
-  ngOnInit(): void {
-    this.initExamForm();
+  constructor(private examService: ExamService) {
+    this.formsExamRegister = this.initExamForm();
   }
 
   initExamForm() {
-    this.formsExamRegister = new FormGroup({
+    return new FormGroup<Examinfos>({
       examName: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
@@ -56,7 +46,7 @@ export class ExamComponent {
         Validators.maxLength(32),
       ]),
       documentUrl: new FormControl(''),
-      status: new FormControl(''),
+      status: new FormControl({ value: true, disabled: true }),
       results: new FormControl('', [
         Validators.required,
         Validators.minLength(16),
@@ -72,17 +62,17 @@ export class ExamComponent {
       alert('Dados cadastrado com sucesso!');
     }
 
-    const user = {
+    const exam = {
       examName: this.formsExamRegister.value.examName!,
       examDate: this.formsExamRegister.value.examDate!,
       examHour: this.formsExamRegister.value.examHour!,
       examType: this.formsExamRegister.value.examType!,
       laboratory: this.formsExamRegister.value.laboratory!,
       documentUrl: this.formsExamRegister.value.documentUrl!,
-      status: this.formsExamRegister.value.status!,
+      status: this.formsExamRegister.value.status,
       results: this.formsExamRegister.value.results!,
     };
 
-    this.initExamForm();
+   this.formsExamRegister = this.initExamForm();
   }
 }
