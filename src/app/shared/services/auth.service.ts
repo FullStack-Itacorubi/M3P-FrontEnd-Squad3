@@ -51,9 +51,7 @@ export class AuthService {
 
   checkConnection() {
     const userStr = localStorage.getItem('userLogged');
-    console.log(userStr);
     if (!userStr) return;
-
     this.userAuthenticated = JSON.parse(userStr);
   }
 }

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 type Options = {
   text: string;
   icon: string;
   selected: boolean;
   link: string;
+  restriction?: 'ADMIN' | 'DOCTOR';
 };
 
 @Component({
@@ -48,10 +50,17 @@ export class SidebarComponent {
       selected: false,
       link: '/prontuarios',
     },
+    {
+      text: 'Usuários',
+      icon: 'ionPerson',
+      selected: false,
+      link: '/usuarios',
+      restriction: 'ADMIN',
+    },
   ];
   collapsed = false;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private authService: AuthService) {
     const url = this.getUrl(route.snapshot);
     this.options = this.options.map((opt) => ({
       ...opt,
@@ -64,6 +73,12 @@ export class SidebarComponent {
       ...opt,
       selected: idx === selectedIdx,
     }));
+  }
+
+  checkRestrictions(role?: 'ADMIN' | 'DOCTOR') {
+    if (!role) return true;
+    if (role === 'ADMIN') return this.authService.isUserAdmin();
+    return false;
   }
 
   private getUrl(snapshot: ActivatedRouteSnapshot): string {
