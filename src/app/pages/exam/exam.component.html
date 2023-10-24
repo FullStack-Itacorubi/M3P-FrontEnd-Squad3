@@ -1,9 +1,10 @@
-<div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
+<div class="container py-4 pr-2 m-auto text-slate-800 pl-14">
   <form [formGroup]="formsExamRegister">
-    <h3 class="text-xl font-bold my-2">Cadastro de exames</h3>
+    <app-form-buttons />
+    <h3 class="my-2 text-xl font-bold">Cadastro de exames</h3>
 
-    <div class="md:flex gap-2">
-      <div class="input-wrapper w-6/12">
+    <div class="gap-2 md:flex">
+      <div class="w-6/12 input-wrapper">
         <label for="examName">Nome do Exame</label>
         <input
           type="text"
@@ -26,7 +27,7 @@
         </div>
       </div>
 
-      <div class="input-wrapper mr-5 w-6/12">
+      <div class="w-6/12 mr-5 input-wrapper">
         <label for="examType">Tipo do Exame</label>
         <input
           type="text"
@@ -50,8 +51,8 @@
       </div>
     </div>
 
-    <div class="md:flex gap-2">
-      <div class="input-wrapper w-3/12">
+    <div class="gap-2 md:flex">
+      <div class="w-3/12 input-wrapper">
         <label for="examDate">Data do Exame</label>
         <input
           type="text"
@@ -60,7 +61,7 @@
           id="examDate"
           formControlName="examDate"
           placeholder="dd/mm/aaaa"
-          mask = "d0/M0/0000"
+          mask="d0/M0/0000"
         />
         <div
           class="text-red-500 font-semibold"
@@ -70,7 +71,7 @@
         </div>
       </div>
 
-      <div class="input-wrapper w-3/12">
+      <div class="w-3/12 input-wrapper">
         <label for="examHour">Hora do Exame</label>
         <input
           type="text"
@@ -79,7 +80,7 @@
           id="examHour"
           formControlName="examHour"
           placeholder="hh:mm:ss"
-          mask = "Hh:m0:s0"
+          mask="Hh:m0:s0"
         />
         <div
           class="text-red-500 font-semibold"
@@ -89,7 +90,7 @@
         </div>
       </div>
 
-      <div class="input-wrapper mr-5 w-6/12">
+      <div class="w-6/12 mr-5 input-wrapper">
         <label for="laboratory">Laboratório</label>
         <input
           type="text"
@@ -113,8 +114,8 @@
       </div>
     </div>
 
-    <div class="md:flex gap-2">
-      <div class="input-wrapper mr-5 w-full">
+    <div class="gap-2 md:flex">
+      <div class="w-full mr-5 input-wrapper">
         <label for="documentUrl">URL do documento</label>
         <input
           type="url"
@@ -126,8 +127,8 @@
       </div>
     </div>
 
-    <div class="md:flex gap-2">
-      <div class="input-wrapper mr-5 w-full">
+    <div class="gap-2 md:flex">
+      <div class="w-full mr-5 input-wrapper">
         <label for="results">Resultados</label>
         <textarea
           class="input-field"
