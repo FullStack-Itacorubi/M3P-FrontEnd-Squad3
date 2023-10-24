@@ -32,7 +32,8 @@ export type User = {
 };
 
 export type Exam = {
-  id: number;
+  id?: number;
+  patientId: number;
   examName: string;
   examDate: string;
   examHour: string;

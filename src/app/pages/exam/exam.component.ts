@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ExamService } from 'src/app/shared/services/exam.service';
+import { Exam } from 'src/app/shared/utils/types';
 
 interface Examinfos {
   examName: FormControl<string | null>;
@@ -27,14 +28,15 @@ export class ExamComponent {
   }
 
   initExamForm() {
+    const today = new Date();
     return new FormGroup<Examinfos>({
       examName: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(64),
       ]),
-      examDate: new FormControl('', [Validators.required]),
-      examHour: new FormControl('', [Validators.required]),
+      examDate: new FormControl(today.toISOString().substring(0, 10), [Validators.required]),
+      examHour: new FormControl(today.toLocaleTimeString('pt-BR').substring(0, 5), [Validators.required]),
       examType: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
@@ -55,24 +57,28 @@ export class ExamComponent {
     });
   }
 
-  registerExam() {
+  async registerExam() {
     if (!this.formsExamRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
     } else {
       alert('Dados cadastrado com sucesso!');
     }
 
-    const exam = {
+    const dateFormated = this.formsExamRegister.value.examDate!.split('-').reverse().join('/');
+
+    const exam: Exam = {
+      patientId: 1,
       examName: this.formsExamRegister.value.examName!,
-      examDate: this.formsExamRegister.value.examDate!,
-      examHour: this.formsExamRegister.value.examHour!,
+      examDate: dateFormated,
+      examHour: this.formsExamRegister.value.examHour! + ':00',
       examType: this.formsExamRegister.value.examType!,
       laboratory: this.formsExamRegister.value.laboratory!,
       documentUrl: this.formsExamRegister.value.documentUrl!,
-      status: this.formsExamRegister.value.status,
+      status: this.formsExamRegister.value.status!,
       results: this.formsExamRegister.value.results!,
     };
 
    this.formsExamRegister = this.initExamForm();
+   await this.examService.saveExams(exam);
   }
 }
