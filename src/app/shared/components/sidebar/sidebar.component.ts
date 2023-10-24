@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 type Options = {
   text: string;
   icon: string;
   selected: boolean;
   link: string;
+  restriction?: 'ADMIN' | 'DOCTOR';
 };
 
 @Component({
@@ -27,8 +29,15 @@ export class SidebarComponent {
       icon: 'ionCalendarClear',
       selected: false,
       link: '/consultas',
+      restriction: 'DOCTOR',
     },
-    { text: 'Exames', icon: 'ionDocuments', selected: false, link: '/exames' },
+    {
+      text: 'Exames',
+      icon: 'ionDocuments',
+      selected: false,
+      link: '/exames',
+      restriction: 'DOCTOR',
+    },
     { text: 'Dietas', icon: 'ionFastFood', selected: false, link: '/dietas' },
     {
       text: 'Medicamentos',
@@ -48,10 +57,17 @@ export class SidebarComponent {
       selected: false,
       link: '/prontuarios',
     },
+    {
+      text: 'Usuários',
+      icon: 'ionPerson',
+      selected: false,
+      link: '/usuarios',
+      restriction: 'ADMIN',
+    },
   ];
   collapsed = false;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private authService: AuthService) {
     const url = this.getUrl(route.snapshot);
     this.options = this.options.map((opt) => ({
       ...opt,
@@ -64,6 +80,13 @@ export class SidebarComponent {
       ...opt,
       selected: idx === selectedIdx,
     }));
+  }
+
+  checkRestrictions(role?: 'ADMIN' | 'DOCTOR') {
+    if (!role) return true;
+    if (role === 'ADMIN') return this.authService.isUserAdmin();
+    if (role === 'DOCTOR') return this.authService.isUserDoctor();
+    return false;
   }
 
   private getUrl(snapshot: ActivatedRouteSnapshot): string {
