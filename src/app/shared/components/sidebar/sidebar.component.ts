@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 type Options = {
   text: string;
@@ -50,10 +51,24 @@ export class SidebarComponent {
   ];
   collapsed = false;
 
+  constructor(private route: ActivatedRoute) {
+    const url = this.getUrl(route.snapshot);
+    this.options = this.options.map((opt) => ({
+      ...opt,
+      selected: opt.link === url,
+    }));
+  }
+
   select(selectedIdx: number) {
     this.options = this.options.map((opt, idx) => ({
       ...opt,
       selected: idx === selectedIdx,
     }));
+  }
+
+  private getUrl(snapshot: ActivatedRouteSnapshot): string {
+    let url = snapshot.url[0] ? snapshot.url[0].path : '';
+    if (snapshot.children[0]) url += '/' + this.getUrl(snapshot.children[0]);
+    return url;
   }
 }
