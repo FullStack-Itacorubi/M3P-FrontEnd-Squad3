@@ -22,6 +22,13 @@ export class AuthService {
     return this.userAuthenticated?.type.toLowerCase() === 'administrador';
   }
 
+  isUserDoctor(): boolean {
+    return (
+      this.userAuthenticated?.type.toLowerCase() === 'médico' ||
+      this.isUserAdmin()
+    );
+  }
+
   async makeLogin(user: ILoginForm): Promise<void> {
     const userRegistered = await this.userService.getUser(user.email);
 

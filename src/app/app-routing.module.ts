@@ -13,6 +13,7 @@ import { MedicalRecordsComponent } from './pages/medical-records/medical-records
 import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
 import { connectionGuard } from './shared/guards/connection.guard';
 import { adminGuard } from './shared/guards/admin.guard';
+import { doctorGuard } from './shared/guards/doctor.guard';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
       {
         path: '',
         component: StatsComponent,
+      },
+      {
+        path: 'consultas',
+        component: ExerciseComponent,
+        canActivate: [doctorGuard],
       },
       {
         path: 'exercicios',
@@ -39,6 +45,7 @@ const routes: Routes = [
       {
         path: 'exames',
         component: ExamComponent,
+        canActivate: [doctorGuard],
       },
       {
         path: 'usuarios',
