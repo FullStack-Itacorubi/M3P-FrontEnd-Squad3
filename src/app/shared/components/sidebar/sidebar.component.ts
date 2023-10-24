@@ -29,8 +29,15 @@ export class SidebarComponent {
       icon: 'ionCalendarClear',
       selected: false,
       link: '/consultas',
+      restriction: 'DOCTOR',
     },
-    { text: 'Exames', icon: 'ionDocuments', selected: false, link: '/exames' },
+    {
+      text: 'Exames',
+      icon: 'ionDocuments',
+      selected: false,
+      link: '/exames',
+      restriction: 'DOCTOR',
+    },
     { text: 'Dietas', icon: 'ionFastFood', selected: false, link: '/dietas' },
     {
       text: 'Medicamentos',
@@ -78,6 +85,7 @@ export class SidebarComponent {
   checkRestrictions(role?: 'ADMIN' | 'DOCTOR') {
     if (!role) return true;
     if (role === 'ADMIN') return this.authService.isUserAdmin();
+    if (role === 'DOCTOR') return this.authService.isUserDoctor();
     return false;
   }
 
