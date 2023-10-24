@@ -11,11 +11,14 @@ import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { MedicalRecordsComponent } from './pages/medical-records/medical-records.component';
 import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
+import { connectionGuard } from './shared/guards/connection.guard';
+import { adminGuard } from './shared/guards/admin.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [connectionGuard],
     children: [
       {
         path: '',
@@ -40,6 +43,7 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: UserComponent,
+        canActivate: [adminGuard],
       },
       {
         path: 'prontuarios',
