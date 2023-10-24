@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsListStyle } from 'src/app/components/stats/stats-list/stats-list.component';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { StatsService } from 'src/app/shared/services/stats.service';
 import { UsersService } from 'src/app/shared/services/users.service';
@@ -35,7 +36,8 @@ export class StatsComponent implements OnInit {
   constructor(
     private statsService: StatsService,
     private patientsService: PatientsService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private authService: AuthService
   ) {}
 
   async ngOnInit() {
@@ -54,6 +56,10 @@ export class StatsComponent implements OnInit {
   onSearchInput(filter: string) {
     if (this.menuOptions[0].selected) this.getPatients(filter);
     else this.getUsers(filter);
+  }
+
+  isAdmin() {
+    return this.authService.isUserAdmin();
   }
 
   private async getPatients(filter?: string) {
