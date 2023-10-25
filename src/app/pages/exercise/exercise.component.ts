@@ -34,7 +34,6 @@ export class ExerciseComponent implements OnInit {
 
   async ngOnInit() {
     this.patients = await this.patientsService['getPatients']();
-    
   }
 
   initExerciseForm() {
@@ -52,7 +51,7 @@ export class ExerciseComponent implements OnInit {
         today.toLocaleTimeString('pt-BR').substring(0, 5),
          [Validators.required]
        ),
-      patientId: new FormControl(),
+      patientId: new FormControl(null, [Validators.required]),
       type: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
