@@ -32,7 +32,7 @@ interface Patientinfos {
 @Component({
   selector: 'app-patient',
   templateUrl: './patient.component.html',
-  styleUrls: ['./patient.component.css'],
+  styleUrls: ['./patient.component.css', '../../app.component.css'],
 })
 export class PatientComponent {
   formPatientRegister: FormGroup<Patientinfos> = new FormGroup({
