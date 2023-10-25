@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ExerciseService } from '../../exercise.service';
+import { ExerciseService } from '../../shared/services/exercise.service';
 import { Exercise, Patient } from 'src/app/shared/utils/types';
 import { PatientService } from 'src/app/shared/services/patient.service';
 
@@ -21,14 +21,14 @@ type Exerciseinfos = {
   styleUrls: ['./exercise.component.css', '../../app.component.css'],
 })
 export class ExerciseComponent implements OnInit {
-  formsExerciseRegister: FormGroup<Exerciseinfos>; 
+  formsExerciseRegister: FormGroup<Exerciseinfos>;
 
   patients: Patient[] = [];
 
   constructor(
     private exerciseService: ExerciseService,
     private patientsService: PatientService
-    ) {
+  ) {
     this.formsExerciseRegister = this.initExerciseForm();
   }
 
@@ -49,8 +49,8 @@ export class ExerciseComponent implements OnInit {
       ]),
       time: new FormControl(
         today.toLocaleTimeString('pt-BR').substring(0, 5),
-         [Validators.required]
-       ),
+        [Validators.required]
+      ),
       patientId: new FormControl(null, [Validators.required]),
       type: new FormControl('', [
         Validators.required,
@@ -77,7 +77,7 @@ export class ExerciseComponent implements OnInit {
     const dateFormated = this.formsExerciseRegister.value
       .date!.split('-')
       .reverse()
-      .join('/'); 
+      .join('/');
 
     const exercise: Exercise = {
       name: this.formsExerciseRegister.value.name!,
