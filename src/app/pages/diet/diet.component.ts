@@ -35,9 +35,9 @@ export class DietComponent implements OnInit {
     this.patients = await this.patientsService.getPatients();
   }
 
-  initDietForm() {
+  initDietForm()  {
     const today = new Date();
-    return new FormGroup({
+    return new FormGroup<Dietinfos>({
       dietName: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -45,10 +45,10 @@ export class DietComponent implements OnInit {
       ]),
       type: new FormControl('', [Validators.required]),
       patientId: new FormControl( null , [Validators.required]),
-      examDate: new FormControl(today.toISOString().substring(0, 10), [
+      dietDate: new FormControl(today.toISOString().substring(0, 10), [
         Validators.required,
       ]),
-      examHour: new FormControl(
+      dietTime: new FormControl(
         today.toLocaleTimeString('pt-BR').substring(0, 5),
         [Validators.required]
       ),
