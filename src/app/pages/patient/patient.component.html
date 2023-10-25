@@ -2,9 +2,10 @@
   <div class="flex-grow p-4 overflow-y-auto">
     <div class="container py-4 pr-2 m-auto text-slate-800 pl-14">
       <form [formGroup]="formPatientRegister">
-        
         <h3 class="my-2 text-xl font-bold">Cadastro de paciente</h3>
-    
+
+        <h3 class="mb-3 my-3 font-semibold">Informações pessoais</h3>
+
         <div class="gap-2 md:flex">
           <div class="w-6/12 input-wrapper">
             <label for="fullname">Nome completo</label>
@@ -28,7 +29,8 @@
               <p>Seu nome deve possuir no mínimo 8 caracteres!</p>
             </div>
           </div>
-          <div class="w-2/12 input-wrapper">
+
+          <div class="w-3/12 input-wrapper">
             <label for="genre">Gênero</label>
             <select
               class="input-field"
@@ -37,9 +39,9 @@
               formControlName="genre"
             >
               <option disabled selected></option>
-              <option value="cisgender">Cisgenero</option>
-              <option value="transgender">Transgênero</option>
-              <option value="nonbinary">Não-binário</option>
+              <option value="CISGENDER">Cisgenero</option>
+              <option value="TRASNGENDER">Transgênero</option>
+              <option value="NONBINARY">Não-binário</option>
             </select>
             <div
               class="font-semibold text-red-500"
@@ -48,7 +50,8 @@
               <p>Por favor insira seu genero!</p>
             </div>
           </div>
-          <div class="w-2/12 input-wrapper">
+
+          <div class="w-3/12 mr-5 input-wrapper">
             <label for="birthdate">Data de nascimento</label>
             <input
               type="text"
@@ -66,7 +69,10 @@
               <p>Por favor insira sua data de nascimento!</p>
             </div>
           </div>
-          <div class="w-2/12 mr-5 input-wrapper">
+        </div>
+
+        <div class="gap-2 md:flex">
+          <div class="w-3/12 input-wrapper">
             <label for="cpf">CPF</label>
             <input
               type="text"
@@ -84,9 +90,7 @@
               <p>Por favor insira seu CPF!</p>
             </div>
           </div>
-        </div>
-    
-        <div class="gap-2 md:flex">
+
           <div class="w-3/12 input-wrapper">
             <label for="rg">RG</label>
             <input
@@ -103,6 +107,7 @@
               <p>Por favor insira seu RG!</p>
             </div>
           </div>
+
           <div class="w-3/12 input-wrapper">
             <label for="civilStatus">Estado civil</label>
             <select
@@ -113,11 +118,11 @@
               formControlName="civilStatus"
             >
               <option disabled selected></option>
-              <option value="single">Solteiro(a)</option>
-              <option value="married">Casado(a)</option>
-              <option value="separated">Separado(a)</option>
-              <option value="divorced">Divorciado(a)</option>
-              <option value="widower">Viúvo(a)</option>
+              <option value="SINGLE">Solteiro(a)</option>
+              <option value="MARRIED">Casado(a)</option>
+              <option value="SEPARATED">Separado(a)</option>
+              <option value="DIVORCED">Divorciado(a)</option>
+              <option value="WIDOWER">Viúvo(a)</option>
             </select>
             <div
               class="font-semibold text-red-500"
@@ -126,7 +131,8 @@
               <p>Por favor insira seu estado civil!</p>
             </div>
           </div>
-          <div class="w-3/12 input-wrapper">
+
+          <div class="w-3/12 mr-5 input-wrapper">
             <label for="placeOfBirth">Naturalidade</label>
             <input
               type="text"
@@ -148,7 +154,29 @@
               <p>Sua naturalidade deve possuir no mínimo 8 caracteres!</p>
             </div>
           </div>
-          <div class="w-3/12 mr-5 input-wrapper">
+        </div>
+
+        <div class="gap-2 md:flex">
+          <div class="w-4/12 input-wrapper">
+            <label for="phone">Telefone</label>
+            <input
+              type="text"
+              class="input-field"
+              name="phone"
+              id="phone"
+              formControlName="phone"
+              placeholder="(99) 9 9999-9999"
+              mask="(00) 0 0000-0000"
+            />
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formPatientRegister.get('phone')?.errors?.['required'] && formPatientRegister.get('phone')?.touched"
+            >
+              <p>Por favor insira seu telefone!</p>
+            </div>
+          </div>
+
+          <div class="w-4/12 input-wrapper">
             <label for="email">E-mail</label>
             <input
               type="text"
@@ -171,28 +199,29 @@
               <p>Por favor insira um e-mail válido!</p>
             </div>
           </div>
-        </div>
-    
-        <div class="gap-2 md:flex">
-          <div class="w-3/12 input-wrapper">
-            <label for="phone">Telefone</label>
-            <input
-              type="text"
-              class="input-field"
-              name="phone"
-              id="phone"
-              formControlName="phone"
-              placeholder="(99) 9 9999-9999"
-              mask="(00) 0 0000-0000"
-            />
-            <div
-              class="font-semibold text-red-500"
-              *ngIf="formPatientRegister.get('phone')?.errors?.['required'] && formPatientRegister.get('phone')?.touched"
-            >
-              <p>Por favor insira seu telefone!</p>
+
+          <div class="w-4/12 mr-5 input-wrapper">
+            <label for="status">Status</label>
+            <div class="flex input-field">
+              <div>
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  checked="true"
+                  formControlName="status"
+                />
+              </div>
+              <div class="mr-3">
+                <label for="checkbox">Ativo</label>
+              </div>
             </div>
           </div>
-          <div class="w-3/12 input-wrapper">
+        </div>
+
+        <h3 class="mb-3 my-3 font-semibold">Informações de saúde</h3>
+
+        <div class="gap-2 md:flex">
+          <div class="w-4/12 input-wrapper">
             <label for="emergencyContact">Contato de Emergência</label>
             <input
               type="text"
@@ -210,7 +239,8 @@
               <p>Por favor insira seu contato de emergência!</p>
             </div>
           </div>
-          <div class="w-3/12 input-wrapper">
+
+          <div class="w-4/12 input-wrapper">
             <label for="allergyList">Lista de Alergias</label>
             <input
               type="text"
@@ -220,7 +250,8 @@
               formControlName="allergyList"
             />
           </div>
-          <div class="w-3/12 mr-5 input-wrapper">
+
+          <div class="w-4/12 mr-5 input-wrapper">
             <label for="specificCareList">Lista de Cuidados</label>
             <input
               type="text"
@@ -231,7 +262,7 @@
             />
           </div>
         </div>
-    
+
         <div class="gap-2 md:flex">
           <div class="w-4/12 input-wrapper">
             <label for="healthInsurance">Convênio</label>
@@ -243,6 +274,7 @@
               formControlName="healthInsurance"
             />
           </div>
+
           <div class="w-4/12 input-wrapper">
             <label for="healthInsuranceNumber">Numero do convênio</label>
             <input
@@ -253,6 +285,7 @@
               formControlName="healthInsuranceNumber"
             />
           </div>
+
           <div class="w-4/12 mr-5 input-wrapper">
             <label for="healthInsuranceValidity">Validade do convênio</label>
             <input
@@ -266,7 +299,9 @@
             />
           </div>
         </div>
-    
+
+        <h3 class="mb-3 my-3 font-semibold">Informações de endereço</h3>
+
         <div class="gap-2 md:flex">
           <div class="w-6/12 input-wrapper">
             <label for="publicPlace">Logradouro</label>
@@ -284,6 +319,7 @@
               <p>Por favor insira seu logradouro!</p>
             </div>
           </div>
+
           <div class="w-2/12 input-wrapper">
             <label for="number">Numero</label>
             <input
@@ -300,6 +336,7 @@
               <p>Por favor insira o número da sua residência!</p>
             </div>
           </div>
+
           <div class="w-2/12 input-wrapper">
             <label for="neighborhood">Bairro</label>
             <input
@@ -316,6 +353,7 @@
               <p>Por favor insira seu bairro!</p>
             </div>
           </div>
+
           <div class="w-2/12 mr-5 input-wrapper">
             <label for="city">Cidade</label>
             <input
@@ -333,7 +371,7 @@
             </div>
           </div>
         </div>
-    
+
         <div class="gap-2 md:flex">
           <div class="w-3/12 input-wrapper">
             <label for="state">Estado</label>
@@ -351,6 +389,7 @@
               <p>Por favor insira seu estado!</p>
             </div>
           </div>
+
           <div class="w-3/12 input-wrapper">
             <label for="cep">CEP</label>
             <input
@@ -368,6 +407,7 @@
               <p>Por favor insira seu cep!</p>
             </div>
           </div>
+
           <div class="w-3/12 input-wrapper">
             <label for="complement">Complemento</label>
             <input
@@ -378,6 +418,7 @@
               formControlName="complement"
             />
           </div>
+
           <div class="w-3/12 mr-5 input-wrapper">
             <label for="referencePoint">Ponto de Referência</label>
             <input
@@ -391,6 +432,6 @@
         </div>
         <app-form-buttons />
       </form>
-    </div>    
+    </div>
   </div>
 </div>
