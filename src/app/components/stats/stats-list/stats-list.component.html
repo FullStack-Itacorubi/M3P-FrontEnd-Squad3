@@ -23,11 +23,8 @@
       <div class="w-1/12 px-3"></div>
     </div>
     <app-stats-table-row
-      *ngFor="let details of getPatients(); index as i"
-      [id]="i + 1"
-      [healthInsurance]="details.healthInsurance!"
-      [name]="details.fullName"
-      [phone]="details.phone"
+      *ngFor="let patient of getPatients()"
+      [patient]="patient"
     />
   </div>
 </ng-template>

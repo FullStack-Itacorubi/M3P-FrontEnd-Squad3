@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { calculateAge } from 'src/app/shared/utils/calculateAge';
+import { Patient } from 'src/app/shared/utils/types';
 
 @Component({
   selector: 'app-stats-table-row',
@@ -6,9 +8,12 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./stats-table-row.component.css'],
 })
 export class StatsTableRowComponent {
-  @Input() name = '';
-  @Input() healthInsurance = '';
-  @Input() age?: string;
-  @Input() phone = '';
-  @Input() id = 1;
+  @Input() patient?: Patient;
+
+  getAge() {
+    if (this.patient) return calculateAge(this.patient.birthday) + ' anos';
+    return;
+  }
+
+  onClick() {}
 }
