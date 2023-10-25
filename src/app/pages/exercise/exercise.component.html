@@ -1,7 +1,7 @@
 <div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
   <div class="flex-grow p-4 overflow-y-auto">
     <div class="container py-3 pr-2 m-auto text-slate-800 pl-14">
-      <form [formGroup]="formsExerciseRegister" class="">
+      <form [formGroup]="formsExerciseRegister" (ngSubmit)="registerExercise()">
         <h3 class="my-1 text-xl font-bold">Cadastro de exercício</h3>
 
         <div class="gap-2 md:flex">
@@ -33,13 +33,12 @@
           <div class="w-6/12 input-wrapper">
             <label for="date">Data</label>
             <input 
-              type="text"
+              type="date"
               class="input-field"
               name="date"
               id="date"
               formControlName="date"
               placeholder="dd/mm/aaaa"
-              mask="d0/M0/0000"
             />
             <div 
               class="text-red-500 font-semibold"
@@ -51,13 +50,12 @@
           <div class="w-6/12 input-wrapper">
             <label for="time">Horário</label>
             <input 
-              type="text"
+              type="time"
               class="input-field"
               name="time"
               id="time"
               formControlName="time"
-              placeholder="hh:mm:ss"
-              mask="Hh:m0:s0"
+              placeholder="hh:mm"
             />
             <div 
               class="text-red-500 font-semibold"
@@ -149,9 +147,8 @@
             </div>
           </div>
         </div>
-
+        <app-form-buttons />
       </form>
-      <app-form-buttons />
     </div>
   </div>
 </div>
