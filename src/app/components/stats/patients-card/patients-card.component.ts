@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { calculateAge } from 'src/app/shared/utils/calculateAge';
+import { Patient } from 'src/app/shared/utils/types';
 
 @Component({
   selector: 'app-patients-card',
@@ -6,8 +8,12 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./patients-card.component.css'],
 })
 export class PatientsCardComponent {
-  @Input() name = '';
-  @Input() healthInsurance = '';
-  @Input() age?: string;
-  @Input() phone = '';
+  @Input() patient?: Patient;
+
+  onClick() {}
+
+  getAge() {
+    if (this.patient) return calculateAge(this.patient.birthday) + ' anos';
+    return;
+  }
 }

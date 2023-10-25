@@ -37,6 +37,7 @@ import { MedicalRecordsCardComponent } from './components/medical-records/medica
 import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
 import { CustomButtonComponent } from './shared/components/custom-button/custom-button.component';
 import { FormButtonsComponent } from './shared/components/form-buttons/form-buttons.component';
+import { UserCardComponent } from './components/stats/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { FormButtonsComponent } from './shared/components/form-buttons/form-butt
     PatientMedicalRecordComponent,
     CustomButtonComponent,
     FormButtonsComponent,
+    UserCardComponent,
   ],
 
   imports: [

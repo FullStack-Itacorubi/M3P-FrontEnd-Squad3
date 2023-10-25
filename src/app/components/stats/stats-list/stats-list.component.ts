@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Patient, User } from 'src/app/shared/utils/types';
 
 export type StatsListStyle = 'TABLE' | 'GRID';
 
@@ -9,15 +10,20 @@ export type StatsListStyle = 'TABLE' | 'GRID';
 })
 export class StatsListComponent {
   @Input() listStyle: StatsListStyle = 'GRID';
-  @Input() data: any[] = [];
+  @Input() data: Patient[] | User[] = [];
 
-  calculateAge(dateStr: string) {
-    if (!dateStr) return;
+  isPatients() {
+    if (this.data.length === 0) return;
+    if (Object.hasOwn(this.data[0] as Patient, 'address')) return true;
+    return false;
+  }
 
-    const [day, month, year] = dateStr.split('/');
-    const date = new Date(+year, +month - 1, +day);
-    const ageDate = new Date(Date.now() - date.getTime());
+  getPatients(): Patient[] {
+    const patients = this.data as Patient[];
+    return patients;
+  }
 
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  getUsers(): User[] {
+    return this.data as User[];
   }
 }
