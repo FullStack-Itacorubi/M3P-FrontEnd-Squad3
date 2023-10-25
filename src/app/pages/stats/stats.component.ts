@@ -40,6 +40,9 @@ export class StatsComponent implements OnInit {
   patients: Patient[] = [];
   users: User[] = [];
 
+  patientSearchInput = '';
+  userSearchInput = '';
+
   constructor(
     private statsService: StatsService,
     private patientsService: PatientsService,

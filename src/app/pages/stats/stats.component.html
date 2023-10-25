@@ -15,7 +15,17 @@
     <div class="flex-grow overflow-y-auto">
       <div class="flex flex-col gap-2 p-4">
         <div class="flex justify-between">
-          <app-delay-search-input (inputEmitter)="onSearchInput($event)" />
+          <app-delay-search-input
+            *ngIf="menuOptions[0].selected; else userInput"
+            [(input)]="patientSearchInput"
+            (inputChange)="onSearchInput($event)"
+          />
+          <ng-template #userInput>
+            <app-delay-search-input
+              [(input)]="userSearchInput"
+              (inputChange)="onSearchInput($event)"
+            />
+          </ng-template>
           <div class="flex self-end gap-2 p-2 rounded-md text-slate-400">
             <button (click)="listStyle = 'GRID'">
               <ng-icon name="ionGrid" />
