@@ -1,0 +1,13 @@
+<div
+  class="flex flex-col justify-between p-2 border rounded-md shadow-md border-slate-300 text-slate-600 aspect-square"
+>
+  <div class="flex flex-col">
+    <ng-icon name="ionPersonCircle" class="mx-auto text-6xl" />
+    <p class="text-lg font-medium truncate">{{ user?.fullName }}</p>
+    <p class="text-sm italic text-slate-400">{{ user?.phone }}</p>
+  </div>
+
+  <button class="py-1 rounded bg-slate-600 text-slate-50" (click)="onClick()">
+    Ver detalhes
+  </button>
+</div>
