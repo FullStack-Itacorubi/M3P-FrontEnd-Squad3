@@ -1,7 +1,7 @@
 <div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
   <div class="flex-grow p-4 overflow-y-auto">
     <div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
-      <form [formGroup]="formUserRegister">
+      <form [formGroup]="formUserRegister" (ngSubmit)="registerUser()">
         <h3 class="my-1 text-xl font-bold">Cadastro de usuário</h3>
 
         <div class="gap-2 md:flex">
@@ -156,7 +156,7 @@
           <div class="w-4/12 mr-5 input-wrapper">
             <label for="password">Senha</label>
             <input
-              type="text"
+              type="password"
               class="input-field"
               name="password"
               id="password"
