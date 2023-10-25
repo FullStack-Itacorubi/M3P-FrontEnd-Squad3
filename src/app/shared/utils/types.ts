@@ -1,5 +1,5 @@
 export type Patient = {
-  id: number;
+  id?: number;
   fullName: string;
   genre: string;
   cpf: string;
@@ -98,7 +98,7 @@ export type MedicalRecord = {
 };
 
 type Address = {
-  id: number;
+  id?: number;
   cep: string;
   city: string;
   state: string;

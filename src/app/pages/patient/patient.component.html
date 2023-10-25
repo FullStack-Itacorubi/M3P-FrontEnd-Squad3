@@ -1,30 +1,30 @@
 <div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
   <div class="flex-grow p-4 overflow-y-auto">
     <div class="container py-4 pr-2 m-auto text-slate-800 pl-14">
-      <form [formGroup]="formPatientRegister">
+      <form [formGroup]="formPatientRegister" (ngSubmit)="registerPatient()">
         <h3 class="my-2 text-xl font-bold">Cadastro de paciente</h3>
 
         <h3 class="mb-3 my-3 font-semibold">Informações pessoais</h3>
 
         <div class="gap-2 md:flex">
           <div class="w-6/12 input-wrapper">
-            <label for="fullname">Nome completo</label>
+            <label for="fullName">Nome completo</label>
             <input
               type="text"
               class="input-field"
-              name="fullname"
-              id="fullname"
-              formControlName="fullname"
+              name="fullName"
+              id="fullName"
+              formControlName="fullName"
             />
             <div
               class="font-semibold text-red-500"
-              *ngIf="formPatientRegister.get('fullname')?.errors?.['required'] && formPatientRegister.get('fullname')?.touched"
+              *ngIf="formPatientRegister.get('fullName')?.errors?.['required'] && formPatientRegister.get('fullName')?.touched"
             >
               <p>Por favor insira seu nome completo!</p>
             </div>
             <div
               class="font-semibold text-red-500"
-              *ngIf="formPatientRegister.get('fullname')?.errors?.['minlength'] && formPatientRegister.get('fullname')?.touched"
+              *ngIf="formPatientRegister.get('fullName')?.errors?.['minlength'] && formPatientRegister.get('fullName')?.touched"
             >
               <p>Seu nome deve possuir no mínimo 8 caracteres!</p>
             </div>
@@ -52,19 +52,17 @@
           </div>
 
           <div class="w-3/12 mr-5 input-wrapper">
-            <label for="birthdate">Data de nascimento</label>
+            <label for="birthday">Data de nascimento</label>
             <input
-              type="text"
+              type="date"
               class="input-field"
-              name="birthdate"
-              id="birthdate"
-              formControlName="birthdate"
-              placeholder="dd/mm/aaaa"
-              mask="d0/M0/0000"
+              name="birthday"
+              id="birthday"
+              formControlName="birthday"
             />
             <div
               class="font-semibold text-red-500"
-              *ngIf="formPatientRegister.get('birthdate')?.errors?.['required'] && formPatientRegister.get('birthdate')?.touched"
+              *ngIf="formPatientRegister.get('birthday')?.errors?.['required'] && formPatientRegister.get('birthday')?.touched"
             >
               <p>Por favor insira sua data de nascimento!</p>
             </div>
@@ -289,13 +287,11 @@
           <div class="w-4/12 mr-5 input-wrapper">
             <label for="healthInsuranceValidity">Validade do convênio</label>
             <input
-              type="text"
+              type="month"
               class="input-field"
               name="healthInsuranceValidity"
               id="healthInsuranceValidity"
               formControlName="healthInsuranceValidity"
-              placeholder="dd/mm/aaaa"
-              mask="d0/M0/0000"
             />
           </div>
         </div>
@@ -398,6 +394,7 @@
               name="cep"
               id="cep"
               formControlName="cep"
+              mask="00000-000"
               (blur)="checkCep()"
             />
             <div
