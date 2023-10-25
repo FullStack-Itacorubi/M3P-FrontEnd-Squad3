@@ -3,9 +3,9 @@ import { calculateAge } from 'src/app/shared/utils/calculateAge';
 import { Patient } from 'src/app/shared/utils/types';
 
 @Component({
-  selector: 'app-patients-card',
-  templateUrl: './patients-card.component.html',
-  styleUrls: ['./patients-card.component.css'],
+  selector: 'app-patient-card',
+  templateUrl: './patient-card.component.html',
+  styleUrls: ['./patient-card.component.css'],
 })
 export class PatientsCardComponent {
   @Input() patient?: Patient;

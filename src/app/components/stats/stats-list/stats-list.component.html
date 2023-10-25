@@ -1,7 +1,7 @@
 <div *ngIf="listStyle === 'GRID'; then grid; else table"></div>
 <ng-template #grid>
   <div *ngIf="isPatients(); else userCards" class="grid grid-cols-5 gap-3">
-    <app-patients-card
+    <app-patient-card
       *ngFor="let patient of getPatients()"
       [patient]="patient"
     />
