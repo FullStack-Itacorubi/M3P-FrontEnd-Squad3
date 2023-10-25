@@ -38,6 +38,9 @@ import { PatientMedicalRecordComponent } from './pages/patient-medical-record/pa
 import { CustomButtonComponent } from './shared/components/custom-button/custom-button.component';
 import { FormButtonsComponent } from './shared/components/form-buttons/form-buttons.component';
 import { UserCardComponent } from './components/stats/cards/user-card/user-card.component';
+import { PatientTableHeaderComponent } from './components/stats/tables/patient-table-header/patient-table-header.component';
+import { UserTableHeaderComponent } from './components/stats/tables/user-table-header/user-table-header.component';
+import { UserTableRowComponent } from './components/stats/tables/user-table-row/user-table-row.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,9 @@ import { UserCardComponent } from './components/stats/cards/user-card/user-card.
     CustomButtonComponent,
     FormButtonsComponent,
     UserCardComponent,
+    PatientTableHeaderComponent,
+    UserTableHeaderComponent,
+    UserTableRowComponent,
   ],
 
   imports: [
