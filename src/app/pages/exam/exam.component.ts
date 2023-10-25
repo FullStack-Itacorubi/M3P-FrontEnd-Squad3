@@ -34,7 +34,7 @@ export class ExamComponent implements OnInit {
   }
 
   async ngOnInit() {
-   this.patients = await this.patientsService.getPatients();
+    this.patients = await this.patientsService.getPatients();
   }
 
   initExamForm() {
@@ -63,7 +63,7 @@ export class ExamComponent implements OnInit {
         Validators.maxLength(32),
       ]),
       documentUrl: new FormControl(''),
-      patientId: new FormControl(),
+      patientId: new FormControl( null , [Validators.required]),
       status: new FormControl({ value: true, disabled: true }),
       results: new FormControl('', [
         Validators.required,

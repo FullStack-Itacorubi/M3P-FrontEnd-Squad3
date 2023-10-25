@@ -125,7 +125,7 @@
             />
           </div>
           <div class="w-4/12 input-wrapper">
-            <label for="documentUrl">Paciente</label>
+            <label for="patientId">Paciente</label>
             <select
               class="input-field"
               name="patientId"
@@ -139,6 +139,12 @@
                 {{ optionPatient.fullName }}
               </option>
             </select>
+            <div
+              class="text-red-500 font-semibold"
+              *ngIf="formsExamRegister.get('patientId')?.errors?.['required'] && formsExamRegister.get('patientId')?.touched"
+            >
+              <p>Por favor insira o paciente!</p>
+            </div>
           </div>
           <div class="w-2/12 mr-5 input-wrapper">
             <label for="status">Status</label>
