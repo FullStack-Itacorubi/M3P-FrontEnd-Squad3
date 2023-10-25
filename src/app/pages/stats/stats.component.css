@@ -1,14 +1,1 @@
-::-webkit-scrollbar {
-  /* Customize the scrollbar width */
-  @apply w-2;
-}
 
-::-webkit-scrollbar-track {
-  /* Customize the scrollbar track */
-  @apply w-2 py-2 bg-transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  /* Customize the scrollbar thumb */
-  @apply rounded-full bg-slate-300;
-}
