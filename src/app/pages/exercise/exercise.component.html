@@ -68,7 +68,7 @@
       </div>
   
       <div class="gap-2 md:flex">
-        <div class="w-6/12 input-wrapper">
+        <div class="w-5/12 input-wrapper">
           <label for="type">Tipo</label>
           <select class="input-field" name="type" id="type" formControlName="type">
             <option disabled selected></option>
@@ -86,7 +86,7 @@
           <p>Por favor insira o tipo de exercício!</p>
         </div>
         </div>
-        <div class="w-6/12 input-wrapper">
+        <div class="w-5/12 input-wrapper">
           <label for="weeklyAmount">Quantidade por Semana</label>
           <input
             type="text"
@@ -101,6 +101,22 @@
         >
           <p>Por favor insira a quantidade de exercício por semana!</p>
         </div>
+        </div>
+        <div class="w-2/12 mr-5 input-wrapper">
+          <label for="status">Status</label>
+          <div class="flex input-field">
+            <div>
+              <input
+                type="checkbox"
+                class="mr-2"
+                checked="true"
+                formControlName="status"
+              />
+            </div>
+            <div class="mr-3">
+              <label for="checkbox">Ativo</label>
+            </div>
+          </div>
         </div>
       </div>
   

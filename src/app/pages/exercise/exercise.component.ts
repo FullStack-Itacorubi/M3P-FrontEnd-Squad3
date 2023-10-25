@@ -9,31 +9,24 @@ interface Exerciseinfos {
   type: FormControl<string | null>;
   weeklyAmount: FormControl<string | null>;
   description: FormControl<string | null>;
+  status: FormControl<boolean | null>;
+
 }
 
 @Component({
   selector: 'app-exercise',
   templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.css'],
+  styleUrls: ['./exercise.component.css', '../../app.component.css'],
 })
 export class ExerciseComponent {
-  formsExerciseRegister: FormGroup<Exerciseinfos> = new FormGroup({
-    name: new FormControl(''),
-    date: new FormControl(''),
-    time: new FormControl(''),
-    type: new FormControl(''),
-    weeklyAmount: new FormControl(''),
-    description: new FormControl(''),
-  });
+  formsExerciseRegister: FormGroup<Exerciseinfos>; 
 
-  constructor(private exerciseService: ExerciseService) {}
-
-  ngOnInit(): void {
-    this.initExerciseForm();
+  constructor(private exerciseService: ExerciseService) {
+    this.formsExerciseRegister = this.initExerciseForm();
   }
 
   initExerciseForm() {
-    this.formsExerciseRegister = new FormGroup({
+    return new FormGroup<Exerciseinfos>({
       name: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -52,6 +45,7 @@ export class ExerciseComponent {
         Validators.minLength(10),
         Validators.maxLength(1000),
       ]),
+      status: new FormControl({ value: true, disabled: true }),
     });
   }
 
@@ -62,15 +56,16 @@ export class ExerciseComponent {
       alert('Dados cadastrado com sucesso!');
     }
 
-    const user = {
+    const exercise = {
       name: this.formsExerciseRegister.value.name!,
       date: this.formsExerciseRegister.value.date!,
       time: this.formsExerciseRegister.value.time!,
       type: this.formsExerciseRegister.value.type!,
       weeklyAmount: this.formsExerciseRegister.value.weeklyAmount!,
       description: this.formsExerciseRegister.value.description!,
+      status: this.formsExerciseRegister.value.status,
     };
 
-    this.initExerciseForm();
+    this.formsExerciseRegister = this.initExerciseForm();
   }
 }
