@@ -5,7 +5,7 @@
         <h3 class="my-1 text-xl font-bold">Cadastro de usuário</h3>
 
         <div class="gap-2 md:flex">
-          <div class="w-8/12 input-wrapper">
+          <div class="w-6/12 input-wrapper">
             <label for="fullName">Nome completo</label>
             <input
               type="text"
@@ -28,7 +28,7 @@
             </div>
           </div>
 
-          <div class="w-4/12 mr-5 input-wrapper">
+          <div class="w-3/12 input-wrapper">
             <label for="genre">Gênero</label>
             <select
               class="input-field"
@@ -46,6 +46,23 @@
               *ngIf="formUserRegister.get('genre')?.errors?.['required'] && formUserRegister.get('genre')?.touched"
             >
               <p>Por favor insira seu gênero!</p>
+            </div>
+          </div>
+
+          <div class="w-3/12 mr-5 input-wrapper">
+            <label for="status">Status</label>
+            <div class="flex input-field">
+              <div>
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  checked="true"
+                  formControlName="status"
+                />
+              </div>
+              <div class="mr-3">
+                <label for="checkbox">Ativo</label>
+              </div>
             </div>
           </div>
         </div>
