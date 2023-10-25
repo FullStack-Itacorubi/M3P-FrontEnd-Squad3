@@ -36,6 +36,7 @@ export class DietComponent implements OnInit {
   }
 
   initDietForm() {
+    const today = new Date();
     return new FormGroup({
       dietName: new FormControl('', [
         Validators.required,
@@ -44,8 +45,13 @@ export class DietComponent implements OnInit {
       ]),
       type: new FormControl('', [Validators.required]),
       patientId: new FormControl( null , [Validators.required]),
-      dietDate: new FormControl('', [Validators.required]),
-      dietTime: new FormControl('', [Validators.required]),
+      examDate: new FormControl(today.toISOString().substring(0, 10), [
+        Validators.required,
+      ]),
+      examHour: new FormControl(
+        today.toLocaleTimeString('pt-BR').substring(0, 5),
+        [Validators.required]
+      ),
       status: new FormControl({ value: true, disabled: true }),
       description: new FormControl('', [
         Validators.required,
@@ -62,12 +68,17 @@ export class DietComponent implements OnInit {
       alert('Dados cadastrado com sucesso!');
     }
 
+    const dateFormated = this.formsDietRegister.value
+      .dietDate!.split('-')
+      .reverse()
+      .join('/');
+
     const diet: Diet = {
       dietName: this.formsDietRegister.value.dietName!,
       type: this.formsDietRegister.value.type!,
       patientId: this.formsDietRegister.value.patientId!,
-      dietDate: this.formsDietRegister.value.dietDate!,
-      dietTime: this.formsDietRegister.value.dietTime!,
+      dietDate: dateFormated,
+      dietTime: this.formsDietRegister.value.dietTime! + ':00',
       status: this.formsDietRegister.value.status!,
       description: this.formsDietRegister.value.description!,
     };
