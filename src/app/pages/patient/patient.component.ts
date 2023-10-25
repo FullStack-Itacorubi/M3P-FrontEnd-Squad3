@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CepService } from 'src/app/shared/services/cep.service';
 import { PatientService } from 'src/app/shared/services/patient.service';
 
-interface Patientinfos {
+type Patientinfos = {
   fullname: FormControl<string | null>;
   genre: FormControl<string | null>;
   birthdate: FormControl<string | null>;
@@ -11,8 +11,9 @@ interface Patientinfos {
   rg: FormControl<string | null>;
   civilStatus: FormControl<string | null>;
   placeOfBirth: FormControl<string | null>;
-  email: FormControl<string | null>;
   phone: FormControl<string | null>;
+  email: FormControl<string | null>;
+  status: FormControl<boolean | null>;
   emergencyContact: FormControl<string | null>;
   allergyList: FormControl<string | null>;
   specificCareList: FormControl<string | null>;
@@ -35,36 +36,14 @@ interface Patientinfos {
   styleUrls: ['./patient.component.css', '../../app.component.css'],
 })
 export class PatientComponent {
-  formPatientRegister: FormGroup<Patientinfos> = new FormGroup({
-    fullname: new FormControl(''),
-    genre: new FormControl(''),
-    birthdate: new FormControl(''),
-    cpf: new FormControl(''),
-    rg: new FormControl(''),
-    civilStatus: new FormControl(''),
-    placeOfBirth: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl(''),
-    emergencyContact: new FormControl(''),
-    allergyList: new FormControl(''),
-    specificCareList: new FormControl(''),
-    healthInsurance: new FormControl(''),
-    healthInsuranceNumber: new FormControl(''),
-    healthInsuranceValidity: new FormControl(''),
-    publicPlace: new FormControl(''),
-    number: new FormControl(''),
-    neighborhood: new FormControl(''),
-    city: new FormControl(''),
-    state: new FormControl(''),
-    cep: new FormControl(''),
-    complement: new FormControl(''),
-    referencePoint: new FormControl(''),
-  });
+  formPatientRegister: FormGroup<Patientinfos>; 
 
   constructor(
     private patientService: PatientService,
     private cepService: CepService
-  ) {}
+  ) {
+    this.formPatientRegister = this. initPatientForm();
+  }
 
   checkCep() {
     const cep = this.formPatientRegister.get('cep')?.value;
@@ -84,12 +63,9 @@ export class PatientComponent {
     });
   }
 
-  ngOnInit(): void {
-    this.initPatientForm();
-  }
 
   initPatientForm() {
-    this.formPatientRegister = new FormGroup({
+    return new FormGroup<Patientinfos>({
       fullname: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
@@ -106,6 +82,7 @@ export class PatientComponent {
         Validators.maxLength(64),
       ]),
       email: new FormControl('', [Validators.required, Validators.email]),
+      status: new FormControl({ value: true, disabled: true }),
       phone: new FormControl('', [Validators.required]),
       emergencyContact: new FormControl('', [Validators.required]),
       allergyList: new FormControl(''),
