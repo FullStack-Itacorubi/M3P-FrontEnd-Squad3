@@ -63,6 +63,12 @@
             >
               <option value="">Nome do paciente</option>
             </select>
+            <div
+            class="text-red-500 font-semibold"
+            *ngIf="formsDietRegister.get('patientId')?.errors?.['required'] && formsDietRegister.get('patientId')?.touched"
+          >
+            <p>Por favor insira o paciente!</p>
+          </div>
           </div>
         </div>
 

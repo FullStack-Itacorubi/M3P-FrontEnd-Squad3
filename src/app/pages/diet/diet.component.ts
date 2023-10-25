@@ -12,7 +12,7 @@ type Dietinfos = {
   dietTime: FormControl<string | null>;
   status: FormControl<boolean | null>;
   description: FormControl<string | null>;
-}
+};
 
 @Component({
   selector: 'app-diet',
@@ -24,10 +24,12 @@ export class DietComponent implements OnInit {
 
   patients: Patient[] = [];
 
-  constructor(private dietService: DietService,
-    private patientsService: PatientsService) {
-      this.formsDietRegister = this.initDietForm();
-    }
+  constructor(
+    private dietService: DietService,
+    private patientsService: PatientsService
+  ) {
+    this.formsDietRegister = this.initDietForm();
+  }
 
   async ngOnInit() {
     this.patients = await this.patientsService.getPatients();
@@ -41,7 +43,7 @@ export class DietComponent implements OnInit {
         Validators.maxLength(100),
       ]),
       type: new FormControl('', [Validators.required]),
-      patientId: new FormControl( ),
+      patientId: new FormControl( null , [Validators.required]),
       dietDate: new FormControl('', [Validators.required]),
       dietTime: new FormControl('', [Validators.required]),
       status: new FormControl({ value: true, disabled: true }),
