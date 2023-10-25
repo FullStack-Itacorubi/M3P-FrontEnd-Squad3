@@ -61,7 +61,7 @@ export class DietComponent implements OnInit {
     });
   }
 
-  registerDiet() {
+  async registerDiet() {
     if (!this.formsDietRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
     } else {
@@ -84,5 +84,6 @@ export class DietComponent implements OnInit {
     };
 
     this.formsDietRegister = this.initDietForm();
+    await this.dietService.saveDiets(diet);
   }
 }

@@ -1,7 +1,7 @@
 <div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
   <div class="flex-grow p-4 overflow-y-auto">
     <div class="container py-4 pr-2 m-auto text-slate-800 pl-14">
-      <form [formGroup]="formsDietRegister">
+      <form [formGroup]="formsDietRegister" (ngSubmit)="registerDiet()">
         <h3 class="my-2 text-xl font-bold">Cadastro de dietas</h3>
 
         <div class="gap-2 md:flex">
@@ -61,14 +61,19 @@
               id="patientId"
               formControlName="patientId"
             >
-              <option value="">Nome do paciente</option>
+              <option
+                *ngFor="let optionPatient of patients"
+                [value]="optionPatient.id"
+              >
+                {{ optionPatient.fullName }}
+              </option>
             </select>
             <div
-            class="text-red-500 font-semibold"
-            *ngIf="formsDietRegister.get('patientId')?.errors?.['required'] && formsDietRegister.get('patientId')?.touched"
-          >
-            <p>Por favor insira o paciente!</p>
-          </div>
+              class="text-red-500 font-semibold"
+              *ngIf="formsDietRegister.get('patientId')?.errors?.['required'] && formsDietRegister.get('patientId')?.touched"
+            >
+              <p>Por favor insira o paciente!</p>
+            </div>
           </div>
         </div>
 
