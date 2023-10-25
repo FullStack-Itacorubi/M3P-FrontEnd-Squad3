@@ -7,7 +7,7 @@ import { Patient } from 'src/app/shared/utils/types';
   templateUrl: './patient-card.component.html',
   styleUrls: ['./patient-card.component.css'],
 })
-export class PatientsCardComponent {
+export class PatientCardComponent {
   @Input() patient?: Patient;
 
   onClick() {}

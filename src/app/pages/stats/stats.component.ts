@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StatsListStyle } from 'src/app/components/stats/stats-list/stats-list.component';
+import { StatsListStyle } from 'src/app/components/stats/dashboard-users-list/dashboard-users-list.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { StatsService } from 'src/app/shared/services/stats.service';

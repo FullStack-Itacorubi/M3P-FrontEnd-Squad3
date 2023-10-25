@@ -4,11 +4,11 @@ import { Patient, User } from 'src/app/shared/utils/types';
 export type StatsListStyle = 'TABLE' | 'GRID';
 
 @Component({
-  selector: 'app-stats-list',
-  templateUrl: './stats-list.component.html',
-  styleUrls: ['./stats-list.component.css'],
+  selector: 'app-dashboard-users-list',
+  templateUrl: './dashboard-users-list.component.html',
+  styleUrls: ['./dashboard-users-list.component.css'],
 })
-export class StatsListComponent {
+export class DashboardUsersListComponent {
   @Input() listStyle: StatsListStyle = 'GRID';
   @Input() data: Patient[] | User[] = [];
 

@@ -11,8 +11,8 @@ import { NavButtonComponent } from './shared/components/sidebar/nav-button/nav-b
 import { StatsComponent } from './pages/stats/stats.component';
 import { StatsCardComponent } from './components/stats/cards/stats-card/stats-card.component';
 import { TabMenuComponent } from './shared/components/tab-menu/tab-menu.component';
-import { PatientsCardComponent } from './components/stats/cards/patient-card/patient-card.component';
-import { StatsListComponent } from './components/stats/stats-list/stats-list.component';
+import { PatientCardComponent } from './components/stats/cards/patient-card/patient-card.component';
+import { DashboardUsersListComponent } from './components/stats/dashboard-users-list/dashboard-users-list.component';
 import { StatsTableRowComponent } from './components/stats/stats-table-row/stats-table-row.component';
 import { DelaySearchInputComponent } from './shared/components/delay-search-input/delay-search-input.component';
 import { FormsModule } from '@angular/forms';
@@ -48,8 +48,8 @@ import { UserCardComponent } from './components/stats/cards/user-card/user-card.
     StatsComponent,
     StatsCardComponent,
     TabMenuComponent,
-    PatientsCardComponent,
-    StatsListComponent,
+    PatientCardComponent,
+    DashboardUsersListComponent,
     StatsTableRowComponent,
     DelaySearchInputComponent,
     HeaderComponent,
