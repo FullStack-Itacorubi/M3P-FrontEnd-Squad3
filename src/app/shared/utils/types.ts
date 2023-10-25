@@ -44,7 +44,8 @@ export type Exam = {
 };
 
 export type Diet = {
-  id: number;
+  id?: number;
+  patientId: number;
   dietName: string;
   dietDate: string;
   dietTime: string;
