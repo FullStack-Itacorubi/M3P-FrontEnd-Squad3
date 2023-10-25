@@ -13,7 +13,7 @@ interface Dietinfos {
 @Component({
   selector: 'app-diet',
   templateUrl: './diet.component.html',
-  styleUrls: ['./diet.component.css'],
+  styleUrls: ['./diet.component.css', '../../app.component.css'],
 })
 export class DietComponent {
   formsDietRegister: FormGroup<Dietinfos> = new FormGroup({
