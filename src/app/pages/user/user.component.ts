@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/shared/services/user.service';
+import { UsersService } from 'src/app/shared/services/users.service';
 
-interface Userinfos {
+type Userinfos = {
   fullname: FormControl<string | null>;
   genre: FormControl<string | null>;
   cpf: FormControl<string | null>;
@@ -18,24 +18,14 @@ interface Userinfos {
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent {
-  formUserRegister: FormGroup<Userinfos> = new FormGroup({
-    fullname: new FormControl(''),
-    genre: new FormControl(''),
-    cpf: new FormControl(''),
-    phone: new FormControl(''),
-    type: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-  });
+  formUserRegister: FormGroup<Userinfos>;
 
-  constructor(private userService: UserService) {}
-
-  ngOnInit(): void {
-    this.initUserForm();
+  constructor(private usersService: UsersService) {
+    this.formUserRegister = this.initUserForm();
   }
 
   initUserForm() {
-    this.formUserRegister = new FormGroup({
+    return new FormGroup<Userinfos>({
       fullname: new FormControl('', [
         Validators.required,
         Validators.minLength(8),

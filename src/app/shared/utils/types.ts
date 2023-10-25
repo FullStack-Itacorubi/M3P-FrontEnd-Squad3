@@ -20,7 +20,7 @@ export type Patient = {
 };
 
 export type User = {
-  id: number;
+  id?: number;
   email: string;
   password: string;
   cpf: string;
