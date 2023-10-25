@@ -30,6 +30,7 @@ export interface patient {
   providedIn: 'root'
 })
 export class PatientService {
+  [x: string]: any;
 
   constructor() { }
 }

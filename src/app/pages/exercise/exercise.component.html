@@ -30,7 +30,7 @@
         </div>
 
         <div class="gap-2 md:flex">
-          <div class="w-6/12 input-wrapper">
+          <div class="w-4/12 input-wrapper">
             <label for="date">Data</label>
             <input 
               type="date"
@@ -47,7 +47,7 @@
               <p>Por favor insira a data do exercício!</p>
             </div>
           </div>
-          <div class="w-6/12 input-wrapper">
+          <div class="w-4/12 input-wrapper">
             <label for="time">Horário</label>
             <input 
               type="time"
@@ -63,6 +63,22 @@
             >
               <p>Por favor insira o horário do exercício!</p>
             </div>
+          </div>
+          <div class="w-4/12 input-wrapper">
+            <label for="documentUrl">Paciente</label>
+            <select
+              class="input-field"
+              name="patientId"
+              id="patientId"
+              formControlName="patientId"
+            >
+              <option
+                *ngFor="let optionPatient of patients"
+                [value]="optionPatient.id"
+              >
+                {{ optionPatient.fullName }}
+              </option>
+            </select>
           </div>
         </div>
 

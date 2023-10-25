@@ -1,29 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ExerciseService } from '../../exercise.service';
-import { Exercise } from 'src/app/shared/utils/types';
+import { Exercise, Patient } from 'src/app/shared/utils/types';
+import { PatientService } from 'src/app/shared/services/patient.service';
 
-interface Exerciseinfos {
+type Exerciseinfos = {
   name: FormControl<string | null>;
   date: FormControl<string | null>;
   time: FormControl<string | null>;
+  patientId: FormControl<number | null>;
   type: FormControl<string | null>;
   weeklyAmount: FormControl<number | null>;
   description: FormControl<string | null>;
   status: FormControl<boolean | null>;
-
-}
+};
 
 @Component({
   selector: 'app-exercise',
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.css', '../../app.component.css'],
 })
-export class ExerciseComponent {
+export class ExerciseComponent implements OnInit {
   formsExerciseRegister: FormGroup<Exerciseinfos>; 
 
-  constructor(private exerciseService: ExerciseService) {
+  patients: Patient[] = [];
+
+  constructor(
+    private exerciseService: ExerciseService,
+    private patientsService: PatientService
+    ) {
     this.formsExerciseRegister = this.initExerciseForm();
+  }
+
+  async ngOnInit() {
+    this.patients = await this.patientsService['getPatients']();
+    
   }
 
   initExerciseForm() {
@@ -34,14 +45,20 @@ export class ExerciseComponent {
         Validators.minLength(5),
         Validators.maxLength(100),
       ]),
-      date: new FormControl(today.toISOString().substring(0, 10), [Validators.required]),
-      time: new FormControl(today.toLocaleTimeString('pt-BR').substring(0, 5), [Validators.required]),
+      date: new FormControl(today.toISOString().substring(0, 10), [
+        Validators.required,
+      ]),
+      time: new FormControl(
+        today.toLocaleTimeString('pt-BR').substring(0, 5),
+         [Validators.required]
+       ),
+      patientId: new FormControl(),
       type: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(32),
       ]),
-      weeklyAmount: new FormControl(0, [Validators.required]),
+      weeklyAmount: new FormControl(null, [Validators.required]),
       description: new FormControl('', [
         Validators.required,
         Validators.minLength(10),
@@ -58,13 +75,16 @@ export class ExerciseComponent {
       alert('Dados cadastrado com sucesso!');
     }
 
-    const dateFormated = this.formsExerciseRegister.value.date!.split('-').reverse().join('/'); 
+    const dateFormated = this.formsExerciseRegister.value
+      .date!.split('-')
+      .reverse()
+      .join('/'); 
 
     const exercise: Exercise = {
-      patientId: 1,
       name: this.formsExerciseRegister.value.name!,
       date: dateFormated,
       time: this.formsExerciseRegister.value.time! + ':00',
+      patientId: this.formsExerciseRegister.value.patientId!,
       type: this.formsExerciseRegister.value.type!,
       weeklyAmount: this.formsExerciseRegister.value.weeklyAmount!,
       description: this.formsExerciseRegister.value.description!,
