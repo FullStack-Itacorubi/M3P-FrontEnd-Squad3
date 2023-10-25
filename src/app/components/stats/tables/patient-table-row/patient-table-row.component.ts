@@ -3,11 +3,11 @@ import { calculateAge } from 'src/app/shared/utils/calculateAge';
 import { Patient } from 'src/app/shared/utils/types';
 
 @Component({
-  selector: 'app-stats-table-row',
-  templateUrl: './stats-table-row.component.html',
-  styleUrls: ['./stats-table-row.component.css'],
+  selector: 'app-patient-table-row',
+  templateUrl: './patient-table-row.component.html',
+  styleUrls: ['./patient-table-row.component.css'],
 })
-export class StatsTableRowComponent {
+export class PatientTableRowComponent {
   @Input() patient?: Patient;
 
   getAge() {

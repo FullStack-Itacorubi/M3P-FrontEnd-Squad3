@@ -13,7 +13,7 @@ import { StatsCardComponent } from './components/stats/cards/stats-card/stats-ca
 import { TabMenuComponent } from './shared/components/tab-menu/tab-menu.component';
 import { PatientCardComponent } from './components/stats/cards/patient-card/patient-card.component';
 import { DashboardUsersListComponent } from './components/stats/dashboard-users-list/dashboard-users-list.component';
-import { StatsTableRowComponent } from './components/stats/stats-table-row/stats-table-row.component';
+import { PatientTableRowComponent } from './components/stats/tables/patient-table-row/patient-table-row.component';
 import { DelaySearchInputComponent } from './shared/components/delay-search-input/delay-search-input.component';
 import { FormsModule } from '@angular/forms';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
@@ -50,7 +50,7 @@ import { UserCardComponent } from './components/stats/cards/user-card/user-card.
     TabMenuComponent,
     PatientCardComponent,
     DashboardUsersListComponent,
-    StatsTableRowComponent,
+    PatientTableRowComponent,
     DelaySearchInputComponent,
     HeaderComponent,
     DropdownComponent,
