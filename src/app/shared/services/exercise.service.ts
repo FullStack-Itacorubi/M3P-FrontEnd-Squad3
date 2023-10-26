@@ -13,7 +13,7 @@ export class ExerciseService {
   constructor(private authService: AuthService) { }
 
   async saveExercises(exercise: Exercise) {
-    await axios.post(`${this.baseUrl}/exercises`, exercise, {
+    await axios.post(`${this.baseUrl}/exercicios`, exercise, {
       headers: {
         userId: this.authService.getUserId()
       }
