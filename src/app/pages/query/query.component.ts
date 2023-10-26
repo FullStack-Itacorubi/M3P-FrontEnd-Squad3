@@ -47,14 +47,19 @@ export class QueryComponent implements OnInit {
   }
 
   initQueryForm() {
+    const today = new Date();
     return new FormGroup<Queriesinfos>({
       motive: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(64),
       ]),
-      date: new FormControl('', [Validators.required]),
-      time: new FormControl('', [Validators.required]),
+      date: new FormControl(today.toISOString().substring(0, 10), [
+        Validators.required,
+      ]),
+      time: new FormControl(today.toLocaleTimeString('pt-BR').substring(0, 5), [
+        Validators.required,
+      ]),
       description: new FormControl('', [
         Validators.required,
         Validators.minLength(16),
@@ -101,7 +106,7 @@ export class QueryComponent implements OnInit {
 
     this.queryService.saveQuery(query);
 
-    this.initQueryForm();
+    this.formQuery = this.initQueryForm();
   }
 
   openModal() {
