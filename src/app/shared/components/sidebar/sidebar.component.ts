@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 type Options = {
@@ -67,19 +67,19 @@ export class SidebarComponent {
   ];
   collapsed = false;
 
-  constructor(private route: ActivatedRoute, private authService: AuthService) {
-    const url = this.getUrl(route.snapshot);
-    this.options = this.options.map((opt) => ({
-      ...opt,
-      selected: opt.link === url,
-    }));
-  }
+  constructor(private route: Router, private authService: AuthService) {
+    route.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const url = event.url;
 
-  select(selectedIdx: number) {
-    this.options = this.options.map((opt, idx) => ({
-      ...opt,
-      selected: idx === selectedIdx,
-    }));
+        console.log(url);
+
+        this.options = this.options.map((opt) => ({
+          ...opt,
+          selected: opt.link === url,
+        }));
+      }
+    });
   }
 
   checkRestrictions(role?: 'ADMIN' | 'DOCTOR') {
@@ -87,11 +87,5 @@ export class SidebarComponent {
     if (role === 'ADMIN') return this.authService.isUserAdmin();
     if (role === 'DOCTOR') return this.authService.isUserDoctor();
     return false;
-  }
-
-  private getUrl(snapshot: ActivatedRouteSnapshot): string {
-    let url = snapshot.url[0] ? snapshot.url[0].path : '';
-    if (snapshot.children[0]) url += '/' + this.getUrl(snapshot.children[0]);
-    return url;
   }
 }
