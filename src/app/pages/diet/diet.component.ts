@@ -52,7 +52,7 @@ export class DietComponent implements OnInit {
         today.toLocaleTimeString('pt-BR').substring(0, 5),
         [Validators.required]
       ),
-      status: new FormControl({ value: true, disabled: true }),
+      status: new FormControl({ value: true, disabled: true }, [Validators.required]),
       description: new FormControl('', [
         Validators.required,
         Validators.minLength(10),
@@ -64,6 +64,7 @@ export class DietComponent implements OnInit {
   async registerDiet() {
     if (!this.formsDietRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      return
     } else {
       alert('Dados cadastrado com sucesso!');
     }
