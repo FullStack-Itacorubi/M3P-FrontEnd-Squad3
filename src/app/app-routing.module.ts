@@ -10,15 +10,26 @@ import { DietComponent } from './pages/diet/diet.component';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { MedicamentsComponent } from './pages/medicaments/medicaments.component';
+import { MedicalRecordsComponent } from './pages/medical-records/medical-records.component';
+import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
+import { connectionGuard } from './shared/guards/connection.guard';
+import { adminGuard } from './shared/guards/admin.guard';
+import { doctorGuard } from './shared/guards/doctor.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [connectionGuard],
     children: [
       {
         path: '',
         component: StatsComponent,
+      },
+      {
+        path: 'consultas',
+        component: ExerciseComponent,
+        canActivate: [doctorGuard],
       },
       {
         path: 'exercicios',
@@ -35,15 +46,25 @@ const routes: Routes = [
       {
         path: 'exames',
         component: ExamComponent,
+        canActivate: [doctorGuard],
       },
       {
         path: 'usuarios',
         component: UserComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'prontuarios',
+        component: MedicalRecordsComponent,
+      },
+      {
+        path: 'prontuarios/:patientId',
+        component: PatientMedicalRecordComponent,
       },
       {
         path: 'medicamentos',
         component: MedicamentsComponent,
-      }
+      },
     ],
   },
   {

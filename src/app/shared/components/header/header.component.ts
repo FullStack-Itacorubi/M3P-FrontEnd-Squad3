@@ -8,6 +8,7 @@ import { ToolbarService } from 'src/app/shared/services/toolbar.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  isDropdownOpen = false;
   user!: IUserForm;
 
   constructor(private toolbarService: ToolbarService) {}

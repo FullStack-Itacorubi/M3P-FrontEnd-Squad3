@@ -1,0 +1,18 @@
+<div class="flex h-[calc(100%-80px)] text-slate-800">
+  <div class="flex-grow p-4 overflow-y-auto">
+    <app-delay-search-input (inputEmitter)="({})" />
+    <div class="flex flex-wrap gap-3 pt-3">
+      <app-medical-records-card
+        *ngFor="let medicalRecord of medicalRecords"
+        [patient]="medicalRecord.patient"
+        [medicalRecordsStats]="{
+          diets: medicalRecord.diets.length,
+          exercises: medicalRecord.exercises.length,
+          exams: medicalRecord.exams.length,
+          queries: medicalRecord.queries.length,
+        }"
+        class="w-[calc(25%-9px)]"
+      />
+    </div>
+  </div>
+</div>
