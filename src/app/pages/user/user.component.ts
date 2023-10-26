@@ -34,7 +34,7 @@ export class UserComponent {
         Validators.maxLength(64),
       ]),
       genre: new FormControl('', [Validators.required]),
-      status: new FormControl({ value: true, disabled: true }),
+      status: new FormControl({ value: true, disabled: true }, [Validators.required]),
       cpf: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       type: new FormControl('', [Validators.required]),
@@ -49,6 +49,7 @@ export class UserComponent {
   async registerUser() {
     if (!this.formUserRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      return
     } else {
       alert('Dados cadastrado com sucesso!');
     }
