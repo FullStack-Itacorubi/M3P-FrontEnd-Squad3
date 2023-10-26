@@ -61,6 +61,7 @@ export class MedicamentsComponent {
   registerMedicament() {
     if (!this.formMedicaments.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      return;
     } else {
       alert('Dados cadastrados com sucesso!');
     }
