@@ -1,23 +1,34 @@
 <div *ngIf="listStyle === 'GRID'; then grid; else table"></div>
 <ng-template #grid>
-  <div *ngIf="isPatients(); else userCards" class="grid grid-cols-5 gap-3">
+  <div *ngIf="isPatients(); else usersCards" class="grid grid-cols-5 gap-3">
     <app-patient-card
       *ngFor="let patient of getPatients()"
       [patient]="patient"
     />
   </div>
-  <ng-template #userCards>
+  <ng-template #usersCards>
     <div class="grid grid-cols-5 gap-3">
       <app-user-card *ngFor="let user of getUsers()" [user]="user" />
     </div>
   </ng-template>
 </ng-template>
 <ng-template #table>
-  <div class="flex flex-col overflow-hidden border rounded-md border-slate-300">
+  <div
+    *ngIf="isPatients(); else usersTable"
+    class="flex flex-col overflow-hidden border rounded-md border-slate-300"
+  >
     <app-patient-table-header />
     <app-patient-table-row
       *ngFor="let patient of getPatients()"
       [patient]="patient"
     />
   </div>
+  <ng-template #usersTable>
+    <div
+      class="flex flex-col overflow-hidden border rounded-md border-slate-300"
+    >
+      <app-user-table-header />
+      <app-user-table-row *ngFor="let user of getUsers()" [user]="user" />
+    </div>
+  </ng-template>
 </ng-template>
