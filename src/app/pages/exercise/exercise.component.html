@@ -5,8 +5,8 @@
         <h3 class="my-1 text-xl font-bold">Cadastro de exercício</h3>
 
         <div class="gap-2 md:flex">
-          <div class="w-10/12 input-wrapper">
-            <label for="name">Nome do Série de Exercícios</label>
+          <div class="w-full mr-5 input-wrapper">
+            <label for="name">Nome da Série de Exercícios</label>
             <input 
               type="text"
               class="input-field"
@@ -18,13 +18,13 @@
               class="text-red-500 font-semibold"
               *ngIf="formsExerciseRegister.get('name')?.errors?.['required'] && formsExerciseRegister.get('name')?.touched"
             >
-              <p>Por favor insira o nome do Série de Exercícios!</p>
+              <p>Por favor insira o nome da Série de Exercícios!</p>
             </div>
             <div 
               class="text-red-500 font-semibold"
               *ngIf="formsExerciseRegister.get('name')?.errors?.['minlength'] && formsExerciseRegister.get('name')?.touched"
             >
-              <p>O nome do Série de Exercícios deve possuir no mínimo 5 caracteres!</p>
+              <p>O nome da Série de Exercícios deve possuir no mínimo 5 caracteres!</p>
             </div>
           </div>
         </div>
@@ -38,7 +38,6 @@
               name="date"
               id="date"
               formControlName="date"
-              placeholder="dd/mm/aaaa"
             />
             <div 
               class="text-red-500 font-semibold"
@@ -55,7 +54,6 @@
               name="time"
               id="time"
               formControlName="time"
-              placeholder="hh:mm"
             />
             <div 
               class="text-red-500 font-semibold"
@@ -64,7 +62,7 @@
               <p>Por favor insira o horário do exercício!</p>
             </div>
           </div>
-          <div class="w-4/12 input-wrapper">
+          <div class="w-4/12 mr-5 input-wrapper">
             <label for="patientId">Paciente</label>
             <select
               class="input-field"
@@ -97,12 +95,12 @@
               id="type"
               formControlName="type">
                 <option disabled selected></option>
-                <option value="aerobics">Resistência Aeróbica</option>
-                <option value="muscular">Resistência Muscular</option>
-                <option value="flexibility">Flexibilidade</option>
-                <option value="strength">Força</option>
-                <option value="agility">Agilidade</option>
-                <option value="other">Outro</option>
+                <option value="AEROBICS">Resistência Aeróbica</option>
+                <option value="MUSCULAR">Resistência Muscular</option>
+                <option value="FLEXIBILITY">Flexibilidade</option>
+                <option value="STRENGTH">Força</option>
+                <option value="AGILITY">Agilidade</option>
+                <option value="OTHER">Outro</option>
             </select>
             <div 
               class="text-red-500 font-semibold"
