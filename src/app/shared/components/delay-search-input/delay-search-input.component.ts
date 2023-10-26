@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-delay-search-input',
@@ -6,14 +13,19 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./delay-search-input.component.css'],
 })
 export class DelaySearchInputComponent {
-  @Output() inputEmitter = new EventEmitter<string>();
-  input = '';
+  @ViewChild('searchInput') inputRef?: ElementRef<HTMLInputElement>;
+  @Output() inputChange = new EventEmitter<string>();
+  @Input() input = '';
   timeoutHandler?: ReturnType<typeof setTimeout>;
 
   onInput() {
     if (this.timeoutHandler) clearTimeout(this.timeoutHandler);
     this.timeoutHandler = setTimeout(() => {
-      this.inputEmitter.emit(this.input.toLowerCase());
+      this.inputChange.emit(this.input.toLowerCase());
     }, 700);
+  }
+
+  selectInput() {
+    this.inputRef?.nativeElement.focus();
   }
 }

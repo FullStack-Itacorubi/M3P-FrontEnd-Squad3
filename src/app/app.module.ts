@@ -9,11 +9,11 @@ import { DropdownComponent } from './shared/components/header/dropdown/dropdown.
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { NavButtonComponent } from './shared/components/sidebar/nav-button/nav-button.component';
 import { StatsComponent } from './pages/stats/stats.component';
-import { StatsCardComponent } from './components/stats/stats-card/stats-card.component';
+import { StatsCardComponent } from './components/stats/cards/stats-card/stats-card.component';
 import { TabMenuComponent } from './shared/components/tab-menu/tab-menu.component';
-import { PatientsCardComponent } from './components/stats/patients-card/patients-card.component';
-import { StatsListComponent } from './components/stats/stats-list/stats-list.component';
-import { StatsTableRowComponent } from './components/stats/stats-table-row/stats-table-row.component';
+import { PatientCardComponent } from './components/stats/cards/patient-card/patient-card.component';
+import { DashboardUsersListComponent } from './components/stats/dashboard-users-list/dashboard-users-list.component';
+import { PatientTableRowComponent } from './components/stats/tables/patient-table-row/patient-table-row.component';
 import { DelaySearchInputComponent } from './shared/components/delay-search-input/delay-search-input.component';
 import { FormsModule } from '@angular/forms';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
@@ -38,6 +38,10 @@ import { MedicalRecordsCardComponent } from './components/medical-records/medica
 import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
 import { CustomButtonComponent } from './shared/components/custom-button/custom-button.component';
 import { FormButtonsComponent } from './shared/components/form-buttons/form-buttons.component';
+import { UserCardComponent } from './components/stats/cards/user-card/user-card.component';
+import { PatientTableHeaderComponent } from './components/stats/tables/patient-table-header/patient-table-header.component';
+import { UserTableHeaderComponent } from './components/stats/tables/user-table-header/user-table-header.component';
+import { UserTableRowComponent } from './components/stats/tables/user-table-row/user-table-row.component';
 
 @NgModule({
   declarations: [
@@ -48,9 +52,9 @@ import { FormButtonsComponent } from './shared/components/form-buttons/form-butt
     StatsComponent,
     StatsCardComponent,
     TabMenuComponent,
-    PatientsCardComponent,
-    StatsListComponent,
-    StatsTableRowComponent,
+    PatientCardComponent,
+    DashboardUsersListComponent,
+    PatientTableRowComponent,
     DelaySearchInputComponent,
     HeaderComponent,
     DropdownComponent,
@@ -70,6 +74,10 @@ import { FormButtonsComponent } from './shared/components/form-buttons/form-butt
     PatientMedicalRecordComponent,
     CustomButtonComponent,
     FormButtonsComponent,
+    UserCardComponent,
+    PatientTableHeaderComponent,
+    UserTableHeaderComponent,
+    UserTableRowComponent,
   ],
 
   imports: [

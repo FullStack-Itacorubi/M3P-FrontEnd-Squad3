@@ -1,0 +1,19 @@
+<div
+  class="flex flex-col justify-between p-2 border rounded-md shadow-md border-slate-300 text-slate-600 aspect-square"
+>
+  <div class="flex flex-col">
+    <ng-icon name="ionPersonCircle" class="mx-auto text-6xl" />
+    <p class="text-lg font-medium truncate">{{ user?.fullName }}</p>
+    <div class="flex flex-col justify-between text-sm italic text-slate-400">
+      <p>{{ user?.phone }}</p>
+      <p>{{ user?.type }}</p>
+    </div>
+  </div>
+
+  <button
+    class="py-1 rounded bg-slate-600 text-slate-50"
+    [routerLink]="['usuarios', user?.id]"
+  >
+    Ver detalhes
+  </button>
+</div>
