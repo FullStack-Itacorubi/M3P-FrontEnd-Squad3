@@ -39,6 +39,7 @@ import { QueryComponent } from './pages/query/query.component';
 import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
 import { CustomButtonComponent } from './shared/components/custom-button/custom-button.component';
 import { FormButtonsComponent } from './shared/components/form-buttons/form-buttons.component';
+import { MedicamentModalComponent } from './components/medicament-modal/medicament-modal.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { FormButtonsComponent } from './shared/components/form-buttons/form-butt
     PatientMedicalRecordComponent,
     CustomButtonComponent,
     FormButtonsComponent,
+    MedicamentModalComponent,
   ],
 
   imports: [
