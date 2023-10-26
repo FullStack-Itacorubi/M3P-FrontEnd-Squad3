@@ -19,4 +19,8 @@ export class MedicamentService {
       },
     });
   }
+
+  async getMedicaments() {
+    return (await axios.get<Medicament[]>(`${this.baseUrl}/medicamentos`)).data;
+  }
 }
