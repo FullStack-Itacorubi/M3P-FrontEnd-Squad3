@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from '../utils/environment';
 import { AuthService } from './auth.service';
-import { Query } from '../utils/types';
+import { QueryRequest } from '../utils/types';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class QueryService {
 
   constructor(private authService: AuthService) {}
 
-  async saveQuery(query: Query) {
+  async saveQuery(query: QueryRequest) {
     await axios.post(`${this.baseUrl}/consultas`, query, {
       headers: {
         userId: this.authService.getUserId(),

@@ -4,7 +4,13 @@ import { MedicamentModalComponent } from 'src/app/components/medicament-modal/me
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { QueryService } from 'src/app/shared/services/query.service';
-import { Query, Patient, Medicament } from 'src/app/shared/utils/types';
+import {
+  QueryResponse,
+  Patient,
+  Medicament,
+  QueryMedicament,
+  QueryRequest,
+} from 'src/app/shared/utils/types';
 
 type Queriesinfos = {
   motive: FormControl<string | null>;
@@ -80,12 +86,14 @@ export class QueryComponent implements OnInit {
       .reverse()
       .join('/');
 
-    const query: Query = {
+    const query: QueryRequest = {
       reasonForConsultation: this.formQuery.value.motive!,
       consultationDate: dateFormated,
       consultationTime: this.formQuery.value.time! + ':00',
       problemDescription: this.formQuery.value.description!,
-      medicaments: this.medicaments,
+      medicaments: this.medicaments.map(
+        (medicament) => ({ id: medicament.id } as QueryMedicament)
+      ),
       dosageAndRecautions: this.formQuery.value.dosage!,
       patientId: this.formQuery.value.patientId!,
       status: this.formQuery.value.status!,

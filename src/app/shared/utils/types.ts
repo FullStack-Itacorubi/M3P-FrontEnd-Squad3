@@ -77,7 +77,11 @@ export type Medicament = {
   status: boolean;
 };
 
-export type Query = {
+export type QueryMedicament = {
+  id: number;
+};
+
+export type QueryResponse = {
   id?: number;
   patientId: number;
   reasonForConsultation: string;
@@ -89,10 +93,22 @@ export type Query = {
   status: boolean;
 };
 
+export type QueryRequest = {
+  id?: number;
+  patientId: number;
+  reasonForConsultation: string;
+  consultationDate: string;
+  consultationTime: string;
+  problemDescription: string;
+  medicaments: Medicament[] | QueryMedicament[];
+  dosageAndRecautions: string;
+  status: boolean;
+};
+
 export type MedicalRecord = {
   id: number;
   patient: Patient;
-  queries: Query[];
+  queries: QueryResponse[];
   exercises: Exercise[];
   diets: Diet[];
   exams: Exam[];
