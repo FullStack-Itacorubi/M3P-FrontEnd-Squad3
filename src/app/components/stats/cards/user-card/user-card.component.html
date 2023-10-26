@@ -10,7 +10,10 @@
     </div>
   </div>
 
-  <button class="py-1 rounded bg-slate-600 text-slate-50" (click)="onClick()">
+  <button
+    class="py-1 rounded bg-slate-600 text-slate-50"
+    [routerLink]="['usuarios', user?.id]"
+  >
     Ver detalhes
   </button>
 </div>

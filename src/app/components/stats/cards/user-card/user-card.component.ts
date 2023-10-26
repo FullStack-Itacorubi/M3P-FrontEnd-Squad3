@@ -8,6 +8,4 @@ import { User } from 'src/app/shared/utils/types';
 })
 export class UserCardComponent {
   @Input() user?: User;
-
-  onClick() {}
 }

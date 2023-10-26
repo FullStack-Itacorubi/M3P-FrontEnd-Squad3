@@ -43,12 +43,21 @@ const routes: Routes = [
         component: PatientComponent,
       },
       {
+        path: 'pacientes/:patientId',
+        component: PatientComponent,
+      },
+      {
         path: 'exames',
         component: ExamComponent,
         canActivate: [doctorGuard],
       },
       {
         path: 'usuarios',
+        component: UserComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'usuarios/:userId',
         component: UserComponent,
         canActivate: [adminGuard],
       },
