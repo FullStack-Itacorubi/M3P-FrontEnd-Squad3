@@ -1,4 +1,6 @@
-<div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
+<div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
+  <div class="flex-grow p-4 overflow-y-auto">
+    <div class="text-slate-800 container m-auto py-4 pl-14 pr-2">
     <form [formGroup]="formQuery">
 
         <h3 class="text-xl font-bold my-2">Cadastro de consultas</h3>
@@ -127,23 +129,28 @@
                 formControlName="medication"
                 />
             </div>
-            <div class="input-wrapper mr-5 w-6/12">
-                <label for="status">Status do sistema</label>
-                <input
-                  type="text"
-                  class="input-field"
-                  name="status"
-                  id="status"
-                  formControlName="status"
-                />
-                <div
-                  class="text-red-500 font-semibold"
-                  *ngIf="formQuery.get('status')?.errors?.['required'] && formQuery.get('status')?.touched"
-                >
-                  <p>Por favor insira o status!</p>
+          
+            <div class="w-2/12 mr-5 input-wrapper">
+              <label for="status">Status</label>
+              <div class="flex input-field">
+                <div>
+                  <input
+                    type="checkbox"
+                    class="mr-2"
+                    checked="true"
+                    formControlName="status"
+                  />
+                </div>
+                <div class="mr-3">
+                  <label for="checkbox">Ativo</label>
                 </div>
               </div>
+            </div>
+
         </div>
+        <app-form-buttons (handleEdit)="formQuery = initQueryForm()" />
 
     </form>
+    </div>
+  </div>
 </div>

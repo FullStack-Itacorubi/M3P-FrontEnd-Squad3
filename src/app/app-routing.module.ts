@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    canActivate: [connectionGuard],
+    /* canActivate: [connectionGuard], */
     children: [
       {
         path: '',
@@ -28,8 +28,8 @@ const routes: Routes = [
       },
       {
         path: 'consultas',
-        component: ExerciseComponent,
-        canActivate: [doctorGuard],
+        component: QueryComponent,
+       /*  canActivate: [doctorGuard], */
       },
       {
         path: 'exercicios',
@@ -46,12 +46,12 @@ const routes: Routes = [
       {
         path: 'exames',
         component: ExamComponent,
-        canActivate: [doctorGuard],
+        /* canActivate: [doctorGuard], */
       },
       {
         path: 'usuarios',
         component: UserComponent,
-        canActivate: [adminGuard],
+        /* canActivate: [adminGuard], */
       },
       {
         path: 'prontuarios',

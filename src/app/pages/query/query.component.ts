@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PatientService } from 'src/app/shared/services/patient.service';
-import { Query, Patient } from "src/app/shared/utils/types";
+import { QueryService } from 'src/app/shared/services/query.service';
+import { Query, Patient, Medicament } from "src/app/shared/utils/types";
 
-type Queriesinfos {
+type Queriesinfos = {
   motive: FormControl<string | null>;
   date: FormControl<string | null>;
   time: FormControl<string | null>;
   description: FormControl<string | null>;
   medication: FormControl<string | null>;
   dosage: FormControl<string | null>;
-  status: FormControl<string | null>;
+  patientId: FormControl<number | null>;
+  status: FormControl<boolean | null>;
 }
 
 @Component({
@@ -20,28 +22,23 @@ type Queriesinfos {
 })
 export class QueryComponent {
 
-  formQuery: FormGroup<Queriesinfos> = new FormGroup({
-    motive: new FormControl(''),
-    date: new FormControl(''),
-    time: new FormControl(''),
-    description: new FormControl(''),
-    medication: new FormControl(''),
-    dosage: new FormControl(''),
-    status: new FormControl(''),
-  });
+  formQuery: FormGroup<Queriesinfos>;
 
   patients: Patient[] = [];
 
   constructor (
     private patientService: PatientService,
-  ) {}
+    private queryService: QueryService,
+  ) {
+    this.formQuery = this.initQueryForm()
+  }
 
   ngOnInit(): void {
     this.initQueryForm();
   }
 
   initQueryForm() {
-    this.formQuery = new FormGroup({
+    return new FormGroup<Queriesinfos>({
       motive: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
@@ -60,7 +57,8 @@ export class QueryComponent {
         Validators.minLength(16), 
         Validators.maxLength(256)
       ]),
-      status: new FormControl('', [Validators.required]),
+      patientId: new FormControl( null , [Validators.required]),
+      status: new FormControl({value: true, disabled: true}, [Validators.required]),
     });
   }
 
@@ -71,13 +69,16 @@ export class QueryComponent {
       alert('Dados cadastrados com sucesso!');
     }
 
-    const query = {
-      motive: this.formQuery.value.motive!,
-      date: this.formQuery.value.date!,
-      time: this.formQuery.value.time!,
-      description: this.formQuery.value.description,
-      medication: this.formQuery.value.medication!,
-      dosage: this.formQuery.value.dosage!,
+    const medicaments: Medicament[] = []
+
+    const query: Query = {
+      reasonForConsultation: this.formQuery.value.motive!,
+      consultationDate: this.formQuery.value.date!,
+      consultationTime: this.formQuery.value.time!,
+      problemDescription: this.formQuery.value.description!,
+      medicaments,
+      dosageAndRecautions: this.formQuery.value.dosage!,
+      patientId: this.formQuery.value.patientId!,
       status: this.formQuery.value.status!,
     };
 

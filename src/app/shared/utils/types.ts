@@ -78,7 +78,8 @@ export type Medicament = {
 };
 
 export type Query = {
-  id: number;
+  id?: number;
+  patientId: number;
   reasonForConsultation: string;
   consultationDate: string;
   consultationTime: string;
