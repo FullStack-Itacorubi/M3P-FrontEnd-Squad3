@@ -1,0 +1,14 @@
+<div class="flex items-center border-t text-slate-500 border-slate-300">
+  <div
+    class="flex items-center justify-center w-10 py-2 border-r text-slate-800 border-slate-300"
+  >
+    {{ patient?.id }}
+  </div>
+  <div class="flex-grow pl-3">{{ patient?.fullName }}</div>
+  <div class="w-1/12 pl-1">{{ getAge() }}</div>
+  <div class="w-2/12 pl-1">{{ patient?.phone }}</div>
+  <div class="w-3/12 pl-1">{{ patient?.healthInsurance }}</div>
+  <div class="w-1/12 h-full px-3 py-2 bg-slate-600 text-slate-50">
+    <button [routerLink]="['pacientes', patient?.id]">Detalhes</button>
+  </div>
+</div>

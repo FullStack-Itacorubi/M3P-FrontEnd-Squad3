@@ -55,7 +55,8 @@ export type Diet = {
 };
 
 export type Exercise = {
-  id: number;
+  id?: number;
+  patientId: number;
   name: string;
   date: string;
   time: string;
