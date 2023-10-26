@@ -35,9 +35,11 @@ import { MedicamentsComponent } from './pages/medicaments/medicaments.component'
 import { MedicalRecordsComponent } from './pages/medical-records/medical-records.component';
 import { AccordionComponent } from './shared/components/accordion/accordion.component';
 import { MedicalRecordsCardComponent } from './components/medical-records/medical-records-card/medical-records-card.component';
+import { QueryComponent } from './pages/query/query.component';
 import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
 import { CustomButtonComponent } from './shared/components/custom-button/custom-button.component';
 import { FormButtonsComponent } from './shared/components/form-buttons/form-buttons.component';
+import { MedicamentModalComponent } from './components/medicament-modal/medicament-modal.component';
 import { UserCardComponent } from './components/stats/cards/user-card/user-card.component';
 import { PatientTableHeaderComponent } from './components/stats/tables/patient-table-header/patient-table-header.component';
 import { UserTableHeaderComponent } from './components/stats/tables/user-table-header/user-table-header.component';
@@ -71,9 +73,11 @@ import { UserTableRowComponent } from './components/stats/tables/user-table-row/
     MedicalRecordsComponent,
     AccordionComponent,
     MedicalRecordsCardComponent,
+    QueryComponent,
     PatientMedicalRecordComponent,
     CustomButtonComponent,
     FormButtonsComponent,
+    MedicamentModalComponent,
     UserCardComponent,
     PatientTableHeaderComponent,
     UserTableHeaderComponent,
