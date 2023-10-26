@@ -109,12 +109,28 @@ export class QueryComponent implements OnInit {
     this.formQuery = this.initQueryForm();
   }
 
-  openModal() {
-    this.modalService.open(MedicamentModalComponent, undefined);
+  selectMedicament() {
+    this.modalService.open(MedicamentModalComponent);
     this.modalService
       .responseObservable<Medicament>()
       .subscribe((medicament) => {
         this.medicaments.push(medicament);
       });
+  }
+
+  editMedicament(id?: number) {
+    this.modalService.open(MedicamentModalComponent);
+    this.modalService
+      .responseObservable<Medicament>()
+      .subscribe((medicament) => {
+        this.medicaments.push(medicament);
+      });
+    this.deleteMedicament(id);
+  }
+
+  deleteMedicament(id?: number) {
+    this.medicaments = this.medicaments.filter(
+      (medicament) => medicament.id !== id
+    );
   }
 }

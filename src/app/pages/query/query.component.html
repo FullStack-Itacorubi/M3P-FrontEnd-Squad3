@@ -156,19 +156,29 @@
         </div>
 
         <h3 class="my-3 font-semibold">Medicamentos</h3>
-        <div *ngFor="let medicament of medicaments" class="gap-2 md:flex">
+        <div
+          *ngFor="let medicament of medicaments"
+          class="flex items-start gap-2"
+        >
           <div class="w-4/12 input-wrapper">
             <p class="input-field">{{ medicament.name }}</p>
           </div>
           <button
-            class="flex items-center justify-center py-2 text-lg text-slate-600"
+            class="py-2 text-xl text-slate-600"
+            (click)="editMedicament(medicament.id)"
           >
             <ng-icon name="ionCreateOutline" />
+          </button>
+          <button
+            class="py-2 text-xl text-slate-600"
+            (click)="deleteMedicament(medicament.id)"
+          >
+            <ng-icon name="ionTrashOutline" />
           </button>
         </div>
         <app-custom-button
           label="Adicionar medicamento"
-          (clickHandler)="openModal()"
+          (clickHandler)="selectMedicament()"
         />
         <app-form-buttons (handleEdit)="formQuery = initQueryForm()" />
       </form>
