@@ -44,6 +44,7 @@ import { UserCardComponent } from './components/stats/cards/user-card/user-card.
 import { PatientTableHeaderComponent } from './components/stats/tables/patient-table-header/patient-table-header.component';
 import { UserTableHeaderComponent } from './components/stats/tables/user-table-header/user-table-header.component';
 import { UserTableRowComponent } from './components/stats/tables/user-table-row/user-table-row.component';
+import { LogsComponent } from './pages/logs/logs.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { UserTableRowComponent } from './components/stats/tables/user-table-row/
     PatientTableHeaderComponent,
     UserTableHeaderComponent,
     UserTableRowComponent,
+    LogsComponent,
   ],
 
   imports: [
