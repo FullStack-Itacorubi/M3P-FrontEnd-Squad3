@@ -9,6 +9,7 @@ import { PatientComponent } from './pages/patient/patient.component';
 import { DietComponent } from './pages/diet/diet.component';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { StatsComponent } from './pages/stats/stats.component';
+import { MedicamentsComponent } from './pages/medicaments/medicaments.component';
 import { MedicalRecordsComponent } from './pages/medical-records/medical-records.component';
 import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
 import { connectionGuard } from './shared/guards/connection.guard';
@@ -59,6 +60,10 @@ const routes: Routes = [
       {
         path: 'prontuarios/:patientId',
         component: PatientMedicalRecordComponent,
+      },
+      {
+        path: 'medicamentos',
+        component: MedicamentsComponent,
       },
     ],
   },

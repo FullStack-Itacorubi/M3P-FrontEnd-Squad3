@@ -1,48 +1,57 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ExamService } from 'src/app/shared/services/exam.service';
+import { PatientsService } from 'src/app/shared/services/patients.service';
+import { Exam, Patient } from 'src/app/shared/utils/types';
 
-interface Examinfos {
+type Examinfos = {
   examName: FormControl<string | null>;
   examDate: FormControl<string | null>;
   examHour: FormControl<string | null>;
   examType: FormControl<string | null>;
   laboratory: FormControl<string | null>;
   documentUrl: FormControl<string | null>;
+  patientId: FormControl<number | null>;
+  status: FormControl<boolean | null>;
   results: FormControl<string | null>;
-}
+};
 
 @Component({
   selector: 'app-exam',
   templateUrl: './exam.component.html',
-  styleUrls: ['./exam.component.css'],
+  styleUrls: ['./exam.component.css', '../../app.component.css'],
 })
-export class ExamComponent {
-  formsExamRegister: FormGroup<Examinfos> = new FormGroup({
-    examName: new FormControl(''),
-    examDate: new FormControl(''),
-    examHour: new FormControl(''),
-    examType: new FormControl(''),
-    laboratory: new FormControl(''),
-    documentUrl: new FormControl(''),
-    results: new FormControl(''),
-  });
+export class ExamComponent implements OnInit {
+  formsExamRegister: FormGroup<Examinfos>;
 
-  constructor(private examService: ExamService) {}
+  patients: Patient[] = [];
 
-  ngOnInit(): void {
-    this.initExamForm();
+  constructor(
+    private examService: ExamService,
+    private patientsService: PatientsService
+  ) {
+    this.formsExamRegister = this.initExamForm();
+  }
+
+  async ngOnInit() {
+    this.patients = await this.patientsService.getPatients();
   }
 
   initExamForm() {
-    this.formsExamRegister = new FormGroup({
+    const today = new Date();
+    return new FormGroup<Examinfos>({
       examName: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(64),
       ]),
-      examDate: new FormControl('', [Validators.required]),
-      examHour: new FormControl('', [Validators.required]),
+      examDate: new FormControl(today.toISOString().substring(0, 10), [
+        Validators.required,
+      ]),
+      examHour: new FormControl(
+        today.toLocaleTimeString('pt-BR').substring(0, 5),
+        [Validators.required]
+      ),
       examType: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
@@ -54,6 +63,8 @@ export class ExamComponent {
         Validators.maxLength(32),
       ]),
       documentUrl: new FormControl(''),
+      patientId: new FormControl( null , [Validators.required]),
+      status: new FormControl({ value: true, disabled: true }, [Validators.required]),
       results: new FormControl('', [
         Validators.required,
         Validators.minLength(16),
@@ -62,23 +73,32 @@ export class ExamComponent {
     });
   }
 
-  registerExam() {
+  async registerExam() {
     if (!this.formsExamRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      return
     } else {
       alert('Dados cadastrado com sucesso!');
     }
 
-    const user = {
+    const dateFormated = this.formsExamRegister.value
+      .examDate!.split('-')
+      .reverse()
+      .join('/');
+
+    const exam: Exam = {
       examName: this.formsExamRegister.value.examName!,
-      examDate: this.formsExamRegister.value.examDate!,
-      examHour: this.formsExamRegister.value.examHour!,
+      examDate: dateFormated,
+      examHour: this.formsExamRegister.value.examHour! + ':00',
       examType: this.formsExamRegister.value.examType!,
       laboratory: this.formsExamRegister.value.laboratory!,
       documentUrl: this.formsExamRegister.value.documentUrl!,
+      patientId: this.formsExamRegister.value.patientId!,
+      status: this.formsExamRegister.value.status!,
       results: this.formsExamRegister.value.results!,
     };
 
-    this.initExamForm();
+    this.formsExamRegister = this.initExamForm();
+    await this.examService.saveExams(exam);
   }
 }

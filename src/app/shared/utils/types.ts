@@ -20,7 +20,7 @@ export type Patient = {
 };
 
 export type User = {
-  id: number;
+  id?: number;
   email: string;
   password: string;
   cpf: string;
@@ -32,7 +32,8 @@ export type User = {
 };
 
 export type Exam = {
-  id: number;
+  id?: number;
+  patientId: number;
   examName: string;
   examDate: string;
   examHour: string;
@@ -66,7 +67,7 @@ export type Exercise = {
 };
 
 export type Medicament = {
-  id: number;
+  id?: number;
   name: string;
   date: string;
   time: string;
