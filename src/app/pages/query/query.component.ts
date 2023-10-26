@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PatientService } from 'src/app/shared/services/patient.service';
+import { Query, Patient } from "src/app/shared/utils/types";
 
-interface Queriesinfos {
+type Queriesinfos {
   motive: FormControl<string | null>;
   date: FormControl<string | null>;
   time: FormControl<string | null>;
@@ -27,6 +29,12 @@ export class QueryComponent {
     dosage: new FormControl(''),
     status: new FormControl(''),
   });
+
+  patients: Patient[] = [];
+
+  constructor (
+    private patientService: PatientService,
+  ) {}
 
   ngOnInit(): void {
     this.initQueryForm();
