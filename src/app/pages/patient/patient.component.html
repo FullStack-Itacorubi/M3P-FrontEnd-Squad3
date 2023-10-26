@@ -104,6 +104,12 @@
             >
               <p>Por favor insira seu RG!</p>
             </div>
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formPatientRegister.get('rg')?.errors?.['maxlength'] && formPatientRegister.get('rg')?.touched"
+            >
+              <p>Seu rg deve possuir no máximo 20 caracteres!</p>
+            </div>
           </div>
 
           <div class="w-3/12 input-wrapper">
