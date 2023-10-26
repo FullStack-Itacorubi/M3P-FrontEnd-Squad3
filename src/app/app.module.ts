@@ -35,6 +35,9 @@ import { MedicalRecordsComponent } from './pages/medical-records/medical-records
 import { AccordionComponent } from './shared/components/accordion/accordion.component';
 import { MedicalRecordsCardComponent } from './components/medical-records/medical-records-card/medical-records-card.component';
 import { QueryComponent } from './pages/query/query.component';
+import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
+import { CustomButtonComponent } from './shared/components/custom-button/custom-button.component';
+import { FormButtonsComponent } from './shared/components/form-buttons/form-buttons.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,9 @@ import { QueryComponent } from './pages/query/query.component';
     AccordionComponent,
     MedicalRecordsCardComponent,
     QueryComponent,
+    PatientMedicalRecordComponent,
+    CustomButtonComponent,
+    FormButtonsComponent,
   ],
 
   imports: [

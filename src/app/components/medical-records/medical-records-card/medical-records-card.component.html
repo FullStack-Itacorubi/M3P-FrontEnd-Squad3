@@ -1,4 +1,8 @@
-<app-accordion *ngIf="patient" [headerTitle]="patient.fullName">
+<app-accordion
+  *ngIf="patient"
+  [headerTitle]="patient.fullName"
+  [bordered]="true"
+>
   <div class="flex justify-between">
     <p>{{ patient.phone }}</p>
     <p>{{ patient.healthInsurance || "Nenhum" }}</p>
@@ -21,7 +25,10 @@
       <p>{{ medicalRecordsStats.diets }}</p>
     </div>
   </div>
-  <button class="p-2 rounded-md bg-slate-600 text-slate-50">
+  <button
+    class="p-2 rounded-md bg-slate-600 text-slate-50"
+    [routerLink]="['/prontuarios', patient.id]"
+  >
     Ver detalhes
   </button>
 </app-accordion>
