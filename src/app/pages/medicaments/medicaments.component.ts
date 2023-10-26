@@ -1,36 +1,29 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MedicamentService } from 'src/app/shared/services/medicament.service';
-import { PatientService } from 'src/app/shared/services/patient.service';
-import { Patient } from 'src/app/shared/utils/types';
+import { Medicament } from 'src/app/shared/utils/types';
 
 type Medicamentsinfos = {
   medicamentsName: FormControl<string | null>;
   date: FormControl<string | null>;
   time: FormControl<string | null>;
   type: FormControl<string | null>;
-  amount: FormControl<string | null>;
+  amount: FormControl<number | null>;
   unit: FormControl<string | null>;
   observations: FormControl<string | null>;
-  status: FormControl<string | null>;
-}
+  status: FormControl<boolean | null>;
+};
 
 @Component({
   selector: 'app-medicaments',
   templateUrl: './medicaments.component.html',
-  styleUrls: ['./medicaments.component.css']
+  styleUrls: ['./medicaments.component.css'],
 })
 export class MedicamentsComponent {
-
   formMedicaments!: FormGroup<Medicamentsinfos>;
 
-  patients: Patient[] = [];
-
-  constructor(
-    private medicamentService: MedicamentService,
-    private patientService: PatientService,
-  ) {
-    this.formMedicaments = this.initMedicamentsForm()
+  constructor(private medicamentService: MedicamentService) {
+    this.formMedicaments = this.initMedicamentsForm();
   }
 
   ngOnInit(): void {
@@ -38,23 +31,30 @@ export class MedicamentsComponent {
   }
 
   initMedicamentsForm() {
+    const today = new Date();
     return new FormGroup<Medicamentsinfos>({
-    medicamentsName: new FormControl('', [
+      medicamentsName: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(100),
       ]),
-      date: new FormControl('', [Validators.required]),
-      time: new FormControl('', [Validators.required]),
+      date: new FormControl(today.toISOString().substring(0, 10), [
+        Validators.required,
+      ]),
+      time: new FormControl(today.toLocaleTimeString('pt-BR').substring(0, 5), [
+        Validators.required,
+      ]),
       type: new FormControl('', [Validators.required]),
-      amount: new FormControl('', [Validators.required]),
+      amount: new FormControl(null, [Validators.required]),
       unit: new FormControl('', [Validators.required]),
       observations: new FormControl('', [
-        Validators.required, 
-        Validators.minLength(10), 
-        Validators.maxLength(1000)
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(1000),
       ]),
-      status: new FormControl('', [Validators.required]),
+      status: new FormControl({ value: true, disabled: true }, [
+        Validators.required,
+      ]),
     });
   }
 
@@ -65,20 +65,24 @@ export class MedicamentsComponent {
       alert('Dados cadastrados com sucesso!');
     }
 
+    const dateFormated = this.formMedicaments.value
+      .date!.split('-')
+      .reverse()
+      .join('/');
+
     const medicament: Medicament = {
-      medicamentsName: this.formMedicaments.value.medicamentsName!,
-      date: this.formMedicaments.value.date!,
-      time: this.formMedicaments.value.time!,
-      type: this.formMedicaments.value.type,
-      amount: this.formMedicaments.value.amount!,
+      name: this.formMedicaments.value.medicamentsName!,
+      date: dateFormated!,
+      time: this.formMedicaments.value.time! + ':00',
+      type: this.formMedicaments.value.type!,
+      quantity: this.formMedicaments.value.amount!,
       unit: this.formMedicaments.value.unit!,
       observations: this.formMedicaments.value.observations!,
       status: this.formMedicaments.value.status!,
     };
 
+    this.medicamentService.SaveMedicaments(medicament);
+
     this.initMedicamentsForm();
   }
-
-  
-
 }

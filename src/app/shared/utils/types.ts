@@ -66,7 +66,7 @@ export type Exercise = {
 };
 
 export type Medicament = {
-  id: number;
+  id?: number;
   name: string;
   date: string;
   time: string;

@@ -33,7 +33,7 @@ export class PatientMedicalRecordComponent implements OnInit {
     const medicaments = new Map<number, Medicament>();
     this.medicalRecord?.queries.map((query) =>
       query.medicaments.map((medicament) =>
-        medicaments.set(medicament.id, medicament)
+        medicaments.set(medicament.id!, medicament)
       )
     );
     return [...medicaments.values()];
