@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ExerciseService } from '../../shared/services/exercise.service';
 import { Exercise, Patient } from 'src/app/shared/utils/types';
-import { PatientService } from 'src/app/shared/services/patient.service';
+import { PatientsService } from 'src/app/shared/services/patients.service';
 
 type Exerciseinfos = {
   name: FormControl<string | null>;
@@ -27,13 +27,13 @@ export class ExerciseComponent implements OnInit {
 
   constructor(
     private exerciseService: ExerciseService,
-    private patientsService: PatientService
+    private patientsService: PatientsService
   ) {
     this.formsExerciseRegister = this.initExerciseForm();
   }
 
   async ngOnInit() {
-    this.patients = await this.patientsService['getPatients']();
+    this.patients = await this.patientsService.getPatients();
   }
 
   initExerciseForm() {
@@ -44,9 +44,8 @@ export class ExerciseComponent implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(100),
       ]),
-      date: new FormControl(today.toISOString().substring(0, 10), [
-        Validators.required,
-      ]),
+      date: new FormControl(today.toISOString().substring(0, 10), 
+        [Validators.required]),
       time: new FormControl(
         today.toLocaleTimeString('pt-BR').substring(0, 5),
         [Validators.required]
@@ -63,15 +62,18 @@ export class ExerciseComponent implements OnInit {
         Validators.minLength(10),
         Validators.maxLength(1000),
       ]),
-      status: new FormControl({ value: true, disabled: true }),
+      status: new FormControl({ value: true, disabled: true },
+        [Validators.required]),
     });
   }
 
   async registerExercise() {
     if (!this.formsExerciseRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      return
     } else {
       alert('Dados cadastrado com sucesso!');
+      return
     }
 
     const dateFormated = this.formsExerciseRegister.value
