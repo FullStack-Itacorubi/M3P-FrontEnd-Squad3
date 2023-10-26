@@ -1,4 +1,4 @@
-<div class="flex h-[calc(100%-64px)] bg-slate-50 text-slate-800">
+<div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
   <div class="flex flex-col w-10/12 h-full p-4">
     <div class="flex justify-between pb-2 border-b">
       <div class="flex gap-6 pl-4">
@@ -8,19 +8,22 @@
           [label]="option.label"
           [selected]="option.selected"
           (select)="select(idx)"
+          [restricted]="option.restricted"
         />
       </div>
-      <app-delay-search-input (inputEmitter)="onSearchInput($event)" />
     </div>
     <div class="flex-grow overflow-y-auto">
       <div class="flex flex-col gap-2 p-4">
-        <div class="flex self-end gap-2 p-2 rounded-md text-slate-400">
-          <button (click)="listStyle = 'GRID'">
-            <ng-icon name="ionGrid" />
-          </button>
-          <button (click)="listStyle = 'TABLE'">
-            <ng-icon name="ionList" />
-          </button>
+        <div class="flex justify-between">
+          <app-delay-search-input (inputEmitter)="onSearchInput($event)" />
+          <div class="flex self-end gap-2 p-2 rounded-md text-slate-400">
+            <button (click)="listStyle = 'GRID'">
+              <ng-icon name="ionGrid" />
+            </button>
+            <button (click)="listStyle = 'TABLE'">
+              <ng-icon name="ionList" />
+            </button>
+          </div>
         </div>
         <app-stats-list
           [data]="menuOptions[0].selected ? patients : users"

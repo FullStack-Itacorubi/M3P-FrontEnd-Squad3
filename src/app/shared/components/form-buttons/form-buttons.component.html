@@ -1,0 +1,16 @@
+<div class="flex justify-end gap-3 py-2 pr-4">
+  <app-custom-button
+    [label]="isCreating ? 'Limpar' : 'Editar'"
+    (clickHandler)="onEdit()"
+  />
+  <app-custom-button
+    [label]="'Deletar'"
+    (clickHandler)="onDelete()"
+    *ngIf="!isCreating"
+  />
+  <app-custom-button
+    [label]="'Salvar'"
+    [type]="'submit'"
+    (clickHandler)="onSave()"
+  />
+</div>
