@@ -17,17 +17,13 @@ type Medicamentsinfos = {
 @Component({
   selector: 'app-medicaments',
   templateUrl: './medicaments.component.html',
-  styleUrls: ['./medicaments.component.css'],
+  styleUrls: ['./medicaments.component.css', '../../app.component.css'],
 })
 export class MedicamentsComponent {
   formMedicaments!: FormGroup<Medicamentsinfos>;
 
   constructor(private medicamentService: MedicamentService) {
     this.formMedicaments = this.initMedicamentsForm();
-  }
-
-  ngOnInit(): void {
-    this.initMedicamentsForm();
   }
 
   initMedicamentsForm() {
