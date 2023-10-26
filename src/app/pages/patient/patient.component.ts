@@ -82,7 +82,7 @@ export class PatientComponent {
         Validators.maxLength(64),
       ]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      status: new FormControl({ value: true, disabled: true }),
+      status: new FormControl({ value: true, disabled: true }, [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       emergencyContact: new FormControl('', [Validators.required]),
       allergyList: new FormControl(''),
@@ -104,6 +104,7 @@ export class PatientComponent {
   async registerPatient() {
     if (!this.formPatientRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      return
     } else {
       alert('Dados cadastrado com sucesso!');
     }
@@ -115,9 +116,10 @@ export class PatientComponent {
     const birthdayFormated = formatDate(
       this.formPatientRegister.value.birthday!
     );
-
+    
+    let healthInsuranceValidityFormated;
     if (this.formPatientRegister.value.healthInsuranceValidity) {
-      const healthInsuranceValidityFormated = formatDate(
+      healthInsuranceValidityFormated = formatDate(
         this.formPatientRegister.value.healthInsuranceValidity!
       );
     }
@@ -162,7 +164,7 @@ export class PatientComponent {
       healthInsurance: this.formPatientRegister.value.healthInsurance!,
       healthInsuranceNumber:
         this.formPatientRegister.value.healthInsuranceNumber!,
-      healthInsuranceValidity: this.formPatientRegister.value.healthInsuranceValidity!,
+      healthInsuranceValidity: healthInsuranceValidityFormated,
       address: {
         publicPlace: this.formPatientRegister.value.publicPlace!,
         number: this.formPatientRegister.value.number!,
