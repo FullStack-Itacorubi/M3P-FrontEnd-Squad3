@@ -70,9 +70,7 @@ export class SidebarComponent {
   constructor(private route: Router, private authService: AuthService) {
     route.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const url = event.url;
-
-        console.log(url);
+        const url = '/' + event.url.substring(1).split('/')[0];
 
         this.options = this.options.map((opt) => ({
           ...opt,
