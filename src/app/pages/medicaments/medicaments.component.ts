@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MedicamentService } from 'src/app/shared/services/medicament.service';
+import { PatientService } from 'src/app/shared/services/patient.service';
+import { Patient } from 'src/app/shared/utils/types';
 
-interface Medicamentsinfos {
+type Medicamentsinfos = {
   medicamentsName: FormControl<string | null>;
   date: FormControl<string | null>;
   time: FormControl<string | null>;
@@ -19,23 +22,23 @@ interface Medicamentsinfos {
 })
 export class MedicamentsComponent {
 
-  formMedicaments: FormGroup<Medicamentsinfos> = new FormGroup({
-    medicamentsName: new FormControl(''),
-    date: new FormControl(''),
-    time: new FormControl(''),
-    type: new FormControl(''),
-    amount: new FormControl(''),
-    unit: new FormControl(''),
-    observations: new FormControl(''),
-    status: new FormControl(''),
-  });
+  formMedicaments!: FormGroup<Medicamentsinfos>;
+
+  patients: Patient[] = [];
+
+  constructor(
+    private medicamentService: MedicamentService,
+    private patientService: PatientService,
+  ) {
+    this.formMedicaments = this.initMedicamentsForm()
+  }
 
   ngOnInit(): void {
     this.initMedicamentsForm();
   }
 
   initMedicamentsForm() {
-    this.formMedicaments = new FormGroup({
+    return new FormGroup<Medicamentsinfos>({
     medicamentsName: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -62,7 +65,7 @@ export class MedicamentsComponent {
       alert('Dados cadastrados com sucesso!');
     }
 
-    const medicament = {
+    const medicament: Medicament = {
       medicamentsName: this.formMedicaments.value.medicamentsName!,
       date: this.formMedicaments.value.date!,
       time: this.formMedicaments.value.time!,
