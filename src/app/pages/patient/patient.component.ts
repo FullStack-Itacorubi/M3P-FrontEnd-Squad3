@@ -89,7 +89,7 @@ export class PatientComponent {
       specificCareList: new FormControl(''),
       healthInsurance: new FormControl(''),
       healthInsuranceNumber: new FormControl(''),
-      healthInsuranceValidity: new FormControl(null),
+      healthInsuranceValidity: new FormControl( null ),
       publicPlace: new FormControl('', [Validators.required]),
       number: new FormControl('', [Validators.required]),
       neighborhood: new FormControl('', [Validators.required]),
@@ -112,12 +112,15 @@ export class PatientComponent {
       return date.split('-').reverse().join('/');
     };
 
-      const birthdayFormated = formatDate(
-        this.formPatientRegister.value.birthday!
-      );
+    const birthdayFormated = formatDate(
+      this.formPatientRegister.value.birthday!
+    );
+
+    if (this.formPatientRegister.value.healthInsuranceValidity) {
       const healthInsuranceValidityFormated = formatDate(
         this.formPatientRegister.value.healthInsuranceValidity!
       );
+    }
 
     const formatPhone = (phone: string) => {
       const ddd = phone.substring(0, 2);
@@ -127,11 +130,11 @@ export class PatientComponent {
       return `(${ddd}) ${isolated} ${firstFour}-${lastFour}`;
     };
 
-      const phoneFormated = formatPhone(this.formPatientRegister.value.phone!);
-      
-      const emergencyContactFormated = formatPhone(
-        this.formPatientRegister.value.emergencyContact!
-      );
+    const phoneFormated = formatPhone(this.formPatientRegister.value.phone!);
+
+    const emergencyContactFormated = formatPhone(
+      this.formPatientRegister.value.emergencyContact!
+    );
 
     const formatCep = (cep: string) => {
       const prefix = cep.substring(0, 5);
@@ -140,7 +143,7 @@ export class PatientComponent {
       return `${prefix}-${sufix}`;
     };
 
-      const cepFormated = formatCep(this.formPatientRegister.value.cep!);
+    const cepFormated = formatCep(this.formPatientRegister.value.cep!);
 
     const patient: Patient = {
       fullName: this.formPatientRegister.value.fullName!,
@@ -159,7 +162,7 @@ export class PatientComponent {
       healthInsurance: this.formPatientRegister.value.healthInsurance!,
       healthInsuranceNumber:
         this.formPatientRegister.value.healthInsuranceNumber!,
-      healthInsuranceValidity: healthInsuranceValidityFormated,
+      healthInsuranceValidity: this.formPatientRegister.value.healthInsuranceValidity!,
       address: {
         publicPlace: this.formPatientRegister.value.publicPlace!,
         number: this.formPatientRegister.value.number!,
