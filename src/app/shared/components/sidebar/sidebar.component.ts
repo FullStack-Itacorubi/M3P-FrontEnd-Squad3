@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToolbarService } from '../../services/toolbar.service';
 
 type Options = {
   text: string;
@@ -67,7 +68,11 @@ export class SidebarComponent {
   ];
   collapsed = false;
 
-  constructor(private route: Router, private authService: AuthService) {
+  constructor(
+    private route: Router,
+    private authService: AuthService,
+    private toolbarService: ToolbarService
+  ) {
     route.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const url = '/' + event.url.substring(1).split('/')[0];
@@ -85,5 +90,9 @@ export class SidebarComponent {
     if (role === 'ADMIN') return this.authService.isUserAdmin();
     if (role === 'DOCTOR') return this.authService.isUserDoctor();
     return false;
+  }
+
+  logout() {
+    this.toolbarService.logout();
   }
 }
