@@ -64,7 +64,7 @@ export class ExamComponent implements OnInit {
       ]),
       documentUrl: new FormControl(''),
       patientId: new FormControl( null , [Validators.required]),
-      status: new FormControl({ value: true, disabled: true }),
+      status: new FormControl({ value: true, disabled: true }, [Validators.required]),
       results: new FormControl('', [
         Validators.required,
         Validators.minLength(16),
@@ -76,6 +76,7 @@ export class ExamComponent implements OnInit {
   async registerExam() {
     if (!this.formsExamRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      return
     } else {
       alert('Dados cadastrado com sucesso!');
     }
