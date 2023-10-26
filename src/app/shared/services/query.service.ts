@@ -1,26 +1,22 @@
 import { Injectable } from '@angular/core';
+import axios from 'axios';
 import { environment } from '../utils/environment';
 import { AuthService } from './auth.service';
-import { Medicament } from 'src/app/shared/utils/types';
-import axios from 'axios';
+import { QueryRequest } from '../utils/types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MedicamentService {
+export class QueryService {
   private baseUrl = environment.API_BASE_URL;
 
   constructor(private authService: AuthService) {}
 
-  async saveMedicaments(medicament: Medicament) {
-    await axios.post(`${this.baseUrl}/medicamentos`, medicament, {
+  async saveQuery(query: QueryRequest) {
+    await axios.post(`${this.baseUrl}/consultas`, query, {
       headers: {
         userId: this.authService.getUserId(),
       },
     });
-  }
-
-  async getMedicaments() {
-    return (await axios.get<Medicament[]>(`${this.baseUrl}/medicamentos`)).data;
   }
 }

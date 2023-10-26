@@ -11,6 +11,7 @@ import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { MedicamentsComponent } from './pages/medicaments/medicaments.component';
 import { MedicalRecordsComponent } from './pages/medical-records/medical-records.component';
+import { QueryComponent } from './pages/query/query.component';
 import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
 import { connectionGuard } from './shared/guards/connection.guard';
 import { adminGuard } from './shared/guards/admin.guard';
@@ -28,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: 'consultas',
-        component: ExerciseComponent,
+        component: QueryComponent,
         canActivate: [doctorGuard],
       },
       {
