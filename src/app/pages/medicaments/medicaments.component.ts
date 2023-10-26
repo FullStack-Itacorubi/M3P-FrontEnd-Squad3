@@ -81,7 +81,7 @@ export class MedicamentsComponent {
       status: this.formMedicaments.value.status!,
     };
 
-    this.medicamentService.SaveMedicaments(medicament);
+    this.medicamentService.saveMedicaments(medicament);
 
     this.initMedicamentsForm();
   }
