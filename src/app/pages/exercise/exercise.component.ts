@@ -44,12 +44,12 @@ export class ExerciseComponent implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(100),
       ]),
-      date: new FormControl(today.toISOString().substring(0, 10), 
-        [Validators.required]),
-      time: new FormControl(
-        today.toLocaleTimeString('pt-BR').substring(0, 5),
-        [Validators.required]
-      ),
+      date: new FormControl(today.toISOString().substring(0, 10), [
+        Validators.required,
+      ]),
+      time: new FormControl(today.toLocaleTimeString('pt-BR').substring(0, 5), [
+        Validators.required,
+      ]),
       patientId: new FormControl(null, [Validators.required]),
       type: new FormControl('', [
         Validators.required,
@@ -62,18 +62,18 @@ export class ExerciseComponent implements OnInit {
         Validators.minLength(10),
         Validators.maxLength(1000),
       ]),
-      status: new FormControl({ value: true, disabled: true },
-        [Validators.required]),
+      status: new FormControl({ value: true, disabled: true }, [
+        Validators.required,
+      ]),
     });
   }
 
   async registerExercise() {
     if (!this.formsExerciseRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
-      return
+      return;
     } else {
       alert('Dados cadastrado com sucesso!');
-      return
     }
 
     const dateFormated = this.formsExerciseRegister.value
