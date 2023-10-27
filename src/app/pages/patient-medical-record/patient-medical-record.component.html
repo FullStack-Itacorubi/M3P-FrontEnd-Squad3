@@ -43,12 +43,6 @@
             </p>
           </div>
           <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
-            <p *ngIf="query.medicaments">
-              Medicamentos:
-              <span class="font-medium">{{
-                listMedicaments(query.medicaments)
-              }}</span>
-            </p>
             <p>
               Dosagem e precauções:
               <span class="font-medium">{{ query.dosageAndRecautions }}</span>
@@ -56,6 +50,18 @@
             <p>
               Descrição:
               <span class="font-medium">{{ query.problemDescription }}</span>
+            </p>
+            <p *ngIf="query.medicaments" class="flex flex-col">
+              Medicamentos:
+              <span
+                *ngFor="let medicament of query.medicaments"
+                class="font-medium"
+              >
+                <button [routerLink]="['/medicamentos', medicament.id]">
+                  <ng-icon name="ionCreateOutline" />
+                </button>
+                {{ medicament.name }}
+              </span>
             </p>
           </div>
         </app-accordion>
@@ -100,7 +106,7 @@
         </app-accordion>
       </app-accordion>
 
-      <app-accordion
+      <!-- <app-accordion
         [headerTitle]="getMedicamentsTotal() + ' Medicamentos'"
         headerIcon="ionBandage"
         iconSize="lg"
@@ -135,7 +141,7 @@
             </p>
           </div>
         </app-accordion>
-      </app-accordion>
+      </app-accordion> -->
 
       <app-accordion
         [headerTitle]="medicalRecord?.exercises?.length + ' Exercícios'"
