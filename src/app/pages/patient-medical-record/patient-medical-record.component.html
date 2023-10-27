@@ -1,6 +1,6 @@
 <div class="flex h-[calc(100%-80px)] text-slate-800">
   <div class="flex-grow p-4 overflow-y-auto">
-    <section class="p-3">
+    <section #patientDetails class="p-3">
       <h2 class="text-xl font-bold">
         {{ medicalRecord?.patient?.fullName }}
       </h2>
@@ -23,49 +23,8 @@
         </p>
       </div>
     </section>
-    <section class="flex flex-col gap-3 p-3">
-      <app-accordion
-        [headerTitle]="medicalRecord?.queries?.length + ' Consultas'"
-        headerIcon="ionDocuments"
-        iconSize="lg"
-        [bordered]="true"
-      >
-        <app-accordion *ngFor="let query of medicalRecord?.queries">
-          <div customHeader class="flex gap-2">
-            <button [routerLink]="['/consultas', query.id]">
-              <ng-icon name="ionCreateOutline" class="text-lg" />
-            </button>
-            <p customHeader class="font-semibold">
-              {{ query.consultationDate }} {{ query.consultationTime }}
-              <span class="font-medium">
-                - {{ query.reasonForConsultation }}</span
-              >
-            </p>
-          </div>
-          <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
-            <p>
-              Dosagem e precauções:
-              <span class="font-medium">{{ query.dosageAndRecautions }}</span>
-            </p>
-            <p>
-              Descrição:
-              <span class="font-medium">{{ query.problemDescription }}</span>
-            </p>
-            <p *ngIf="query.medicaments" class="flex flex-col">
-              Medicamentos:
-              <span
-                *ngFor="let medicament of query.medicaments"
-                class="font-medium"
-              >
-                <button [routerLink]="['/medicamentos', medicament.id]">
-                  <ng-icon name="ionCreateOutline" />
-                </button>
-                {{ medicament.name }}
-              </span>
-            </p>
-          </div>
-        </app-accordion>
-      </app-accordion>
+    <section #medicalRecordSections class="flex flex-col gap-3 p-3">
+      <app-queries-section [queries]="medicalRecord?.queries ?? []" />
 
       <app-accordion
         [headerTitle]="medicalRecord?.exams?.length + ' Exames'"
