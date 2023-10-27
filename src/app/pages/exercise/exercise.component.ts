@@ -133,6 +133,14 @@ export class ExerciseComponent implements OnInit {
     this.updateExercise();
   }
 
+  deleteExercise() {
+    this.exerciseService.deleteExercise(
+      this.exerciseId,
+      window.history.state.patientId
+    );
+    alert('Exercício deletado com sucesso!');
+  }
+
   async registerExercise() {
     const dateFormated = this.formsExerciseRegister.value
       .date!.split('-')
@@ -174,7 +182,6 @@ export class ExerciseComponent implements OnInit {
     };
 
     await this.exerciseService.updateExercise(exercise);
-    this.formsExerciseRegister = this.initExerciseForm();
     alert('Exercício editado com sucesso!');
   }
 }

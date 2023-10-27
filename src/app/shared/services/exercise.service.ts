@@ -31,4 +31,13 @@ export class ExerciseService {
       },
     });
   }
+
+  async deleteExercise(id: number, patientId: number) {
+    await axios.delete(`${this.baseUrl}/exercicios/${id}`, {
+      headers: {
+        userId: this.authService.getUserId(),
+        patientId,
+      },
+    });
+  }
 }

@@ -176,6 +176,7 @@
           (handleEdit)="
             isCreating ? (formsExerciseRegister = initExerciseForm()) : {}
           "
+          (handleDelete)="deleteExercise()"
           [isCreating]="isCreating"
         />
       </form>
