@@ -105,11 +105,7 @@ export class QueryComponent implements OnInit {
     this.formQuery.get('patientId')?.disable();
   }
 
-  deleteQuery() {
-    this.queryService.deleteQuery(this.queryId);
-  }
-
-  registerQuery() {
+  saveQuery() {
     if (!this.formQuery.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
       return;
@@ -117,6 +113,19 @@ export class QueryComponent implements OnInit {
       alert('Dados cadastrados com sucesso!');
     }
 
+    if (this.isCreating) {
+      this.registerQuery();
+      return;
+    }
+
+    this.updateQuery();
+  }
+
+  deleteQuery() {
+    this.queryService.deleteQuery(this.queryId);
+  }
+
+  registerQuery() {
     const dateFormated = this.formQuery.value
       .date!.split('-')
       .reverse()
@@ -136,7 +145,30 @@ export class QueryComponent implements OnInit {
     };
 
     this.queryService.saveQuery(query);
+    this.formQuery = this.initQueryForm();
+  }
 
+  updateQuery() {
+    const dateFormated = this.formQuery.value
+      .date!.split('-')
+      .reverse()
+      .join('/');
+
+    const query: QueryRequest = {
+      id: this.queryId,
+      reasonForConsultation: this.formQuery.value.motive!,
+      consultationDate: dateFormated,
+      consultationTime: this.formQuery.value.time!,
+      problemDescription: this.formQuery.value.description!,
+      medicaments: this.medicaments.map(
+        (medicament) => ({ id: medicament.id } as QueryMedicament)
+      ),
+      dosageAndRecautions: this.formQuery.value.dosage!,
+      patientId: this.formQuery.value.patientId!,
+      status: this.formQuery.value.status!,
+    };
+
+    this.queryService.updateQuery(query);
     this.formQuery = this.initQueryForm();
   }
 
