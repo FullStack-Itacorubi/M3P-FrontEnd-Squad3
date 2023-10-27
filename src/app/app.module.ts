@@ -44,6 +44,10 @@ import { UserCardComponent } from './components/stats/cards/user-card/user-card.
 import { PatientTableHeaderComponent } from './components/stats/tables/patient-table-header/patient-table-header.component';
 import { UserTableHeaderComponent } from './components/stats/tables/user-table-header/user-table-header.component';
 import { UserTableRowComponent } from './components/stats/tables/user-table-row/user-table-row.component';
+import { QueriesSectionComponent } from './components/patient-medical-record/queries-section/queries-section.component';
+import { ExamsSectionComponent } from './components/patient-medical-record/exams-section/exams-section.component';
+import { ExercisesSectionComponent } from './components/patient-medical-record/exercises-section/exercises-section.component';
+import { DietsSectionComponent } from './components/patient-medical-record/diets-section/diets-section.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +86,10 @@ import { UserTableRowComponent } from './components/stats/tables/user-table-row/
     PatientTableHeaderComponent,
     UserTableHeaderComponent,
     UserTableRowComponent,
+    QueriesSectionComponent,
+    ExamsSectionComponent,
+    ExercisesSectionComponent,
+    DietsSectionComponent,
   ],
 
   imports: [

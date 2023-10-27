@@ -1,0 +1,32 @@
+<app-accordion
+  [headerTitle]="exercises.length + ' Exercícios'"
+  headerIcon="ionDocuments"
+  iconSize="lg"
+  [bordered]="true"
+>
+  <app-accordion *ngFor="let exercise of exercises">
+    <div customHeader class="flex gap-2">
+      <button [routerLink]="['/exercicios', exercise.id]">
+        <ng-icon name="ionCreateOutline" class="text-lg" />
+      </button>
+      <p customHeader class="font-semibold">
+        {{ exercise.date }} {{ exercise.time }}
+        <span class="font-medium"> - {{ exercise.name }}</span>
+      </p>
+    </div>
+    <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
+      <p>
+        Tipo de exercício:
+        <span class="font-medium">{{ exercise.type }}</span>
+      </p>
+      <p>
+        Quantidade semanal:
+        <span class="font-medium">{{ exercise.weeklyAmount }}</span>
+      </p>
+      <p>
+        Descrição:
+        <span class="font-medium">{{ exercise.description }}</span>
+      </p>
+    </div>
+  </app-accordion>
+</app-accordion>
