@@ -5,18 +5,22 @@ import { Exercise } from '../utils/types';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ExerciseService {
   private baseUrl = environment.API_BASE_URL;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   async saveExercises(exercise: Exercise) {
     await axios.post(`${this.baseUrl}/exercicios`, exercise, {
       headers: {
-        userId: this.authService.getUserId()
-      }
+        userId: this.authService.getUserId(),
+      },
     });
+  }
+
+  async getExerciseById(id: number) {
+    return (await axios.get<Exercise>(`${this.baseUrl}/exercicios/${id}`)).data;
   }
 }
