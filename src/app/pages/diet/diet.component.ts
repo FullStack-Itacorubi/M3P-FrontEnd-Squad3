@@ -5,6 +5,25 @@ import { DietService } from 'src/app/shared/services/diet.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { Diet, Patient } from 'src/app/shared/utils/types';
 
+const DietTypesValues = {
+  'Low Carb': 'LOW_CARB',
+  Dash: 'DASH',
+  Paleolítica: 'PALEOLITHIC',
+  Cetogenica: 'KETOGENIC',
+  Dukan: 'DUKAN',
+  Mediterrânea: 'MEDITERRANEAN',
+  Outra: 'OTHER',
+};
+
+type DietType =
+  | 'Low Carb'
+  | 'Dash'
+  | 'Paleolítica'
+  | 'Cetogenica'
+  | 'Dukan'
+  | 'Mediterrânea'
+  | 'Outra';
+
 type Dietinfos = {
   dietName: FormControl<string | null>;
   type: FormControl<string | null>;
@@ -76,11 +95,12 @@ export class DietComponent implements OnInit {
   }
 
   populateForm(diet: Diet) {
+    const type = diet.type as DietType;
     this.formsDietRegister.get('dietName')?.setValue(diet.dietName);
     this.formsDietRegister.get('dietDate')?.setValue(diet.dietDate);
     this.formsDietRegister.get('dietTime')?.setValue(diet.dietTime);
     this.formsDietRegister.get('description')?.setValue(diet.description);
-    this.formsDietRegister.get('type')?.setValue(diet.type);
+    this.formsDietRegister.get('type')?.setValue(DietTypesValues[type]);
     this.formsDietRegister.get('status')?.setValue(diet.status);
     this.formsDietRegister.get('status')?.enable();
     this.formsDietRegister
