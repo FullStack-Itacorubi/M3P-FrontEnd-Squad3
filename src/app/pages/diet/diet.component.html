@@ -15,13 +15,13 @@
               formControlName="dietName"
             />
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsDietRegister.get('dietName')?.errors?.['required'] && formsDietRegister.get('dietName')?.touched"
             >
               <p>Por favor insira o nome da dieta!</p>
             </div>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsDietRegister.get('dietName')?.errors?.['minlength'] && formsDietRegister.get('dietName')?.touched"
             >
               <p>O nome da dieta deve possuir no mínimo 5 caracteres!</p>
@@ -46,7 +46,7 @@
               <option value="OTHER">Outra</option>
             </select>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsDietRegister.get('type')?.errors?.['required'] && formsDietRegister.get('type')?.touched"
             >
               <p>Por favor insira o tipo da dieta!</p>
@@ -69,7 +69,7 @@
               </option>
             </select>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsDietRegister.get('patientId')?.errors?.['required'] && formsDietRegister.get('patientId')?.touched"
             >
               <p>Por favor insira o paciente!</p>
@@ -88,7 +88,7 @@
               formControlName="dietDate"
             />
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsDietRegister.get('dietDate')?.errors?.['required'] && formsDietRegister.get('dietDate')?.touched"
             >
               <p>Por favor insira a data!</p>
@@ -105,7 +105,7 @@
               formControlName="dietTime"
             />
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsDietRegister.get('dietTime')?.errors?.['required'] && formsDietRegister.get('dietTime')?.touched"
             >
               <p>Por favor insira a hora!</p>
@@ -140,20 +140,24 @@
               formControlName="description"
             ></textarea>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsDietRegister.get('description')?.errors?.['required'] && formsDietRegister.get('description')?.touched"
             >
               <p>Por favor insira a descrição da dieta!</p>
             </div>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsDietRegister.get('description')?.errors?.['minlength'] && formsDietRegister.get('description')?.touched"
             >
               <p>A descrição deve possuir no mínimo 10 caracteres!</p>
             </div>
           </div>
         </div>
-        <app-form-buttons (handleEdit)="formsDietRegister = initDietForm()" />
+        <app-form-buttons
+          (handleEdit)="isCreating ? (formsDietRegister = initDietForm()) : {}"
+          (handleDelete)="deleteDiet()"
+          [isCreating]="isCreating"
+        />
       </form>
     </div>
   </div>
