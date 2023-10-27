@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from '../utils/environment';
 import { Patient } from 'src/app/shared/utils/types';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Patient } from 'src/app/shared/utils/types';
 export class PatientsService {
   private baseUrl = environment.API_BASE_URL;
 
-  constructor() {}
+  constructor( private authService: AuthService ) {}
 
   async getPatients(filter?: string) {
     const patients = await axios.get<Patient[]>(`${this.baseUrl}/pacientes`);
@@ -17,5 +18,13 @@ export class PatientsService {
     return patients.data.filter((patient) =>
       patient.fullName.toLowerCase().includes(filter)
     );
+  }
+
+  async savePatients(patient: Patient){
+    await axios.post(`${this.baseUrl}/pacientes`, patient, {
+      headers: {
+        userId: this.authService.getUserId()
+      }
+    })
   }
 }
