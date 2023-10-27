@@ -6,7 +6,7 @@
 >
   <app-accordion *ngFor="let exercise of exercises">
     <div customHeader class="flex gap-2">
-      <button [routerLink]="['/exercicios', exercise.id]">
+      <button [routerLink]="['/exercicios', exercise.id]" [state]="{patientId}">
         <ng-icon name="ionCreateOutline" class="text-lg" />
       </button>
       <p customHeader class="font-semibold">
