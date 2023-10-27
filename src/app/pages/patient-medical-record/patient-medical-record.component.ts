@@ -13,6 +13,7 @@ import { MedicalRecord, Medicament } from 'src/app/shared/utils/types';
 })
 export class PatientMedicalRecordComponent implements OnInit {
   medicalRecord?: MedicalRecord;
+  patientId = -1;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,10 +22,10 @@ export class PatientMedicalRecordComponent implements OnInit {
 
   async ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
-    const patientId: number = Number(routeParams.get('patientId'));
+    this.patientId = Number(routeParams.get('patientId'));
 
     this.medicalRecord =
-      await this.medicalRecordsService.getPatientMedicalRecord(patientId);
+      await this.medicalRecordsService.getPatientMedicalRecord(this.patientId);
   }
 
   listMedicaments(medicaments: Medicament[]): string {
