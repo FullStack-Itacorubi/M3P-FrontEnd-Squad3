@@ -33,10 +33,11 @@ export class QueryService {
     });
   }
 
-  async deleteQuery(id: number) {
+  async deleteQuery(id: number, patientId: number) {
     await axios.delete(`${this.baseUrl}/consultas/${id}`, {
       headers: {
         userId: this.authService.getUserId(),
+        patientId,
       },
     });
   }

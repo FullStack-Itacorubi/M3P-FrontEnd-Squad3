@@ -122,7 +122,7 @@ export class QueryComponent implements OnInit {
   }
 
   deleteQuery() {
-    this.queryService.deleteQuery(this.queryId);
+    this.queryService.deleteQuery(this.queryId, window.history.state.patientId);
   }
 
   registerQuery() {
