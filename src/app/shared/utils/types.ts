@@ -128,6 +128,6 @@ type Address = {
 };
 
 export type Logs = {
-  id: number;
   message: string;
+  timestamp: string;
 }
