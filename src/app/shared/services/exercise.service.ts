@@ -12,7 +12,7 @@ export class ExerciseService {
 
   constructor(private authService: AuthService) {}
 
-  async saveExercises(exercise: Exercise) {
+  async saveExercise(exercise: Exercise) {
     await axios.post(`${this.baseUrl}/exercicios`, exercise, {
       headers: {
         userId: this.authService.getUserId(),
@@ -22,5 +22,13 @@ export class ExerciseService {
 
   async getExerciseById(id: number) {
     return (await axios.get<Exercise>(`${this.baseUrl}/exercicios/${id}`)).data;
+  }
+
+  async updateExercise(exercise: Exercise) {
+    await axios.put(`${this.baseUrl}/exercicios/${exercise.id}`, exercise, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
   }
 }

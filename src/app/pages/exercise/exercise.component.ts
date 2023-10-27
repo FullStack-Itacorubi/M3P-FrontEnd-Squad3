@@ -119,14 +119,21 @@ export class ExerciseComponent implements OnInit {
     this.formsExerciseRegister.get('patientId')?.disable();
   }
 
-  async registerExercise() {
+  saveExercise() {
     if (!this.formsExerciseRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
       return;
-    } else {
-      alert('Dados cadastrado com sucesso!');
     }
 
+    if (this.isCreating) {
+      this.registerExercise();
+      return;
+    }
+
+    this.updateExercise();
+  }
+
+  async registerExercise() {
     const dateFormated = this.formsExerciseRegister.value
       .date!.split('-')
       .reverse()
@@ -143,7 +150,31 @@ export class ExerciseComponent implements OnInit {
       status: this.formsExerciseRegister.value.status!,
     };
 
+    await this.exerciseService.saveExercise(exercise);
     this.formsExerciseRegister = this.initExerciseForm();
-    await this.exerciseService.saveExercises(exercise);
+    alert('Exercício cadastrado com sucesso!');
+  }
+
+  async updateExercise() {
+    const dateFormated = this.formsExerciseRegister.value
+      .date!.split('-')
+      .reverse()
+      .join('/');
+
+    const exercise: Exercise = {
+      id: this.exerciseId,
+      name: this.formsExerciseRegister.value.name!,
+      date: dateFormated,
+      time: this.formsExerciseRegister.value.time!,
+      patientId: this.formsExerciseRegister.value.patientId!,
+      type: this.formsExerciseRegister.value.type!,
+      weeklyAmount: this.formsExerciseRegister.value.weeklyAmount!,
+      description: this.formsExerciseRegister.value.description!,
+      status: this.formsExerciseRegister.value.status!,
+    };
+
+    await this.exerciseService.updateExercise(exercise);
+    this.formsExerciseRegister = this.initExerciseForm();
+    alert('Exercício editado com sucesso!');
   }
 }
