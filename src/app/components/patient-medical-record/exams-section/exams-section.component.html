@@ -1,1 +1,38 @@
-<p>exams-section works!</p>
+<app-accordion
+  [headerTitle]="exams.length + ' Exames'"
+  headerIcon="ionDocuments"
+  iconSize="lg"
+  [bordered]="true"
+>
+  <app-accordion *ngFor="let exam of exams">
+    <div customHeader class="flex gap-2">
+      <button [routerLink]="['/exames', exam.id]">
+        <ng-icon name="ionCreateOutline" class="text-lg" />
+      </button>
+      <p customHeader class="font-semibold">
+        {{ exam.examDate }} {{ exam.examHour }}
+        <span class="font-medium"> - {{ exam.examName }}</span>
+      </p>
+    </div>
+    <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
+      <p>
+        Tipo de exame:
+        <span class="font-medium">{{ exam.examType }}</span>
+      </p>
+      <p>
+        Laboratório:
+        <span class="font-medium">{{ exam.laboratory }}</span>
+      </p>
+      <p>
+        Anexo:
+        <a [href]="exam.documentUrl" class="font-medium text-blue-500">{{
+          exam.documentUrl
+        }}</a>
+      </p>
+      <p>
+        Resultados:
+        <span class="font-medium">{{ exam.results }}</span>
+      </p>
+    </div>
+  </app-accordion>
+</app-accordion>
