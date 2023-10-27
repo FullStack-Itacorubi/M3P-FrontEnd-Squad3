@@ -65,6 +65,5 @@ export class AuthService {
   getUserId(){
     return this.userAuthenticated?.id;
   }
-
 }
 
