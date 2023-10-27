@@ -190,6 +190,7 @@
         </div>
         <app-form-buttons
           (handleEdit)="isCreating ? (formsExamRegister = initExamForm()) : {}"
+          (handleDelete)="deleteExam()"
           [isCreating]="isCreating"
         />
       </form>

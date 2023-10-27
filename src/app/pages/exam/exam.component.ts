@@ -165,4 +165,9 @@ export class ExamComponent implements OnInit {
     this.formsExamRegister = this.initExamForm();
     alert('Exame editado com sucesso!');
   }
+
+  deleteExam() {
+    this.examService.deleteExam(this.examId, window.history.state.patientId);
+    alert('Exame excluído com sucesso!');
+  }
 }

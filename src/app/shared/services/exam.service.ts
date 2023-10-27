@@ -31,4 +31,13 @@ export class ExamService {
       },
     });
   }
+
+  async deleteExam(id: number, patientId: number) {
+    await axios.delete(`${this.baseUrl}/exames/${id}`, {
+      headers: {
+        userId: this.authService.getUserId(),
+        patientId,
+      },
+    });
+  }
 }
