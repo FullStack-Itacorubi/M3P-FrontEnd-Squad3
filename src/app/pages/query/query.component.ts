@@ -169,7 +169,6 @@ export class QueryComponent implements OnInit {
     };
 
     this.queryService.updateQuery(query);
-    this.formQuery = this.initQueryForm();
     alert('Consulta editada com sucesso!');
   }
 
