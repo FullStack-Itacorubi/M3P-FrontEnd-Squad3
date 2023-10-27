@@ -1,8 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { CepService } from 'src/app/shared/services/cep.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { Patient } from 'src/app/shared/utils/types';
+
+const GenreTypeValues = {
+  Cisgênero: 'CISGENDER',
+  Transgênero: 'TRASNGENDER',
+  'Não-binário': 'NONBINARY',
+} as const;
+
+type GenreType = 'Cisgênero' | 'Transgênero' | 'Não-binário';
+
+const CivilStatusTypeValues = {
+  'Solteiro(a)': 'SINGLE',
+  'Casado(a)': 'MARRIED',
+  'Separado(a)': 'SEPARATED',
+  'Divorciado(a)': 'DIVORCED',
+  'Viúvo(a)': 'WIDOWER',
+} as const;
+
+type CivilStatusType =
+  | 'Solteiro(a)'
+  | 'Casado(a)'
+  | 'Separado(a)'
+  | 'Divorciado(a)'
+  | 'Viúvo(a)';
 
 type Patientinfos = {
   fullName: FormControl<string | null>;
@@ -36,32 +60,28 @@ type Patientinfos = {
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css', '../../app.component.css'],
 })
-export class PatientComponent {
+export class PatientComponent implements OnInit {
   formPatientRegister: FormGroup<Patientinfos>;
+  isCreating = true;
+  patientId = -1;
 
   constructor(
     private patientsService: PatientsService,
-    private cepService: CepService
+    private cepService: CepService,
+    private route: ActivatedRoute
   ) {
     this.formPatientRegister = this.initPatientForm();
-  }
-
-  checkCep() {
-    const cep = this.formPatientRegister.get('cep')?.value;
-    console.log(cep);
-    if (cep) {
-      this.cepService.search(cep).subscribe((data) => this.populaForm(data));
+    if (Object.hasOwn(route.snapshot.params, 'patientId')) {
+      this.isCreating = false;
+      this.patientId = route.snapshot.params['patientId'];
     }
   }
 
-  populaForm(data: any) {
-    console.log(data);
-    this.formPatientRegister.patchValue({
-      publicPlace: data.logradouro,
-      neighborhood: data.bairro,
-      city: data.localidade,
-      state: data.uf,
-    });
+  async ngOnInit() {
+    if (this.isCreating) return;
+
+    const patient = await this.patientsService.getPatientById(this.patientId);
+    this.populateForm(patient);
   }
 
   initPatientForm() {
@@ -82,14 +102,16 @@ export class PatientComponent {
         Validators.maxLength(64),
       ]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      status: new FormControl({ value: true, disabled: true }, [Validators.required]),
+      status: new FormControl({ value: true, disabled: true }, [
+        Validators.required,
+      ]),
       phone: new FormControl('', [Validators.required]),
       emergencyContact: new FormControl('', [Validators.required]),
       allergyList: new FormControl(''),
       specificCareList: new FormControl(''),
       healthInsurance: new FormControl(''),
       healthInsuranceNumber: new FormControl(''),
-      healthInsuranceValidity: new FormControl( null ),
+      healthInsuranceValidity: new FormControl(null),
       publicPlace: new FormControl('', [Validators.required]),
       number: new FormControl('', [Validators.required]),
       neighborhood: new FormControl('', [Validators.required]),
@@ -101,10 +123,83 @@ export class PatientComponent {
     });
   }
 
+  populateForm(patient: Patient) {
+    const genreType = patient.genre as GenreType;
+    const civilStatusType = patient.civilStatus as CivilStatusType;
+    this.formPatientRegister.get('fullName')?.setValue(patient.fullName);
+    this.formPatientRegister.get('genre')?.setValue(GenreTypeValues[genreType]);
+    this.formPatientRegister.get('birthday')?.setValue(patient.birthday);
+    this.formPatientRegister.get('cpf')?.setValue(patient.cpf);
+    this.formPatientRegister.get('cpf')?.disable();
+    this.formPatientRegister.get('rg')?.setValue(patient.rg);
+    this.formPatientRegister
+      .get('civilStatus')
+      ?.setValue(CivilStatusTypeValues[civilStatusType]);
+    this.formPatientRegister
+      .get('placeOfBirth')
+      ?.setValue(patient.placeOfBirth);
+    this.formPatientRegister.get('email')?.setValue(patient.email);
+    this.formPatientRegister.get('status')?.setValue(patient.status);
+    this.formPatientRegister.get('status')?.enable();
+    this.formPatientRegister.get('phone')?.setValue(patient.phone);
+    this.formPatientRegister
+      .get('emergencyContact')
+      ?.setValue(patient.emergencyContact);
+    this.formPatientRegister
+      .get('allergyList')
+      ?.setValue(patient.allergyList ?? null);
+    this.formPatientRegister
+      .get('specificCareList')
+      ?.setValue(patient.specificCareList ?? null);
+    this.formPatientRegister
+      .get('healthInsurance')
+      ?.setValue(patient.healthInsurance ?? null);
+    this.formPatientRegister
+      .get('healthInsuranceNumber')
+      ?.setValue(patient.healthInsuranceNumber ?? null);
+    this.formPatientRegister
+      .get('healthInsuranceValidity')
+      ?.setValue(patient.healthInsuranceValidity ?? null);
+    this.formPatientRegister
+      .get('publicPlace')
+      ?.setValue(patient.address.publicPlace);
+    this.formPatientRegister.get('number')?.setValue(patient.address.number);
+    this.formPatientRegister
+      .get('neighborhood')
+      ?.setValue(patient.address.neighborhood);
+    this.formPatientRegister.get('city')?.setValue(patient.address.city);
+    this.formPatientRegister.get('state')?.setValue(patient.address.state);
+    this.formPatientRegister.get('cep')?.setValue(patient.address.cep);
+    this.formPatientRegister
+      .get('complement')
+      ?.setValue(patient.address.complement ?? null);
+    this.formPatientRegister
+      .get('referencePoint')
+      ?.setValue(patient.address.referencePoint ?? null);
+  }
+
+  checkCep() {
+    const cep = this.formPatientRegister.get('cep')?.value;
+    if (cep) {
+      this.cepService
+        .search(cep)
+        .subscribe((data) => this.populateAddress(data));
+    }
+  }
+
+  populateAddress(data: any) {
+    this.formPatientRegister.patchValue({
+      publicPlace: data.logradouro,
+      neighborhood: data.bairro,
+      city: data.localidade,
+      state: data.uf,
+    });
+  }
+
   async registerPatient() {
     if (!this.formPatientRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
-      return
+      return;
     } else {
       alert('Dados cadastrado com sucesso!');
     }
@@ -116,7 +211,7 @@ export class PatientComponent {
     const birthdayFormated = formatDate(
       this.formPatientRegister.value.birthday!
     );
-    
+
     let healthInsuranceValidityFormated;
     if (this.formPatientRegister.value.healthInsuranceValidity) {
       healthInsuranceValidityFormated = formatDate(
