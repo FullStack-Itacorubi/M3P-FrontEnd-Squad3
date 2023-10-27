@@ -126,3 +126,8 @@ type Address = {
   neighborhood: string;
   referencePoint?: string;
 };
+
+export type Logs = {
+  id: number;
+  message: string;
+}
