@@ -23,4 +23,12 @@ export class ExamService {
   async getExamById(id: number) {
     return (await axios.get<Exam>(`${this.baseUrl}/exames/${id}`)).data;
   }
+
+  async updateExam(exam: Exam) {
+    await axios.put(`${this.baseUrl}/exames/${exam.id}`, exam, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
+  }
 }

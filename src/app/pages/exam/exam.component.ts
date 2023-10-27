@@ -105,14 +105,21 @@ export class ExamComponent implements OnInit {
     this.formsExamRegister.get('patientId')?.disable();
   }
 
-  async registerExam() {
+  saveExam() {
     if (!this.formsExamRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
       return;
-    } else {
-      alert('Dados cadastrado com sucesso!');
     }
 
+    if (this.isCreating) {
+      this.registerExam();
+      return;
+    }
+
+    this.updateExam();
+  }
+
+  async registerExam() {
     const dateFormated = this.formsExamRegister.value
       .examDate!.split('-')
       .reverse()
@@ -132,5 +139,30 @@ export class ExamComponent implements OnInit {
 
     this.formsExamRegister = this.initExamForm();
     await this.examService.saveExams(exam);
+    alert('Exame cadastrado com sucesso!');
+  }
+
+  async updateExam() {
+    const dateFormated = this.formsExamRegister.value
+      .examDate!.split('-')
+      .reverse()
+      .join('/');
+
+    const exam: Exam = {
+      id: this.examId,
+      examName: this.formsExamRegister.value.examName!,
+      examDate: dateFormated,
+      examHour: this.formsExamRegister.value.examHour!,
+      examType: this.formsExamRegister.value.examType!,
+      laboratory: this.formsExamRegister.value.laboratory!,
+      documentUrl: this.formsExamRegister.value.documentUrl!,
+      patientId: this.formsExamRegister.value.patientId!,
+      status: this.formsExamRegister.value.status!,
+      results: this.formsExamRegister.value.results!,
+    };
+
+    await this.examService.updateExam(exam);
+    this.formsExamRegister = this.initExamForm();
+    alert('Exame editado com sucesso!');
   }
 }
