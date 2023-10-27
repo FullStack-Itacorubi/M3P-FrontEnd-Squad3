@@ -27,6 +27,7 @@
       <app-queries-section [queries]="medicalRecord?.queries ?? []" />
       <app-exams-section [exams]="medicalRecord?.exams ?? []" />
       <app-exercises-section [exercises]="medicalRecord?.exercises ?? []" />
+      <app-diets-section [diets]="medicalRecord?.diets ?? []" />
 
       <!-- <app-accordion
         [headerTitle]="getMedicamentsTotal() + ' Medicamentos'"
@@ -64,35 +65,6 @@
           </div>
         </app-accordion>
       </app-accordion> -->
-
-      <app-accordion
-        [headerTitle]="medicalRecord?.diets?.length + ' Dietas'"
-        headerIcon="ionDocuments"
-        iconSize="lg"
-        [bordered]="true"
-      >
-        <app-accordion *ngFor="let diet of medicalRecord?.diets">
-          <div customHeader class="flex gap-2">
-            <button [routerLink]="['/dietas', diet.id]">
-              <ng-icon name="ionCreateOutline" class="text-lg" />
-            </button>
-            <p customHeader class="font-semibold">
-              {{ diet.dietDate }} {{ diet.dietTime }}
-              <span class="font-medium"> - {{ diet.dietName }}</span>
-            </p>
-          </div>
-          <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
-            <p>
-              Tipo de dieta:
-              <span class="font-medium">{{ diet.type }}</span>
-            </p>
-            <p>
-              Descrição
-              <span class="font-medium">{{ diet.description }}</span>
-            </p>
-          </div>
-        </app-accordion>
-      </app-accordion>
     </section>
   </div>
 </div>
