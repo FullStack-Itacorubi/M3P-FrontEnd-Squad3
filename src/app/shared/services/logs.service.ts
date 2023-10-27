@@ -12,7 +12,7 @@ export class LogsService {
   constructor() { }
 
   async getLogs(){
-    await axios.get<Logs[]>(`${this.baseUrl}/logs`);
+    return (await axios.get<Logs[]>(`${this.baseUrl}/logs`)).data;
   }
 
 }
