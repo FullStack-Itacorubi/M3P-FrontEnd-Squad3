@@ -6,7 +6,7 @@
 >
   <app-accordion *ngFor="let query of queries">
     <div customHeader class="flex gap-2">
-      <button [routerLink]="['/consultas', query.id]">
+      <button [routerLink]="['/consultas', query.id]" [state]="{patientId}">
         <ng-icon name="ionCreateOutline" class="text-lg" />
       </button>
       <p customHeader class="font-semibold">
