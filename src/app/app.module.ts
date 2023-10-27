@@ -45,6 +45,7 @@ import { PatientTableHeaderComponent } from './components/stats/tables/patient-t
 import { UserTableHeaderComponent } from './components/stats/tables/user-table-header/user-table-header.component';
 import { UserTableRowComponent } from './components/stats/tables/user-table-row/user-table-row.component';
 import { LogsComponent } from './pages/logs/logs.component';
+import { LogsTableRowComponent } from './components/logs-table-row/logs-table-row.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { LogsComponent } from './pages/logs/logs.component';
     UserTableHeaderComponent,
     UserTableRowComponent,
     LogsComponent,
+    LogsTableRowComponent,
   ],
 
   imports: [
