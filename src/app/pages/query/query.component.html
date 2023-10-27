@@ -181,7 +181,8 @@
           (clickHandler)="selectMedicament()"
         />
         <app-form-buttons
-          (handleEdit)="formQuery = initQueryForm()"
+          (handleEdit)="isCreating ? (formQuery = initQueryForm()) : {}"
+          (handleDelete)="deleteQuery()"
           [isCreating]="isCreating"
         />
       </form>

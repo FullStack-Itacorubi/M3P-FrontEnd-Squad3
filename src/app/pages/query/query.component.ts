@@ -105,6 +105,10 @@ export class QueryComponent implements OnInit {
     this.formQuery.get('patientId')?.disable();
   }
 
+  deleteQuery() {
+    this.queryService.deleteQuery(this.queryId);
+  }
+
   registerQuery() {
     if (!this.formQuery.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');

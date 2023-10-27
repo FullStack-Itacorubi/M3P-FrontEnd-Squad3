@@ -24,4 +24,12 @@ export class QueryService {
     return (await axios.get<QueryResponse>(`${this.baseUrl}/consultas/${id}`))
       .data;
   }
+
+  async deleteQuery(id: number) {
+    await axios.delete(`${this.baseUrl}/consultas/${id}`, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
+  }
 }
