@@ -146,7 +146,7 @@ export class DietComponent implements OnInit {
 
     this.formsDietRegister = this.initDietForm();
     await this.dietService.saveDiet(diet);
-    alert('Dados cadastrado com sucesso!');
+    alert('Dieta cadastrada com sucesso!');
   }
 
   async updateDiet() {
@@ -167,7 +167,6 @@ export class DietComponent implements OnInit {
     };
 
     await this.dietService.updateDiet(diet);
-    this.formsDietRegister = this.initDietForm();
-    alert('Dados alterados com sucesso!');
+    alert('Dieta alterada com sucesso!');
   }
 }
