@@ -1,4 +1,3 @@
-import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MedicalRecordsService } from 'src/app/shared/services/medical-records.service';
@@ -7,7 +6,10 @@ import { MedicalRecord, Medicament } from 'src/app/shared/utils/types';
 @Component({
   selector: 'app-patient-medical-record',
   templateUrl: './patient-medical-record.component.html',
-  styleUrls: ['./patient-medical-record.component.css'],
+  styleUrls: [
+    './patient-medical-record.component.css',
+    '../../app.component.css',
+  ],
 })
 export class PatientMedicalRecordComponent implements OnInit {
   medicalRecord?: MedicalRecord;

@@ -33,11 +33,24 @@ const routes: Routes = [
         canActivate: [doctorGuard],
       },
       {
+        path: 'consultas/:queryId',
+        component: QueryComponent,
+        canActivate: [doctorGuard],
+      },
+      {
         path: 'exercicios',
         component: ExerciseComponent,
       },
       {
+        path: 'exercicios/:exerciseId',
+        component: ExerciseComponent,
+      },
+      {
         path: 'dietas',
+        component: DietComponent,
+      },
+      {
+        path: 'dietas/:dietId',
         component: DietComponent,
       },
       {
@@ -50,6 +63,11 @@ const routes: Routes = [
       },
       {
         path: 'exames',
+        component: ExamComponent,
+        canActivate: [doctorGuard],
+      },
+      {
+        path: 'exames/:examId',
         component: ExamComponent,
         canActivate: [doctorGuard],
       },
@@ -73,6 +91,10 @@ const routes: Routes = [
       },
       {
         path: 'medicamentos',
+        component: MedicamentsComponent,
+      },
+      {
+        path: 'medicamentos/:medicamentId',
         component: MedicamentsComponent,
       },
     ],
