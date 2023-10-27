@@ -162,7 +162,6 @@ export class ExamComponent implements OnInit {
     };
 
     await this.examService.updateExam(exam);
-    this.formsExamRegister = this.initExamForm();
     alert('Exame editado com sucesso!');
   }
 

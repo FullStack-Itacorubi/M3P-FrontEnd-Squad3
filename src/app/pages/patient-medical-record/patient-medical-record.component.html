@@ -25,7 +25,10 @@
     </section>
     <section #medicalRecordSections class="flex flex-col gap-3 p-3">
       <app-queries-section [queries]="medicalRecord?.queries ?? []" />
-      <app-exams-section [exams]="medicalRecord?.exams ?? []" />
+      <app-exams-section
+        [exams]="medicalRecord?.exams ?? []"
+        [patientId]="patientId"
+      />
       <app-exercises-section [exercises]="medicalRecord?.exercises ?? []" />
       <app-diets-section [diets]="medicalRecord?.diets ?? []" />
 
