@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from '../utils/environment';
 import { AuthService } from './auth.service';
-import { QueryRequest } from '../utils/types';
+import { QueryRequest, QueryResponse } from '../utils/types';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +18,10 @@ export class QueryService {
         userId: this.authService.getUserId(),
       },
     });
+  }
+
+  async getQueryById(id: number) {
+    return (await axios.get<QueryResponse>(`${this.baseUrl}/consultas/${id}`))
+      .data;
   }
 }

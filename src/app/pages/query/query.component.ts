@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MedicamentModalComponent } from 'src/app/components/medicament-modal/medicament-modal.component';
+import { MedicalRecordsService } from 'src/app/shared/services/medical-records.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { QueryService } from 'src/app/shared/services/query.service';
@@ -30,6 +32,8 @@ type Queriesinfos = {
 })
 export class QueryComponent implements OnInit {
   formQuery: FormGroup<Queriesinfos>;
+  isEditing = false;
+  queryId = -1;
 
   patients: Patient[] = [];
   medicaments: Medicament[] = [];
@@ -37,13 +41,24 @@ export class QueryComponent implements OnInit {
   constructor(
     private patientService: PatientsService,
     private queryService: QueryService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private medicalRecordService: MedicalRecordsService,
+    private route: ActivatedRoute
   ) {
     this.formQuery = this.initQueryForm();
+    if (Object.hasOwn(route.snapshot.params, 'queryId')) {
+      this.isEditing = true;
+      this.queryId = route.snapshot.params['queryId'];
+    }
   }
 
   async ngOnInit() {
     this.patients = await this.patientService.getPatients();
+    if (!this.isEditing) return;
+
+    const query = await this.queryService.getQueryById(this.queryId);
+    this.medicaments = query.medicaments;
+    this.populateForm(query);
   }
 
   initQueryForm() {
@@ -76,6 +91,18 @@ export class QueryComponent implements OnInit {
         Validators.required,
       ]),
     });
+  }
+
+  populateForm(query: QueryResponse) {
+    this.formQuery.get('motive')?.setValue(query.reasonForConsultation);
+    this.formQuery.get('date')?.setValue(query.consultationDate);
+    this.formQuery.get('time')?.setValue(query.consultationTime);
+    this.formQuery.get('description')?.setValue(query.problemDescription);
+    this.formQuery.get('dosage')?.setValue(query.dosageAndRecautions);
+    this.formQuery.get('status')?.setValue(query.status);
+    this.formQuery.get('status')?.enable();
+    this.formQuery.get('patientId')?.setValue(window.history.state.patientId);
+    this.formQuery.get('patientId')?.disable();
   }
 
   registerQuery() {
