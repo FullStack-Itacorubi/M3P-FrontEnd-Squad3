@@ -105,6 +105,7 @@ export class DietComponent implements OnInit {
 
   deleteDiet() {
     this.dietService.deleteDiet(this.dietId, window.history.state.patientId);
+    alert('Dieta deletada com sucesso!');
   }
 
   async registerDiet() {
@@ -140,7 +141,7 @@ export class DietComponent implements OnInit {
       type: this.formsDietRegister.value.type!,
       patientId: this.formsDietRegister.value.patientId!,
       dietDate: dateFormated,
-      dietTime: this.formsDietRegister.value.dietTime! + ':00',
+      dietTime: this.formsDietRegister.value.dietTime!,
       status: this.formsDietRegister.value.status!,
       description: this.formsDietRegister.value.description!,
     };
