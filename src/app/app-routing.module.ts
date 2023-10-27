@@ -79,6 +79,7 @@ const routes: Routes = [
       {
         path: 'logs',
         component: LogsComponent,
+        canActivate: [adminGuard],
       }
     ],
   },
