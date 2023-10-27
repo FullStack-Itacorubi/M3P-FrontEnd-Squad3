@@ -109,8 +109,6 @@ export class QueryComponent implements OnInit {
     if (!this.formQuery.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
       return;
-    } else {
-      alert('Dados cadastrados com sucesso!');
     }
 
     if (this.isCreating) {
@@ -123,6 +121,7 @@ export class QueryComponent implements OnInit {
 
   deleteQuery() {
     this.queryService.deleteQuery(this.queryId, window.history.state.patientId);
+    alert('Consulta excluída com sucesso!');
   }
 
   registerQuery() {
@@ -146,6 +145,7 @@ export class QueryComponent implements OnInit {
 
     this.queryService.saveQuery(query);
     this.formQuery = this.initQueryForm();
+    alert('Consulta cadastrada com sucesso!');
   }
 
   updateQuery() {
@@ -170,6 +170,7 @@ export class QueryComponent implements OnInit {
 
     this.queryService.updateQuery(query);
     this.formQuery = this.initQueryForm();
+    alert('Consulta editada com sucesso!');
   }
 
   selectMedicament() {
