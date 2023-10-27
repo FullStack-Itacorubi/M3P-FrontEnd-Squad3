@@ -9,7 +9,9 @@ import { PatientComponent } from './pages/patient/patient.component';
 import { DietComponent } from './pages/diet/diet.component';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { StatsComponent } from './pages/stats/stats.component';
+import { MedicamentsComponent } from './pages/medicaments/medicaments.component';
 import { MedicalRecordsComponent } from './pages/medical-records/medical-records.component';
+import { QueryComponent } from './pages/query/query.component';
 import { PatientMedicalRecordComponent } from './pages/patient-medical-record/patient-medical-record.component';
 import { connectionGuard } from './shared/guards/connection.guard';
 import { adminGuard } from './shared/guards/admin.guard';
@@ -27,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: 'consultas',
-        component: ExerciseComponent,
+        component: QueryComponent,
         canActivate: [doctorGuard],
       },
       {
@@ -43,6 +45,10 @@ const routes: Routes = [
         component: PatientComponent,
       },
       {
+        path: 'pacientes/:patientId',
+        component: PatientComponent,
+      },
+      {
         path: 'exames',
         component: ExamComponent,
         canActivate: [doctorGuard],
@@ -53,12 +59,21 @@ const routes: Routes = [
         canActivate: [adminGuard],
       },
       {
+        path: 'usuarios/:userId',
+        component: UserComponent,
+        canActivate: [adminGuard],
+      },
+      {
         path: 'prontuarios',
         component: MedicalRecordsComponent,
       },
       {
         path: 'prontuarios/:patientId',
         component: PatientMedicalRecordComponent,
+      },
+      {
+        path: 'medicamentos',
+        component: MedicamentsComponent,
       },
     ],
   },

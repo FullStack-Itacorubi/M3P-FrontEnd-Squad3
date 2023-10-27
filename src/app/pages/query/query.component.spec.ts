@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatsListComponent } from './stats-list.component';
+import { QueryComponent } from './query.component';
 
-describe('StatsListComponent', () => {
-  let component: StatsListComponent;
-  let fixture: ComponentFixture<StatsListComponent>;
+describe('QueryComponent', () => {
+  let component: QueryComponent;
+  let fixture: ComponentFixture<QueryComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [StatsListComponent]
+      declarations: [QueryComponent]
     });
-    fixture = TestBed.createComponent(StatsListComponent);
+    fixture = TestBed.createComponent(QueryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

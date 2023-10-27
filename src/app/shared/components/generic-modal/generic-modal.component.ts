@@ -3,21 +3,21 @@ import {
   Component,
   ElementRef,
   HostListener,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { Observable, fromEvent, zip } from 'rxjs';
 
 import { IOptionsModal } from 'src/app/shared/interfaces/options-modal.interface';
 import { ModalService } from 'src/app/shared/services/modal.service';
 
-@Component( {
+@Component({
   selector: 'app-generic-modal',
   templateUrl: './generic-modal.component.html',
-  styleUrls: [ './generic-modal.component.css' ]
-} )
+  styleUrls: ['./generic-modal.component.css'],
+})
 export class GenericModalComponent implements AfterViewInit {
-  @ViewChild( 'modal' ) modal!: ElementRef<HTMLDivElement>;
-  @ViewChild( 'overlay' ) overlay!: ElementRef<HTMLDivElement>;
+  @ViewChild('modal') modal!: ElementRef<HTMLDivElement>;
+  @ViewChild('overlay') overlay!: ElementRef<HTMLDivElement>;
   options!: IOptionsModal | undefined;
   modalAnimationEnd!: Observable<Event>;
   modalLeaveAnimation!: string;
@@ -29,9 +29,9 @@ export class GenericModalComponent implements AfterViewInit {
   constructor(
     private modalService: ModalService,
     private element: ElementRef
-  ) { }
+  ) {}
 
-  @HostListener( 'document:keydown.escape' )
+  @HostListener('document:keydown.escape')
   onEscape() {
     this.modalService.close();
   }
@@ -40,7 +40,7 @@ export class GenericModalComponent implements AfterViewInit {
     this.modalService.close();
   }
 
-  stopPropagation( event: MouseEvent ) {
+  stopPropagation(event: MouseEvent) {
     event.stopPropagation();
   }
 
@@ -66,13 +66,13 @@ export class GenericModalComponent implements AfterViewInit {
     this.modalLeaveAnimation = this.options?.animations?.modal?.leave || '';
     this.overlayLeaveAnimation = this.options?.animations?.overlay?.leave || '';
 
-    this.modalAnimationEnd = this.animationendEvent( this.modal.nativeElement );
+    this.modalAnimationEnd = this.animationendEvent(this.modal.nativeElement);
     this.overlayAnimationEnd = this.animationendEvent(
       this.overlay.nativeElement
     );
 
-    this.modalLeaveTiming = this.getAnimationTime( this.modalLeaveAnimation );
-    this.overlayLeaveTiming = this.getAnimationTime( this.overlayLeaveAnimation );
+    this.modalLeaveTiming = this.getAnimationTime(this.modalLeaveAnimation);
+    this.overlayLeaveTiming = this.getAnimationTime(this.overlayLeaveAnimation);
   }
 
   addEnterAnimations() {
@@ -82,12 +82,12 @@ export class GenericModalComponent implements AfterViewInit {
       this.options?.animations?.overlay?.enter || '';
   }
 
-  animationendEvent( element: HTMLDivElement ) {
-    return fromEvent( element, 'animationend' );
+  animationendEvent(element: HTMLDivElement) {
+    return fromEvent(element, 'animationend');
   }
 
-  removeElementIfNoAnimation( element: HTMLDivElement, animation: string ) {
-    if ( !animation ) {
+  removeElementIfNoAnimation(element: HTMLDivElement, animation: string) {
+    if (!animation) {
       element.remove();
     }
   }
@@ -114,31 +114,31 @@ export class GenericModalComponent implements AfterViewInit {
       this.overlayLeaveAnimation
     );
 
-    if ( this.modalLeaveTiming > this.overlayLeaveTiming ) {
-      this.modalAnimationEnd.subscribe( () => {
+    if (this.modalLeaveTiming > this.overlayLeaveTiming) {
+      this.modalAnimationEnd.subscribe(() => {
         this.element.nativeElement.remove();
-      } );
-    } else if ( this.modalLeaveTiming < this.overlayLeaveTiming ) {
-      this.overlayAnimationEnd.subscribe( () => {
+      });
+    } else if (this.modalLeaveTiming < this.overlayLeaveTiming) {
+      this.overlayAnimationEnd.subscribe(() => {
         this.element.nativeElement.remove();
-      } );
+      });
     } else {
-      zip( this.modalAnimationEnd, this.overlayAnimationEnd ).subscribe( () => {
+      zip(this.modalAnimationEnd, this.overlayAnimationEnd).subscribe(() => {
         this.element.nativeElement.remove();
-      } );
+      });
     }
 
     this.modalService.options = undefined;
   }
 
-  getAnimationTime( animation: string ) {
+  getAnimationTime(animation: string) {
     let animationTime = 0;
-    const splittedAnimation = animation.split( ' ' );
+    const splittedAnimation = animation.split(' ');
 
-    for ( const expression of splittedAnimation ) {
-      const currentValue = +expression.replace( /s$/, '' );
+    for (const expression of splittedAnimation) {
+      const currentValue = +expression.replace(/s$/, '');
 
-      if ( !isNaN( currentValue ) ) {
+      if (!isNaN(currentValue)) {
         animationTime = currentValue;
         break;
       }

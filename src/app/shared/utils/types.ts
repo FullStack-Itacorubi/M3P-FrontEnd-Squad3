@@ -1,5 +1,5 @@
 export type Patient = {
-  id: number;
+  id?: number;
   fullName: string;
   genre: string;
   cpf: string;
@@ -20,7 +20,7 @@ export type Patient = {
 };
 
 export type User = {
-  id: number;
+  id?: number;
   email: string;
   password: string;
   cpf: string;
@@ -32,7 +32,8 @@ export type User = {
 };
 
 export type Exam = {
-  id: number;
+  id?: number;
+  patientId: number;
   examName: string;
   examDate: string;
   examHour: string;
@@ -55,7 +56,8 @@ export type Diet = {
 };
 
 export type Exercise = {
-  id: number;
+  id?: number;
+  patientId: number;
   name: string;
   date: string;
   time: string;
@@ -66,7 +68,7 @@ export type Exercise = {
 };
 
 export type Medicament = {
-  id: number;
+  id?: number;
   name: string;
   date: string;
   time: string;
@@ -77,8 +79,13 @@ export type Medicament = {
   status: boolean;
 };
 
-export type Query = {
+export type QueryMedicament = {
   id: number;
+};
+
+export type QueryResponse = {
+  id?: number;
+  patientId: number;
   reasonForConsultation: string;
   consultationDate: string;
   consultationTime: string;
@@ -88,17 +95,29 @@ export type Query = {
   status: boolean;
 };
 
+export type QueryRequest = {
+  id?: number;
+  patientId: number;
+  reasonForConsultation: string;
+  consultationDate: string;
+  consultationTime: string;
+  problemDescription: string;
+  medicaments: Medicament[] | QueryMedicament[];
+  dosageAndRecautions: string;
+  status: boolean;
+};
+
 export type MedicalRecord = {
   id: number;
   patient: Patient;
-  queries: Query[];
+  queries: QueryResponse[];
   exercises: Exercise[];
   diets: Diet[];
   exams: Exam[];
 };
 
 type Address = {
-  id: number;
+  id?: number;
   cep: string;
   city: string;
   state: string;

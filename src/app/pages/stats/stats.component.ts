@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StatsListStyle } from 'src/app/components/stats/stats-list/stats-list.component';
+import { StatsListStyle } from 'src/app/components/stats/dashboard-users-list/dashboard-users-list.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { StatsService } from 'src/app/shared/services/stats.service';
@@ -20,7 +20,7 @@ type StatsTabOption = {
 @Component({
   selector: 'app-stats',
   templateUrl: './stats.component.html',
-  styleUrls: ['./stats.component.css'],
+  styleUrls: ['./stats.component.css', '../../app.component.css'],
 })
 export class StatsComponent implements OnInit {
   menuOptions: StatsTabOption[] = [
@@ -39,6 +39,9 @@ export class StatsComponent implements OnInit {
   stats: Stats[] = [];
   patients: Patient[] = [];
   users: User[] = [];
+
+  patientSearchInput = '';
+  userSearchInput = '';
 
   constructor(
     private statsService: StatsService,
