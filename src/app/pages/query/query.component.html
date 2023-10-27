@@ -180,7 +180,10 @@
           label="Adicionar medicamento"
           (clickHandler)="selectMedicament()"
         />
-        <app-form-buttons (handleEdit)="formQuery = initQueryForm()" />
+        <app-form-buttons
+          (handleEdit)="formQuery = initQueryForm()"
+          [isCreating]="isCreating"
+        />
       </form>
     </div>
   </div>

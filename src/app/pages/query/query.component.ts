@@ -32,7 +32,7 @@ type Queriesinfos = {
 })
 export class QueryComponent implements OnInit {
   formQuery: FormGroup<Queriesinfos>;
-  isEditing = false;
+  isCreating = true;
   queryId = -1;
 
   patients: Patient[] = [];
@@ -47,14 +47,14 @@ export class QueryComponent implements OnInit {
   ) {
     this.formQuery = this.initQueryForm();
     if (Object.hasOwn(route.snapshot.params, 'queryId')) {
-      this.isEditing = true;
+      this.isCreating = false;
       this.queryId = route.snapshot.params['queryId'];
     }
   }
 
   async ngOnInit() {
     this.patients = await this.patientService.getPatients();
-    if (!this.isEditing) return;
+    if (this.isCreating) return;
 
     const query = await this.queryService.getQueryById(this.queryId);
     this.medicaments = query.medicaments;
