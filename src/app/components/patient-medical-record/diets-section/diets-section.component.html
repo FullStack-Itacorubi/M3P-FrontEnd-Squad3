@@ -1,0 +1,28 @@
+<app-accordion
+  [headerTitle]="diets.length + ' Dietas'"
+  headerIcon="ionDocuments"
+  iconSize="lg"
+  [bordered]="true"
+>
+  <app-accordion *ngFor="let diet of diets">
+    <div customHeader class="flex gap-2">
+      <button [routerLink]="['/dietas', diet.id]" [state]="{patientId}">
+        <ng-icon name="ionCreateOutline" class="text-lg" />
+      </button>
+      <p customHeader class="font-semibold">
+        {{ diet.dietDate }} {{ diet.dietTime }}
+        <span class="font-medium"> - {{ diet.dietName }}</span>
+      </p>
+    </div>
+    <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
+      <p>
+        Tipo de dieta:
+        <span class="font-medium">{{ diet.type }}</span>
+      </p>
+      <p>
+        Descrição
+        <span class="font-medium">{{ diet.description }}</span>
+      </p>
+    </div>
+  </app-accordion>
+</app-accordion>

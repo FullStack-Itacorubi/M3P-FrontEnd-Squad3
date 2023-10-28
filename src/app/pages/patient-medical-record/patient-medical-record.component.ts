@@ -1,4 +1,3 @@
-import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MedicalRecordsService } from 'src/app/shared/services/medical-records.service';
@@ -7,10 +6,14 @@ import { MedicalRecord, Medicament } from 'src/app/shared/utils/types';
 @Component({
   selector: 'app-patient-medical-record',
   templateUrl: './patient-medical-record.component.html',
-  styleUrls: ['./patient-medical-record.component.css'],
+  styleUrls: [
+    './patient-medical-record.component.css',
+    '../../app.component.css',
+  ],
 })
 export class PatientMedicalRecordComponent implements OnInit {
   medicalRecord?: MedicalRecord;
+  patientId = -1;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,10 +22,10 @@ export class PatientMedicalRecordComponent implements OnInit {
 
   async ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
-    const patientId: number = Number(routeParams.get('patientId'));
+    this.patientId = Number(routeParams.get('patientId'));
 
     this.medicalRecord =
-      await this.medicalRecordsService.getPatientMedicalRecord(patientId);
+      await this.medicalRecordsService.getPatientMedicalRecord(this.patientId);
   }
 
   listMedicaments(medicaments: Medicament[]): string {

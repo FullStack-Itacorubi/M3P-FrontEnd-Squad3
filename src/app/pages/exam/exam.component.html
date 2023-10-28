@@ -1,7 +1,7 @@
 <div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
   <div class="flex-grow p-4 overflow-y-auto">
     <div class="container py-3 pr-2 m-auto text-slate-800 pl-14">
-      <form [formGroup]="formsExamRegister" (ngSubmit)="registerExam()">
+      <form [formGroup]="formsExamRegister" (ngSubmit)="saveExam()">
         <h3 class="my-1 text-xl font-bold">Cadastro de exames</h3>
 
         <div class="gap-2 md:flex">
@@ -15,13 +15,13 @@
               formControlName="examName"
             />
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('examName')?.errors?.['required'] && formsExamRegister.get('examName')?.touched"
             >
               <p>Por favor insira o nome do exame!</p>
             </div>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('examName')?.errors?.['minlength'] && formsExamRegister.get('examName')?.touched"
             >
               <p>O nome do exame deve possuir no mínimo 8 caracteres!</p>
@@ -38,13 +38,13 @@
               formControlName="examType"
             />
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('examType')?.errors?.['required'] && formsExamRegister.get('examType')?.touched"
             >
               <p>Por favor insira o tipo do exame!</p>
             </div>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('examType')?.errors?.['minlength'] && formsExamRegister.get('examType')?.touched"
             >
               <p>O tipo do exame deve possuir no mínimo 4 caracteres!</p>
@@ -64,7 +64,7 @@
               placeholder="dd/mm/aaaa"
             />
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('examDate')?.errors?.['required'] && formsExamRegister.get('examDate')?.touched"
             >
               <p>Por favor insira a data do exame!</p>
@@ -82,7 +82,7 @@
               placeholder="hh:mm"
             />
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('examHour')?.errors?.['required'] && formsExamRegister.get('examHour')?.touched"
             >
               <p>Por favor insira a hora do exame!</p>
@@ -99,13 +99,13 @@
               formControlName="laboratory"
             />
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('laboratory')?.errors?.['required'] && formsExamRegister.get('laboratory')?.touched"
             >
               <p>Por favor insira o laboratório!</p>
             </div>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('laboratory')?.errors?.['minlength'] && formsExamRegister.get('laboratory')?.touched"
             >
               <p>O laboratório deve possuir no mínimo 4 caracteres!</p>
@@ -140,7 +140,7 @@
               </option>
             </select>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('patientId')?.errors?.['required'] && formsExamRegister.get('patientId')?.touched"
             >
               <p>Por favor insira o paciente!</p>
@@ -175,20 +175,24 @@
               formControlName="results"
             ></textarea>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('results')?.errors?.['required'] && formsExamRegister.get('results')?.touched"
             >
               <p>Por favor insira o resultado!</p>
             </div>
             <div
-              class="text-red-500 font-semibold"
+              class="font-semibold text-red-500"
               *ngIf="formsExamRegister.get('results')?.errors?.['minlength'] && formsExamRegister.get('results')?.touched"
             >
               <p>O resultado deve possuir no mínimo 16 caracteres!</p>
             </div>
           </div>
         </div>
-        <app-form-buttons (handleEdit)="formsExamRegister = initExamForm()" />
+        <app-form-buttons
+          (handleEdit)="isCreating ? (formsExamRegister = initExamForm()) : {}"
+          (handleDelete)="deleteExam()"
+          [isCreating]="isCreating"
+        />
       </form>
     </div>
   </div>

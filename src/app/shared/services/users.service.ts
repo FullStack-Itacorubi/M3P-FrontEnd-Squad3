@@ -20,8 +20,28 @@ export class UsersService {
     );
   }
 
-  async saveUsers(user: User) {
+  async saveUser(user: User) {
     await axios.post(`${this.baseUrl}/usuarios`, user, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
+  }
+
+  async getUserById(id: number) {
+    return (await axios.get<User>(`${this.baseUrl}/usuarios/${id}`)).data;
+  }
+
+  async updateUser(user: User) {
+    await axios.put(`${this.baseUrl}/usuarios/${user.id}`, user, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
+  }
+
+  async deleteUser(id: number) {
+    await axios.delete(`${this.baseUrl}/usuarios/${id}`, {
       headers: {
         userId: this.authService.getUserId(),
       },

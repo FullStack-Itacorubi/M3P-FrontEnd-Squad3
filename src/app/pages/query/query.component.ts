@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MedicamentModalComponent } from 'src/app/components/medicament-modal/medicament-modal.component';
+import { MedicalRecordsService } from 'src/app/shared/services/medical-records.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { QueryService } from 'src/app/shared/services/query.service';
@@ -30,6 +32,8 @@ type Queriesinfos = {
 })
 export class QueryComponent implements OnInit {
   formQuery: FormGroup<Queriesinfos>;
+  isCreating = true;
+  queryId = -1;
 
   patients: Patient[] = [];
   medicaments: Medicament[] = [];
@@ -37,13 +41,24 @@ export class QueryComponent implements OnInit {
   constructor(
     private patientService: PatientsService,
     private queryService: QueryService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private medicalRecordService: MedicalRecordsService,
+    private route: ActivatedRoute
   ) {
     this.formQuery = this.initQueryForm();
+    if (Object.hasOwn(route.snapshot.params, 'queryId')) {
+      this.isCreating = false;
+      this.queryId = route.snapshot.params['queryId'];
+    }
   }
 
   async ngOnInit() {
     this.patients = await this.patientService.getPatients();
+    if (this.isCreating) return;
+
+    const query = await this.queryService.getQueryById(this.queryId);
+    this.medicaments = query.medicaments;
+    this.populateForm(query);
   }
 
   initQueryForm() {
@@ -78,14 +93,38 @@ export class QueryComponent implements OnInit {
     });
   }
 
-  registerQuery() {
+  populateForm(query: QueryResponse) {
+    this.formQuery.get('motive')?.setValue(query.reasonForConsultation);
+    this.formQuery.get('date')?.setValue(query.consultationDate);
+    this.formQuery.get('time')?.setValue(query.consultationTime);
+    this.formQuery.get('description')?.setValue(query.problemDescription);
+    this.formQuery.get('dosage')?.setValue(query.dosageAndRecautions);
+    this.formQuery.get('status')?.setValue(query.status);
+    this.formQuery.get('status')?.enable();
+    this.formQuery.get('patientId')?.setValue(window.history.state.patientId);
+    this.formQuery.get('patientId')?.disable();
+  }
+
+  saveQuery() {
     if (!this.formQuery.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
       return;
-    } else {
-      alert('Dados cadastrados com sucesso!');
     }
 
+    if (this.isCreating) {
+      this.registerQuery();
+      return;
+    }
+
+    this.updateQuery();
+  }
+
+  deleteQuery() {
+    this.queryService.deleteQuery(this.queryId, window.history.state.patientId);
+    alert('Consulta excluída com sucesso!');
+  }
+
+  registerQuery() {
     const dateFormated = this.formQuery.value
       .date!.split('-')
       .reverse()
@@ -105,8 +144,32 @@ export class QueryComponent implements OnInit {
     };
 
     this.queryService.saveQuery(query);
-
     this.formQuery = this.initQueryForm();
+    alert('Consulta cadastrada com sucesso!');
+  }
+
+  updateQuery() {
+    const dateFormated = this.formQuery.value
+      .date!.split('-')
+      .reverse()
+      .join('/');
+
+    const query: QueryRequest = {
+      id: this.queryId,
+      reasonForConsultation: this.formQuery.value.motive!,
+      consultationDate: dateFormated,
+      consultationTime: this.formQuery.value.time!,
+      problemDescription: this.formQuery.value.description!,
+      medicaments: this.medicaments.map(
+        (medicament) => ({ id: medicament.id } as QueryMedicament)
+      ),
+      dosageAndRecautions: this.formQuery.value.dosage!,
+      patientId: this.formQuery.value.patientId!,
+      status: this.formQuery.value.status!,
+    };
+
+    this.queryService.updateQuery(query);
+    alert('Consulta editada com sucesso!');
   }
 
   selectMedicament() {

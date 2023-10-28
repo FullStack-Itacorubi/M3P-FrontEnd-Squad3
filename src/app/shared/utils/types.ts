@@ -1,5 +1,5 @@
 export type Patient = {
-  id: number;
+  id?: number;
   fullName: string;
   genre: string;
   cpf: string;
@@ -45,7 +45,8 @@ export type Exam = {
 };
 
 export type Diet = {
-  id: number;
+  id?: number;
+  patientId: number;
   dietName: string;
   dietDate: string;
   dietTime: string;
@@ -116,7 +117,7 @@ export type MedicalRecord = {
 };
 
 type Address = {
-  id: number;
+  id?: number;
   cep: string;
   city: string;
   state: string;

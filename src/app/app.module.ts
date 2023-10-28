@@ -46,6 +46,10 @@ import { UserTableHeaderComponent } from './components/stats/tables/user-table-h
 import { UserTableRowComponent } from './components/stats/tables/user-table-row/user-table-row.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { LogsTableRowComponent } from './components/logs-table-row/logs-table-row.component';
+import { QueriesSectionComponent } from './components/patient-medical-record/queries-section/queries-section.component';
+import { ExamsSectionComponent } from './components/patient-medical-record/exams-section/exams-section.component';
+import { ExercisesSectionComponent } from './components/patient-medical-record/exercises-section/exercises-section.component';
+import { DietsSectionComponent } from './components/patient-medical-record/diets-section/diets-section.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +90,10 @@ import { LogsTableRowComponent } from './components/logs-table-row/logs-table-ro
     UserTableRowComponent,
     LogsComponent,
     LogsTableRowComponent,
+    QueriesSectionComponent,
+    ExamsSectionComponent,
+    ExercisesSectionComponent,
+    DietsSectionComponent,
   ],
 
   imports: [
