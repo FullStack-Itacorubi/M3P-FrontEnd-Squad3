@@ -1,10 +1,9 @@
+import { UsersService } from 'src/app/shared/services/users.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { IUserResetPassword } from 'src/app/shared/interfaces/user.interface';
 
 import { ModalService } from 'src/app/shared/services/modal.service';
-import { UserService } from 'src/app/shared/services/user.service';
+import { UserResetPassword } from 'src/app/shared/utils/types';
 
 @Component( {
   selector: 'app-reset-password',
@@ -14,12 +13,11 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class ResetPasswordComponent {
   resetPasswordForm!: FormGroup;
   currentStep!: string;
-  userResetPasword!: IUserResetPassword;
+  userResetPassword!: UserResetPassword;
 
   constructor(
     private modalService: ModalService,
-    private userService: UserService,
-    private router: Router,
+    private usersService: UsersService,
   ) { }
 
   ngOnInit(): void {
@@ -48,23 +46,22 @@ export class ResetPasswordComponent {
   }
 
   onSubmit() {
-    this.userResetPasword = {
-      ...this.userResetPasword,
+    this.userResetPassword = {
+      ...this.userResetPassword,
       password: this.resetPasswordForm.get( "password" )?.value,
     };
-    this.userService.resetPassword(
-      this.userResetPasword
+    this.usersService.resetPassword(
+      this.userResetPassword
     );
     this.resetPasswordForm.reset();
     this.modalService.close();
   }
 
   async validateEmail() {
-    const userFound = await this.userService.findUserByEmail( this.resetPasswordForm.get( 'email' )?.value );
-    // const userFound = await this.userService.getUser( this.resetPasswordForm.get( 'email' )?.value );
-    console.log( { userFound } );
-    this.userResetPasword = {
-      ...userFound
+    const userFound = await this.usersService.findUserByEmail( this.resetPasswordForm.get( 'email' )?.value );
+    console.log( { userFound: userFound["data"] } );
+    this.userResetPassword = {
+      ...userFound.data
     };
 
     this.currentStep = "password";

@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UserService } from './user.service';
-import { ILoginForm, ILoginResponse } from '../interfaces/login.interface';
-import { User } from '../utils/types';
+import { UsersService } from './users.service';
+import { LoginForm, LoginResponse } from '../utils/types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private userAuthenticated?: ILoginResponse;
+  private userAuthenticated?: LoginResponse;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private usersService: UsersService,
+    private router: Router
+  ) {}
 
   isUserAuthenticated(): boolean {
     if (!this.userAuthenticated) this.checkConnection();
@@ -29,20 +31,12 @@ export class AuthService {
     );
   }
 
-  async makeLogin(user: ILoginForm): Promise<void> {
-    const userRegistered = await this.userService.getUser(user.email);
-
-    if (userRegistered === undefined) {
-      alert('Usuário não encontrado!');
-
-      return;
-    }
-
-    await this.userService.loginUser(user).then((res) => {
-      const userLoggedString = JSON.stringify(res);
+  async makeLogin(user: LoginForm): Promise<void> {
+    await this.usersService.loginUser(user).then((res) => {
+      const userLoggedString = JSON.stringify(res.data);
 
       localStorage.setItem('userLogged', userLoggedString);
-      this.userAuthenticated = res;
+      this.userAuthenticated = res.data;
     });
 
     this.router.navigate(['']);
