@@ -16,6 +16,7 @@ import { PatientMedicalRecordComponent } from './pages/patient-medical-record/pa
 import { connectionGuard } from './shared/guards/connection.guard';
 import { adminGuard } from './shared/guards/admin.guard';
 import { doctorGuard } from './shared/guards/doctor.guard';
+import { LogsComponent } from './pages/logs/logs.component';
 
 const routes: Routes = [
   {
@@ -114,6 +115,11 @@ const routes: Routes = [
         component: MedicamentsComponent,
         title: 'Medicamentos',
       },
+      {
+        path: 'logs',
+        component: LogsComponent,
+        canActivate: [adminGuard],
+      }
     ],
   },
   {

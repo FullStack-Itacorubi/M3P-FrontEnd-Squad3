@@ -70,8 +70,8 @@ export type Exercise = {
 export type Medicament = {
   id?: number;
   name: string;
-  date: string;
-  time: string;
+  date?: string;
+  time?: string;
   type: string;
   quantity: number;
   unit: string;
@@ -128,6 +128,12 @@ type Address = {
   referencePoint?: string;
 };
 
+export type Logs = {
+  message: string;
+  timestamp: string;
+
+}
+
 export type UserResetPassword = {
   // id: User[ "id" ];
   id: number;
@@ -166,4 +172,4 @@ export type OptionsModal = {
     height?: string;
     maxHeight?: string;
   };
-}
+
