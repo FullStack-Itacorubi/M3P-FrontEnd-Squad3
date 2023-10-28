@@ -8,4 +8,5 @@ import { QueryResponse } from 'src/app/shared/utils/types';
 })
 export class QueriesSectionComponent {
   @Input() queries: QueryResponse[] = [];
+  @Input() patientId = -1;
 }
