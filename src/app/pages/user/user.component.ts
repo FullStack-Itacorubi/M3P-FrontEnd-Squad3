@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { User } from 'src/app/shared/utils/types';
 
@@ -39,9 +40,11 @@ type Userinfos = {
 export class UserComponent implements OnInit {
   formUserRegister: FormGroup<Userinfos>;
   isCreating = true;
+  isSelf = false;
   userId = -1;
 
   constructor(
+    private authService: AuthService,
     private usersService: UsersService,
     private route: ActivatedRoute
   ) {
@@ -49,6 +52,7 @@ export class UserComponent implements OnInit {
     if (Object.hasOwn(route.snapshot.params, 'userId')) {
       this.isCreating = false;
       this.userId = route.snapshot.params['userId'];
+      this.isSelf = +this.userId === authService.getUserId();
     }
   }
 

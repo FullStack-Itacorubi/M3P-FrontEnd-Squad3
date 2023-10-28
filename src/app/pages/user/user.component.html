@@ -180,6 +180,7 @@
           (handleEdit)="isCreating ? (formUserRegister = initUserForm()) : {}"
           (handleDelete)="deleteUser()"
           [isCreating]="isCreating"
+          [disableDelete]="isSelf"
         />
       </form>
     </div>
