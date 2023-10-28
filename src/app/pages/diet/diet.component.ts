@@ -9,7 +9,7 @@ const DietTypesValues = {
   'Low Carb': 'LOW_CARB',
   Dash: 'DASH',
   Paleolítica: 'PALEOLITHIC',
-  Cetogenica: 'KETOGENIC',
+  Cetogênica: 'KETOGENIC',
   Dukan: 'DUKAN',
   Mediterrânea: 'MEDITERRANEAN',
   Outra: 'OTHER',
@@ -19,7 +19,7 @@ type DietType =
   | 'Low Carb'
   | 'Dash'
   | 'Paleolítica'
-  | 'Cetogenica'
+  | 'Cetogênica'
   | 'Dukan'
   | 'Mediterrânea'
   | 'Outra';
@@ -62,8 +62,9 @@ export class DietComponent implements OnInit {
     this.patients = await this.patientsService.getPatients();
     if (this.isCreating) return;
 
+    const patientId = window.history.state.patientId;
     const diet = await this.dietService.getDietById(this.dietId);
-    this.populateForm(diet);
+    this.populateForm(diet, patientId);
   }
 
   initDietForm() {
@@ -94,7 +95,7 @@ export class DietComponent implements OnInit {
     });
   }
 
-  populateForm(diet: Diet) {
+  populateForm(diet: Diet, patientId: number) {
     const type = diet.type as DietType;
     this.formsDietRegister.get('dietName')?.setValue(diet.dietName);
     this.formsDietRegister.get('dietDate')?.setValue(diet.dietDate);
@@ -103,9 +104,7 @@ export class DietComponent implements OnInit {
     this.formsDietRegister.get('type')?.setValue(DietTypesValues[type]);
     this.formsDietRegister.get('status')?.setValue(diet.status);
     this.formsDietRegister.get('status')?.enable();
-    this.formsDietRegister
-      .get('patientId')
-      ?.setValue(window.history.state.patientId);
+    this.formsDietRegister.get('patientId')?.setValue(patientId);
     this.formsDietRegister.get('patientId')?.disable();
   }
 
@@ -165,6 +164,8 @@ export class DietComponent implements OnInit {
       status: this.formsDietRegister.value.status!,
       description: this.formsDietRegister.value.description!,
     };
+
+    console.log(diet);
 
     await this.dietService.updateDiet(diet);
     alert('Dieta alterada com sucesso!');
