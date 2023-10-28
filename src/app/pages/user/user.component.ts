@@ -116,7 +116,7 @@ export class UserComponent implements OnInit {
     const user: User = {
       fullName: this.formUserRegister.value.fullName!,
       genre: this.formUserRegister.value.genre!,
-      status: this.formUserRegister.value.status!,
+      status: this.formUserRegister.get('status')?.value!,
       cpf: this.formUserRegister.value.cpf!,
       phone: phoneFormated,
       type: this.formUserRegister.value.type!,
