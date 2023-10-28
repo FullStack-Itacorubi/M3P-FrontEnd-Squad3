@@ -1,8 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { DietService } from 'src/app/shared/services/diet.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { Diet, Patient } from 'src/app/shared/utils/types';
+
+const DietTypesValues = {
+  'Low Carb': 'LOW_CARB',
+  Dash: 'DASH',
+  Paleolítica: 'PALEOLITHIC',
+  Cetogênica: 'KETOGENIC',
+  Dukan: 'DUKAN',
+  Mediterrânea: 'MEDITERRANEAN',
+  Outra: 'OTHER',
+};
+
+type DietType =
+  | 'Low Carb'
+  | 'Dash'
+  | 'Paleolítica'
+  | 'Cetogênica'
+  | 'Dukan'
+  | 'Mediterrânea'
+  | 'Outra';
 
 type Dietinfos = {
   dietName: FormControl<string | null>;
@@ -21,21 +41,33 @@ type Dietinfos = {
 })
 export class DietComponent implements OnInit {
   formsDietRegister: FormGroup<Dietinfos>;
+  isCreating = true;
+  dietId = -1;
 
   patients: Patient[] = [];
 
   constructor(
     private dietService: DietService,
-    private patientsService: PatientsService
+    private patientsService: PatientsService,
+    private route: ActivatedRoute
   ) {
     this.formsDietRegister = this.initDietForm();
+    if (Object.hasOwn(route.snapshot.params, 'dietId')) {
+      this.isCreating = false;
+      this.dietId = route.snapshot.params['dietId'];
+    }
   }
 
   async ngOnInit() {
     this.patients = await this.patientsService.getPatients();
+    if (this.isCreating) return;
+
+    const patientId = window.history.state.patientId;
+    const diet = await this.dietService.getDietById(this.dietId);
+    this.populateForm(diet, patientId);
   }
 
-  initDietForm()  {
+  initDietForm() {
     const today = new Date();
     return new FormGroup<Dietinfos>({
       dietName: new FormControl('', [
@@ -44,7 +76,7 @@ export class DietComponent implements OnInit {
         Validators.maxLength(100),
       ]),
       type: new FormControl('', [Validators.required]),
-      patientId: new FormControl( null , [Validators.required]),
+      patientId: new FormControl(null, [Validators.required]),
       dietDate: new FormControl(today.toISOString().substring(0, 10), [
         Validators.required,
       ]),
@@ -52,7 +84,9 @@ export class DietComponent implements OnInit {
         today.toLocaleTimeString('pt-BR').substring(0, 5),
         [Validators.required]
       ),
-      status: new FormControl({ value: true, disabled: true }, [Validators.required]),
+      status: new FormControl({ value: true, disabled: true }, [
+        Validators.required,
+      ]),
       description: new FormControl('', [
         Validators.required,
         Validators.minLength(10),
@@ -61,14 +95,39 @@ export class DietComponent implements OnInit {
     });
   }
 
-  async registerDiet() {
+  populateForm(diet: Diet, patientId: number) {
+    const type = diet.type as DietType;
+    this.formsDietRegister.get('dietName')?.setValue(diet.dietName);
+    this.formsDietRegister.get('dietDate')?.setValue(diet.dietDate);
+    this.formsDietRegister.get('dietTime')?.setValue(diet.dietTime);
+    this.formsDietRegister.get('description')?.setValue(diet.description);
+    this.formsDietRegister.get('type')?.setValue(DietTypesValues[type]);
+    this.formsDietRegister.get('status')?.setValue(diet.status);
+    this.formsDietRegister.get('status')?.enable();
+    this.formsDietRegister.get('patientId')?.setValue(patientId);
+    this.formsDietRegister.get('patientId')?.disable();
+  }
+
+  saveDiet() {
     if (!this.formsDietRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
-      return
-    } else {
-      alert('Dados cadastrado com sucesso!');
+      return;
     }
 
+    if (this.isCreating) {
+      this.registerDiet();
+      return;
+    }
+
+    this.updateDiet();
+  }
+
+  deleteDiet() {
+    this.dietService.deleteDiet(this.dietId, window.history.state.patientId);
+    alert('Dieta deletada com sucesso!');
+  }
+
+  async registerDiet() {
     const dateFormated = this.formsDietRegister.value
       .dietDate!.split('-')
       .reverse()
@@ -85,6 +144,30 @@ export class DietComponent implements OnInit {
     };
 
     this.formsDietRegister = this.initDietForm();
-    await this.dietService.saveDiets(diet);
+    await this.dietService.saveDiet(diet);
+    alert('Dieta cadastrada com sucesso!');
+  }
+
+  async updateDiet() {
+    const dateFormated = this.formsDietRegister.value
+      .dietDate!.split('-')
+      .reverse()
+      .join('/');
+
+    const diet: Diet = {
+      id: this.dietId,
+      dietName: this.formsDietRegister.value.dietName!,
+      type: this.formsDietRegister.value.type!,
+      patientId: this.formsDietRegister.value.patientId!,
+      dietDate: dateFormated,
+      dietTime: this.formsDietRegister.value.dietTime!,
+      status: this.formsDietRegister.value.status!,
+      description: this.formsDietRegister.value.description!,
+    };
+
+    console.log(diet);
+
+    await this.dietService.updateDiet(diet);
+    alert('Dieta alterada com sucesso!');
   }
 }
