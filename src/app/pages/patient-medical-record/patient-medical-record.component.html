@@ -29,8 +29,14 @@
         [exams]="medicalRecord?.exams ?? []"
         [patientId]="patientId"
       />
-      <app-exercises-section [exercises]="medicalRecord?.exercises ?? []" />
-      <app-diets-section [diets]="medicalRecord?.diets ?? []" />
+      <app-exercises-section
+        [exercises]="medicalRecord?.exercises ?? []"
+        [patientId]="patientId"
+      />
+      <app-diets-section
+        [diets]="medicalRecord?.diets ?? []"
+        [patientId]="patientId"
+      />
 
       <!-- <app-accordion
         [headerTitle]="getMedicamentsTotal() + ' Medicamentos'"
