@@ -39,4 +39,12 @@ export class PatientsService {
       },
     });
   }
+
+  async deletePatient(id: number) {
+    await axios.delete(`${this.baseUrl}/pacientes/${id}`, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
+  }
 }

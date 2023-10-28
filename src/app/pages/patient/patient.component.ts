@@ -202,6 +202,11 @@ export class PatientComponent implements OnInit {
     this.updatePatient();
   }
 
+  async deletePatient() {
+    await this.patientsService.deletePatient(this.patientId);
+    alert('Paciente excluído com sucesso!');
+  }
+
   async registerPatient() {
     const formatDate = (date: string) => {
       return date.split('-').reverse().join('/');
