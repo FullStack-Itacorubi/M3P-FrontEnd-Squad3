@@ -48,6 +48,7 @@ import { QueriesSectionComponent } from './components/patient-medical-record/que
 import { ExamsSectionComponent } from './components/patient-medical-record/exams-section/exams-section.component';
 import { ExercisesSectionComponent } from './components/patient-medical-record/exercises-section/exercises-section.component';
 import { DietsSectionComponent } from './components/patient-medical-record/diets-section/diets-section.component';
+import { ToastAlertComponent } from './shared/components/toast-alert/toast-alert.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { DietsSectionComponent } from './components/patient-medical-record/diets
     ExamsSectionComponent,
     ExercisesSectionComponent,
     DietsSectionComponent,
+    ToastAlertComponent,
   ],
 
   imports: [
