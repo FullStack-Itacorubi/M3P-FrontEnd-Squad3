@@ -1,10 +1,10 @@
 <div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
   <div class="flex-grow p-4 overflow-y-auto">
     <div class="container py-4 pr-2 m-auto text-slate-800 pl-14">
-      <form [formGroup]="formPatientRegister" (ngSubmit)="registerPatient()">
+      <form [formGroup]="formPatientRegister" (ngSubmit)="savePatient()">
         <h3 class="my-2 text-xl font-bold">Cadastro de paciente</h3>
 
-        <h3 class="mb-3 my-3 font-semibold">Informações pessoais</h3>
+        <h3 class="my-3 mb-3 font-semibold">Informações pessoais</h3>
 
         <div class="gap-2 md:flex">
           <div class="w-6/12 input-wrapper">
@@ -39,8 +39,8 @@
               formControlName="genre"
             >
               <option disabled selected></option>
-              <option value="CISGENDER">Cisgenero</option>
-              <option value="TRASNGENDER">Transgênero</option>
+              <option value="CISGENDER">Cisgênero</option>
+              <option value="TRANSGENDER">Transgênero</option>
               <option value="NONBINARY">Não-binário</option>
             </select>
             <div
@@ -222,7 +222,7 @@
           </div>
         </div>
 
-        <h3 class="mb-3 my-3 font-semibold">Informações de saúde</h3>
+        <h3 class="my-3 mb-3 font-semibold">Informações de saúde</h3>
 
         <div class="gap-2 md:flex">
           <div class="w-4/12 input-wrapper">
@@ -302,7 +302,7 @@
           </div>
         </div>
 
-        <h3 class="mb-3 my-3 font-semibold">Informações de endereço</h3>
+        <h3 class="my-3 mb-3 font-semibold">Informações de endereço</h3>
 
         <div class="gap-2 md:flex">
           <div class="w-6/12 input-wrapper">
@@ -433,7 +433,11 @@
             />
           </div>
         </div>
-        <app-form-buttons (handleEdit)="formPatientRegister = initPatientForm()" />
+        <app-form-buttons
+          (handleEdit)="formPatientRegister = initPatientForm()"
+          (handleDelete)="deletePatient()"
+          [isCreating]="isCreating"
+        />
       </form>
     </div>
   </div>

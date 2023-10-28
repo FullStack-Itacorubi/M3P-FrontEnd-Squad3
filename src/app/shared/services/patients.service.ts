@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 export class PatientsService {
   private baseUrl = environment.API_BASE_URL;
 
-  constructor( private authService: AuthService ) {}
+  constructor(private authService: AuthService) {}
 
   async getPatients(filter?: string) {
     const patients = await axios.get<Patient[]>(`${this.baseUrl}/pacientes`);
@@ -20,11 +20,31 @@ export class PatientsService {
     );
   }
 
-  async savePatients(patient: Patient){
+  async savePatient(patient: Patient) {
     await axios.post(`${this.baseUrl}/pacientes`, patient, {
       headers: {
-        userId: this.authService.getUserId()
-      }
-    })
+        userId: this.authService.getUserId(),
+      },
+    });
+  }
+
+  async getPatientById(id: number) {
+    return (await axios.get<Patient>(`${this.baseUrl}/pacientes/${id}`)).data;
+  }
+
+  async updatePatient(patient: Patient) {
+    await axios.put(`${this.baseUrl}/pacientes/${patient.id}`, patient, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
+  }
+
+  async deletePatient(id: number) {
+    await axios.delete(`${this.baseUrl}/pacientes/${id}`, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
   }
 }

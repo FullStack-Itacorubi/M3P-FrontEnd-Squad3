@@ -10,12 +10,15 @@ export class FormButtonsComponent {
   @Output() handleEdit = new EventEmitter();
   @Output() handleDelete = new EventEmitter();
   @Output() handleSave = new EventEmitter();
+  @Input() disableDelete = false;
 
   onEdit() {
     this.handleEdit.emit();
   }
 
   onDelete() {
+    console.log(this.disableDelete);
+
     this.handleDelete.emit();
   }
 
