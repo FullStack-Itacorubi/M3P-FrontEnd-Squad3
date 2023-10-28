@@ -70,8 +70,8 @@ export type Exercise = {
 export type Medicament = {
   id?: number;
   name: string;
-  date: string;
-  time: string;
+  date?: string;
+  time?: string;
   type: string;
   quantity: number;
   unit: string;

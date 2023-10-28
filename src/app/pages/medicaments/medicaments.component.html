@@ -1,22 +1,22 @@
 <div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
   <div class="flex-grow p-4 overflow-y-auto">
     <div class="container py-4 pr-2 m-auto text-slate-800 pl-14">
-      <form [formGroup]="formMedicaments" (ngSubmit)="registerMedicament()">
+      <form [formGroup]="formMedicaments" (ngSubmit)="saveMedicament()">
         <h3 class="my-2 text-xl font-bold">Cadastro de medicamentos</h3>
 
         <div class="gap-2 md:flex">
           <div class="w-8/12 input-wrapper">
-            <label for="medicamentsName">Nome do medicamento</label>
+            <label for="name">Nome do medicamento</label>
             <input
               type="text"
               class="input-field"
-              name="medicamentsName"
-              id="medicamentsName"
-              formControlName="medicamentsName"
+              name="name"
+              id="name"
+              formControlName="name"
             />
             <div
               class="font-semibold text-red-500"
-              *ngIf="formMedicaments.get('medicamentsName')?.errors?.['required'] && formMedicaments.get('medicamentsName')?.touched"
+              *ngIf="formMedicaments.get('name')?.errors?.['required'] && formMedicaments.get('name')?.touched"
             >
               <p>Por favor insira o nome do medicamento!</p>
             </div>
@@ -88,17 +88,17 @@
             </div>
           </div>
           <div class="w-3/12 input-wrapper">
-            <label for="amount">Quantidade</label>
+            <label for="quantity">Quantidade</label>
             <input
               type="number"
               class="input-field"
-              name="amount"
-              id="amount"
-              formControlName="amount"
+              name="quantity"
+              id="quantity"
+              formControlName="quantity"
             />
             <div
               class="font-semibold text-red-500"
-              *ngIf="formMedicaments.get('amount')?.errors?.['required'] && formMedicaments.get('amount')?.touched"
+              *ngIf="formMedicaments.get('quantity')?.errors?.['required'] && formMedicaments.get('quantity')?.touched"
             >
               <p>Por favor insira a quantidade do medicamento!</p>
             </div>
@@ -113,11 +113,11 @@
               formControlName="unit"
             >
               <option disabled selected></option>
-              <option value="MG">Miligrama</option>
-              <option value="MCG">Micrograma</option>
-              <option value="G">Grama</option>
-              <option value="ML">Mililitro</option>
-              <option value="PERCENTAGE">Porcento</option>
+              <option value="MG">mg</option>
+              <option value="MCG">mcg</option>
+              <option value="G">g</option>
+              <option value="ML">ml</option>
+              <option value="PERCENTAGE">%</option>
             </select>
             <div
               class="font-semibold text-red-500"
@@ -170,7 +170,11 @@
         </div>
 
         <app-form-buttons
-          (handleEdit)="formMedicaments = initMedicamentsForm()"
+          (handleEdit)="
+            isCreating ? (formMedicaments = initMedicamentsForm()) : {}
+          "
+          (handleDelete)="deleteMedicament()"
+          [isCreating]="isCreating"
         />
       </form>
     </div>
