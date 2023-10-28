@@ -5,11 +5,11 @@ import {
   Validators
 } from '@angular/forms';
 
-import { IOptionsModal } from 'src/app/shared/interfaces/options-modal.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { ContactAdminComponent } from 'src/app/components/contact-admin/contact-admin.component';
 import { ResetPasswordComponent } from 'src/app/components/reset-password/reset-password.component';
+import { OptionsModal } from 'src/app/shared/utils/types';
 
 @Component( {
   selector: 'app-login',
@@ -18,7 +18,7 @@ import { ResetPasswordComponent } from 'src/app/components/reset-password/reset-
 } )
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  options: IOptionsModal = {
+  options: OptionsModal = {
     animations: {
       modal: {
         enter: 'enter-scaling 0.3s ease-out',

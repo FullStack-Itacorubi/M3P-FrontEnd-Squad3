@@ -9,14 +9,14 @@ import {
 } from '@angular/core';
 
 import { GenericModalComponent } from 'src/app/shared/components/generic-modal/generic-modal.component';
-import { IOptionsModal } from '../interfaces/options-modal.interface';
+import { OptionsModal } from '../utils/types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModalService {
   newModalComponent!: ComponentRef<GenericModalComponent>;
-  options!: IOptionsModal | undefined;
+  options!: OptionsModal | undefined;
   response?: any;
   responseEmitter?: EventEmitter<any>;
 
@@ -25,9 +25,9 @@ export class ModalService {
     private injector: EnvironmentInjector
   ) {}
 
-  open<C>(component: Type<C>, options?: IOptionsModal) {
+  open<C>(component: Type<C>, options?: OptionsModal) {
     this.openWithComponent(component);
-    this.options = options as IOptionsModal | undefined;
+    this.options = options as OptionsModal | undefined;
   }
 
   private openWithComponent(component: Type<unknown>) {
