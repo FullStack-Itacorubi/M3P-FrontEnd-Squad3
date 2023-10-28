@@ -7,7 +7,7 @@ import { Patient } from 'src/app/shared/utils/types';
 
 const GenreTypeValues = {
   Cisgênero: 'CISGENDER',
-  Transgênero: 'TRASNGENDER',
+  Transgênero: 'TRANSGENDER',
   'Não-binário': 'NONBINARY',
 } as const;
 
@@ -128,7 +128,9 @@ export class PatientComponent implements OnInit {
     const civilStatusType = patient.civilStatus as CivilStatusType;
     this.formPatientRegister.get('fullName')?.setValue(patient.fullName);
     this.formPatientRegister.get('genre')?.setValue(GenreTypeValues[genreType]);
-    this.formPatientRegister.get('birthday')?.setValue(patient.birthday);
+    this.formPatientRegister
+      .get('birthday')
+      ?.setValue(patient.birthday.split('/').reverse().join('-'));
     this.formPatientRegister.get('cpf')?.setValue(patient.cpf);
     this.formPatientRegister.get('cpf')?.disable();
     this.formPatientRegister.get('rg')?.setValue(patient.rg);
@@ -159,7 +161,15 @@ export class PatientComponent implements OnInit {
       ?.setValue(patient.healthInsuranceNumber ?? null);
     this.formPatientRegister
       .get('healthInsuranceValidity')
-      ?.setValue(patient.healthInsuranceValidity ?? null);
+      ?.setValue(
+        patient.healthInsuranceValidity
+          ? patient.healthInsuranceValidity
+              .split('/')
+              .slice(1)
+              .reverse()
+              .join('-')
+          : null
+      );
     this.formPatientRegister
       .get('publicPlace')
       ?.setValue(patient.address.publicPlace);
@@ -178,32 +188,21 @@ export class PatientComponent implements OnInit {
       ?.setValue(patient.address.referencePoint ?? null);
   }
 
-  checkCep() {
-    const cep = this.formPatientRegister.get('cep')?.value;
-    if (cep) {
-      this.cepService
-        .search(cep)
-        .subscribe((data) => this.populateAddress(data));
-    }
-  }
-
-  populateAddress(data: any) {
-    this.formPatientRegister.patchValue({
-      publicPlace: data.logradouro,
-      neighborhood: data.bairro,
-      city: data.localidade,
-      state: data.uf,
-    });
-  }
-
-  async registerPatient() {
+  savePatient() {
     if (!this.formPatientRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
       return;
-    } else {
-      alert('Dados cadastrado com sucesso!');
     }
 
+    if (this.isCreating) {
+      this.registerPatient();
+      return;
+    }
+
+    this.updatePatient();
+  }
+
+  async registerPatient() {
     const formatDate = (date: string) => {
       return date.split('-').reverse().join('/');
     };
@@ -212,9 +211,15 @@ export class PatientComponent implements OnInit {
       this.formPatientRegister.value.birthday!
     );
 
+    const formatValidityDate = (date: string) => {
+      const dateParts = date.split('-').reverse();
+      dateParts[1] = dateParts[1].slice(2);
+      return dateParts.join('/');
+    };
+
     let healthInsuranceValidityFormated;
     if (this.formPatientRegister.value.healthInsuranceValidity) {
-      healthInsuranceValidityFormated = formatDate(
+      healthInsuranceValidityFormated = formatValidityDate(
         this.formPatientRegister.value.healthInsuranceValidity!
       );
     }
@@ -272,7 +277,83 @@ export class PatientComponent implements OnInit {
       },
     };
 
+    await this.patientsService.savePatient(patient);
     this.formPatientRegister = this.initPatientForm();
-    await this.patientsService.savePatients(patient);
+    alert('Paciente cadastrado com sucesso!');
+  }
+
+  async updatePatient() {
+    const formatDate = (date: string) => {
+      return date.split('-').reverse().join('/');
+    };
+
+    const birthdayFormated = formatDate(
+      this.formPatientRegister.value.birthday!
+    );
+
+    const formatValidityDate = (date: string) => {
+      const dateParts = date.split('-').reverse();
+      dateParts[1] = dateParts[1].slice(2);
+      return dateParts.join('/');
+    };
+
+    let healthInsuranceValidityFormated;
+    if (this.formPatientRegister.value.healthInsuranceValidity) {
+      healthInsuranceValidityFormated = formatValidityDate(
+        this.formPatientRegister.value.healthInsuranceValidity!
+      );
+    }
+
+    const patient: Patient = {
+      id: this.patientId,
+      fullName: this.formPatientRegister.value.fullName!,
+      genre: this.formPatientRegister.value.genre!,
+      birthday: birthdayFormated,
+      cpf: this.formPatientRegister.get('cpf')?.value!,
+      rg: this.formPatientRegister.value.rg!,
+      civilStatus: this.formPatientRegister.value.civilStatus!,
+      placeOfBirth: this.formPatientRegister.value.placeOfBirth!,
+      email: this.formPatientRegister.value.email!,
+      status: this.formPatientRegister.value.status!,
+      phone: this.formPatientRegister.value.phone!,
+      emergencyContact: this.formPatientRegister.value.emergencyContact!,
+      allergyList: this.formPatientRegister.value.allergyList!,
+      specificCareList: this.formPatientRegister.value.specificCareList!,
+      healthInsurance: this.formPatientRegister.value.healthInsurance!,
+      healthInsuranceNumber:
+        this.formPatientRegister.value.healthInsuranceNumber!,
+      healthInsuranceValidity: healthInsuranceValidityFormated,
+      address: {
+        publicPlace: this.formPatientRegister.value.publicPlace!,
+        number: this.formPatientRegister.value.number!,
+        neighborhood: this.formPatientRegister.value.neighborhood!,
+        city: this.formPatientRegister.value.city!,
+        state: this.formPatientRegister.value.state!,
+        cep: this.formPatientRegister.value.cep!,
+        complement: this.formPatientRegister.value.complement!,
+        referencePoint: this.formPatientRegister.value.referencePoint!,
+      },
+    };
+
+    await this.patientsService.updatePatient(patient);
+    alert('Paciente editado com sucesso!');
+  }
+
+  checkCep() {
+    const cep = this.formPatientRegister.get('cep')?.value;
+    if (cep) {
+      this.cepService
+        .search(cep)
+        .subscribe((data) => this.populateAddress(data));
+    }
+  }
+
+  private populateAddress(data: any) {
+    this.formPatientRegister.patchValue({
+      publicPlace: data.logradouro,
+      neighborhood: data.bairro,
+      city: data.localidade,
+      state: data.uf,
+    });
   }
 }

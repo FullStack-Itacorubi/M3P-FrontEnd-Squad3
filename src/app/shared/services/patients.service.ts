@@ -20,7 +20,7 @@ export class PatientsService {
     );
   }
 
-  async savePatients(patient: Patient) {
+  async savePatient(patient: Patient) {
     await axios.post(`${this.baseUrl}/pacientes`, patient, {
       headers: {
         userId: this.authService.getUserId(),
@@ -30,5 +30,13 @@ export class PatientsService {
 
   async getPatientById(id: number) {
     return (await axios.get<Patient>(`${this.baseUrl}/pacientes/${id}`)).data;
+  }
+
+  async updatePatient(patient: Patient) {
+    await axios.put(`${this.baseUrl}/pacientes/${patient.id}`, patient, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
   }
 }
