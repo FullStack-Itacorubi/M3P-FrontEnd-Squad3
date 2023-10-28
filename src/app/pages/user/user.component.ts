@@ -93,6 +93,7 @@ export class UserComponent implements OnInit {
     this.formUserRegister.get('phone')?.setValue(user.phone);
     this.formUserRegister.get('type')?.setValue(UserTypeValues[userType]);
     this.formUserRegister.get('email')?.setValue(user.email);
+    this.formUserRegister.get('email')?.disable();
     this.formUserRegister.get('password')?.clearValidators();
     this.formUserRegister.get('password')?.updateValueAndValidity();
   }
