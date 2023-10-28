@@ -127,3 +127,8 @@ type Address = {
   neighborhood: string;
   referencePoint?: string;
 };
+
+export type Logs = {
+  message: string;
+  timestamp: string;
+}
