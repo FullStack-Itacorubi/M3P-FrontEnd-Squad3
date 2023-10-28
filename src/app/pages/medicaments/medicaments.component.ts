@@ -134,7 +134,12 @@ export class MedicamentsComponent implements OnInit {
     this.updateMedicament();
   }
 
-  private registerMedicament() {
+  async deleteMedicament() {
+    await this.medicamentService.deleteMedicament(this.medicamentId);
+    alert('Medicamento excluído com sucesso!');
+  }
+
+  private async registerMedicament() {
     const dateFormated = this.formMedicaments.value
       .date!.split('-')
       .reverse()
@@ -151,12 +156,12 @@ export class MedicamentsComponent implements OnInit {
       status: this.formMedicaments.value.status!,
     };
 
-    this.medicamentService.saveMedicament(medicament);
+    await this.medicamentService.saveMedicament(medicament);
     this.initMedicamentsForm();
     alert('Medicamento cadastrado com sucesso!');
   }
 
-  private updateMedicament() {
+  private async updateMedicament() {
     const medicament: Medicament = {
       id: this.medicamentId,
       name: this.formMedicaments.value.name!,
@@ -167,7 +172,7 @@ export class MedicamentsComponent implements OnInit {
       status: this.formMedicaments.value.status!,
     };
 
-    this.medicamentService.updateMedicament(medicament);
+    await this.medicamentService.updateMedicament(medicament);
     alert('Medicamento editado com sucesso!');
   }
 }

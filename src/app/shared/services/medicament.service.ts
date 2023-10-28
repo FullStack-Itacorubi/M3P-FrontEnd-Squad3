@@ -30,7 +30,6 @@ export class MedicamentService {
   }
 
   async updateMedicament(medicament: Medicament) {
-    console.log(medicament);
     await axios.put(
       `${this.baseUrl}/medicamentos/${medicament.id}`,
       medicament,
@@ -40,5 +39,13 @@ export class MedicamentService {
         },
       }
     );
+  }
+
+  async deleteMedicament(id: number) {
+    await axios.delete(`${this.baseUrl}/medicamentos/${id}`, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
   }
 }

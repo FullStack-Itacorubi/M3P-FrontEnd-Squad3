@@ -173,6 +173,7 @@
           (handleEdit)="
             isCreating ? (formMedicaments = initMedicamentsForm()) : {}
           "
+          (handleDelete)="deleteMedicament()"
           [isCreating]="isCreating"
         />
       </form>
