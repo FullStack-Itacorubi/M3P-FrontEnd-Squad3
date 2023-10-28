@@ -1,7 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { User } from 'src/app/shared/utils/types';
+
+const GenreTypeValues = {
+  Cisgênero: 'CISGENDER',
+  Transgênero: 'TRANSGENDER',
+  'Não-binário': 'NONBINARY',
+} as const;
+
+type GenreType = 'Cisgênero' | 'Transgênero' | 'Não-binário';
+
+const UserTypeValues = {
+  Administrador: 'ADMINISTRATOR',
+  Médico: 'DOCTOR',
+  Enfermeiro: 'NURSE',
+} as const;
+
+type UserType = 'Administrador' | 'Médico' | 'Enfermeiro';
 
 type Userinfos = {
   fullName: FormControl<string | null>;
@@ -12,18 +29,34 @@ type Userinfos = {
   type: FormControl<string | null>;
   email: FormControl<string | null>;
   password: FormControl<string | null>;
-}
+};
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
   formUserRegister: FormGroup<Userinfos>;
+  isCreating = true;
+  userId = -1;
 
-  constructor(private usersService: UsersService) {
+  constructor(
+    private usersService: UsersService,
+    private route: ActivatedRoute
+  ) {
     this.formUserRegister = this.initUserForm();
+    if (Object.hasOwn(route.snapshot.params, 'userId')) {
+      this.isCreating = false;
+      this.userId = route.snapshot.params['userId'];
+    }
+  }
+
+  async ngOnInit() {
+    if (this.isCreating) return;
+
+    const user = await this.usersService.getUserById(this.userId);
+    this.populateForm(user);
   }
 
   initUserForm() {
@@ -34,7 +67,9 @@ export class UserComponent {
         Validators.maxLength(64),
       ]),
       genre: new FormControl('', [Validators.required]),
-      status: new FormControl({ value: true, disabled: true }, [Validators.required]),
+      status: new FormControl({ value: true, disabled: true }, [
+        Validators.required,
+      ]),
       cpf: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       type: new FormControl('', [Validators.required]),
@@ -46,10 +81,24 @@ export class UserComponent {
     });
   }
 
+  populateForm(user: User) {
+    const genreType = user.genre as GenreType;
+    const userType = user.type as UserType;
+    this.formUserRegister.get('fullName')?.setValue(user.fullName);
+    this.formUserRegister.get('genre')?.setValue(GenreTypeValues[genreType]);
+    this.formUserRegister.get('status')?.setValue(user.status);
+    this.formUserRegister.get('status')?.enable();
+    this.formUserRegister.get('cpf')?.setValue(user.cpf);
+    this.formUserRegister.get('cpf')?.disable();
+    this.formUserRegister.get('phone')?.setValue(user.phone);
+    this.formUserRegister.get('type')?.setValue(UserTypeValues[userType]);
+    this.formUserRegister.get('email')?.setValue(user.email);
+  }
+
   async registerUser() {
     if (!this.formUserRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
-      return
+      return;
     } else {
       alert('Dados cadastrado com sucesso!');
     }

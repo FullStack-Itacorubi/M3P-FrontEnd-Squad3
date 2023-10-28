@@ -27,4 +27,8 @@ export class UsersService {
       },
     });
   }
+
+  async getUserById(id: number) {
+    return (await axios.get<User>(`${this.baseUrl}/usuarios/${id}`)).data;
+  }
 }
