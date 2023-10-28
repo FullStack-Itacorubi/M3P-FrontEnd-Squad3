@@ -178,6 +178,7 @@
         </div>
         <app-form-buttons
           (handleEdit)="isCreating ? (formUserRegister = initUserForm()) : {}"
+          (handleDelete)="deleteUser()"
           [isCreating]="isCreating"
         />
       </form>

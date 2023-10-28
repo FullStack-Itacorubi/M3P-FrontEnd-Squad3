@@ -39,4 +39,12 @@ export class UsersService {
       },
     });
   }
+
+  async deleteUser(id: number) {
+    await axios.delete(`${this.baseUrl}/usuarios/${id}`, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
+  }
 }

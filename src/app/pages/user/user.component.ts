@@ -111,6 +111,11 @@ export class UserComponent implements OnInit {
     this.updateUser();
   }
 
+  async deleteUser() {
+    await this.usersService.deleteUser(this.userId);
+    alert('Usuário excluído com sucesso!');
+  }
+
   async registerUser() {
     const formatPhone = (phone: string) => {
       const ddd = phone.substring(0, 2);
