@@ -93,16 +93,25 @@ export class UserComponent implements OnInit {
     this.formUserRegister.get('phone')?.setValue(user.phone);
     this.formUserRegister.get('type')?.setValue(UserTypeValues[userType]);
     this.formUserRegister.get('email')?.setValue(user.email);
+    this.formUserRegister.get('password')?.clearValidators();
+    this.formUserRegister.get('password')?.updateValueAndValidity();
   }
 
-  async registerUser() {
+  saveUser() {
     if (!this.formUserRegister.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
       return;
-    } else {
-      alert('Dados cadastrado com sucesso!');
     }
 
+    if (this.isCreating) {
+      this.registerUser();
+      return;
+    }
+
+    this.updateUser();
+  }
+
+  async registerUser() {
     const formatPhone = (phone: string) => {
       const ddd = phone.substring(0, 2);
       const isolated = phone.substring(2, 3);
@@ -116,7 +125,7 @@ export class UserComponent implements OnInit {
     const user: User = {
       fullName: this.formUserRegister.value.fullName!,
       genre: this.formUserRegister.value.genre!,
-      status: this.formUserRegister.get('status')?.value!,
+      status: this.formUserRegister.value.status!,
       cpf: this.formUserRegister.value.cpf!,
       phone: phoneFormated,
       type: this.formUserRegister.value.type!,
@@ -124,7 +133,25 @@ export class UserComponent implements OnInit {
       password: this.formUserRegister.value.password!,
     };
 
+    await this.usersService.saveUser(user);
     this.formUserRegister = this.initUserForm();
-    await this.usersService.saveUsers(user);
+    alert('Usuário cadastrado com sucesso!');
+  }
+
+  async updateUser() {
+    const user: User = {
+      id: this.userId,
+      fullName: this.formUserRegister.value.fullName!,
+      genre: this.formUserRegister.value.genre!,
+      status: this.formUserRegister.value.status!,
+      cpf: this.formUserRegister.get('cpf')?.value!,
+      phone: this.formUserRegister.value.phone!,
+      type: this.formUserRegister.value.type!,
+      email: this.formUserRegister.value.email!,
+      password: this.formUserRegister.value.password!,
+    };
+
+    await this.usersService.updateUser(user);
+    alert('Usuário editado com sucesso!');
   }
 }
