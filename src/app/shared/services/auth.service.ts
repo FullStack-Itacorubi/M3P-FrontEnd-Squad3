@@ -62,8 +62,7 @@ export class AuthService {
     this.userAuthenticated = JSON.parse(userStr);
   }
 
-  getUserId(){
+  getUserId() {
     return this.userAuthenticated?.id;
   }
 }
-
