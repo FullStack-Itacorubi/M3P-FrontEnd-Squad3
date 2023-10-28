@@ -26,76 +26,93 @@ const routes: Routes = [
       {
         path: '',
         component: StatsComponent,
+        title: 'Dashboard',
       },
       {
         path: 'consultas',
         component: QueryComponent,
         canActivate: [doctorGuard],
+        title: 'Consultas',
       },
       {
         path: 'consultas/:queryId',
         component: QueryComponent,
         canActivate: [doctorGuard],
+        title: 'Consultas',
       },
       {
         path: 'exercicios',
         component: ExerciseComponent,
+        title: 'Exercícios',
       },
       {
         path: 'exercicios/:exerciseId',
         component: ExerciseComponent,
+        title: 'Exercícios',
       },
       {
         path: 'dietas',
         component: DietComponent,
+        title: 'Dietas',
       },
       {
         path: 'dietas/:dietId',
         component: DietComponent,
+        title: 'Dietas',
       },
       {
         path: 'pacientes',
         component: PatientComponent,
+        title: 'Pacientes',
       },
       {
         path: 'pacientes/:patientId',
         component: PatientComponent,
+        title: 'Pacientes',
       },
       {
         path: 'exames',
         component: ExamComponent,
         canActivate: [doctorGuard],
+        title: 'Exames',
       },
       {
         path: 'exames/:examId',
         component: ExamComponent,
         canActivate: [doctorGuard],
+        title: 'Exames',
       },
       {
         path: 'usuarios',
         component: UserComponent,
         canActivate: [adminGuard],
+        title: 'Usuários',
       },
       {
         path: 'usuarios/:userId',
         component: UserComponent,
         canActivate: [adminGuard],
+        title: 'Usuários',
       },
       {
         path: 'prontuarios',
         component: MedicalRecordsComponent,
+        title: 'Prontuários',
       },
       {
         path: 'prontuarios/:patientId',
         component: PatientMedicalRecordComponent,
+        title: 'Prontuários',
       },
       {
         path: 'medicamentos',
         component: MedicamentsComponent,
+        title: 'Medicamentos',
       },
       {
         path: 'medicamentos/:medicamentId',
         component: MedicamentsComponent,
+        title: 'Medicamentos',
       },
     ],
   },
