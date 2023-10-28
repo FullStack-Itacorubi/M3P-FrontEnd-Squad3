@@ -108,8 +108,10 @@ export class MedicamentsComponent implements OnInit {
     const type = medicament.type as MedicamentType;
     const unit = medicament.unit as MedicamentUnit;
     this.formMedicaments.get('name')?.setValue(medicament.name);
-    this.formMedicaments.get('date')?.setValue(medicament.date);
-    this.formMedicaments.get('time')?.setValue(medicament.time);
+    this.formMedicaments.get('date')?.setValue(medicament.date ?? null);
+    this.formMedicaments.get('date')?.disable();
+    this.formMedicaments.get('time')?.setValue(medicament.time ?? null);
+    this.formMedicaments.get('time')?.disable();
     this.formMedicaments.get('type')?.setValue(MedicamentTypesValues[type]);
     this.formMedicaments.get('quantity')?.setValue(medicament.quantity);
     this.formMedicaments.get('unit')?.setValue(MedicamentUnitsValues[unit]);
@@ -118,14 +120,21 @@ export class MedicamentsComponent implements OnInit {
     this.formMedicaments.get('status')?.enable();
   }
 
-  registerMedicament() {
+  saveMedicament() {
     if (!this.formMedicaments.valid) {
       alert('Formulário inválido, por favor insira ou corrija seus dados!');
       return;
-    } else {
-      alert('Dados cadastrados com sucesso!');
     }
 
+    if (this.isCreating) {
+      this.registerMedicament();
+      return;
+    }
+
+    this.updateMedicament();
+  }
+
+  private registerMedicament() {
     const dateFormated = this.formMedicaments.value
       .date!.split('-')
       .reverse()
@@ -142,8 +151,23 @@ export class MedicamentsComponent implements OnInit {
       status: this.formMedicaments.value.status!,
     };
 
-    this.medicamentService.saveMedicaments(medicament);
-
+    this.medicamentService.saveMedicament(medicament);
     this.initMedicamentsForm();
+    alert('Medicamento cadastrado com sucesso!');
+  }
+
+  private updateMedicament() {
+    const medicament: Medicament = {
+      id: this.medicamentId,
+      name: this.formMedicaments.value.name!,
+      type: this.formMedicaments.value.type!,
+      quantity: this.formMedicaments.value.quantity!,
+      unit: this.formMedicaments.value.unit!,
+      observations: this.formMedicaments.value.observations!,
+      status: this.formMedicaments.value.status!,
+    };
+
+    this.medicamentService.updateMedicament(medicament);
+    alert('Medicamento editado com sucesso!');
   }
 }
