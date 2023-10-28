@@ -8,4 +8,5 @@ import { Diet } from 'src/app/shared/utils/types';
 })
 export class DietsSectionComponent {
   @Input() diets: Diet[] = [];
+  @Input() patientId = -1;
 }
