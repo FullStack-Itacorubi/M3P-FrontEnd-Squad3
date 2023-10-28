@@ -8,4 +8,5 @@ import { Exam } from 'src/app/shared/utils/types';
 })
 export class ExamsSectionComponent {
   @Input() exams: Exam[] = [];
+  @Input() patientId = -1;
 }
