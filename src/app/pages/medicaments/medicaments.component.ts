@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MedicamentService } from 'src/app/shared/services/medicament.service';
 import { Medicament } from 'src/app/shared/utils/types';
 
@@ -19,11 +20,29 @@ type Medicamentsinfos = {
   templateUrl: './medicaments.component.html',
   styleUrls: ['./medicaments.component.css', '../../app.component.css'],
 })
-export class MedicamentsComponent {
+export class MedicamentsComponent implements OnInit {
   formMedicaments!: FormGroup<Medicamentsinfos>;
+  isCreating = true;
+  medicamentId = -1;
 
-  constructor(private medicamentService: MedicamentService) {
+  constructor(
+    private medicamentService: MedicamentService,
+    route: ActivatedRoute
+  ) {
     this.formMedicaments = this.initMedicamentsForm();
+    if (Object.hasOwn(route.snapshot.params, 'medicamentId')) {
+      this.isCreating = false;
+      this.medicamentId = route.snapshot.params['medicamentId'];
+    }
+  }
+
+  async ngOnInit() {
+    if (this.isCreating) return;
+
+    const medicament = await this.medicamentService.getMedicamentById(
+      this.medicamentId
+    );
+    this.populateForm(medicament);
   }
 
   initMedicamentsForm() {
@@ -53,6 +72,8 @@ export class MedicamentsComponent {
       ]),
     });
   }
+
+  populateForm(medicament: Medicament) {}
 
   registerMedicament() {
     if (!this.formMedicaments.valid) {

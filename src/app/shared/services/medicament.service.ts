@@ -23,4 +23,9 @@ export class MedicamentService {
   async getMedicaments() {
     return (await axios.get<Medicament[]>(`${this.baseUrl}/medicamentos`)).data;
   }
+
+  async getMedicamentById(id: number) {
+    return (await axios.get<Medicament>(`${this.baseUrl}/medicamentos/${id}`))
+      .data;
+  }
 }
