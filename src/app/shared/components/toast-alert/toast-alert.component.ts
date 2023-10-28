@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from '../../services/alert.service';
 
 export type ToastMessage = {
   text: string;
@@ -10,18 +11,16 @@ export type ToastMessage = {
   templateUrl: './toast-alert.component.html',
   styleUrls: ['./toast-alert.component.css'],
 })
-export class ToastAlertComponent implements OnInit {
+export class ToastAlertComponent {
   messages: ToastMessage[] = [];
   isShowing = false;
   endAnimation = false;
   removeHandler?: ReturnType<typeof setTimeout>;
 
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.addMessage({ text: 'Usuário cadastrado com sucesso', class: '' });
-      this.addMessage({ text: 'Paciente cadastrado com sucesso', class: '' });
-      this.addMessage({ text: 'Exame cadastrado com sucesso', class: '' });
-    }, 2000);
+  constructor(private alertService: AlertService) {
+    alertService.getEmitter().subscribe((message) => {
+      this.addMessage(message);
+    });
   }
 
   addMessage(message: ToastMessage) {
