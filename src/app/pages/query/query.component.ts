@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MedicamentModalComponent } from 'src/app/components/medicament-modal/medicament-modal.component';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { MedicalRecordsService } from 'src/app/shared/services/medical-records.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
@@ -39,10 +40,10 @@ export class QueryComponent implements OnInit {
   medicaments: Medicament[] = [];
 
   constructor(
+    private alertService: AlertService,
     private patientService: PatientsService,
     private queryService: QueryService,
     private modalService: ModalService,
-    private medicalRecordService: MedicalRecordsService,
     private route: ActivatedRoute
   ) {
     this.formQuery = this.initQueryForm();
@@ -107,7 +108,10 @@ export class QueryComponent implements OnInit {
 
   saveQuery() {
     if (!this.formQuery.valid) {
-      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      this.alertService.emit({
+        text: 'Formulário inválido, por favor insira ou corrija seus dados!',
+        class: 'bg-red-600 text-white border-0',
+      });
       return;
     }
 
@@ -121,7 +125,9 @@ export class QueryComponent implements OnInit {
 
   deleteQuery() {
     this.queryService.deleteQuery(this.queryId, window.history.state.patientId);
-    alert('Consulta excluída com sucesso!');
+    this.alertService.emit({
+      text: 'Consulta excluída com sucesso!',
+    });
   }
 
   registerQuery() {
@@ -145,7 +151,9 @@ export class QueryComponent implements OnInit {
 
     this.queryService.saveQuery(query);
     this.formQuery = this.initQueryForm();
-    alert('Consulta cadastrada com sucesso!');
+    this.alertService.emit({
+      text: 'Consulta cadastrada com sucesso!',
+    });
   }
 
   updateQuery() {
@@ -169,7 +177,9 @@ export class QueryComponent implements OnInit {
     };
 
     this.queryService.updateQuery(query);
-    alert('Consulta editada com sucesso!');
+    this.alertService.emit({
+      text: 'Consulta editada com sucesso!',
+    });
   }
 
   selectMedicament() {
