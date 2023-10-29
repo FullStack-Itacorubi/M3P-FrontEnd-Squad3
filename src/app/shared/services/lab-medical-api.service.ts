@@ -13,8 +13,11 @@ export class LabMedicalApiService {
   }
 
   async getAll<T>(endpoint: string, filter?: string): Promise<T[]> {
-    const list = (await this.client.get<T[]>(`/${endpoint}`)).data;
-    return list;
+    if (!filter) return (await this.client.get<T[]>(`/${endpoint}`)).data;
+    const isFilterAString = isNaN(Number(filter));
+    if (isFilterAString)
+      return (await this.client.get<T[]>(`/${endpoint}?s=${filter}`)).data;
+    return (await this.client.get<T[]>(`/${endpoint}?id=${filter}`)).data;
   }
 
   async getById<T>(endpoint: string, id: number): Promise<T> {
