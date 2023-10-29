@@ -16,7 +16,7 @@ import { OptionsModal } from '../utils/types';
 })
 export class ModalService {
   newModalComponent!: ComponentRef<GenericModalComponent>;
-  options!: OptionsModal | undefined;
+  options?: OptionsModal;
   response?: any;
   responseEmitter?: EventEmitter<any>;
 
