@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { StatsListStyle } from 'src/app/components/stats/dashboard-users-list/dashboard-users-list.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
-import { StatsService } from 'src/app/shared/services/stats.service';
-import { UsersService } from 'src/app/shared/services/users.service';
 import { endpoints } from 'src/app/shared/utils/endpoints';
 import { Patient, User } from 'src/app/shared/utils/types';
 
@@ -45,14 +43,12 @@ export class StatsComponent implements OnInit {
   userSearchInput = '';
 
   constructor(
-    private statsService: StatsService,
     private labMedicalApiService: LabMedicalApiService,
-    private usersService: UsersService,
     private authService: AuthService
   ) {}
 
   async ngOnInit() {
-    this.stats = (await this.statsService.getStats()).data;
+    this.stats = await this.labMedicalApiService.getAll(endpoints.stats);
     this.getPatients();
     this.getUsers();
   }
@@ -81,6 +77,6 @@ export class StatsComponent implements OnInit {
   }
 
   private async getUsers(filter?: string) {
-    this.users = await this.usersService.getUsers(filter);
+    this.users = await this.labMedicalApiService.getAll(endpoints.user, filter);
   }
 }
