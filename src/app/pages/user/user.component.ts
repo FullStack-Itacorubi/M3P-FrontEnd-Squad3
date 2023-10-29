@@ -3,7 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { UsersService } from 'src/app/shared/services/users.service';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
 import { User } from 'src/app/shared/utils/types';
 
 const GenreTypeValues = {
@@ -47,7 +48,7 @@ export class UserComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private authService: AuthService,
-    private usersService: UsersService,
+    private labMedicalApiService: LabMedicalApiService,
     private route: ActivatedRoute
   ) {
     this.formUserRegister = this.initUserForm();
@@ -61,7 +62,10 @@ export class UserComponent implements OnInit {
   async ngOnInit() {
     if (this.isCreating) return;
 
-    const user = await this.usersService.getUserById(this.userId);
+    const user = await this.labMedicalApiService.getById<User>(
+      endpoints.user,
+      this.userId
+    );
     this.populateForm(user);
   }
 
@@ -122,7 +126,7 @@ export class UserComponent implements OnInit {
   }
 
   async deleteUser() {
-    await this.usersService.deleteUser(this.userId);
+    await this.labMedicalApiService.delete(endpoints.user, this.userId);
     this.alertService.emit({
       text: 'Usuário excluído com sucesso!',
     });
@@ -150,7 +154,7 @@ export class UserComponent implements OnInit {
       password: this.formUserRegister.value.password!,
     };
 
-    await this.usersService.saveUser(user);
+    await this.labMedicalApiService.save(endpoints.user, user);
     this.formUserRegister = this.initUserForm();
     this.alertService.emit({
       text: 'Usuário cadastrado com sucesso!',
@@ -170,7 +174,7 @@ export class UserComponent implements OnInit {
       password: this.formUserRegister.value.password!,
     };
 
-    await this.usersService.updateUser(user);
+    await this.labMedicalApiService.update(endpoints.user, user, this.userId);
     this.alertService.emit({
       text: 'Usuário editado com sucesso!',
     });
