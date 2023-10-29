@@ -38,4 +38,10 @@ export class MedicalRecordsComponent implements OnInit {
   async ngOnInit() {
     this.medicalRecords = await this.medicalRecordsService.getMedicalRecords();
   }
+
+  async onSearchInput(filter: string) {
+    this.medicalRecords = await this.medicalRecordsService.getMedicalRecords(
+      filter
+    );
+  }
 }

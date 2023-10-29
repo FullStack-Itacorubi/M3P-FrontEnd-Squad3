@@ -11,9 +11,9 @@ export class MedicalRecordsService {
 
   constructor() {}
 
-  async getMedicalRecords() {
+  async getMedicalRecords(filter?: string) {
     const medicalRecords = await axios.get<MedicalRecord[]>(
-      `${this.baseUrl}/prontuarios`
+      `${this.baseUrl}/prontuarios${filter ? `?nome=${filter}` : ''}`
     );
 
     return medicalRecords.data;
