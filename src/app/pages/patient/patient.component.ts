@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { CepService } from 'src/app/shared/services/cep.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { Patient } from 'src/app/shared/utils/types';
@@ -66,6 +67,7 @@ export class PatientComponent implements OnInit {
   patientId = -1;
 
   constructor(
+    private alertService: AlertService,
     private patientsService: PatientsService,
     private cepService: CepService,
     private route: ActivatedRoute
@@ -190,7 +192,10 @@ export class PatientComponent implements OnInit {
 
   savePatient() {
     if (!this.formPatientRegister.valid) {
-      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      this.alertService.emit({
+        text: 'Formulário inválido, por favor insira ou corrija seus dados!',
+        class: 'bg-red-600 text-white border-0',
+      });
       return;
     }
 
@@ -204,7 +209,9 @@ export class PatientComponent implements OnInit {
 
   async deletePatient() {
     await this.patientsService.deletePatient(this.patientId);
-    alert('Paciente excluído com sucesso!');
+    this.alertService.emit({
+      text: 'Paciente excluído com sucesso!',
+    });
   }
 
   async registerPatient() {
@@ -284,7 +291,9 @@ export class PatientComponent implements OnInit {
 
     await this.patientsService.savePatient(patient);
     this.formPatientRegister = this.initPatientForm();
-    alert('Paciente cadastrado com sucesso!');
+    this.alertService.emit({
+      text: 'Paciente cadastrado com sucesso!',
+    });
   }
 
   async updatePatient() {
@@ -341,7 +350,9 @@ export class PatientComponent implements OnInit {
     };
 
     await this.patientsService.updatePatient(patient);
-    alert('Paciente editado com sucesso!');
+    this.alertService.emit({
+      text: 'Paciente editado com sucesso!',
+    });
   }
 
   checkCep() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { ExamService } from 'src/app/shared/services/exam.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { Exam, Patient } from 'src/app/shared/utils/types';
@@ -30,6 +31,7 @@ export class ExamComponent implements OnInit {
   patients: Patient[] = [];
 
   constructor(
+    private alertService: AlertService,
     private examService: ExamService,
     private patientsService: PatientsService,
     private route: ActivatedRoute
@@ -107,7 +109,10 @@ export class ExamComponent implements OnInit {
 
   saveExam() {
     if (!this.formsExamRegister.valid) {
-      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      this.alertService.emit({
+        text: 'Formulário inválido, por favor insira ou corrija seus dados!',
+        class: 'bg-red-600 text-white border-0',
+      });
       return;
     }
 
@@ -139,7 +144,9 @@ export class ExamComponent implements OnInit {
 
     this.formsExamRegister = this.initExamForm();
     await this.examService.saveExams(exam);
-    alert('Exame cadastrado com sucesso!');
+    this.alertService.emit({
+      text: 'Exame cadastrado com sucesso!',
+    });
   }
 
   async updateExam() {
@@ -162,11 +169,15 @@ export class ExamComponent implements OnInit {
     };
 
     await this.examService.updateExam(exam);
-    alert('Exame editado com sucesso!');
+    this.alertService.emit({
+      text: 'Exame editado com sucesso!',
+    });
   }
 
   deleteExam() {
     this.examService.deleteExam(this.examId, window.history.state.patientId);
-    alert('Exame excluído com sucesso!');
+    this.alertService.emit({
+      text: 'Exame excluído com sucesso!',
+    });
   }
 }

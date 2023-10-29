@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { MedicamentService } from 'src/app/shared/services/medicament.service';
 import { Medicament } from 'src/app/shared/utils/types';
 
@@ -57,6 +58,7 @@ export class MedicamentsComponent implements OnInit {
   medicamentId = -1;
 
   constructor(
+    private alertService: AlertService,
     private medicamentService: MedicamentService,
     route: ActivatedRoute
   ) {
@@ -122,7 +124,10 @@ export class MedicamentsComponent implements OnInit {
 
   saveMedicament() {
     if (!this.formMedicaments.valid) {
-      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      this.alertService.emit({
+        text: 'Formulário inválido, por favor insira ou corrija seus dados!',
+        class: 'bg-red-600 text-white border-0',
+      });
       return;
     }
 
@@ -136,7 +141,9 @@ export class MedicamentsComponent implements OnInit {
 
   async deleteMedicament() {
     await this.medicamentService.deleteMedicament(this.medicamentId);
-    alert('Medicamento excluído com sucesso!');
+    this.alertService.emit({
+      text: 'Medicamento excluído com sucesso!',
+    });
   }
 
   private async registerMedicament() {
@@ -158,7 +165,9 @@ export class MedicamentsComponent implements OnInit {
 
     await this.medicamentService.saveMedicament(medicament);
     this.initMedicamentsForm();
-    alert('Medicamento cadastrado com sucesso!');
+    this.alertService.emit({
+      text: 'Medicamento cadastrado com sucesso!',
+    });
   }
 
   private async updateMedicament() {
@@ -173,6 +182,8 @@ export class MedicamentsComponent implements OnInit {
     };
 
     await this.medicamentService.updateMedicament(medicament);
-    alert('Medicamento editado com sucesso!');
+    this.alertService.emit({
+      text: 'Medicamento editado com sucesso!',
+    });
   }
 }
