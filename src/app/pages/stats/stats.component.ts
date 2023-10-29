@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsListStyle } from 'src/app/components/stats/dashboard-users-list/dashboard-users-list.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { PatientsService } from 'src/app/shared/services/patients.service';
-import { StatsService } from 'src/app/shared/services/stats.service';
-import { UsersService } from 'src/app/shared/services/users.service';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
 import { Patient, User } from 'src/app/shared/utils/types';
 
 type Stats = {
@@ -44,14 +43,12 @@ export class StatsComponent implements OnInit {
   userSearchInput = '';
 
   constructor(
-    private statsService: StatsService,
-    private patientsService: PatientsService,
-    private usersService: UsersService,
+    private labMedicalApiService: LabMedicalApiService,
     private authService: AuthService
   ) {}
 
   async ngOnInit() {
-    this.stats = (await this.statsService.getStats()).data;
+    this.stats = await this.labMedicalApiService.getAll(endpoints.stats);
     this.getPatients();
     this.getUsers();
   }
@@ -73,10 +70,20 @@ export class StatsComponent implements OnInit {
   }
 
   private async getPatients(filter?: string) {
-    this.patients = await this.patientsService.getPatients(filter);
+    this.patients = await this.labMedicalApiService.getAll(
+      endpoints.patient,
+      filter,
+      true
+    );
   }
 
   private async getUsers(filter?: string) {
-    this.users = await this.usersService.getUsers(filter);
+    console.log(filter);
+
+    this.users = await this.labMedicalApiService.getAll(
+      endpoints.user,
+      filter,
+      true
+    );
   }
 }

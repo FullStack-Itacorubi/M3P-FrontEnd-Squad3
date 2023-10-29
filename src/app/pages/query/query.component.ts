@@ -3,10 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MedicamentModalComponent } from 'src/app/components/medicament-modal/medicament-modal.component';
 import { AlertService } from 'src/app/shared/services/alert.service';
-import { MedicalRecordsService } from 'src/app/shared/services/medical-records.service';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
-import { PatientsService } from 'src/app/shared/services/patients.service';
-import { QueryService } from 'src/app/shared/services/query.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
 import {
   QueryResponse,
   Patient,
@@ -41,8 +40,7 @@ export class QueryComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private patientService: PatientsService,
-    private queryService: QueryService,
+    private labMedicalApiService: LabMedicalApiService,
     private modalService: ModalService,
     private route: ActivatedRoute
   ) {
@@ -54,10 +52,13 @@ export class QueryComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.patients = await this.patientService.getPatients();
+    this.patients = await this.labMedicalApiService.getAll(endpoints.patient);
     if (this.isCreating) return;
 
-    const query = await this.queryService.getQueryById(this.queryId);
+    const query = await this.labMedicalApiService.getById<QueryResponse>(
+      endpoints.query,
+      this.queryId
+    );
     this.medicaments = query.medicaments;
     this.populateForm(query);
   }
@@ -124,7 +125,11 @@ export class QueryComponent implements OnInit {
   }
 
   deleteQuery() {
-    this.queryService.deleteQuery(this.queryId, window.history.state.patientId);
+    this.labMedicalApiService.delete(
+      endpoints.query,
+      this.queryId,
+      window.history.state.patientId
+    );
     this.alertService.emit({
       text: 'Consulta excluída com sucesso!',
     });
@@ -149,7 +154,7 @@ export class QueryComponent implements OnInit {
       status: this.formQuery.value.status!,
     };
 
-    this.queryService.saveQuery(query);
+    this.labMedicalApiService.save(endpoints.query, query);
     this.formQuery = this.initQueryForm();
     this.alertService.emit({
       text: 'Consulta cadastrada com sucesso!',
@@ -176,7 +181,7 @@ export class QueryComponent implements OnInit {
       status: this.formQuery.value.status!,
     };
 
-    this.queryService.updateQuery(query);
+    this.labMedicalApiService.update(endpoints.query, query, this.queryId);
     this.alertService.emit({
       text: 'Consulta editada com sucesso!',
     });

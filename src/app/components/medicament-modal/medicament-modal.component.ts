@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MedicamentService } from 'src/app/shared/services/medicament.service';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
 import { Medicament } from 'src/app/shared/utils/types';
 
 @Component({
@@ -13,12 +14,14 @@ export class MedicamentModalComponent implements OnInit {
   medicaments?: Medicament[];
 
   constructor(
-    private medicamentsService: MedicamentService,
+    private LabMedicalApiService: LabMedicalApiService,
     private modalService: ModalService
   ) {}
 
   async ngOnInit() {
-    this.medicaments = await this.medicamentsService.getMedicaments();
+    this.medicaments = await this.LabMedicalApiService.getAll(
+      endpoints.medicament
+    );
   }
 
   selectMedicament() {

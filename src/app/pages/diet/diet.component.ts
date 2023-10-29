@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/shared/services/alert.service';
-import { DietService } from 'src/app/shared/services/diet.service';
-import { PatientsService } from 'src/app/shared/services/patients.service';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
 import { Diet, Patient } from 'src/app/shared/utils/types';
 
 const DietTypesValues = {
@@ -49,8 +49,7 @@ export class DietComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private dietService: DietService,
-    private patientsService: PatientsService,
+    private labMedicalApiApi: LabMedicalApiService,
     private route: ActivatedRoute
   ) {
     this.formsDietRegister = this.initDietForm();
@@ -61,11 +60,14 @@ export class DietComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.patients = await this.patientsService.getPatients();
+    this.patients = await this.labMedicalApiApi.getAll(endpoints.patient);
     if (this.isCreating) return;
 
     const patientId = window.history.state.patientId;
-    const diet = await this.dietService.getDietById(this.dietId);
+    const diet = await this.labMedicalApiApi.getById<Diet>(
+      endpoints.diet,
+      this.dietId
+    );
     this.populateForm(diet, patientId);
   }
 
@@ -128,7 +130,11 @@ export class DietComponent implements OnInit {
   }
 
   deleteDiet() {
-    this.dietService.deleteDiet(this.dietId, window.history.state.patientId);
+    this.labMedicalApiApi.delete(
+      endpoints.diet,
+      this.dietId,
+      window.history.state.patientId
+    );
     this.alertService.emit({
       text: 'Dieta deletada com sucesso!',
     });
@@ -151,7 +157,7 @@ export class DietComponent implements OnInit {
     };
 
     this.formsDietRegister = this.initDietForm();
-    await this.dietService.saveDiet(diet);
+    await this.labMedicalApiApi.save(endpoints.diet, diet);
     this.alertService.emit({
       text: 'Dieta cadastrada com sucesso!',
     });
@@ -174,9 +180,7 @@ export class DietComponent implements OnInit {
       description: this.formsDietRegister.value.description!,
     };
 
-    console.log(diet);
-
-    await this.dietService.updateDiet(diet);
+    await this.labMedicalApiApi.update(endpoints.diet, diet, this.dietId);
     this.alertService.emit({
       text: 'Dieta alterada com sucesso!',
     });

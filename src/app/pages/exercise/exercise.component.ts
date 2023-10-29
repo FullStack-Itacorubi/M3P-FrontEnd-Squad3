@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ExerciseService } from '../../shared/services/exercise.service';
 import { Exercise, Patient } from 'src/app/shared/utils/types';
-import { PatientsService } from 'src/app/shared/services/patients.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/shared/services/alert.service';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
 
 const ExerciseTypesValues = {
   'Resistência Aeróbica': 'AEROBICS',
@@ -48,8 +48,7 @@ export class ExerciseComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private exerciseService: ExerciseService,
-    private patientsService: PatientsService,
+    private labMedicalApiService: LabMedicalApiService,
     private route: ActivatedRoute
   ) {
     this.formsExerciseRegister = this.initExerciseForm();
@@ -60,10 +59,11 @@ export class ExerciseComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.patients = await this.patientsService.getPatients();
+    this.patients = await this.labMedicalApiService.getAll(endpoints.patient);
     if (this.isCreating) return;
 
-    const exercise = await this.exerciseService.getExerciseById(
+    const exercise = await this.labMedicalApiService.getById<Exercise>(
+      endpoints.exercise,
       this.exerciseId
     );
     this.populateForm(exercise);
@@ -139,7 +139,8 @@ export class ExerciseComponent implements OnInit {
   }
 
   deleteExercise() {
-    this.exerciseService.deleteExercise(
+    this.labMedicalApiService.delete(
+      endpoints.exercise,
       this.exerciseId,
       window.history.state.patientId
     );
@@ -165,7 +166,7 @@ export class ExerciseComponent implements OnInit {
       status: this.formsExerciseRegister.value.status!,
     };
 
-    await this.exerciseService.saveExercise(exercise);
+    await this.labMedicalApiService.save(endpoints.exercise, exercise);
     this.formsExerciseRegister = this.initExerciseForm();
     this.alertService.emit({
       text: 'Exercício cadastrado com sucesso!',
@@ -190,7 +191,11 @@ export class ExerciseComponent implements OnInit {
       status: this.formsExerciseRegister.value.status!,
     };
 
-    await this.exerciseService.updateExercise(exercise);
+    await this.labMedicalApiService.update(
+      endpoints.exercise,
+      exercise,
+      this.exerciseId
+    );
     this.alertService.emit({
       text: 'Exercício editado com sucesso!',
     });

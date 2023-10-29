@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MedicalRecordsService } from 'src/app/shared/services/medical-records.service';
-import { MedicalRecord, Medicament } from 'src/app/shared/utils/types';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
+import { MedicalRecord } from 'src/app/shared/utils/types';
 
 @Component({
   selector: 'app-patient-medical-record',
@@ -17,32 +18,18 @@ export class PatientMedicalRecordComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private medicalRecordsService: MedicalRecordsService
+    private labMedicalApiService: LabMedicalApiService
   ) {}
 
   async ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     this.patientId = Number(routeParams.get('patientId'));
 
-    this.medicalRecord =
-      await this.medicalRecordsService.getPatientMedicalRecord(this.patientId);
-  }
-
-  listMedicaments(medicaments: Medicament[]): string {
-    return medicaments.map((med) => med.name).join(', ') + '.';
-  }
-
-  getUniqueMedicaments() {
-    const medicaments = new Map<number, Medicament>();
-    this.medicalRecord?.queries.map((query) =>
-      query.medicaments.map((medicament) =>
-        medicaments.set(medicament.id!, medicament)
+    this.medicalRecord = (
+      await this.labMedicalApiService.getAll<MedicalRecord>(
+        endpoints.medicalRecord,
+        this.patientId
       )
-    );
-    return [...medicaments.values()];
-  }
-
-  getMedicamentsTotal() {
-    return this.getUniqueMedicaments().length;
+    ).pop();
   }
 }
