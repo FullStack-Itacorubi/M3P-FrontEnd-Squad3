@@ -26,7 +26,6 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './components/layout/layout.component';
-import { GlobalHttpErrorHandlerInterceptor } from './shared/middlewares/global-http-error-handler.interceptor';
 import { LoginComponent } from './pages/login/login.component';
 import { GenericModalComponent } from './shared/components/generic-modal/generic-modal.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
@@ -109,11 +108,6 @@ import { ToastAlertComponent } from './shared/components/toast-alert/toast-alert
   ],
   providers: [
     provideNgxMask(),
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: GlobalHttpErrorHandlerInterceptor,
-      multi: true,
-    },
   ],
   bootstrap: [AppComponent],
 })
