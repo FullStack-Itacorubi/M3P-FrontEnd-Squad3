@@ -10,13 +10,10 @@ import { AxiosService } from './axios.service';
 export class AuthService {
   private userAuthenticated?: LoginResponse;
 
-  constructor(
-    private router: Router,
-    private axiosService: AxiosService
-  ) {}
+  constructor(private router: Router, private axiosService: AxiosService) {}
 
   private async loginUser(user: LoginForm) {
-    return await this.axiosService.getClient().post("usuarios/login", user);
+    return await this.axiosService.getClient().post('usuarios/login', user);
   }
 
   isUserAuthenticated(): boolean {
@@ -36,9 +33,10 @@ export class AuthService {
   }
 
   async makeLogin(user: LoginForm): Promise<void> {
-    const {data} = await this.loginUser(user);
-    const userLoggedString = JSON.stringify(data);
+    const { data } = await this.loginUser(user);
+    if (!data) return;
 
+    const userLoggedString = JSON.stringify(data);
     localStorage.setItem('userLogged', userLoggedString);
     this.userAuthenticated = data;
 
