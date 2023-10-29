@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsListStyle } from 'src/app/components/stats/dashboard-users-list/dashboard-users-list.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { PatientsService } from 'src/app/shared/services/patients.service';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
 import { StatsService } from 'src/app/shared/services/stats.service';
 import { UsersService } from 'src/app/shared/services/users.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
 import { Patient, User } from 'src/app/shared/utils/types';
 
 type Stats = {
@@ -45,7 +46,7 @@ export class StatsComponent implements OnInit {
 
   constructor(
     private statsService: StatsService,
-    private patientsService: PatientsService,
+    private labMedicalApiService: LabMedicalApiService,
     private usersService: UsersService,
     private authService: AuthService
   ) {}
@@ -73,7 +74,10 @@ export class StatsComponent implements OnInit {
   }
 
   private async getPatients(filter?: string) {
-    this.patients = await this.patientsService.getPatients(filter);
+    this.patients = await this.labMedicalApiService.getAll(
+      endpoints.patient,
+      filter
+    );
   }
 
   private async getUsers(filter?: string) {

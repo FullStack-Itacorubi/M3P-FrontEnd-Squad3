@@ -3,7 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { CepService } from 'src/app/shared/services/cep.service';
-import { PatientsService } from 'src/app/shared/services/patients.service';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
 import { Patient } from 'src/app/shared/utils/types';
 
 const GenreTypeValues = {
@@ -68,7 +69,7 @@ export class PatientComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private patientsService: PatientsService,
+    private labMedicalApiService: LabMedicalApiService,
     private cepService: CepService,
     private route: ActivatedRoute
   ) {
@@ -82,7 +83,10 @@ export class PatientComponent implements OnInit {
   async ngOnInit() {
     if (this.isCreating) return;
 
-    const patient = await this.patientsService.getPatientById(this.patientId);
+    const patient = await this.labMedicalApiService.getById<Patient>(
+      endpoints.patient,
+      this.patientId
+    );
     this.populateForm(patient);
   }
 
@@ -208,7 +212,7 @@ export class PatientComponent implements OnInit {
   }
 
   async deletePatient() {
-    await this.patientsService.deletePatient(this.patientId);
+    await this.labMedicalApiService.delete(endpoints.patient, this.patientId);
     this.alertService.emit({
       text: 'Paciente excluído com sucesso!',
     });
@@ -289,7 +293,7 @@ export class PatientComponent implements OnInit {
       },
     };
 
-    await this.patientsService.savePatient(patient);
+    await this.labMedicalApiService.save(endpoints.patient, patient);
     this.formPatientRegister = this.initPatientForm();
     this.alertService.emit({
       text: 'Paciente cadastrado com sucesso!',
@@ -349,7 +353,11 @@ export class PatientComponent implements OnInit {
       },
     };
 
-    await this.patientsService.updatePatient(patient);
+    await this.labMedicalApiService.update(
+      endpoints.patient,
+      patient,
+      this.patientId
+    );
     this.alertService.emit({
       text: 'Paciente editado com sucesso!',
     });
