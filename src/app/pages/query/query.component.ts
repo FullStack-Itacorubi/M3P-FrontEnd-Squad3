@@ -5,7 +5,6 @@ import { MedicamentModalComponent } from 'src/app/components/medicament-modal/me
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
-import { QueryService } from 'src/app/shared/services/query.service';
 import { endpoints } from 'src/app/shared/utils/endpoints';
 import {
   QueryResponse,
@@ -42,7 +41,6 @@ export class QueryComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private labMedicalApiService: LabMedicalApiService,
-    private queryService: QueryService,
     private modalService: ModalService,
     private route: ActivatedRoute
   ) {
@@ -57,7 +55,10 @@ export class QueryComponent implements OnInit {
     this.patients = await this.labMedicalApiService.getAll(endpoints.patient);
     if (this.isCreating) return;
 
-    const query = await this.queryService.getQueryById(this.queryId);
+    const query = await this.labMedicalApiService.getById<QueryResponse>(
+      endpoints.query,
+      this.queryId
+    );
     this.medicaments = query.medicaments;
     this.populateForm(query);
   }
@@ -124,7 +125,11 @@ export class QueryComponent implements OnInit {
   }
 
   deleteQuery() {
-    this.queryService.deleteQuery(this.queryId, window.history.state.patientId);
+    this.labMedicalApiService.delete(
+      endpoints.query,
+      this.queryId,
+      window.history.state.patientId
+    );
     this.alertService.emit({
       text: 'Consulta excluída com sucesso!',
     });
@@ -149,7 +154,7 @@ export class QueryComponent implements OnInit {
       status: this.formQuery.value.status!,
     };
 
-    this.queryService.saveQuery(query);
+    this.labMedicalApiService.save(endpoints.query, query);
     this.formQuery = this.initQueryForm();
     this.alertService.emit({
       text: 'Consulta cadastrada com sucesso!',
@@ -176,7 +181,7 @@ export class QueryComponent implements OnInit {
       status: this.formQuery.value.status!,
     };
 
-    this.queryService.updateQuery(query);
+    this.labMedicalApiService.update(endpoints.query, query, this.queryId);
     this.alertService.emit({
       text: 'Consulta editada com sucesso!',
     });
