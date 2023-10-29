@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/shared/services/alert.service';
-import { MedicamentService } from 'src/app/shared/services/medicament.service';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
 import { Medicament } from 'src/app/shared/utils/types';
 
 const MedicamentTypesValues = {
@@ -59,7 +60,7 @@ export class MedicamentsComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private medicamentService: MedicamentService,
+    private labMedicalApiService: LabMedicalApiService,
     route: ActivatedRoute
   ) {
     this.formMedicaments = this.initMedicamentsForm();
@@ -72,7 +73,8 @@ export class MedicamentsComponent implements OnInit {
   async ngOnInit() {
     if (this.isCreating) return;
 
-    const medicament = await this.medicamentService.getMedicamentById(
+    const medicament = await this.labMedicalApiService.getById<Medicament>(
+      endpoints.medicament,
       this.medicamentId
     );
     this.populateForm(medicament);
@@ -140,7 +142,10 @@ export class MedicamentsComponent implements OnInit {
   }
 
   async deleteMedicament() {
-    await this.medicamentService.deleteMedicament(this.medicamentId);
+    await this.labMedicalApiService.delete(
+      endpoints.medicament,
+      this.medicamentId
+    );
     this.alertService.emit({
       text: 'Medicamento excluído com sucesso!',
     });
@@ -163,7 +168,7 @@ export class MedicamentsComponent implements OnInit {
       status: this.formMedicaments.value.status!,
     };
 
-    await this.medicamentService.saveMedicament(medicament);
+    await this.labMedicalApiService.save(endpoints.medicament, medicament);
     this.initMedicamentsForm();
     this.alertService.emit({
       text: 'Medicamento cadastrado com sucesso!',
@@ -181,7 +186,11 @@ export class MedicamentsComponent implements OnInit {
       status: this.formMedicaments.value.status!,
     };
 
-    await this.medicamentService.updateMedicament(medicament);
+    await this.labMedicalApiService.update(
+      endpoints.medicament,
+      medicament,
+      this.medicamentId
+    );
     this.alertService.emit({
       text: 'Medicamento editado com sucesso!',
     });
