@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { DietService } from 'src/app/shared/services/diet.service';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { Diet, Patient } from 'src/app/shared/utils/types';
@@ -47,6 +48,7 @@ export class DietComponent implements OnInit {
   patients: Patient[] = [];
 
   constructor(
+    private alertService: AlertService,
     private dietService: DietService,
     private patientsService: PatientsService,
     private route: ActivatedRoute
@@ -110,7 +112,10 @@ export class DietComponent implements OnInit {
 
   saveDiet() {
     if (!this.formsDietRegister.valid) {
-      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      this.alertService.emit({
+        text: 'Formulário inválido, por favor insira ou corrija seus dados!',
+        class: 'border-0 bg-red-600 text-white',
+      });
       return;
     }
 
@@ -124,7 +129,9 @@ export class DietComponent implements OnInit {
 
   deleteDiet() {
     this.dietService.deleteDiet(this.dietId, window.history.state.patientId);
-    alert('Dieta deletada com sucesso!');
+    this.alertService.emit({
+      text: 'Dieta deletada com sucesso!',
+    });
   }
 
   async registerDiet() {
@@ -145,7 +152,9 @@ export class DietComponent implements OnInit {
 
     this.formsDietRegister = this.initDietForm();
     await this.dietService.saveDiet(diet);
-    alert('Dieta cadastrada com sucesso!');
+    this.alertService.emit({
+      text: 'Dieta cadastrada com sucesso!',
+    });
   }
 
   async updateDiet() {
@@ -168,6 +177,8 @@ export class DietComponent implements OnInit {
     console.log(diet);
 
     await this.dietService.updateDiet(diet);
-    alert('Dieta alterada com sucesso!');
+    this.alertService.emit({
+      text: 'Dieta alterada com sucesso!',
+    });
   }
 }
