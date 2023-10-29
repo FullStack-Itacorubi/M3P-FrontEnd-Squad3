@@ -65,6 +65,13 @@ export class SidebarComponent {
       link: '/usuarios',
       restriction: 'ADMIN',
     },
+    {
+      text: 'Logs',
+      icon: 'ionAlbums',
+      selected: false,
+      link: '/logs',
+      restriction: 'ADMIN',
+    },
   ];
   collapsed = false;
 
