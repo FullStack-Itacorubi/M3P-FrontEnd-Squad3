@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { User } from 'src/app/shared/utils/types';
@@ -44,6 +45,7 @@ export class UserComponent implements OnInit {
   userId = -1;
 
   constructor(
+    private alertService: AlertService,
     private authService: AuthService,
     private usersService: UsersService,
     private route: ActivatedRoute
@@ -104,7 +106,10 @@ export class UserComponent implements OnInit {
 
   saveUser() {
     if (!this.formUserRegister.valid) {
-      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      this.alertService.emit({
+        text: 'Formulário inválido, por favor insira ou corrija seus dados!',
+        class: 'bg-red-600 text-white border-0',
+      });
       return;
     }
 
@@ -118,7 +123,9 @@ export class UserComponent implements OnInit {
 
   async deleteUser() {
     await this.usersService.deleteUser(this.userId);
-    alert('Usuário excluído com sucesso!');
+    this.alertService.emit({
+      text: 'Usuário excluído com sucesso!',
+    });
   }
 
   async registerUser() {
@@ -145,7 +152,9 @@ export class UserComponent implements OnInit {
 
     await this.usersService.saveUser(user);
     this.formUserRegister = this.initUserForm();
-    alert('Usuário cadastrado com sucesso!');
+    this.alertService.emit({
+      text: 'Usuário cadastrado com sucesso!',
+    });
   }
 
   async updateUser() {
@@ -162,6 +171,8 @@ export class UserComponent implements OnInit {
     };
 
     await this.usersService.updateUser(user);
-    alert('Usuário editado com sucesso!');
+    this.alertService.emit({
+      text: 'Usuário editado com sucesso!',
+    });
   }
 }
