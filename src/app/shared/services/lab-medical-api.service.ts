@@ -12,10 +12,14 @@ export class LabMedicalApiService {
     this.client = axiosService.getClient();
   }
 
-  async getAll<T>(endpoint: string, filter?: string | number): Promise<T[]> {
+  async getAll<T>(
+    endpoint: string,
+    filter?: string | number,
+    numberAsString?: boolean
+  ): Promise<T[]> {
     if (!filter) return (await this.client.get<T[]>(`/${endpoint}`)).data;
     const isFilterAString = isNaN(Number(filter));
-    if (isFilterAString)
+    if (isFilterAString || numberAsString)
       return (await this.client.get<T[]>(`/${endpoint}?s=${filter}`)).data;
     return (await this.client.get<T[]>(`/${endpoint}?id=${filter}`)).data;
   }

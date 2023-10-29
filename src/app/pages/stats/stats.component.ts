@@ -72,11 +72,16 @@ export class StatsComponent implements OnInit {
   private async getPatients(filter?: string) {
     this.patients = await this.labMedicalApiService.getAll(
       endpoints.patient,
-      filter
+      filter,
+      true
     );
   }
 
   private async getUsers(filter?: string) {
-    this.users = await this.labMedicalApiService.getAll(endpoints.user, filter);
+    this.users = await this.labMedicalApiService.getAll(
+      endpoints.user,
+      filter,
+      true
+    );
   }
 }
