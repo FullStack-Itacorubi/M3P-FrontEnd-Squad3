@@ -78,6 +78,8 @@ export class StatsComponent implements OnInit {
   }
 
   private async getUsers(filter?: string) {
+    console.log(filter);
+
     this.users = await this.labMedicalApiService.getAll(
       endpoints.user,
       filter,

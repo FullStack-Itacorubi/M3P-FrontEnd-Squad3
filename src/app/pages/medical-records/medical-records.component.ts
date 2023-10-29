@@ -20,7 +20,8 @@ export class MedicalRecordsComponent implements OnInit {
   }
 
   async onSearchInput(filter: string) {
-    this.medicalRecords = await this.medicalRecordsService.getMedicalRecords(
+    this.medicalRecords = await this.labMedicalApiService.getAll(
+      endpoints.medicalRecord,
       filter
     );
   }
