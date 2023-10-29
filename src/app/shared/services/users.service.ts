@@ -10,13 +10,7 @@ import { AuthService } from './auth.service';
 export class UsersService {
   private baseUrl = environment.API_BASE_URL;
 
-  constructor(/* private authService: AuthService */) {}
-
-  private getUserId() {
-    const userLoggedJson = localStorage.getItem('userLogged') ?? "";
-    const userLogged = JSON.parse(userLoggedJson);
-    return userLogged.id;
-  }
+  constructor(private authService: AuthService) {}
 
   async getUsers(filter?: string) {
     const users = await axios.get<User[]>(`${this.baseUrl}/usuarios`);
@@ -29,8 +23,7 @@ export class UsersService {
   async saveUser(user: User) {
     await axios.post(`${this.baseUrl}/usuarios`, user, {
       headers: {
-        // userId: this.authService.getUserId(),
-        userId: this.getUserId(),
+        userId: this.authService.getUserId(),
       },
     });
   }
@@ -42,8 +35,7 @@ export class UsersService {
   async updateUser(user: User) {
     await axios.put(`${this.baseUrl}/usuarios/${user.id}`, user, {
       headers: {
-        // userId: this.authService.getUserId(),
-        userId: this.getUserId(),
+        userId: this.authService.getUserId(),
       },
     });
   }
@@ -51,14 +43,9 @@ export class UsersService {
   async deleteUser(id: number) {
     await axios.delete(`${this.baseUrl}/usuarios/${id}`, {
       headers: {
-        // userId: this.authService.getUserId(),
-        userId: this.getUserId(),
+        userId: this.authService.getUserId(),
       },
     });
-  }
-
-  async loginUser(user: LoginForm) {
-    return await axios.post(`${this.baseUrl}/usuarios/login`, user);
   }
 
   async findUserByEmail(email: string) {
