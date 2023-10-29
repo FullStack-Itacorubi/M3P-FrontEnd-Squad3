@@ -12,11 +12,18 @@ export class MedicalRecordsService {
   constructor() {}
 
   async getMedicalRecords(filter?: string) {
-    const medicalRecords = await axios.get<MedicalRecord[]>(
-      `${this.baseUrl}/prontuarios${filter ? `?nome=${filter}` : ''}`
-    );
+    if (!filter)
+      return (await axios.get<MedicalRecord[]>(`${this.baseUrl}/prontuarios`))
+        .data;
 
-    return medicalRecords.data;
+    const isFilterAString = isNaN(Number(filter));
+    return (
+      await axios.get<MedicalRecord[]>(
+        `${this.baseUrl}/prontuarios${
+          isFilterAString ? `?nome=${filter}` : `?id=${filter}`
+        }`
+      )
+    ).data;
   }
 
   async getPatientMedicalRecord(id: number) {
