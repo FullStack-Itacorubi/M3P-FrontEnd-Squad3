@@ -172,4 +172,4 @@ export type OptionsModal = {
     height?: string;
     maxHeight?: string;
   };
-
+}
