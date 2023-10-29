@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/shared/services/alert.service';
-import { ExamService } from 'src/app/shared/services/exam.service';
-import { PatientsService } from 'src/app/shared/services/patients.service';
+import { LabMedicalApiService } from 'src/app/shared/services/lab-medical-api.service';
+import { endpoints } from 'src/app/shared/utils/endpoints';
 import { Exam, Patient } from 'src/app/shared/utils/types';
 
 type Examinfos = {
@@ -32,8 +32,7 @@ export class ExamComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private examService: ExamService,
-    private patientsService: PatientsService,
+    private labMedicalApiService: LabMedicalApiService,
     private route: ActivatedRoute
   ) {
     this.formsExamRegister = this.initExamForm();
@@ -44,10 +43,13 @@ export class ExamComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.patients = await this.patientsService.getPatients();
+    this.patients = await this.labMedicalApiService.getAll(endpoints.patient);
     if (this.isCreating) return;
 
-    const exam = await this.examService.getExamById(this.examId);
+    const exam = await this.labMedicalApiService.getById<Exam>(
+      endpoints.exam,
+      this.examId
+    );
     this.populateForm(exam);
   }
 
@@ -143,7 +145,7 @@ export class ExamComponent implements OnInit {
     };
 
     this.formsExamRegister = this.initExamForm();
-    await this.examService.saveExams(exam);
+    await this.labMedicalApiService.save(endpoints.exam, exam);
     this.alertService.emit({
       text: 'Exame cadastrado com sucesso!',
     });
@@ -168,14 +170,18 @@ export class ExamComponent implements OnInit {
       results: this.formsExamRegister.value.results!,
     };
 
-    await this.examService.updateExam(exam);
+    await this.labMedicalApiService.update(endpoints.exam, exam, this.examId);
     this.alertService.emit({
       text: 'Exame editado com sucesso!',
     });
   }
 
   deleteExam() {
-    this.examService.deleteExam(this.examId, window.history.state.patientId);
+    this.labMedicalApiService.delete(
+      endpoints.exam,
+      this.examId,
+      window.history.state.patientId
+    );
     this.alertService.emit({
       text: 'Exame excluído com sucesso!',
     });
