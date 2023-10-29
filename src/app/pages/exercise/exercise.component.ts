@@ -4,6 +4,7 @@ import { ExerciseService } from '../../shared/services/exercise.service';
 import { Exercise, Patient } from 'src/app/shared/utils/types';
 import { PatientsService } from 'src/app/shared/services/patients.service';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 const ExerciseTypesValues = {
   'Resistência Aeróbica': 'AEROBICS',
@@ -46,6 +47,7 @@ export class ExerciseComponent implements OnInit {
   patients: Patient[] = [];
 
   constructor(
+    private alertService: AlertService,
     private exerciseService: ExerciseService,
     private patientsService: PatientsService,
     private route: ActivatedRoute
@@ -121,7 +123,10 @@ export class ExerciseComponent implements OnInit {
 
   saveExercise() {
     if (!this.formsExerciseRegister.valid) {
-      alert('Formulário inválido, por favor insira ou corrija seus dados!');
+      this.alertService.emit({
+        text: 'Formulário inválido, por favor insira ou corrija seus dados!',
+        class: 'bg-red-600 text-white border-0',
+      });
       return;
     }
 
@@ -138,7 +143,9 @@ export class ExerciseComponent implements OnInit {
       this.exerciseId,
       window.history.state.patientId
     );
-    alert('Exercício deletado com sucesso!');
+    this.alertService.emit({
+      text: 'Exercício deletado com sucesso!',
+    });
   }
 
   async registerExercise() {
@@ -160,7 +167,9 @@ export class ExerciseComponent implements OnInit {
 
     await this.exerciseService.saveExercise(exercise);
     this.formsExerciseRegister = this.initExerciseForm();
-    alert('Exercício cadastrado com sucesso!');
+    this.alertService.emit({
+      text: 'Exercício cadastrado com sucesso!',
+    });
   }
 
   async updateExercise() {
@@ -182,6 +191,8 @@ export class ExerciseComponent implements OnInit {
     };
 
     await this.exerciseService.updateExercise(exercise);
-    alert('Exercício editado com sucesso!');
+    this.alertService.emit({
+      text: 'Exercício editado com sucesso!',
+    });
   }
 }
