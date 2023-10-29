@@ -27,7 +27,7 @@ export class ModalService {
 
   open<C>(component: Type<C>, options?: OptionsModal) {
     this.openWithComponent(component);
-    this.options = options as OptionsModal | undefined;
+    this.options = options;
   }
 
   private openWithComponent(component: Type<unknown>) {
