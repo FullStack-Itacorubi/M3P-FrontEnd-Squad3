@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
-import { IUserForm } from 'src/app/shared/interfaces/user.interface';
 import { ToolbarService } from 'src/app/shared/services/toolbar.service';
+import { User } from '../../utils/types';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +11,7 @@ import { ToolbarService } from 'src/app/shared/services/toolbar.service';
 })
 export class HeaderComponent implements OnInit {
   isDropdownOpen = false;
-  user!: IUserForm;
+  user!: User;
   title = 'Dashboard';
 
   constructor(

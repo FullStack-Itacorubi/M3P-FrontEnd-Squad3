@@ -12,7 +12,7 @@ export class MedicamentService {
 
   constructor(private authService: AuthService) {}
 
-  async saveMedicaments(medicament: Medicament) {
+  async saveMedicament(medicament: Medicament) {
     await axios.post(`${this.baseUrl}/medicamentos`, medicament, {
       headers: {
         userId: this.authService.getUserId(),
@@ -22,5 +22,30 @@ export class MedicamentService {
 
   async getMedicaments() {
     return (await axios.get<Medicament[]>(`${this.baseUrl}/medicamentos`)).data;
+  }
+
+  async getMedicamentById(id: number) {
+    return (await axios.get<Medicament>(`${this.baseUrl}/medicamentos/${id}`))
+      .data;
+  }
+
+  async updateMedicament(medicament: Medicament) {
+    await axios.put(
+      `${this.baseUrl}/medicamentos/${medicament.id}`,
+      medicament,
+      {
+        headers: {
+          userId: this.authService.getUserId(),
+        },
+      }
+    );
+  }
+
+  async deleteMedicament(id: number) {
+    await axios.delete(`${this.baseUrl}/medicamentos/${id}`, {
+      headers: {
+        userId: this.authService.getUserId(),
+      },
+    });
   }
 }

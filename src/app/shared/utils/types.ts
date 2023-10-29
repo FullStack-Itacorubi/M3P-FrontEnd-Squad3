@@ -70,8 +70,8 @@ export type Exercise = {
 export type Medicament = {
   id?: number;
   name: string;
-  date: string;
-  time: string;
+  date?: string;
+  time?: string;
   type: string;
   quantity: number;
   unit: string;
@@ -127,3 +127,49 @@ type Address = {
   neighborhood: string;
   referencePoint?: string;
 };
+
+export type Logs = {
+  message: string;
+  timestamp: string;
+
+}
+
+export type UserResetPassword = {
+  // id: User[ "id" ];
+  id: number;
+  email: User["email"];
+  password: User["password"];
+};
+
+export type LoginForm = {
+  email: User["email"];
+  password: User["password"];
+};
+
+export type LoginResponse = {
+  id: UserResetPassword["id"];
+  fullName: User["fullName"];
+  email: User["email"];
+  type: User["type"];
+};
+
+export type OptionsModal = {
+  animations?: {
+    modal?: {
+      enter?: string;
+      leave?: string;
+    };
+    overlay?: {
+      enter?: string;
+      leave?: string;
+    };
+  };
+  size?: {
+    minWidth?: string;
+    width?: string;
+    maxWidth?: string;
+    minHeight?: string;
+    height?: string;
+    maxHeight?: string;
+  };
+}

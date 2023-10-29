@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { Observable, fromEvent, zip } from 'rxjs';
 
-import { IOptionsModal } from 'src/app/shared/interfaces/options-modal.interface';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { OptionsModal } from '../../utils/types';
 
 @Component({
   selector: 'app-generic-modal',
@@ -18,7 +18,7 @@ import { ModalService } from 'src/app/shared/services/modal.service';
 export class GenericModalComponent implements AfterViewInit {
   @ViewChild('modal') modal!: ElementRef<HTMLDivElement>;
   @ViewChild('overlay') overlay!: ElementRef<HTMLDivElement>;
-  options!: IOptionsModal | undefined;
+  options!: OptionsModal | undefined;
   modalAnimationEnd!: Observable<Event>;
   modalLeaveAnimation!: string;
   overlayLeaveAnimation!: string;

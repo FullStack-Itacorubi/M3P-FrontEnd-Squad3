@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from '../utils/environment';
-import { User } from 'src/app/shared/utils/types';
+import { LoginForm, User, UserResetPassword } from 'src/app/shared/utils/types';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -46,5 +46,20 @@ export class UsersService {
         userId: this.authService.getUserId(),
       },
     });
+  }
+
+  async findUserByEmail(email: string) {
+    return await axios.get(`${this.baseUrl}/usuarios/email`, {
+      headers: {
+        email: email,
+      },
+    });
+  }
+
+  async resetPassword(user: UserResetPassword) {
+    await axios.patch(
+      this.baseUrl + '/usuarios/resetar-senha',
+      user
+    );
   }
 }

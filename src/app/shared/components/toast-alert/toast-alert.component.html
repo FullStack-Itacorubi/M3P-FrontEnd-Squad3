@@ -1,0 +1,9 @@
+<div
+  *ngIf="isShowing"
+  (click)="hide()"
+  class="absolute top-0 z-50 px-3 py-1 border rounded-md shadow-md cursor-pointer max-w-[80%]
+  left-1/2 bg-slate-50 text-slate-600 border-slate-300 {{ messages[0].class }}"
+  [ngClass]="{ slide: !endAnimation, slideOut: endAnimation }"
+>
+  {{ messages[0].text }}
+</div>
