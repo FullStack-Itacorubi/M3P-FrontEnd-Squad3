@@ -32,8 +32,8 @@ export class AuthService {
   }
 
   async makeLogin(user: LoginForm): Promise<void> {
-    await this.usersService.loginUser(user).then((res) => {
-      const userLoggedString = JSON.stringify(res.data);
+    const res = await this.usersService.loginUser(user);
+    const userLoggedString = JSON.stringify(res.data);
 
       localStorage.setItem('userLogged', userLoggedString);
       this.userAuthenticated = res.data;
