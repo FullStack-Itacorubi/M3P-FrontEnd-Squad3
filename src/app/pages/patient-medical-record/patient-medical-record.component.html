@@ -1,0 +1,82 @@
+<div class="flex h-[calc(100%-80px)] text-slate-800">
+  <div class="flex-grow p-4 overflow-y-auto">
+    <section #patientDetails class="p-3">
+      <h2 class="text-xl font-bold">
+        {{ medicalRecord?.patient?.fullName }}
+      </h2>
+      <div class="columns-2">
+        <p>
+          <span class="font-semibold">Convênio:</span>
+          {{ medicalRecord?.patient?.healthInsurance ?? "Nenhum" }}
+        </p>
+        <p>
+          <span class="font-semibold">Alergias:</span>
+          {{ medicalRecord?.patient?.allergyList ?? "Nenhum" }}
+        </p>
+        <p>
+          <span class="font-semibold">Telefone de contato:</span>
+          {{ medicalRecord?.patient?.phone }}
+        </p>
+        <p>
+          <span class="font-semibold">Cuidados especiais:</span>
+          {{ medicalRecord?.patient?.specificCareList ?? "Nenhum" }}
+        </p>
+      </div>
+    </section>
+    <section #medicalRecordSections class="flex flex-col gap-3 p-3">
+      <app-queries-section
+        [queries]="medicalRecord?.queries ?? []"
+        [patientId]="patientId"
+      />
+      <app-exams-section
+        [exams]="medicalRecord?.exams ?? []"
+        [patientId]="patientId"
+      />
+      <app-exercises-section
+        [exercises]="medicalRecord?.exercises ?? []"
+        [patientId]="patientId"
+      />
+      <app-diets-section
+        [diets]="medicalRecord?.diets ?? []"
+        [patientId]="patientId"
+      />
+
+      <!-- <app-accordion
+        [headerTitle]="getMedicamentsTotal() + ' Medicamentos'"
+        headerIcon="ionBandage"
+        iconSize="lg"
+        [bordered]="true"
+      >
+        <app-accordion *ngFor="let medicament of getUniqueMedicaments()">
+          <div customHeader class="flex gap-2">
+            <button [routerLink]="['/medicamentos', medicament.id]">
+              <ng-icon name="ionCreateOutline" class="text-lg" />
+            </button>
+            <p customHeader class="font-semibold">
+              {{ medicament.date }} {{ medicament.time }}
+              <span class="font-medium"> - {{ medicament.name }}</span>
+            </p>
+          </div>
+          <div class="p-2 font-semibold rounded-md bg-slate-600 text-slate-50">
+            <p>
+              Tipo:
+              <span class="font-medium">{{ medicament.type }}</span>
+            </p>
+            <p>
+              Quantidade:
+              <span class="font-medium">{{ medicament.quantity }}</span>
+            </p>
+            <p>
+              Unidade:
+              <span class="font-medium">{{ medicament.unit }}</span>
+            </p>
+            <p>
+              Observações:
+              <span class="font-medium">{{ medicament.observations }}</span>
+            </p>
+          </div>
+        </app-accordion>
+      </app-accordion> -->
+    </section>
+  </div>
+</div>

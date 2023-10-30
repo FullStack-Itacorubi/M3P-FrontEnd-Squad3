@@ -1,0 +1,52 @@
+<div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
+  <div class="flex flex-col w-10/12 h-full p-4">
+    <div class="flex justify-between pb-2 border-b">
+      <div class="flex gap-6 pl-4">
+        <app-tab-menu
+          *ngFor="let option of menuOptions; index as idx"
+          class="translate-y-[9px] pb-2"
+          [label]="option.label"
+          [selected]="option.selected"
+          (select)="select(idx)"
+          [restricted]="option.restricted"
+        />
+      </div>
+    </div>
+    <div class="flex-grow overflow-y-auto">
+      <div class="flex flex-col gap-2 p-4">
+        <div class="flex justify-between">
+          <app-delay-search-input
+            *ngIf="menuOptions[0].selected; else userInput"
+            [(input)]="patientSearchInput"
+            (inputChange)="onSearchInput($event)"
+          />
+          <ng-template #userInput>
+            <app-delay-search-input
+              [(input)]="userSearchInput"
+              (inputChange)="onSearchInput($event)"
+            />
+          </ng-template>
+          <div class="flex self-end gap-2 p-2 rounded-md text-slate-400">
+            <button (click)="listStyle = 'GRID'">
+              <ng-icon name="ionGrid" />
+            </button>
+            <button (click)="listStyle = 'TABLE'">
+              <ng-icon name="ionList" />
+            </button>
+          </div>
+        </div>
+        <app-dashboard-users-list
+          [data]="menuOptions[0].selected ? patients : users"
+          [listStyle]="listStyle"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col w-2/12 gap-4 p-4 pl-0 overflow-y-auto">
+    <app-stats-card
+      *ngFor="let stat of stats"
+      [label]="stat.title"
+      [value]="stat.value"
+    />
+  </div>
+</div>

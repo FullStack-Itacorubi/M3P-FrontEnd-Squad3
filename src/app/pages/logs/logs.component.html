@@ -1,0 +1,8 @@
+<div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
+  <div class="flex-grow p-4 overflow-y-auto">
+    <div class="container p-5 text-slate-800">
+      <h3 class="my-1 mb-5 text-xl font-bold">Registros de atividades no sistema</h3>
+      <app-logs-table-row *ngFor="let log of logs" [logs]="log"/>
+    </div>
+  </div>
+</div>

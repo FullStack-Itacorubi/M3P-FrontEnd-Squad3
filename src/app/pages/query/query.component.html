@@ -1,0 +1,191 @@
+<div class="flex h-[calc(100%-80px)] bg-slate-50 text-slate-800">
+  <div class="flex-grow p-4 overflow-y-auto">
+    <div class="container py-4 pr-2 m-auto text-slate-800 pl-14">
+      <form [formGroup]="formQuery" (ngSubmit)="saveQuery()">
+        <h3 class="my-2 text-xl font-bold">Cadastro de consultas</h3>
+
+        <div class="gap-2 md:flex">
+          <div class="w-full mr-5 input-wrapper">
+            <label for="motive">Motivo da consulta</label>
+            <input
+              type="text"
+              class="input-field"
+              name="motive"
+              id="motive"
+              formControlName="motive"
+            />
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formQuery.get('motive')?.errors?.['required'] && formQuery.get('motive')?.touched"
+            >
+              <p>Por favor insira o motivo da consulta!</p>
+            </div>
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formQuery.get('motive')?.errors?.['minlength'] && formQuery.get('motive')?.touched"
+            >
+              <p>Seu nome deve possuir no mínimo 8 caracteres!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gap-2 md:flex">
+          <div class="w-3/12 input-wrapper">
+            <label for="date">Data da consulta</label>
+            <input
+              type="date"
+              class="input-field"
+              name="date"
+              id="date"
+              formControlName="date"
+            />
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formQuery.get('date')?.errors?.['required'] && formQuery.get('date')?.touched"
+            >
+              <p>Por favor insira a data da consulta!</p>
+            </div>
+          </div>
+          <div class="w-3/12 input-wrapper">
+            <label for="time">Horário da consulta</label>
+            <input
+              type="time"
+              class="input-field"
+              name="time"
+              id="time"
+              formControlName="time"
+            />
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formQuery.get('time')?.errors?.['required'] && formQuery.get('time')?.touched"
+            >
+              <p>Por favor insira o horário da consulta!</p>
+            </div>
+          </div>
+          <div class="w-3/12 input-wrapper">
+            <label for="patientId">Paciente</label>
+            <select
+              class="input-field"
+              name="patientId"
+              id="patientId"
+              formControlName="patientId"
+            >
+              <option
+                *ngFor="let optionPatient of patients"
+                [value]="optionPatient.id"
+              >
+                {{ optionPatient.fullName }}
+              </option>
+            </select>
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formQuery.get('patientId')?.errors?.['required'] && formQuery.get('patientId')?.touched"
+            >
+              <p>Por favor insira o paciente!</p>
+            </div>
+          </div>
+          <div class="w-3/12 mr-5 input-wrapper">
+            <label for="status">Status</label>
+            <div class="flex input-field">
+              <div>
+                <input
+                  type="checkbox"
+                  class="mr-2"
+                  checked="true"
+                  formControlName="status"
+                />
+              </div>
+              <div class="mr-3">
+                <label for="checkbox">Ativo</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gap-2 md:flex">
+          <div class="w-full mr-5 input-wrapper">
+            <label for="description">Descrição do problema</label>
+            <textarea
+              class="input-field"
+              name="description"
+              id="description"
+              formControlName="description"
+              rows="4"
+            ></textarea>
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formQuery.get('description')?.errors?.['required'] && formQuery.get('description')?.touched"
+            >
+              <p>Por favor descreva o problema!</p>
+            </div>
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formQuery.get('description')?.errors?.['minlength'] && formQuery.get('description')?.touched"
+            >
+              <p>
+                A descrição do problema deve possuir no mínimo 16 caracteres!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gap-2 md:flex">
+          <div class="w-full mr-5 input-wrapper">
+            <label for="dosage">Dosagem e Precauções</label>
+            <textarea
+              class="input-field"
+              name="dosage"
+              id="dosage"
+              formControlName="dosage"
+              rows="4"
+            >
+            </textarea>
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formQuery.get('dosage')?.errors?.['required'] && formQuery.get('dosage')?.touched"
+            >
+              <p>Por favor insira a dosagem e precauções!</p>
+            </div>
+            <div
+              class="font-semibold text-red-500"
+              *ngIf="formQuery.get('dosage')?.errors?.['minlength'] && formQuery.get('dosage')?.touched"
+            >
+              <p>Dosagem e precauções devem possuir no mínimo 16 caracteres!</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="my-3 font-semibold">Medicamentos</h3>
+        <div
+          *ngFor="let medicament of medicaments"
+          class="flex items-start gap-2"
+        >
+          <div class="w-4/12 input-wrapper">
+            <p class="input-field">{{ medicament.name }}</p>
+          </div>
+          <button
+            class="py-2 text-xl text-slate-600"
+            (click)="editMedicament(medicament.id)"
+          >
+            <ng-icon name="ionCreateOutline" />
+          </button>
+          <button
+            class="py-2 text-xl text-slate-600"
+            (click)="deleteMedicament(medicament.id)"
+          >
+            <ng-icon name="ionTrashOutline" />
+          </button>
+        </div>
+        <app-custom-button
+          label="Adicionar medicamento"
+          (clickHandler)="selectMedicament()"
+        />
+        <app-form-buttons
+          (handleEdit)="isCreating ? (formQuery = initQueryForm()) : {}"
+          (handleDelete)="deleteQuery()"
+          [isCreating]="isCreating"
+        />
+      </form>
+    </div>
+  </div>
+</div>
