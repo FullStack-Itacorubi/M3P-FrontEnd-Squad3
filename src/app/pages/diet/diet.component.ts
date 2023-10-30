@@ -116,7 +116,7 @@ export class DietComponent implements OnInit {
     if (!this.formsDietRegister.valid) {
       this.alertService.emit({
         text: 'Formulário inválido, por favor insira ou corrija seus dados!',
-        class: 'border-0 bg-red-600 text-white',
+        // class: 'border-0 bg-red-500 text-white',
       });
       return;
     }

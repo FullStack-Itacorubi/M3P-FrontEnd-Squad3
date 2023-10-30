@@ -30,7 +30,7 @@ export class AxiosService {
 
         alertService.emit({
           text: err.response.data.message,
-          class: 'bg-red-500 text-white border-0',
+          // class: 'bg-red-500 text-white border-0',
         });
         return err;
       }

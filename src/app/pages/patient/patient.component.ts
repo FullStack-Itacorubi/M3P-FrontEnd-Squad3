@@ -198,7 +198,7 @@ export class PatientComponent implements OnInit {
     if (!this.formPatientRegister.valid) {
       this.alertService.emit({
         text: 'Formulário inválido, por favor insira ou corrija seus dados!',
-        class: 'bg-red-600 text-white border-0',
+        // class: 'bg-red-600 text-white border-0',
       });
       return;
     }
